@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investment Intelligence — Institutional Portfolio Platform | Sakshi Agrawal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="investment.css" />
+</head>
+<body id="top">
+  <!-- Floating Translucent Nav with TL;DR Button -->
+  <header class="cs-nav-wrap">
+    <nav class="cs-nav" aria-label="Case study navigation">
+      <a href="../index.html" class="cs-back-link">← All work</a>
+
+      <div class="cs-jump-links">
+        <a href="#problem">Problem</a>
+        <a href="#turning-point">Turning Point</a>
+        <a href="#strategy">AI Strategy</a>
+        <a href="#fund-profile">Fund Profile</a>
+        <a href="#result">Result</a>
+      </div>
+
+      <div class="cs-nav-right">
+        <button
+          type="button"
+          id="tldr-btn"
+          class="tldr-nav-btn"
+          aria-pressed="false"
+        >
+          <span class="tldr-dot" aria-hidden="true"></span>
+          <span>TL;DR</span>
+        </button>
+
+        <span class="status-pill">
+          <span class="status-dot" aria-hidden="true"></span>
+          Open to work
+        </span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero + Metadata -->
+    <section class="cs-hero">
+      <div class="container">
+        <span class="mono small muted cs-eyebrow">CASE STUDY · INSTITUTIONAL FINTECH · CONFIDENTIAL</span>
+        <h1 class="cs-title">INVESTMENT INTELLIGENCE</h1>
+        <p class="cs-hero-sub">
+          A confidential <strong>client investment technology and portfolio analytics platform</strong> bringing <em>portfolio information, investment managers, documents, and intelligent insights</em> into one secure experience for institutional investors.
+        </p>
+
+        <div class="confidential-banner mono small">
+          <strong>Confidential project:</strong> Product name, proprietary data, financial figures, and production screens have been anonymised.
+        </div>
+
+        <dl class="cs-meta-strip">
+          <div>
+            <dt>Role</dt>
+            <dd>Senior UX Designer</dd>
+          </div>
+          <div>
+            <dt>Process</dt>
+            <dd>Strategy → IA → Interaction → Prototyping → Testing</dd>
+          </div>
+          <div>
+            <dt>Users</dt>
+            <dd>Institutional Investors &amp; Investment Managers</dd>
+          </div>
+          <div>
+            <dt>Impact</dt>
+            <dd>One Secure, Scannable &amp; Trust-First Experience</dd>
+          </div>
+        </dl>
+
+        <div class="cs-hero-banner">
+          <div class="cs-banner-top mono">
+            <span>HUMAN-LED MODEL · AI SURFACES → USER EVALUATES → PROFESSIONAL APPLIES JUDGEMENT</span>
+            <span class="cs-badge-accent">Trust Before Intelligence</span>
+          </div>
+          <div class="cs-banner-metrics">
+            <div>
+              <strong>One Workspace</strong>
+              <span>Portfolios, managers, docs &amp; analytics</span>
+            </div>
+            <div>
+              <strong>Visible Security</strong>
+              <span>Demonstrated protection over claims</span>
+            </div>
+            <div>
+              <strong>Scannable Depth</strong>
+              <span>Progressive disclosure on fund profiles</span>
+            </div>
+            <div>
+              <strong>AI Augments</strong>
+              <span>Reduces effort without replacing expertise</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compact TL;DR Drawer / View (Toggled via Nav Button) -->
+    <section id="tldr-panel" class="tldr-panel" aria-label="TL;DR summary" hidden>
+      <div class="container">
+        <div class="tldr-box">
+          <div class="tldr-head">
+            <div>
+              <span class="mono small cs-accent-text">QUICK SUMMARY</span>
+              <h2>Investment Intelligence — TL;DR</h2>
+            </div>
+            <button type="button" id="tldr-close-btn" class="tldr-close-link mono small">
+              Full case study ↓
+            </button>
+          </div>
+
+          <ul class="tldr-points">
+            <li><strong>The Challenge:</strong> Consolidating portfolios, managers, and documents into one institutional platform risked recreating fragmentation inside a single product—while users hesitated to trust sensitive financial data in one digital environment.</li>
+            <li><strong>Key Principle:</strong> <em>Don't ask users to trust the AI before they trust the platform.</em> Early UserTesting showed confidence rose when users could visibly see how the platform protected their data.</li>
+            <li><strong>Design Execution:</strong> Restructured dense fund profiles with visual cues and progressive disclosure, and positioned AI as an augmentation layer (<code>AI surfaces → User evaluates → Professional applies judgement</code>).</li>
+          </ul>
+
+          <div class="tldr-kpi-grid">
+            <div class="tldr-kpi">
+              <strong>Consolidated</strong>
+              <span class="small muted">Portfolios, managers &amp; docs</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>Trust-First</strong>
+              <span class="small muted">Visible data protection cues</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>Progressive</strong>
+              <span class="small muted">Scannable fund profile depth</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>Human-Led AI</strong>
+              <span class="small muted">Supports professional judgement</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Case Study Sections -->
+    <div id="detailed-sections">
+      <!-- 1. The Problem -->
+      <section id="problem" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">01 · THE PROBLEM</h2>
+            <p class="muted cs-sec-lead">
+              <strong>More information didn't mean a better experience.</strong> Simply putting enormous amounts of financial data in one place would recreate fragmentation inside a single product.
+            </p>
+          </div>
+
+          <div class="cs-split-diagram">
+            <div class="cs-diag-col">
+              <span class="mono small muted">BEFORE · SCATTERED INSTITUTIONAL SOURCES</span>
+              <div class="cs-diag-row">
+                <div class="cs-node">Portfolios</div>
+                <div class="cs-node">Managers</div>
+                <div class="cs-node">Documents</div>
+              </div>
+              <p class="small muted">Professionals switched across separate sources to piece together portfolio context.</p>
+            </div>
+
+            <div class="cs-diag-center mono">STRUCTURED<br />CLARITY</div>
+
+            <div class="cs-diag-col">
+              <span class="mono small muted">CHALLENGE · DEPTH WITHOUT OVERLOAD</span>
+              <div class="cs-diag-row">
+                <div class="cs-node is-lit">Unified Access</div>
+                <div class="cs-node is-lit">Scannable IA</div>
+                <div class="cs-node is-lit">Full Depth</div>
+              </div>
+              <p class="small muted">How might we make complex investment information easier to understand without removing the depth professionals need?</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Turning Point -->
+      <section id="turning-point" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">02 · TURNING POINT</h2>
+            <p class="muted cs-sec-lead">
+              <strong>Trust had to come before intelligence.</strong> Early UserTesting uncovered hesitation around placing sensitive investment data into a single digital environment.
+            </p>
+          </div>
+
+          <div class="cs-two-col">
+            <article class="cs-panel">
+              <span class="mono cs-num">RESEARCH INSIGHT · USERTESTING</span>
+              <h3>Showing protection beats claiming security</h3>
+              <p class="small muted">
+                While clients valued consolidated data, hesitation persisted until the interface visibly demonstrated how their sensitive investment information was governed and protected—rather than simply stating it was secure.
+              </p>
+            </article>
+
+            <article class="cs-panel is-selected">
+              <span class="mono cs-num">CORE DESIGN PRINCIPLE</span>
+              <h3>Don't ask users to trust the AI before they trust the platform</h3>
+              <p class="small muted">
+                Establishing foundational platform trust and data transparency first became the prerequisite for introducing any intelligent or AI-assisted capabilities.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Product Strategy -->
+      <section id="strategy" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">03 · PRODUCT STRATEGY</h2>
+            <p class="muted cs-sec-lead">
+              <strong>AI that assists, rather than decides.</strong> Introduced as an intentional augmentation layer—never the center of the product.
+            </p>
+          </div>
+
+          <div class="loop-banner">
+            <span class="loop-step is-lit mono">1. AI Surfaces Information</span>
+            <span class="loop-arrow" aria-hidden="true">→</span>
+            <span class="loop-step is-lit mono">2. User Evaluates It</span>
+            <span class="loop-arrow" aria-hidden="true">→</span>
+            <span class="loop-step is-lit mono">3. Professional Applies Judgement</span>
+          </div>
+
+          <div class="cs-two-col mt-20">
+            <article class="cs-panel">
+              <span class="mono small muted">SME &amp; MANAGER INTERVIEWS</span>
+              <h3>Reducing effort without interfering with expertise</h3>
+              <p class="small muted">
+                Through interviews with investment managers and subject-matter experts, we pinpointed high-friction synthesis tasks where AI could accelerate discovery while leaving interpretation untouched.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono small muted">HIGH-CONSEQUENCE ENVIRONMENT</span>
+              <h3>Clear boundary around professional agency</h3>
+              <p class="small muted">
+                In institutional finance, decisions carry significant weight. Keeping AI clearly framed as supporting evidence ensured professionals remained in full control.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Fund Profile -->
+      <section id="fund-profile" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">04 · FUND PROFILE ARCHITECTURE</h2>
+            <p class="muted cs-sec-lead">
+              <strong>Designing depth without overwhelming the user.</strong> Rebuilt one of the product's densest surfaces around hierarchy, scannability, and progressive disclosure.
+            </p>
+          </div>
+
+          <div class="cs-three-cols">
+            <article class="cs-panel">
+              <span class="mono cs-num">PILLAR 01 · HIERARCHY</span>
+              <h3>Overall picture first</h3>
+              <p class="small muted">
+                Countered the instinct to expose every metric at once by establishing clear visual anchors so investors grasp fund posture immediately.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">PILLAR 02 · SCANNABILITY</span>
+              <h3>Visual cues over walls of text</h3>
+              <p class="small muted">
+                Replaced dense blocks of financial prose with structured visual groupings and clear typographic contrast for rapid comparison.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">PILLAR 03 · PROGRESSIVE DISCLOSURE</span>
+              <h3>Depth on demand</h3>
+              <p class="small muted">
+                Preserved full institutional rigor underneath clean summary layers so specialists can drill deeper whenever needed without upfront cognitive overload.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 5. The Result & Closing Quote -->
+    <section id="result" class="cs-section">
+      <div class="container">
+        <div class="cs-sec-head">
+          <h2 class="cs-sec-title">THE RESULT</h2>
+          <p class="muted cs-sec-lead">
+            <strong>From fragmented information to one trusted experience.</strong> Unified portfolio data, investment-manager details, documents, analytics, and AI assistance into one coherent client platform.
+          </p>
+        </div>
+
+        <blockquote class="cs-quote-box">
+          <p>
+            "In financial UX, trust isn't a feature. It's part of the experience."
+          </p>
+        </blockquote>
+
+        <div class="cs-three-cols mt-20">
+          <article class="cs-mini-card is-northstar">
+            <span class="mono cs-num">OUTCOME 01</span>
+            <strong class="cs-big-num">One Secure Hub</strong>
+            <p class="small muted">Consolidated portfolios, managers, documents, and analytics under visible data governance.</p>
+          </article>
+
+          <article class="cs-mini-card">
+            <span class="mono cs-num">OUTCOME 02</span>
+            <strong class="cs-big-num">Scannable Complexity</strong>
+            <p class="small muted">Users access deep financial rigor progressively without having to process everything at once.</p>
+          </article>
+
+          <article class="cs-mini-card">
+            <span class="mono cs-num">OUTCOME 03</span>
+            <strong class="cs-big-num">Trust-Led AI</strong>
+            <p class="small muted">Introduced intelligent assistance that respects and amplifies professional expertise.</p>
+          </article>
+        </div>
+
+        <!-- Next Case Study Card -->
+        <a href="../project4/project4.html" class="cs-next-card">
+          <div>
+            <span class="mono small muted">NEXT CASE STUDY</span>
+            <h3>WayAble</h3>
+            <p class="small muted">Inclusive urban navigation concept for Mumbai designed around journey confidence and time-decayed alerts.</p>
+          </div>
+          <span class="cs-next-arrow">→</span>
+        </a>
+
+        <!-- Dark Split CTA + Accent Stripes -->
+        <div class="cta-split mt-36">
+          <div class="cta-dark-box">
+            <span class="dark-pill">
+              <span class="status-dot" aria-hidden="true"></span>
+              Open to Senior UX &amp; Product roles
+            </span>
+            <h2>Let's make something<br />that actually matters.</h2>
+            <div class="cta-email-row">
+              <span class="cta-email-text">sakshiagrawal3110@gmail.com</span>
+              <button
+                type="button"
+                class="copy-pill-btn copy-email-btn"
+                data-email="sakshiagrawal3110@gmail.com"
+              >
+                Click to copy
+              </button>
+            </div>
+          </div>
+
+          <div class="cta-accent-block" aria-hidden="true">
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Sakshi Agrawal</strong>
+        <p class="small muted">Senior UX &amp; Product Designer · Mumbai</p>
+      </div>
+      <div class="mono small muted">
+        Mumbai, IN · <span id="local-time">--:-- --</span> · UTC+5:30
+      </div>
+      <div class="footer-right">
+        <a href="https://www.linkedin.com/in/sakshiagrawalll" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        <a href="#top" class="text-link">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Copied</div>
+
+  <script src="../script.js"></script>
+  <script>
+    const tldrBtn = document.getElementById("tldr-btn");
+    const tldrCloseBtn = document.getElementById("tldr-close-btn");
+    const tldrPanel = document.getElementById("tldr-panel");
+
+    function setTldrState(open) {
+      if (!tldrBtn || !tldrPanel) return;
+      tldrBtn.classList.toggle("is-active", open);
+      tldrBtn.setAttribute("aria-pressed", String(open));
+      tldrPanel.hidden = !open;
+      if (open) {
+        tldrPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+
+    if (tldrBtn) {
+      tldrBtn.addEventListener("click", () => {
+        const next = tldrBtn.getAttribute("aria-pressed") !== "true";
+        setTldrState(next);
+      });
+    }
+
+    if (tldrCloseBtn) {
+      tldrCloseBtn.addEventListener("click", () => setTldrState(false));
+    }
+  </script>
+</body>
+</html>

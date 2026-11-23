@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Trust Research — Behavioural Framework | Sakshi Agrawal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="ai-trust.css" />
+</head>
+<body id="top">
+  <!-- Floating Translucent Nav with TL;DR Button -->
+  <header class="cs-nav-wrap">
+    <nav class="cs-nav" aria-label="Case study navigation">
+      <a href="../index.html" class="cs-back-link">← All work</a>
+
+      <div class="cs-jump-links">
+        <a href="#question">Question</a>
+        <a href="#methods">Methods</a>
+        <a href="#insights">4 Insights</a>
+        <a href="#spectrum">Trust Spectrum</a>
+        <a href="#outcome">Outcome</a>
+      </div>
+
+      <div class="cs-nav-right">
+        <button
+          type="button"
+          id="tldr-btn"
+          class="tldr-nav-btn"
+          aria-pressed="false"
+        >
+          <span class="tldr-dot" aria-hidden="true"></span>
+          <span>TL;DR</span>
+        </button>
+
+        <span class="status-pill">
+          <span class="status-dot" aria-hidden="true"></span>
+          Open to work
+        </span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero + Metadata -->
+    <section class="cs-hero">
+      <div class="container">
+        <span class="mono small muted cs-eyebrow">CASE STUDY · BEHAVIOURAL UX RESEARCH · AI TRUST</span>
+        <h1 class="cs-title">AI TRUST RESEARCH</h1>
+        <p class="cs-hero-sub">
+          Exploring the <strong>behavioural factors behind AI trust</strong>—and how <em>transparency, evidence, uncertainty, and user control</em> can make AI experiences feel safer and more understandable.
+        </p>
+
+        <dl class="cs-meta-strip">
+          <div>
+            <dt>Role &amp; Focus</dt>
+            <dd>UX Researcher · Product Designer</dd>
+          </div>
+          <div>
+            <dt>Domain</dt>
+            <dd>AI UX · Behavioural Research · Human-in-the-Loop</dd>
+          </div>
+          <div>
+            <dt>Methods</dt>
+            <dd>Interviews, Diary Study, Usability &amp; Thematic Analysis</dd>
+          </div>
+          <div>
+            <dt>Tools</dt>
+            <dd>FigJam · Figma · UserTesting</dd>
+          </div>
+        </dl>
+
+        <div class="cs-hero-banner">
+          <div class="cs-banner-top mono">
+            <span>RESEARCH QUESTION · WHAT MAKES USERS TRUST, QUESTION, OR REJECT AI-GENERATED INFORMATION?</span>
+            <span class="cs-badge-accent">12-Step Research Framework</span>
+          </div>
+          <div class="cs-banner-metrics">
+            <div>
+              <strong>12 Participants</strong>
+              <span>Explorers, Pragmatists &amp; Skeptics</span>
+            </div>
+            <div>
+              <strong>5–7 Days</strong>
+              <span>Real-world AI interaction diary logs</span>
+            </div>
+            <div>
+              <strong>3 UI Variants</strong>
+              <span>Tested answer vs. evidence + control</span>
+            </div>
+            <div>
+              <strong>4 Core Insights</strong>
+              <span>Actionable principles for AI UX</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compact TL;DR Drawer / View (Toggled via Nav Button) -->
+    <section id="tldr-panel" class="tldr-panel" aria-label="TL;DR summary" hidden>
+      <div class="container">
+        <div class="tldr-box">
+          <div class="tldr-head">
+            <div>
+              <span class="mono small cs-accent-text">QUICK SUMMARY</span>
+              <h2>AI Trust Research — TL;DR</h2>
+            </div>
+            <button type="button" id="tldr-close-btn" class="tldr-close-link mono small">
+              Full case study ↓
+            </button>
+          </div>
+
+          <ul class="tldr-points">
+            <li><strong>Hypothesis:</strong> Trust doesn't come from making AI appear more confident—it comes from making AI more <em>understandable and controllable</em>.</li>
+            <li><strong>Mixed-Methods Study:</strong> Combined behavioural interviews, a 5–7 day diary study across 12 participants, and a 3-variant usability study (<em>Answer only</em> vs. <em>Answer + explanation</em> vs. <em>Answer + evidence + control</em>).</li>
+            <li><strong>Core Takeaway:</strong> Users trust AI as a starting point (<code>Discovery → Organisation → Summarisation</code>), not as evidence—and confidence rises when they can <code>Inspect → Modify → Verify → Reject</code>.</li>
+          </ul>
+
+          <div class="tldr-kpi-grid">
+            <div class="tldr-kpi">
+              <strong>3 Archetypes</strong>
+              <span class="small muted">Explorers, Pragmatists, Skeptics</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>5 Themes</strong>
+              <span class="small muted">Understanding, Verification, Control, Uncertainty, Responsibility</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>Variant C Won</strong>
+              <span class="small muted">Answer + evidence + user control</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>Calibrated Trust</strong>
+              <span class="small muted">Know when AI deserves trust</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Case Study Sections -->
+    <div id="detailed-sections">
+      <!-- 01 & 02: Research Question & Hypothesis -->
+      <section id="question" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">01 · QUESTION &amp; HYPOTHESIS</h2>
+            <p class="muted cs-sec-lead">
+              <strong>AI can give us an answer in seconds. But what makes us believe it?</strong> Capability alone doesn't automatically create trust.
+            </p>
+          </div>
+
+          <div class="cs-two-col">
+            <article class="cs-panel">
+              <span class="mono cs-num">01 · THE RESEARCH QUESTION</span>
+              <h3>What makes users trust, question, or reject AI-generated information?</h3>
+              <ul class="clean-bullets small muted">
+                <li>Accepting an AI answer without checking it</li>
+                <li>Verifying information they don't fully understand</li>
+                <li>Rejecting an answer even when it is correct</li>
+                <li>Trusting confident language more than actual evidence</li>
+                <li>Feeling uncomfortable when AI reasoning is opaque</li>
+              </ul>
+            </article>
+
+            <article class="cs-panel is-selected">
+              <span class="mono cs-num">02 · RESEARCH HYPOTHESIS</span>
+              <h3>Understandable &amp; controllable over confident</h3>
+              <p class="small muted">
+                Rather than starting with <em>"Users don't trust AI,"</em> I framed a testable hypothesis:
+              </p>
+              <p class="small">
+                <strong>"Trust may not come from making AI appear more confident. It may come from making AI more understandable and controllable."</strong>
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 to 07: Mixed-Methods Research Plan -->
+      <section id="methods" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">02 · MIXED-METHODS PLAN</h2>
+            <p class="muted cs-sec-lead">
+              <strong>Steps 03–07:</strong> A structured framework combining observed interview recall, a 5–7 day diary study, and controlled UI testing.
+            </p>
+          </div>
+
+          <!-- 04 Participant Archetypes -->
+          <div class="cs-three-cols">
+            <article class="cs-panel">
+              <span class="mono cs-num">04 · ARCHETYPE 01</span>
+              <h3>AI Explorers</h3>
+              <p class="small muted">
+                People who regularly use ChatGPT, Gemini, Claude, and similar assistants across daily workflows.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">04 · ARCHETYPE 02</span>
+              <h3>AI Pragmatists</h3>
+              <p class="small muted">
+                People who use AI occasionally for specific, bounded tasks when it saves time.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">04 · ARCHETYPE 03</span>
+              <h3>AI Skeptics</h3>
+              <p class="small muted">
+                People who actively question, double-check, or avoid AI-generated information.
+              </p>
+            </article>
+          </div>
+
+          <!-- 05 Interview + 06 Diary Study -->
+          <div class="cs-two-col mt-20">
+            <article class="cs-panel">
+              <span class="mono cs-num">05 · INTERVIEW APPROACH · BEHAVIOUR &gt; OPINION</span>
+              <h3>"Tell me about the last time an AI tool gave you an answer you weren't sure about."</h3>
+              <p class="small muted">
+                Instead of asking <em>"Do you trust AI?"</em>, probing specific incidents uncovered observed behaviour: what triggered doubt, where they verified it, and what would have built confidence.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">06 · DIARY STUDY · 5–7 DAYS</span>
+              <h3>AI was trusted as a starting point, not as evidence</h3>
+              <p class="small muted">
+                Trust happens in moments, not surveys. Logging real context, AI outputs, reactions, verification steps, and final decisions revealed how users treat AI drafts in the wild.
+              </p>
+            </article>
+          </div>
+
+          <!-- 07 Usability Study Variants -->
+          <div class="cs-panel mt-20">
+            <span class="mono small cs-accent-text">07 · USABILITY STUDY · TESTING INTERFACE VARIABLES</span>
+            <h3>Three versions of the same AI response</h3>
+            <p class="small muted">
+              Participants evaluated the exact same recommendation across three UI treatments while measuring confidence, willingness to act, and perceived transparency:
+            </p>
+            <div class="cs-three-cols mt-8">
+              <div class="variant-box">
+                <span class="mono cs-num">VERSION A</span>
+                <strong>Answer only</strong>
+                <p class="small muted">Polished recommendation with no supporting rationale or controls.</p>
+              </div>
+              <div class="variant-box">
+                <span class="mono cs-num">VERSION B</span>
+                <strong>Answer + explanation</strong>
+                <p class="small muted">Adds rationale behind the output, but lacks verifiable sources or criteria edits.</p>
+              </div>
+              <div class="variant-box is-winner">
+                <span class="mono cs-num">VERSION C · HIGHEST TRUST</span>
+                <strong>Answer + evidence + control</strong>
+                <p class="small muted">Pairs supporting evidence with transparent parameters the user can inspect and adjust.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 08 & 09: Synthesis & Key Research Insights -->
+      <section id="insights" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">03 · SYNTHESIS &amp; INSIGHTS</h2>
+            <p class="muted cs-sec-lead">
+              <strong>Steps 08–09:</strong> Interview transcripts and diary logs synthesized in FigJam into five core themes—<em>Understanding, Verification, Control, Uncertainty, and Responsibility</em>.
+            </p>
+          </div>
+
+          <div class="cs-two-col">
+            <article class="cs-panel">
+              <span class="mono cs-num">INSIGHT 01</span>
+              <h3>Trust isn't binary</h3>
+              <p class="small muted">
+                Users readily trust AI for <strong>Discovery → Organisation → Summarisation</strong>, but hesitate sharply when AI moves toward <strong>Recommendation → Decision → Action</strong>.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">INSIGHT 02</span>
+              <h3>Confidence isn't the same as credibility</h3>
+              <p class="small muted">
+                Polished, confident language can feel convincing, yet comfort comes from answering: <em>Where did this come from? What information was used? Can I verify it?</em>
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">INSIGHT 03</span>
+              <h3>Users don't necessarily want more explanation</h3>
+              <p class="small muted">
+                They want the <strong>right explanation at the right moment</strong>. Instead of exposing technical AI reasoning, surface useful, scannable evidence.
+              </p>
+            </article>
+
+            <article class="cs-panel is-selected">
+              <span class="mono cs-num">INSIGHT 04</span>
+              <h3>Control is a trust mechanism</h3>
+              <p class="small muted">
+                Trust increases when users can <strong>Inspect → Modify → Verify → Reject</strong>, rather than being forced into a binary <em>Accept → Continue</em> flow.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10, 11 & 12: Trust Spectrum, Principles & Conceptual Direction -->
+      <section id="spectrum" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">04 · SPECTRUM &amp; DIRECTION</h2>
+            <p class="muted cs-sec-lead">
+              <strong>Steps 10–12:</strong> Mapping risk levels to proportional user control so AI assists decisions rather than silently making them.
+            </p>
+          </div>
+
+          <!-- 10 Trust Spectrum -->
+          <div class="spectrum-bar">
+            <div class="spec-zone">
+              <span class="mono cs-num">LOW RISK · ASSISTIVE</span>
+              <strong>Discovery → Organisation → Summarisation</strong>
+              <p class="small muted">Fast synthesis with lightweight source links and easy undo.</p>
+            </div>
+            <div class="spec-divider mono" aria-hidden="true">→</div>
+            <div class="spec-zone is-high">
+              <span class="mono cs-num">HIGH RISK · HUMAN-LED</span>
+              <strong>Recommendation → Decision → Action</strong>
+              <p class="small muted">Requires visible evidence, uncertainty flags, adjustable criteria, and explicit approval.</p>
+            </div>
+          </div>
+
+          <!-- 11 & 12 Conceptual Direction -->
+          <div class="cs-two-col mt-20">
+            <article class="cs-panel">
+              <span class="mono cs-num">11 · FROM RESEARCH TO PRODUCT</span>
+              <h3>Translating patterns into design principles</h3>
+              <p class="small muted">
+                Moves product teams from raw research observations to concrete interaction rules: when to explain, when to surface evidence, when to show uncertainty, and when to step back.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">12 · CONCEPTUAL DIRECTION</span>
+              <h3>AI should assist the decision, not silently make it</h3>
+              <p class="small muted">
+                Instead of saying <em>"This is the best option,"</em> the UI explains parameters, surfaces supporting evidence, and lets users adjust criteria—helping them evaluate rather than trust blindly.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Outcome & Closing Principle -->
+    <section id="outcome" class="cs-section">
+      <div class="container">
+        <div class="cs-sec-head">
+          <h2 class="cs-sec-title">OUTCOME</h2>
+          <p class="muted cs-sec-lead">
+            <strong>A framework for safer AI experiences</strong>—turning AI trust from an abstract worry into an actionable product design system.
+          </p>
+        </div>
+
+        <blockquote class="cs-quote-box">
+          <p>
+            "The goal isn't to make users trust AI more. It's to help users know when AI deserves their trust."
+          </p>
+        </blockquote>
+
+        <div class="cs-four-cols mt-20">
+          <article class="cs-mini-card is-northstar">
+            <span class="mono cs-num">WHEN TO EXPLAIN</span>
+            <strong class="cs-big-num">Right Moment</strong>
+            <p class="small muted">Contextual rationale without overwhelming technical jargon.</p>
+          </article>
+
+          <article class="cs-mini-card">
+            <span class="mono cs-num">WHEN TO PROVE</span>
+            <strong class="cs-big-num">Useful Evidence</strong>
+            <p class="small muted">Clear provenance answering where information came from.</p>
+          </article>
+
+          <article class="cs-mini-card">
+            <span class="mono cs-num">WHEN TO FLAG</span>
+            <strong class="cs-big-num">Visible Uncertainty</strong>
+            <p class="small muted">Honest cues when data is incomplete or ambiguous.</p>
+          </article>
+
+          <article class="cs-mini-card">
+            <span class="mono cs-num">WHEN TO STEP BACK</span>
+            <strong class="cs-big-num">Human Control</strong>
+            <p class="small muted">Inspect, modify, verify, or reject on consequential actions.</p>
+          </article>
+        </div>
+
+        <!-- Next Case Study Card -->
+        <a href="../project5/project5.html" class="cs-next-card">
+          <div>
+            <span class="mono small muted">NEXT CASE STUDY</span>
+            <h3>FINBIT</h3>
+            <p class="small muted">White-label, audio-first financial intelligence across consumer listening and B2B partner consoles.</p>
+          </div>
+          <span class="cs-next-arrow">→</span>
+        </a>
+
+        <!-- Dark Split CTA + Accent Stripes -->
+        <div class="cta-split mt-36">
+          <div class="cta-dark-box">
+            <span class="dark-pill">
+              <span class="status-dot" aria-hidden="true"></span>
+              Open to Senior UX &amp; Product roles
+            </span>
+            <h2>Let's make something<br />that actually matters.</h2>
+            <div class="cta-email-row">
+              <span class="cta-email-text">sakshiagrawal3110@gmail.com</span>
+              <button
+                type="button"
+                class="copy-pill-btn copy-email-btn"
+                data-email="sakshiagrawal3110@gmail.com"
+              >
+                Click to copy
+              </button>
+            </div>
+          </div>
+
+          <div class="cta-accent-block" aria-hidden="true">
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Sakshi Agrawal</strong>
+        <p class="small muted">Senior UX &amp; Product Designer · Mumbai</p>
+      </div>
+      <div class="mono small muted">
+        Mumbai, IN · <span id="local-time">--:-- --</span> · UTC+5:30
+      </div>
+      <div class="footer-right">
+        <a href="https://www.linkedin.com/in/sakshiagrawalll" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        <a href="#top" class="text-link">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Copied</div>
+
+  <script src="../script.js"></script>
+  <script>
+    const tldrBtn = document.getElementById("tldr-btn");
+    const tldrCloseBtn = document.getElementById("tldr-close-btn");
+    const tldrPanel = document.getElementById("tldr-panel");
+
+    function setTldrState(open) {
+      if (!tldrBtn || !tldrPanel) return;
+      tldrBtn.classList.toggle("is-active", open);
+      tldrBtn.setAttribute("aria-pressed", String(open));
+      tldrPanel.hidden = !open;
+      if (open) {
+        tldrPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+
+    if (tldrBtn) {
+      tldrBtn.addEventListener("click", () => {
+        const next = tldrBtn.getAttribute("aria-pressed") !== "true";
+        setTldrState(next);
+      });
+    }
+
+    if (tldrCloseBtn) {
+      tldrCloseBtn.addEventListener("click", () => setTldrState(false));
+    }
+  </script>
+</body>
+</html>

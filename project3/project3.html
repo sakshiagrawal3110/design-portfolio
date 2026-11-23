@@ -3,38 +3,559 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alpha Workflow - Project 3</title>
+  <title>OpsPilot — Support Operations Intelligence (NDA) | Sakshi Agrawal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
   <link rel="stylesheet" href="project3.css" />
 </head>
-<body>
-  <nav class="nav">
-    <a href="../index.html" class="brand"><span>SA</span><strong>Sakshi Agrawal</strong></a>
-    <a href="../index.html#builds" class="back">Back to prototypes <span>→</span></a>
-  </nav>
+<body id="top">
+  <!-- Floating Translucent Nav with TL;DR Button -->
+  <header class="cs-nav-wrap">
+    <nav class="cs-nav" aria-label="Case study navigation">
+      <a href="../index.html" class="cs-back-link">← All work</a>
+
+      <div class="cs-jump-links">
+        <a href="#empathy">Research</a>
+        <a href="#define">Define</a>
+        <a href="#ideate">Ideate</a>
+        <a href="#prototype">Prototype</a>
+        <a href="#test-ship">Test &amp; Ship</a>
+        <a href="#impact">KPIs</a>
+      </div>
+
+      <div class="cs-nav-right">
+        <button
+          type="button"
+          id="tldr-btn"
+          class="tldr-nav-btn"
+          aria-pressed="false"
+        >
+          <span class="tldr-dot" aria-hidden="true"></span>
+          <span>TL;DR</span>
+        </button>
+
+        <span class="status-pill">
+          <span class="status-dot" aria-hidden="true"></span>
+          Open to work
+        </span>
+      </div>
+    </nav>
+  </header>
 
   <main>
-    <section class="hero">
-      <div class="copy">
-        <p class="eyebrow">PROJECT 03 / ALPHA WORKFLOW</p>
-        <h1>From signal<br />to <i>action.</i></h1>
-        <p class="lede">An adaptive workflow that turns scattered operational signals into one clear next step.</p>
-        <div class="chips"><span>Product strategy</span><span>Workflow design</span><span>Prototype</span></div>
-      </div>
-      <div class="signal-card">
-        <div class="signal-head"><span>ALPHA / LIVE</span><b>•••</b></div>
-        <div class="orbit"><span class="core">A</span><i></i><i></i><i></i></div>
-        <div class="signal-footer"><span>Confidence</span><strong>94%</strong></div>
+    <!-- Hero + NDA Notice + Metadata -->
+    <section class="cs-hero">
+      <div class="container">
+        <span class="mono small muted cs-eyebrow">CASE STUDY · B2B SAAS · SUPPORT OPERATIONS</span>
+        <h1 class="cs-title">OPSPILOT</h1>
+        <p class="cs-hero-sub">
+          <strong>Closing the gap between spotting a support issue and fixing it</strong>—a research-led <em>desktop-first workspace</em> unifying operational monitoring, root-cause investigation, corrective action assignment, and resolution tracking.
+        </p>
+
+        <!-- NDA Notice Banner -->
+        <aside class="nda-notice" aria-label="Confidentiality and NDA Notice">
+          <span class="nda-tag mono">NDA REDACTED</span>
+          <p class="small">
+            <strong>Confidentiality &amp; NDA Notice:</strong> Due to non-disclosure agreements (NDA) governing this project, all true company data, proprietary details, and actual performance numbers have been redacted. Visuals illustrate the UX process and interaction architecture rather than live metrics, and the narrative is conceptualized without displaying accurate figures or confidential operational data.
+          </p>
+        </aside>
+
+        <dl class="cs-meta-strip">
+          <div>
+            <dt>Role</dt>
+            <dd>UX Researcher &amp; Product Designer</dd>
+          </div>
+          <div>
+            <dt>Platform</dt>
+            <dd>Desktop-first SaaS</dd>
+          </div>
+          <div>
+            <dt>Scope</dt>
+            <dd>Research, Audit, Workflow &amp; Prototype</dd>
+          </div>
+          <div>
+            <dt>Status</dt>
+            <dd>NDA Redacted (Process &amp; Concept)</dd>
+          </div>
+        </dl>
+
+        <div class="cs-hero-banner">
+          <div class="cs-banner-top mono">
+            <span>CLOSED-LOOP WORKFLOW · MONITOR → INVESTIGATE → ASSIGN → TRACK → RESOLVE</span>
+            <span class="cs-badge-accent">Process &amp; Concept View</span>
+          </div>
+          <div class="cs-banner-metrics">
+            <div>
+              <strong>5 Stages</strong>
+              <span>End-to-end incident loop</span>
+            </div>
+            <div>
+              <strong>8–10 Leads</strong>
+              <span>Qualitative discovery framework</span>
+            </div>
+            <div>
+              <strong>5 Platforms</strong>
+              <span>Competitive audit baseline</span>
+            </div>
+            <div>
+              <strong>Mandatory</strong>
+              <span>Tracked action &amp; ownership</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="steps">
-      <article><div class="step-num">01</div><div><p>INPUT</p><h2>Capture the signal</h2><span>Bring context in without asking users to start from a blank page.</span></div></article>
-      <article><div class="step-num">02</div><div><p>MODEL</p><h2>Find the pattern</h2><span>Combine evidence and surface the strongest recommendation.</span></div></article>
-      <article><div class="step-num">03</div><div><p>ACT</p><h2>Move with confidence</h2><span>Make the next action visible, reversible, and easy to explain.</span></div></article>
+    <!-- Compact TL;DR Drawer / View (Toggled via Nav Button) -->
+    <section id="tldr-panel" class="tldr-panel" aria-label="TL;DR summary" hidden>
+      <div class="container">
+        <div class="tldr-box">
+          <div class="tldr-head">
+            <div>
+              <span class="mono small cs-accent-text">QUICK SUMMARY</span>
+              <h2>OpsPilot — TL;DR</h2>
+            </div>
+            <button type="button" id="tldr-close-btn" class="tldr-close-link mono small">
+              Full case study ↓
+            </button>
+          </div>
+
+          <ul class="tldr-points">
+            <li><strong>The Gap:</strong> Support teams don't lack metrics—they lose context switching between BI alerts, ticketing tools, spreadsheets, and Slack threads when SLA or CSAT dips.</li>
+            <li><strong>The Loop:</strong> Anchored around <code>Monitor → Investigate → Assign → Track → Resolve</code> as an intelligence layer above existing helpdesks—with mandatory ownership or explicit dismissal.</li>
+            <li><strong>Craft &amp; KPIs:</strong> Exception-first desktop triage, inline root-cause side-drawers, and one-click escalation to tracked action items; measured via resolution-in-target rate, time to root cause, ownership coverage, and reduced tool switching (figures redacted under NDA).</li>
+          </ul>
+
+          <div class="tldr-kpi-grid">
+            <div class="tldr-kpi">
+              <strong>North Star</strong>
+              <span class="small muted">% issues resolved in target time</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>Root Cause</strong>
+              <span class="small muted">Faster anomaly-to-cause time</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>Ownership</strong>
+              <span class="small muted">Named owner assigned within 24h</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>Less Switching</strong>
+              <span class="small muted">Fewer manual sheets &amp; threads</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Case Study Sections -->
+    <div id="detailed-sections">
+      <!-- 1. Empathy (Context & Research Framework) -->
+      <section id="empathy" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">01 · EMPATHY &amp; RESEARCH</h2>
+            <p class="muted cs-sec-lead">
+              <strong>Support teams don't lack data—they lack a bridge from data to action.</strong> Alerts fire in BI tools, digging happens in tickets, and action items scatter across spreadsheets and chat.
+            </p>
+          </div>
+
+          <div class="cs-split-diagram">
+            <div class="cs-diag-col">
+              <span class="mono small muted">FRACTURED · CURRENT INCIDENT HANDOFF</span>
+              <div class="cs-diag-row">
+                <div class="cs-node">BI Alerts</div>
+                <div class="cs-node">Spreadsheets</div>
+                <div class="cs-node">Slack Threads</div>
+              </div>
+              <p class="small muted">Context drops between spotting a metric slip and following through on fixes.</p>
+            </div>
+
+            <div class="cs-diag-center mono">BRIDGE<br />TO ACTION</div>
+
+            <div class="cs-diag-col">
+              <span class="mono small muted">UNIFIED · OPSPILOT WORKSPACE</span>
+              <div class="cs-diag-row">
+                <div class="cs-node is-lit">Anomaly Queue</div>
+                <div class="cs-node is-lit">Root Cause</div>
+                <div class="cs-node is-lit">Tracked Owner</div>
+              </div>
+              <p class="small muted">Investigation findings carry straight into assigned corrective actions.</p>
+            </div>
+          </div>
+
+          <!-- Research Framework Table -->
+          <div class="cs-table-card">
+            <div class="cs-table-head">
+              <span class="mono small cs-accent-text">GENERATIVE QUALITATIVE RESEARCH FRAMEWORK</span>
+            </div>
+            <div class="table-scroll">
+              <table class="research-table">
+                <thead>
+                  <tr>
+                    <th>Study Parameter</th>
+                    <th>Approach (Conceptualized)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Discovery Participants</strong></td>
+                    <td>8–10 Support Operations Managers, Team Leads, and CX Professionals</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Session Format</strong></td>
+                    <td>45–60 minute qualitative interviews + live workflow walkthroughs</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Research Focus</strong></td>
+                    <td>Operational incidents, handoff friction, and prioritization trade-offs</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Competitive Audit</strong></td>
+                    <td>5 existing support &amp; analytics platforms to map interaction patterns and gaps</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Define (The Anchor Section) -->
+      <section id="define" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">02 · DEFINE</h2>
+            <p class="muted cs-sec-lead">
+              <em>"How might we connect performance monitoring directly to root-cause investigation and tracked ownership?"</em> Anchored around <strong>Monitor → Investigate → Assign → Track → Resolve</strong>.
+            </p>
+          </div>
+
+          <!-- 5-Stage Loop Strip -->
+          <div class="loop-banner">
+            <span class="loop-step is-lit mono">1. Monitor</span>
+            <span class="loop-arrow" aria-hidden="true">→</span>
+            <span class="loop-step is-lit mono">2. Investigate</span>
+            <span class="loop-arrow" aria-hidden="true">→</span>
+            <span class="loop-step is-lit mono">3. Assign</span>
+            <span class="loop-arrow" aria-hidden="true">→</span>
+            <span class="loop-step is-lit mono">4. Track</span>
+            <span class="loop-arrow" aria-hidden="true">→</span>
+            <span class="loop-step is-lit mono">5. Resolve</span>
+          </div>
+
+          <!-- Strategic Trade-offs -->
+          <div class="cs-three-cols mt-20">
+            <article class="cs-panel">
+              <span class="mono cs-num">BOUNDARY 01 · INTEGRATION</span>
+              <h3>Not another ticketing system</h3>
+              <p class="small muted">
+                Sits <strong>above existing helpdesks</strong> as an intelligence and coordination layer, ingesting signals without forcing teams to migrate their ticketing stack.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">BOUNDARY 02 · FOCUS</span>
+              <h3>Not a generic BI builder</h3>
+              <p class="small muted">
+                Deprioritized infinite chart or custom SQL builders in favor of <strong>opinionated operational health views</strong> that tie anomalies directly to actionable queues.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">BOUNDARY 03 · ACCOUNTABILITY</span>
+              <h3>Ownership is mandatory</h3>
+              <p class="small muted">
+                Anomalies cannot sit as passive red numbers. Every investigated issue becomes a <strong>tracked corrective action</strong> with a target window—or is explicitly dismissed with a reason.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Ideate (Divergence & Workflow Exploration) -->
+      <section id="ideate" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">03 · IDEATE &amp; WORKFLOWS</h2>
+            <p class="muted cs-sec-lead">
+              Auditing <strong>5 support and analytics platforms</strong> showed analytics tools are built for reading while trackers are built for doing—OpsPilot bridges both <em>without context switching</em>.
+            </p>
+          </div>
+
+          <div class="cs-two-col">
+            <article class="cs-panel">
+              <span class="mono small muted">EXPLORATION 01 · INVESTIGATION</span>
+              <h3>Inline root-cause drilldown</h3>
+              <p class="small muted">
+                Instead of exporting CSVs to diagnose a metric dip, clicking an anomaly opens a <strong>contextual side-drawer</strong> pre-filtered to affected ticket clusters, regions, or agent queues.
+              </p>
+              <div class="flow-mini-box mono small">
+                <span>Anomaly Alert</span>
+                <span>→</span>
+                <strong class="cs-accent-text">Filtered Side-Drawer</strong>
+                <span>(Clusters · Regions · Queues)</span>
+              </div>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono small muted">EXPLORATION 02 · HANDOFF</span>
+              <h3>One-click escalation to Action Item</h3>
+              <p class="small muted">
+                Once a root cause is spotted (such as a checkout issue spiking billing tickets), leads convert the <strong>investigation snapshot</strong> straight into a tracked action item with owner, priority, and resolution window.
+              </p>
+              <div class="flow-mini-box mono small">
+                <span>Root-Cause Snapshot</span>
+                <span>→</span>
+                <strong class="cs-accent-text">Tracked Action Item</strong>
+                <span>(Owner · Priority · Window)</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Prototype (Craft & Key Decisions) -->
+      <section id="prototype" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">04 · PROTOTYPE &amp; CRAFT</h2>
+            <p class="muted cs-sec-lead">
+              Designed for <strong>high-density desktop scanning</strong>, rapid incident triage, and <em>audit-ready operational history</em>.
+            </p>
+          </div>
+
+          <div class="cs-split-feature">
+            <div class="cs-three-stack">
+              <article class="cs-panel">
+                <span class="mono cs-num">01 · TRIAGE VIEW</span>
+                <h3>Exception-first dashboard</h3>
+                <p class="small muted">
+                  Surfaces active operational anomalies ranked by <strong>customer impact and SLA risk</strong> instead of burying leads in vanity metrics.
+                </p>
+              </article>
+
+              <article class="cs-panel">
+                <span class="mono cs-num">02 · STATE VISIBILITY</span>
+                <h3>Persistent resolution timeline</h3>
+                <p class="small muted">
+                  Tracks every issue across <strong>Investigating → Assigned → In Progress → Blocked → Resolved</strong> alongside elapsed time against its target window.
+                </p>
+              </article>
+
+              <article class="cs-panel">
+                <span class="mono cs-num">03 · SINGLE RECORD</span>
+                <h3>Audit-ready context</h3>
+                <p class="small muted">
+                  Keeps metric spike, root-cause notes, and final resolution together—eliminating manual weekly <em>"ops review"</em> slide decks.
+                </p>
+              </article>
+            </div>
+
+            <div class="cs-mockup-showcase">
+              <div class="ops-preview-card" aria-label="OpsPilot desktop triage and resolution workflow preview">
+                <div class="ops-header">
+                  <span class="mono">OPSPILOT · DESKTOP INCIDENT CONSOLE</span>
+                  <span class="ops-nda-pill mono">CONCEPTUAL UI</span>
+                </div>
+
+                <div class="ops-loop-strip mono">
+                  <span class="is-done">Investigating</span>
+                  <i>→</i>
+                  <span class="is-active">Assigned</span>
+                  <i>→</i>
+                  <span>In Progress</span>
+                  <i>→</i>
+                  <span>Blocked</span>
+                  <i>→</i>
+                  <span>Resolved</span>
+                </div>
+
+                <div class="ops-grid">
+                  <div class="ops-box">
+                    <span class="mono ops-label">EXCEPTION RANKING</span>
+                    <strong>SLA Risk &amp; Impact Queue</strong>
+                    <p class="small muted">Side-drawer isolates affected ticket clusters, regions, and queues in one click.</p>
+                  </div>
+
+                  <div class="ops-box is-owned">
+                    <span class="mono ops-label">ACTION SNAPSHOT</span>
+                    <strong>Owner + Target Window</strong>
+                    <p class="small muted">Preserves diagnostic context from initial spike through verified resolution.</p>
+                  </div>
+                </div>
+
+                <div class="ops-footer mono">
+                  <span>Audit-Ready Timeline</span>
+                  <span>No Manual Deck Prep</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Test & Iterate (Validation Process) -->
+      <section id="test-ship" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">05 · TEST &amp; VALIDATION</h2>
+            <p class="muted cs-sec-lead">
+              Structured a focused usability validation plan with <strong>5–6 support ops participants</strong> to stress-test the end-to-end workflow.
+            </p>
+          </div>
+
+          <div class="cs-three-cols">
+            <article class="cs-panel">
+              <span class="mono cs-num">STEP 01 · SIMULATION</span>
+              <h3>Task-based incident simulation</h3>
+              <p class="small muted">
+                Guide support ops leads through a full scenario—from spotting an SLA dip to isolating the cause, assigning an owner, and verifying resolution.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">STEP 02 · SIGNAL CHECK</span>
+              <h3>Signal-to-noise check</h3>
+              <p class="small muted">
+                Verify whether the exception-first view speeds up triage or risks alert fatigue during high-volume operational spikes.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">STEP 03 · STACK FIT</span>
+              <h3>Integration &amp; permissions pass</h3>
+              <p class="small muted">
+                Confirm which data fields leads actually need from helpdesk and messaging tools so OpsPilot stays lightweight and non-duplicative.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 6. Ship & Impact (Success Framework) -->
+    <section id="impact" class="cs-section">
+      <div class="container">
+        <div class="cs-sec-head">
+          <h2 class="cs-sec-title">SUCCESS FRAMEWORK (NDA)</h2>
+          <p class="muted cs-sec-lead">
+            <strong>Actual performance figures are redacted under NDA.</strong> Success is defined around four operational KPIs designed to close the loop from detection to resolution.
+          </p>
+        </div>
+
+        <div class="cs-four-cols">
+          <article class="cs-mini-card is-northstar">
+            <span class="mono cs-num">NORTH STAR METRIC</span>
+            <strong class="cs-big-num">Resolution in Target</strong>
+            <p class="small muted">% of actionable operational issues resolved within target time—proving the loop closes.</p>
+          </article>
+
+          <article class="cs-mini-card">
+            <span class="mono cs-num">DIAGNOSIS SPEED</span>
+            <strong class="cs-big-num">Time to Root Cause</strong>
+            <p class="small muted">Reduction in median time from anomaly detection to identified root cause.</p>
+          </article>
+
+          <article class="cs-mini-card">
+            <span class="mono cs-num">ACCOUNTABILITY</span>
+            <strong class="cs-big-num">Ownership Coverage</strong>
+            <p class="small muted">% of flagged operational issues assigned to a named owner within 24 hours.</p>
+          </article>
+
+          <article class="cs-mini-card">
+            <span class="mono cs-num">WORKFLOW CLARITY</span>
+            <strong class="cs-big-num">Tool Switching</strong>
+            <p class="small muted">Drop in manual spreadsheet and chat tracking during incident reviews.</p>
+          </article>
+        </div>
+
+        <!-- Next Case Study Card -->
+        <a href="../project4/project4.html" class="cs-next-card">
+          <div>
+            <span class="mono small muted">NEXT CASE STUDY</span>
+            <h3>Clinical AI Documentation</h3>
+            <p class="small muted">Trust-first clinical workflow separating AI note drafting from clinician authority.</p>
+          </div>
+          <span class="cs-next-arrow">→</span>
+        </a>
+
+        <!-- Dark Split CTA + Accent Stripes -->
+        <div class="cta-split mt-36">
+          <div class="cta-dark-box">
+            <span class="dark-pill">
+              <span class="status-dot" aria-hidden="true"></span>
+              Open to Senior UX &amp; Product roles
+            </span>
+            <h2>Let's make something<br />that actually matters.</h2>
+            <div class="cta-email-row">
+              <span class="cta-email-text">sakshiagrawal3110@gmail.com</span>
+              <button
+                type="button"
+                class="copy-pill-btn copy-email-btn"
+                data-email="sakshiagrawal3110@gmail.com"
+              >
+                Click to copy
+              </button>
+            </div>
+          </div>
+
+          <div class="cta-accent-block" aria-hidden="true">
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Sakshi Agrawal</strong>
+        <p class="small muted">Senior UX &amp; Product Designer · Mumbai</p>
+      </div>
+      <div class="mono small muted">
+        Mumbai, IN · <span id="local-time">--:-- --</span> · UTC+5:30
+      </div>
+      <div class="footer-right">
+        <a href="https://linkedin.com/in/sakshiagrawalll" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        <a href="#top" class="text-link">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Copied</div>
+
+  <script src="../script.js"></script>
+  <script>
+    const tldrBtn = document.getElementById("tldr-btn");
+    const tldrCloseBtn = document.getElementById("tldr-close-btn");
+    const tldrPanel = document.getElementById("tldr-panel");
+
+    function setTldrState(open) {
+      if (!tldrBtn || !tldrPanel) return;
+      tldrBtn.classList.toggle("is-active", open);
+      tldrBtn.setAttribute("aria-pressed", String(open));
+      tldrPanel.hidden = !open;
+      if (open) {
+        tldrPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+
+    if (tldrBtn) {
+      tldrBtn.addEventListener("click", () => {
+        const next = tldrBtn.getAttribute("aria-pressed") !== "true";
+        setTldrState(next);
+      });
+    }
+
+    if (tldrCloseBtn) {
+      tldrCloseBtn.addEventListener("click", () => setTldrState(false));
+    }
+  </script>
 </body>
 </html>

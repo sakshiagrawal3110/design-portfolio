@@ -55,6 +55,27 @@ if (gridEl) {
   }
 }
 
+// How I Work staggered scroll reveal
+const howCols = document.querySelectorAll("[data-how-step]");
+if (howCols.length > 0) {
+  if ("IntersectionObserver" in window) {
+    const howObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            howObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    howCols.forEach((col) => howObserver.observe(col));
+  } else {
+    howCols.forEach((col) => col.classList.add("is-visible"));
+  }
+}
+
 // 5. Live IST clock in footer
 function updateClock() {
   const el = document.getElementById("local-time");

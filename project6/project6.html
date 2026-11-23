@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clinical AI Documentation — Trust-First Copilot | Sakshi Agrawal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="project6.css" />
+</head>
+<body id="top">
+  <!-- Floating Translucent Nav with TL;DR Button -->
+  <header class="cs-nav-wrap">
+    <nav class="cs-nav" aria-label="Case study navigation">
+      <a href="../index.html" class="cs-back-link">← All work</a>
+
+      <div class="cs-jump-links">
+        <a href="#challenges">Challenges</a>
+        <a href="#audit">Audit &amp; Scope</a>
+        <a href="#interaction">Interaction</a>
+        <a href="#verification">Verification</a>
+        <a href="#constraints">Constraints</a>
+        <a href="#outcome">Outcome</a>
+      </div>
+
+      <div class="cs-nav-right">
+        <button
+          type="button"
+          id="tldr-btn"
+          class="tldr-nav-btn"
+          aria-pressed="false"
+        >
+          <span class="tldr-dot" aria-hidden="true"></span>
+          <span>TL;DR</span>
+        </button>
+
+        <span class="status-pill">
+          <span class="status-dot" aria-hidden="true"></span>
+          Open to work
+        </span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero + Metadata -->
+    <section class="cs-hero">
+      <div class="container">
+        <span class="mono small muted cs-eyebrow">CASE STUDY · HEALTHCARE · AI COPILOT</span>
+        <h1 class="cs-title">CLINICAL AI DOCUMENTATION</h1>
+        <p class="cs-hero-sub">
+          A conceptual exploration of how AI could help clinicians turn patient consultations into <strong>structured clinical notes</strong> while maintaining <em>transparency, human oversight, accessibility, and trust</em>.
+        </p>
+
+        <dl class="cs-meta-strip">
+          <div>
+            <dt>Role</dt>
+            <dd>Product Designer (End-to-End UX Concept)</dd>
+          </div>
+          <div>
+            <dt>Scope</dt>
+            <dd>Workflow, IA, AI Interaction &amp; Prototyping</dd>
+          </div>
+          <div>
+            <dt>Focus</dt>
+            <dd>Human Oversight, Traceability &amp; A11y</dd>
+          </div>
+          <div>
+            <dt>Outcome</dt>
+            <dd>Reduced Admin Effort · Trust-First AI</dd>
+          </div>
+        </dl>
+
+        <div class="cs-hero-banner">
+          <div class="cs-banner-top mono">
+            <span>HUMAN-IN-THE-LOOP · GENERATE → REVIEW → VERIFY → APPROVE</span>
+            <span class="cs-badge-accent">AI Proposes · Clinician Decides</span>
+          </div>
+          <div class="cs-banner-metrics">
+            <div>
+              <strong>4 Capabilities</strong>
+              <span>Capture · Organise · Summarise · Retrieve</span>
+            </div>
+            <div>
+              <strong>3 Data States</strong>
+              <span>Patient · AI Inferred · Clinician Approved</span>
+            </div>
+            <div>
+              <strong>Zero Auto-Save</strong>
+              <span>Explicit accept, edit, or remove</span>
+            </div>
+            <div>
+              <strong>Visible Gaps</strong>
+              <span>Actionable uncertainty pathways</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compact TL;DR Drawer / View (Toggled via Nav Button) -->
+    <section id="tldr-panel" class="tldr-panel" aria-label="TL;DR summary" hidden>
+      <div class="container">
+        <div class="tldr-box">
+          <div class="tldr-head">
+            <div>
+              <span class="mono small cs-accent-text">QUICK SUMMARY</span>
+              <h2>Clinical AI Documentation — TL;DR</h2>
+            </div>
+            <button type="button" id="tldr-close-btn" class="tldr-close-link mono small">
+              Full case study ↓
+            </button>
+          </div>
+
+          <ul class="tldr-points">
+            <li><strong>The Challenge:</strong> Documentation competes with patient attention, yet clinicians cannot accept plausible-sounding AI text without knowing what it used or where uncertainty lies.</li>
+            <li><strong>Bounded Scope:</strong> Limited AI strictly to <code>Capture → Organise → Summarise → Retrieve</code>—removing repetitive charting while keeping diagnosis, prescriptions, and final approval with the clinician.</li>
+            <li><strong>Trust &amp; Verification:</strong> Visually separated <em>Patient Said</em>, <em>AI Generated</em>, and <em>Clinician Accepted</em> states across a <code>Generate → Review → Verify → Approve</code> loop with accessible, non-color-only cues.</li>
+          </ul>
+
+          <div class="tldr-kpi-grid">
+            <div class="tldr-kpi">
+              <strong>Reduced Effort</strong>
+              <span class="small muted">Less repetitive note-taking</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>Traceable Outputs</strong>
+              <span class="small muted">Linked back to consultation</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>Human Oversight</strong>
+              <span class="small muted">Accept, edit, or remove every item</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>Accessible UX</strong>
+              <span class="small muted">Keyboard nav &amp; redundant cues</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Case Study Sections -->
+    <div id="detailed-sections">
+      <!-- 1. The Challenges -->
+      <section id="challenges" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">01 · THE CHALLENGES</h2>
+            <p class="muted cs-sec-lead">
+              <strong>Balancing attention and trust.</strong> The opportunity wasn't to automate clinical judgement—it was to remove repetitive documentation while keeping interpretation and approval with the clinician.
+            </p>
+          </div>
+
+          <div class="cs-three-cols">
+            <article class="cs-panel">
+              <span class="mono cs-num">CHALLENGE 01 · ATTENTION</span>
+              <h3>Documentation competes with patient care</h3>
+              <p class="small muted">
+                Clinicians need to listen, ask questions, make decisions, and maintain human connection while simultaneously capturing accurate details for the clinical record.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">CHALLENGE 02 · TRUST</span>
+              <h3>AI introduces a verification problem</h3>
+              <p class="small muted">
+                A healthcare professional cannot accept an AI output just because it sounds plausible—they must see <strong>what the AI generated</strong>, <strong>what source it used</strong>, and whether anything was misunderstood.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">CHALLENGE 03 · BOUNDARIES</span>
+              <h3>Automation has a clear boundary</h3>
+              <p class="small muted">
+                Clinical judgement cannot be automated. AI belongs on repetitive charting tasks, leaving <strong>interpretation, diagnosis, and final approval</strong> strictly with the clinician.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. The Audit & Role -->
+      <section id="audit" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">02 · WORKFLOW AUDIT &amp; SCOPE</h2>
+            <p class="muted cs-sec-lead">
+              Started with the clinical workflow rather than <em>"What can AI do?"</em>—mapping where effort goes during a consultation to separate charting from decision-making.
+            </p>
+          </div>
+
+          <div class="cs-split-diagram">
+            <div class="cs-diag-col">
+              <span class="mono small muted">AI ASSISTANT · 4 BOUNDED CAPABILITIES</span>
+              <div class="cs-diag-row four-mini">
+                <div class="cs-node is-lit">Capture</div>
+                <div class="cs-node is-lit">Organise</div>
+                <div class="cs-node is-lit">Summarise</div>
+                <div class="cs-node is-lit">Retrieve</div>
+              </div>
+              <p class="small muted">Converts speech to transcript, identifies relevant clinical info, drafts notes, and surfaces context.</p>
+            </div>
+
+            <div class="cs-diag-center mono">STRICT<br />BOUNDARY</div>
+
+            <div class="cs-diag-col">
+              <span class="mono small muted">CLINICIAN AUTHORITY · NEVER AUTOMATED</span>
+              <div class="cs-diag-row">
+                <div class="cs-node">Diagnosis</div>
+                <div class="cs-node">Prescriptions</div>
+                <div class="cs-node">Treatment</div>
+              </div>
+              <p class="small muted">The AI never independently diagnoses, prescribes, or makes treatment decisions.</p>
+            </div>
+          </div>
+
+          <div class="cs-four-cols">
+            <article class="cs-mini-card">
+              <span class="mono cs-num">01 · CAPTURE</span>
+              <h3>Convert to transcript</h3>
+              <p class="small muted">Transcribes the consultation in the background without pulling focus from the patient.</p>
+            </article>
+            <article class="cs-mini-card">
+              <span class="mono cs-num">02 · ORGANISE</span>
+              <h3>Identify relevant info</h3>
+              <p class="small muted">Structures key clinical details out of conversational dialogue.</p>
+            </article>
+            <article class="cs-mini-card">
+              <span class="mono cs-num">03 · SUMMARISE</span>
+              <h3>Draft a structured note</h3>
+              <p class="small muted">Prepares a clear clinical draft for review rather than saving automatically.</p>
+            </article>
+            <article class="cs-mini-card">
+              <span class="mono cs-num">04 · RETRIEVE</span>
+              <h3>Surface source context</h3>
+              <p class="small muted">Lets clinicians inspect supporting consultation moments on demand.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Interaction (Distinguishing Information States) -->
+      <section id="interaction" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">03 · INTERACTION DESIGN</h2>
+            <p class="muted cs-sec-lead">
+              <strong>Making AI-generated information distinguishable.</strong> Visually separating three distinct types of information prevents generated drafts from being mistaken for verified clinical facts.
+            </p>
+          </div>
+
+          <div class="cs-three-cols">
+            <article class="cs-panel state-card state-patient">
+              <span class="state-pill mono">STATE 01 · SOURCE</span>
+              <h3>What the patient actually said</h3>
+              <p class="small muted">
+                Direct consultation transcript quotes anchored to the encounter so clinicians can read raw patient statements verbatim.
+              </p>
+            </article>
+
+            <article class="cs-panel state-card state-ai">
+              <span class="state-pill mono">STATE 02 · DRAFT</span>
+              <h3>What the system generated or inferred</h3>
+              <p class="small muted">
+                Clearly labeled AI-drafted summaries and extractions—visually distinct so unreviewed suggestions never blend into the medical record.
+              </p>
+            </article>
+
+            <article class="cs-panel state-card state-approved">
+              <span class="state-pill mono">STATE 03 · VERIFIED</span>
+              <h3>Reviewed and accepted by clinician</h3>
+              <p class="small muted">
+                Explicitly confirmed clinical entries that only enter the final record after human review and sign-off.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Verification (Human-in-the-Loop) -->
+      <section id="verification" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">04 · VERIFICATION &amp; CONTROL</h2>
+            <p class="muted cs-sec-lead">
+              <strong>AI proposes. The clinician decides.</strong> Every important piece of information traces back to the consultation inside an explicit human-in-the-loop workflow.
+            </p>
+          </div>
+
+          <!-- Human-in-the-loop Strip -->
+          <div class="loop-banner">
+            <span class="loop-step is-lit mono">1. Generate</span>
+            <span class="loop-arrow" aria-hidden="true">→</span>
+            <span class="loop-step is-lit mono">2. Review</span>
+            <span class="loop-arrow" aria-hidden="true">→</span>
+            <span class="loop-step is-lit mono">3. Verify</span>
+            <span class="loop-arrow" aria-hidden="true">→</span>
+            <span class="loop-step is-lit mono">4. Approve</span>
+          </div>
+
+          <div class="cs-split-feature mt-20">
+            <div class="cs-mockup-showcase">
+              <div class="case-media-frame">
+                <img
+                  src="../assets/aiClinicalDoc/aiClinicalDoc-mockup.png"
+                  alt="Clinical AI Documentation interface showing source transcript, AI draft suggestions, and clinician approval controls"
+                />
+              </div>
+            </div>
+
+            <div class="cs-three-stack">
+              <article class="cs-panel">
+                <span class="mono cs-num">CONTROL 01 · TRACEABILITY</span>
+                <h3>Source-linked verification</h3>
+                <p class="small muted">
+                  Instead of presenting an AI note as a finished answer, each key point links back to the consultation so clinicians verify facts rather than relying on AI confidence alone.
+                </p>
+              </article>
+
+              <article class="cs-panel">
+                <span class="mono cs-num">CONTROL 02 · ITEM-LEVEL AGENCY</span>
+                <h3>Accept, edit, or remove</h3>
+                <p class="small muted">
+                  Clinicians retain granular control over every AI-generated item—accepting accurate lines, editing clinical phrasing, or removing irrelevant suggestions.
+                </p>
+              </article>
+
+              <article class="cs-panel">
+                <span class="mono cs-num">CONTROL 03 · NO AUTO-SAVE</span>
+                <h3>Deliberate sign-off</h3>
+                <p class="small muted">
+                  Replacing automatic saving with <strong>Generate → Review → Verify → Approve</strong> ensures nothing enters the record without clinical accountability.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Handling Constraints & Accessibility -->
+      <section id="constraints" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">05 · UNCERTAINTY &amp; ACCESSIBILITY</h2>
+            <p class="muted cs-sec-lead">
+              <strong>Don't hide uncertainty behind a polished answer.</strong> Making gaps actionable and building accessibility into every state keeps high-stakes workflows safe.
+            </p>
+          </div>
+
+          <div class="cs-two-col">
+            <article class="cs-panel">
+              <span class="mono cs-num">CONSTRAINT 01 · TRANSPARENCY</span>
+              <h3>Actionable uncertainty pathways</h3>
+              <p class="small muted">
+                When information is missing, contradictory, or unclear, the interface surfaces it visibly and provides direct pathways to review manually or inspect the original transcript—never pretending the system is always right.
+              </p>
+            </article>
+
+            <article class="cs-panel">
+              <span class="mono cs-num">CONSTRAINT 02 · INCLUSIVE DESIGN</span>
+              <h3>Accessibility at every step</h3>
+              <p class="small muted">
+                Designed around <strong>clear visual hierarchy</strong>, <strong>full keyboard accessibility</strong>, <strong>readable transcription</strong>, and redundant visual cues so color is never the sole signal for AI states or warnings.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 6. Outcome & Closing Quote -->
+    <section id="outcome" class="cs-section">
+      <div class="container">
+        <div class="cs-sec-head">
+          <h2 class="cs-sec-title">OUTCOME</h2>
+          <p class="muted cs-sec-lead">
+            <strong>A model for responsible AI in clinical workflows</strong>—helping clinicians spend less time documenting and more time reviewing, reasoning, and caring for the patient.
+          </p>
+        </div>
+
+        <blockquote class="cs-quote-box">
+          <p>
+            "AI doesn't need to replace the clinician to be useful. It just needs to make the clinician's work easier — without taking away their control."
+          </p>
+        </blockquote>
+
+        <div class="cs-four-cols mt-20">
+          <article class="cs-mini-card is-northstar">
+            <span class="mono cs-num">EFFICIENCY</span>
+            <strong class="cs-big-num">Less Admin Effort</strong>
+            <p class="small muted">Automates repetitive charting so clinicians stay present with patients.</p>
+          </article>
+
+          <article class="cs-mini-card">
+            <span class="mono cs-num">OVERSIGHT</span>
+            <strong class="cs-big-num">Human-in-the-Loop</strong>
+            <p class="small muted">Clinicians review, verify, and approve—never passive bystanders.</p>
+          </article>
+
+          <article class="cs-mini-card">
+            <span class="mono cs-num">TRACEABILITY</span>
+            <strong class="cs-big-num">Source-Verified</strong>
+            <p class="small muted">Every key claim traces back to the consultation transcript.</p>
+          </article>
+
+          <article class="cs-mini-card">
+            <span class="mono cs-num">TRUST &amp; A11Y</span>
+            <strong class="cs-big-num">Visible Uncertainty</strong>
+            <p class="small muted">Clear states, keyboard navigation, and non-color-only cues.</p>
+          </article>
+        </div>
+
+        <!-- Next Case Study Card -->
+        <a href="../project1/project1.html" class="cs-next-card">
+          <div>
+            <span class="mono small muted">NEXT CASE STUDY</span>
+            <h3>Agentic Design System</h3>
+            <p class="small muted">Scaling 50+ governed components and accessibility across 13–14 global markets.</p>
+          </div>
+          <span class="cs-next-arrow">→</span>
+        </a>
+
+        <!-- Dark Split CTA + Accent Stripes -->
+        <div class="cta-split mt-36">
+          <div class="cta-dark-box">
+            <span class="dark-pill">
+              <span class="status-dot" aria-hidden="true"></span>
+              Open to Senior UX &amp; Product roles
+            </span>
+            <h2>Let's make something<br />that actually matters.</h2>
+            <div class="cta-email-row">
+              <span class="cta-email-text">sakshiagrawal3110@gmail.com</span>
+              <button
+                type="button"
+                class="copy-pill-btn copy-email-btn"
+                data-email="sakshiagrawal3110@gmail.com"
+              >
+                Click to copy
+              </button>
+            </div>
+          </div>
+
+          <div class="cta-accent-block" aria-hidden="true">
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Sakshi Agrawal</strong>
+        <p class="small muted">Senior UX &amp; Product Designer · Mumbai</p>
+      </div>
+      <div class="mono small muted">
+        Mumbai, IN · <span id="local-time">--:-- --</span> · UTC+5:30
+      </div>
+      <div class="footer-right">
+        <a href="https://linkedin.com/in/sakshiagrawalll" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        <a href="#top" class="text-link">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Copied</div>
+
+  <script src="../script.js"></script>
+  <script>
+    const tldrBtn = document.getElementById("tldr-btn");
+    const tldrCloseBtn = document.getElementById("tldr-close-btn");
+    const tldrPanel = document.getElementById("tldr-panel");
+
+    function setTldrState(open) {
+      if (!tldrBtn || !tldrPanel) return;
+      tldrBtn.classList.toggle("is-active", open);
+      tldrBtn.setAttribute("aria-pressed", String(open));
+      tldrPanel.hidden = !open;
+      if (open) {
+        tldrPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+
+    if (tldrBtn) {
+      tldrBtn.addEventListener("click", () => {
+        const next = tldrBtn.getAttribute("aria-pressed") !== "true";
+        setTldrState(next);
+      });
+    }
+
+    if (tldrCloseBtn) {
+      tldrCloseBtn.addEventListener("click", () => setTldrState(false));
+    }
+  </script>
+</body>
+</html>

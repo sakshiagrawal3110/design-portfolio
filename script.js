@@ -14,6 +14,7 @@ const toast = document.getElementById("toast");
 let toastTimer;
 
 function showToast(msg) {
+  if (!toast) return;
   toast.textContent = msg;
   toast.classList.add("is-visible");
   clearTimeout(toastTimer);
@@ -36,36 +37,22 @@ document.querySelectorAll(".copy-email-btn").forEach((btn) => {
 document.querySelectorAll(".exp-toggle").forEach((btn) => {
   btn.addEventListener("click", () => {
     const row = btn.closest(".exp-row");
+    if (!row) return;
     const isOpen = row.classList.toggle("is-open");
     btn.setAttribute("aria-expanded", String(isOpen));
   });
 });
 
-// 4. Activity heatmap generator (52 weeks x 7 days)
-const gridEl = document.getElementById("activity-grid");
-if (gridEl) {
-  const levels = ["", "heat-1", "heat-2", "heat-3", "heat-4"];
-  for (let i = 0; i < 52 * 7; i++) {
-    const cell = document.createElement("div");
-    const seed = (i * 17 + 7) % 13;
-    const lvl = seed > 10 ? 4 : seed > 8 ? 3 : seed > 5 ? 2 : seed > 2 ? 1 : 0;
-    cell.className = `heat-cell ${levels[lvl]}`.trim();
-    cell.title = lvl ? `${lvl} contributions` : "No activity";
-    gridEl.appendChild(cell);
-  }
-}
-
-// How I Work staggered scroll reveal
+// 4. How I Work staggered scroll reveal
 const howCols = document.querySelectorAll("[data-how-step]");
 if (howCols.length > 0) {
   if ("IntersectionObserver" in window) {
     const howObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            howObserver.unobserve(entry.target);
-          }
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          howObserver.unobserve(entry.target);
         });
       },
       { threshold: 0.15 }
@@ -92,7 +79,7 @@ function updateClock() {
 updateClock();
 setInterval(updateClock, 30000);
 
-// Headline spotlight entrance & subtle pointer sheen
+// 6. Headline spotlight entrance & subtle pointer sheen
 const heroHeadline = document.querySelector(".hero-display--single");
 const intentWord = document.querySelector(".word-intent");
 
@@ -113,7 +100,7 @@ if (heroHeadline && intentWord) {
   });
 }
 
-// Toolkit category spotlight filter
+// 7. Toolkit category spotlight filter
 const tkFilters = document.querySelectorAll(".tk-filter");
 const tkCards = document.querySelectorAll(".toolkit-card");
 
@@ -132,7 +119,7 @@ tkFilters.forEach((btn) => {
   });
 });
 
-// Things I Built staggered reveal & subtle tilt micro-interaction
+// 8. Things I Built staggered reveal & subtle tilt micro-interaction
 const bentoCards = document.querySelectorAll("[data-bento-card]");
 if (bentoCards.length > 0) {
   if ("IntersectionObserver" in window) {
@@ -168,3 +155,41 @@ if (bentoCards.length > 0) {
     });
   });
 }
+
+// START: EXPERIENCE MICRO-INTERACTIONS
+const expCards = document.querySelectorAll("[data-exp-card]");
+const expSegs = document.querySelectorAll("[data-role-seg]");
+
+expCards.forEach((card) => {
+  const role = card.dataset.role;
+  const matchingSeg = role
+    ? document.querySelector(`[data-role-seg="${role}"]`)
+    : null;
+
+  card.addEventListener("pointermove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty("--spot-x", `${x.toFixed(1)}%`);
+    card.style.setProperty("--spot-y", `${y.toFixed(1)}%`);
+  });
+
+  card.addEventListener("pointerenter", () => {
+    expSegs.forEach((seg) => seg.classList.remove("is-highlighted"));
+    if (matchingSeg) matchingSeg.classList.add("is-highlighted");
+  });
+
+  card.addEventListener("pointerleave", () => {
+    card.style.setProperty("--spot-x", "50%");
+    card.style.setProperty("--spot-y", "50%");
+    if (matchingSeg) matchingSeg.classList.remove("is-highlighted");
+  });
+
+  card.addEventListener("click", () => {
+    card.classList.remove("is-booped");
+    void card.offsetWidth;
+    card.classList.add("is-booped");
+    setTimeout(() => card.classList.remove("is-booped"), 320);
+  });
+});
+// END: EXPERIENCE MICRO-INTERACTIONS

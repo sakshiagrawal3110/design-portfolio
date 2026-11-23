@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sunona — Inclusive Multi-Generational Audio Brand & App | Sakshi Agrawal</title>
+  <title>Sunona — Inclusive Multi-Generational Audio Brand &amp; App | Sakshi Agrawal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -43,7 +43,7 @@
   </header>
 
   <main>
-    <!-- Hero + Metadata -->
+    <!-- Hero + Opening Video Reel + Metadata -->
     <section class="cs-hero">
       <div class="container">
         <span class="mono small muted cs-eyebrow">CASE STUDY · BRAND IDENTITY · INCLUSIVE AUDIO APP</span>
@@ -51,6 +51,37 @@
         <p class="cs-hero-sub">
           An <strong>inclusive audio experience</strong> bringing <em>music, stories, and familiar sounds</em> closer to every generation—adapting across <strong>children, adults, and seniors</strong> with clear brand identity, voice, accessibility, and governance.
         </p>
+
+        <!-- Opening Autoplay Reel (At the Start) -->
+        <div class="sunona-reel-stage" id="sunona-reel-stage" aria-label="Sunona brand and motion showcase video">
+          <div class="sunona-reel-top">
+            <span class="mono small sunona-live-badge">
+              <span class="sunona-pulse-dot" aria-hidden="true"></span>
+              SUNONA MOTION REEL · PLAYING
+            </span>
+            <div class="sunona-reel-controls">
+              <button type="button" class="suno-ctrl-btn" id="suno-play-btn" aria-pressed="false">Pause</button>
+              <button type="button" class="suno-ctrl-btn" id="suno-mute-btn" aria-pressed="true">Unmute</button>
+              <button type="button" class="suno-ctrl-btn mono" id="suno-speed-btn" data-speed="1">1× speed</button>
+            </div>
+          </div>
+
+          <div class="sunona-video-frame" id="sunona-video-frame">
+            <video
+              id="sunona-hero-video"
+              src="../assets/sunona/download.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="metadata"
+            ></video>
+            <div class="sunona-wave-tag mono" aria-hidden="true">
+              <span>)))</span>
+              <span>CLICK VIDEO TO TOGGLE PLAYBACK</span>
+            </div>
+          </div>
+        </div>
 
         <dl class="cs-meta-strip">
           <div>
@@ -233,7 +264,7 @@
               <div class="case-media-frame">
                 <img
                   src="../assets/sunona/sunona-mockup.png"
-                  alt="Suno na brand applications showing multi-generational audio cards and app icons"
+                  alt="Sunona brand applications showing multi-generational audio cards and app icons"
                 />
               </div>
             </div>
@@ -373,6 +404,80 @@
 
     if (tldrCloseBtn) {
       tldrCloseBtn.addEventListener("click", () => setTldrState(false));
+    }
+
+    // Sunona opening reel microinteractions
+    const sunoVideo = document.getElementById("sunona-hero-video");
+    const sunoStage = document.getElementById("sunona-reel-stage");
+    const sunoFrame = document.getElementById("sunona-video-frame");
+    const sunoPlayBtn = document.getElementById("suno-play-btn");
+    const sunoMuteBtn = document.getElementById("suno-mute-btn");
+    const sunoSpeedBtn = document.getElementById("suno-speed-btn");
+    const sunoBadge = sunoStage ? sunoStage.querySelector(".sunona-live-badge") : null;
+
+    function syncPlayUi() {
+      if (!sunoVideo || !sunoStage || !sunoPlayBtn) return;
+      const isPaused = sunoVideo.paused;
+      sunoStage.classList.toggle("is-paused", isPaused);
+      sunoPlayBtn.textContent = isPaused ? "Play" : "Pause";
+      sunoPlayBtn.setAttribute("aria-pressed", String(isPaused));
+      if (sunoBadge) {
+        sunoBadge.lastChild.textContent = isPaused
+          ? " SUNONA MOTION REEL · PAUSED"
+          : " SUNONA MOTION REEL · PLAYING";
+      }
+    }
+
+    if (sunoVideo) {
+      sunoVideo.play().catch(() => {});
+      sunoVideo.addEventListener("play", syncPlayUi);
+      sunoVideo.addEventListener("pause", syncPlayUi);
+    }
+
+    if (sunoPlayBtn && sunoVideo) {
+      sunoPlayBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (sunoVideo.paused) {
+          sunoVideo.play().catch(() => {});
+        } else {
+          sunoVideo.pause();
+        }
+      });
+    }
+
+    if (sunoMuteBtn && sunoVideo) {
+      sunoMuteBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        sunoVideo.muted = !sunoVideo.muted;
+        sunoMuteBtn.textContent = sunoVideo.muted ? "Unmute" : "Mute";
+        sunoMuteBtn.setAttribute("aria-pressed", String(sunoVideo.muted));
+        sunoMuteBtn.classList.toggle("is-active", !sunoVideo.muted);
+      });
+    }
+
+    const speeds = [1, 1.25, 1.5];
+    if (sunoSpeedBtn && sunoVideo) {
+      sunoSpeedBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const current = Number(sunoSpeedBtn.dataset.speed || "1");
+        const next = speeds[(speeds.indexOf(current) + 1) % speeds.length];
+        sunoVideo.playbackRate = next;
+        sunoSpeedBtn.dataset.speed = String(next);
+        sunoSpeedBtn.textContent = `${next}× speed`;
+      });
+    }
+
+    if (sunoFrame && sunoVideo) {
+      sunoFrame.addEventListener("click", () => {
+        sunoFrame.classList.remove("is-pulsing");
+        void sunoFrame.offsetWidth;
+        sunoFrame.classList.add("is-pulsing");
+        if (sunoVideo.paused) {
+          sunoVideo.play().catch(() => {});
+        } else {
+          sunoVideo.pause();
+        }
+      });
     }
   </script>
 </body>

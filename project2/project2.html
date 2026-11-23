@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document &amp; Access Flow - Project 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="project2.css" />
+</head>
+<body>
+  <nav class="nav" aria-label="Project navigation">
+    <a href="../index.html" class="brand"><span>SA</span> Sakshi Agrawal</a>
+    <a href="../index.html#builds" class="back">Back to prototypes <b>→</b></a>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <p class="eyebrow">PROJECT 02 / INFORMATION ARCHITECTURE</p>
+      <h1>Document<br /><em>&amp; Access</em> Flow</h1>
+      <p>Making a complex document library feel predictable, searchable, and safe to navigate.</p>
+    </header>
+
+    <section class="workspace">
+      <aside class="sidebar">
+        <span class="wordmark">Library</span>
+        <button class="active">All documents <b>24</b></button>
+        <button>Shared with me <b>8</b></button>
+        <button>Archived <b>3</b></button>
+      </aside>
+      <div class="library">
+        <div class="toolbar"><label><span>Search</span><input type="text" placeholder="Search documents" /></label><button>+ Add document</button></div>
+        <div class="table-head"><span>Name</span><span>Owner</span><span>Status</span></div>
+        <div class="row"><span class="file-icon">PDF</span><strong>Investment guide</strong><span>A. Shah</span><em>Approved</em></div>
+        <div class="row"><span class="file-icon doc">DOC</span><strong>Client questionnaire</strong><span>M. Chen</span><em class="review">In review</em></div>
+        <div class="row"><span class="file-icon sheet">XLS</span><strong>Market comparison</strong><span>S. Patel</span><em>Approved</em></div>
+        <div class="row"><span class="file-icon doc">DOC</span><strong>Disclosure summary</strong><span>J. Wilson</span><em class="draft">Draft</em></div>
+      </div>
+    </section>
+
+    <section class="details">
+      <article><span>01</span><h2>Find</h2><p>Clear categories and search make document discovery immediate.</p></article>
+      <article><span>02</span><h2>Review</h2><p>Status and ownership remove uncertainty before opening a file.</p></article>
+      <article><span>03</span><h2>Control</h2><p>Permission signals keep sensitive documents protected at a glance.</p></article>
+    </section>
+  </main>
+</body>
+</html>

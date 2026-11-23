@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <!-- Background -->
+  <rect width="500" height="500" fill="#eeb47b"/>
+
+  <!-- 3D Block Base Shadows (Right and Bottom sides) -->
+  
+  <!-- Top row (T O L D) right side -->
+  <path d="M 340 130 L 400 115 L 400 180 L 340 195 Z" fill="#f4bfaa" stroke="#d86c5a" stroke-width="1.5"/>
+  
+  <!-- Middle row (Y O U) right side -->
+  <path d="M 300 195 L 340 180 L 340 260 L 300 275 Z" fill="#e8a18b" stroke="#d86c5a" stroke-width="1.5"/>
+  
+  <!-- Bottom row (S O) right side -->
+  <path d="M 260 275 L 300 260 L 300 340 L 260 355 Z" fill="#e8826d" stroke="#d86c5a" stroke-width="1.5"/>
+
+  <!-- Top face (perspective top) -->
+  <path d="M 90 115 L 120 95 L 400 95 L 400 115 L 340 130 Z" fill="#fdf7f1" stroke="#d86c5a" stroke-width="1.5"/>
+
+  <!-- Main White Front Faces (Grid) -->
+  
+  <!-- Top Row -->
+  <g stroke="#d86c5a" stroke-width="1.5" fill="#fdf7f1">
+    <rect x="85" y="130" width="62.5" height="65"/>
+    <rect x="147.5" y="130" width="62.5" height="65"/>
+    <rect x="210" y="130" width="62.5" height="65"/>
+    <rect x="272.5" y="130" width="67.5" height="65"/>
+  </g>
+
+  <!-- Middle Row -->
+  <g stroke="#d86c5a" stroke-width="1.5" fill="#fdf7f1">
+    <rect x="85" y="195" width="67.5" height="65"/>
+    <rect x="152.5" y="195" width="67.5" height="65"/>
+    <rect x="220" y="195" width="80" height="65"/>
+  </g>
+
+  <!-- Bottom Row -->
+  <g stroke="#d86c5a" stroke-width="1.5" fill="#fdf7f1">
+    <rect x="85" y="260" width="80" height="85"/>
+    <rect x="165" y="260" width="95" height="85"/>
+  </g>
+
+  <!-- Letters (Text) -->
+  <g font-family="Arial, Helvetica, sans-serif" font-weight="300" font-size="48" fill="#d86c5a" text-anchor="middle" dominant-baseline="central">
+    
+    <!-- T -->
+    <text x="116" y="163">T</text>
+    <!-- O -->
+    <text x="178.5" y="163">O</text>
+    <!-- L -->
+    <text x="241" y="163">L</text>
+    <!-- D -->
+    <text x="306" y="163">D</text>
+    
+    <!-- Y -->
+    <text x="118.5" y="227.5">Y</text>
+    <!-- O -->
+    <text x="186" y="227.5">O</text>
+    <!-- U -->
+    <text x="260" y="227.5">U</text>
+    
+    <!-- S -->
+    <text x="125" y="302.5">S</text>
+    <!-- O -->
+    <text x="212.5" y="302.5">O</text>
+
+  </g>
+</svg>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Setu – Audio-first wage verification prototype</title>
+<style>
+:root{--bg:#f4f1ea;--surf:#fff;--ink:#16181d;--mute:#5a606b;--line:#d9d4c7;--pri:#0b5cff;--ok:#0a7a3d;--okbg:#dff3e6;--warn:#8a5a00;--warnbg:#fff0cc;--bad:#b3261e;--badbg:#fde3e1;--dev:#e9e4d6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161a;--surf:#1f2229;--ink:#f2f0ea;--mute:#a9aeb8;--line:#363a44;--pri:#7aa5ff;--ok:#6fdc9c;--okbg:#12361f;--warn:#ffd36b;--warnbg:#3b2d0a;--bad:#ff9a92;--badbg:#431614;--dev:#0c0d10}}
+:root[data-theme="dark"]{--bg:#14161a;--surf:#1f2229;--ink:#f2f0ea;--mute:#a9aeb8;--line:#363a44;--pri:#7aa5ff;--ok:#6fdc9c;--okbg:#12361f;--warn:#ffd36b;--warnbg:#3b2d0a;--bad:#ff9a92;--badbg:#431614;--dev:#0c0d10}
+*{box-sizing:inherit}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans Devanagari",Roboto,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:20px;display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start}
+@media(max-width:860px){.wrap{grid-template-columns:1fr;padding:12px}.side{order:2}}
+h1{font-size:26px;margin:0 0 4px}.sub{color:var(--mute);margin:0 0 16px;line-height:1.5}
+.steps{display:flex;flex-direction:column;gap:8px}
+.step{text-align:left;background:var(--surf);border:2px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;color:var(--ink);font:inherit}
+.step b{display:block}.step span{font-size:13px;color:var(--mute)}
+.step[aria-current=true]{border-color:var(--pri)}
+.note{margin-top:14px;background:var(--surf);border-left:4px solid var(--pri);padding:12px;border-radius:8px;font-size:14px;line-height:1.5}
+.dev{width:360px;height:720px;background:var(--dev);border-radius:36px;padding:10px;margin:0 auto;box-shadow:0 10px 30px #0003;position:relative}
+.scr{background:var(--surf);border-radius:28px;height:100%;display:flex;flex-direction:column;overflow:hidden}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;font-size:12px;color:var(--mute)}
+.net{display:flex;gap:6px;align-items:center}
+.main{flex:1;overflow:auto;padding:6px 16px 12px;display:flex;flex-direction:column;gap:12px}
+.t{font-size:24px;font-weight:800;line-height:1.2;margin:0}.p{margin:0;color:var(--mute);font-size:15px;line-height:1.4}
+.btn{min-height:64px;border-radius:18px;border:3px solid var(--ink);background:var(--surf);color:var(--ink);font:700 18px inherit;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;width:100%;padding:8px 14px;font-family:inherit}
+.btn.pri{background:var(--pri);border-color:var(--pri);color:#fff}.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.pri,:root:not([data-theme="light"]) .btn.ok,:root:not([data-theme="light"]) .btn.bad{color:#0c0d10}}
+.btn:focus-visible,.step:focus-visible,.tab:focus-visible{outline:4px solid var(--pri);outline-offset:2px}
+.big{width:160px;height:160px;border-radius:50%;margin:8px auto;font-size:64px;border:6px solid var(--pri);background:var(--surf);cursor:pointer;display:grid;place-items:center;color:var(--ink)}
+.big.rec{border-color:var(--bad);animation:pulse 1.1s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 18px #b3261e33}}@media(prefers-reduced-motion:reduce){.big.rec{animation:none}}
+.card{display:flex;gap:12px;align-items:center;border:2px solid var(--line);border-radius:16px;padding:12px}
+.ic{font-size:34px;width:52px;height:52px;border-radius:14px;background:var(--bg);display:grid;place-items:center;flex:none}
+.card b{font-size:22px;display:block}.card span{color:var(--mute);font-size:14px}
+.chip{display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border-radius:999px;font-weight:700;font-size:14px}
+.ok-c{background:var(--okbg);color:var(--ok)}.warn-c{background:var(--warnbg);color:var(--warn)}.bad-c{background:var(--badbg);color:var(--bad)}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--line)}
+.tab{background:none;border:0;padding:8px 2px;font:inherit;font-size:12px;color:var(--mute);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:60px}
+.tab i{font-style:normal;font-size:24px}.tab[aria-current=true]{color:var(--pri);font-weight:800}
+.wave{display:flex;gap:4px;align-items:center;justify-content:center;height:40px}.wave u{width:6px;background:var(--bad);border-radius:3px;animation:w .6s infinite alternate}
+@keyframes w{from{height:6px}to{height:36px}}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;font-size:12px}
+.days div{border-radius:10px;padding:8px 0;border:2px solid var(--line)}.days div b{display:block;font-size:20px}
+.row{display:flex;gap:12px;align-items:center;border-radius:16px;padding:12px;border:2px solid}
+.row.ok{background:var(--okbg);border-color:var(--ok)}.row.warn{background:var(--warnbg);border-color:var(--warn)}.row.bad{background:var(--badbg);border-color:var(--bad)}
+.row .sh{font-size:30px}.row b{display:block}.row small{color:var(--mute)}
+.hash{font:12px ui-monospace,monospace;word-break:break-all;background:var(--bg);padding:8px;border-radius:8px}
+.lang{background:none;border:2px solid var(--line);border-radius:999px;color:var(--ink);padding:2px 10px;font:inherit;font-size:12px;cursor:pointer}
+.tog{display:flex;gap:8px;margin-top:14px;font-size:13px}
+</style></head>
+<body>
+<div class="wrap">
+<div class="side">
+ <h1>Setu <span style="font-weight:400">· सेतु</span></h1>
+ <p class="sub">A voice-first, tamper-evident record of wages and attendance for workers who can’t read or write. Tap through the six screens, or use the list.</p>
+ <div class="steps" id="steps"></div>
+ <div class="note" id="note"></div>
+ <div class="tog"><button class="lang" id="theme">Toggle light/dark</button><button class="lang" id="net">Simulate 2G</button></div>
+</div>
+<div class="dev"><div class="scr"><div class="bar"><span>9:41</span><span class="net" id="netb"></span></div><div class="main" id="main" aria-live="polite"></div><nav class="tabs" id="tabs" aria-label="Main"></nav></div></div>
+</div>
+<script>
+var L='hi',S=0,rec=false,sealed=false,in_=false,slow=false,recd=false;
+var T={
+ site:{hi:'साइट पर हाज़िरी',en:'Check in at site'},
+ deal:{hi:'काम की बात',en:'Your agreement'},
+ days:{hi:'आज',en:'Today'},
+ wages:{hi:'पैसा',en:'Wages'}
+};
+var steps=[
+ ['Site tap','NFC/QR at the gate proves where you are','Bridges the physical site to the phone. A tap replaces typing: no login, no OTP. Works offline and syncs later.'],
+ ['Voice deal','Say the deal out loud','Speech is captured on-device, then sent to Bhashini ASR/translation when signal allows. An IVR missed-call fallback covers feature phones.'],
+ ['Confirm & seal','Hear it back, say yes or no','The worker approves a picture-and-voice summary. The app seals audio, summary and time with a hash, creating a tamper-evident record. Aligns with wage-slip and payment-timeline duties under the Code on Wages, 2019.'],
+ ['Attendance','One tap a day','Daily tap builds the attendance trail. Shapes and symbols, not only colour, show present, absent and unsynced.'],
+ ['Wage ledger','Paid, late, due at a glance','Green ✔ circle, amber ▲ triangle, red ■ square. Status is carried by colour, shape and voice (WCAG 2.2 AAA intent).'],
+ ['Get help','Share proof with Legal Aid','Exports an audit trail (audio, hashes, taps) to a Legal Aid NGO or Labour Commissioner. The worker picks who sees it.']
+];
+function t(k){return T[k][L]}
+function speak(txt){try{var u=new SpeechSynthesisUtterance(txt);u.lang=L=='hi'?'hi-IN':'en-IN';speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function listen(txt){return '<button class="btn" onclick="speak(this.dataset.s)" data-s="'+txt+'">🔊 '+(L=='hi'?'सुनिए':'Listen')+'</button>'}
+function tx(h,e){return L=='hi'?h:e}
+var V=[
+function(){return '<h2 class="t">'+tx('आप शिवाजी नगर साइट पर हैं?','Are you at Shivaji Nagar site?')+'</h2><p class="p">'+tx('फ़ोन को गेट के टैग से छुएँ','Touch your phone to the gate tag')+'</p>'+
+ '<button class="big'+(in_?'':' rec')+'" style="border-color:'+(in_?'var(--ok)':'var(--pri)')+'" onclick="in_=true;go(0)" aria-label="Tap to check in">'+(in_?'✔':'📲')+'</button>'+
+ (in_?'<div class="row ok"><span class="sh">✔</span><div><b>'+tx('हाज़िरी लग गई','Checked in')+'</b><small>'+tx('आज, सुबह 8:02','Today, 8:02 am')+(slow?tx(' · सिंक बाकी',' · will sync'):'')+'</small></div></div><button class="btn pri" onclick="go(1)">'+tx('आगे: काम की बात','Next: your agreement')+' →</button>':listen(tx('फ़ोन को गेट के टैग से छुएँ','Touch your phone to the gate tag')))},
+function(){return '<h2 class="t">'+tx('ठेकेदार ने क्या कहा?','What did the contractor promise?')+'</h2><p class="p">'+tx('बटन दबाएँ और बोलें: कितना पैसा, कब मिलेगा','Press and speak: how much, and when you’ll be paid')+'</p>'+
+ '<button class="big'+(rec?' rec':'')+'" onclick="toggleRec()" aria-label="Record">'+(rec?'⏹':'🎙️')+'</button>'+
+ (rec?'<div class="wave"><u></u><u style="animation-delay:.1s"></u><u style="animation-delay:.2s"></u><u style="animation-delay:.3s"></u><u style="animation-delay:.15s"></u></div>':'')+
+ (recd?'<div class="hash">“'+tx('रोज़ छह सौ पचास रुपये, हर शनिवार को','650 rupees a day, paid every Saturday')+'”<br>⏱ 0:07 · Bhashini ✓</div><button class="btn pri" onclick="go(2)">'+tx('आगे: सुनकर पक्का करें','Next: hear and confirm')+' →</button>':'<p class="p">'+tx('आवाज़ फ़ोन में सुरक्षित रहेगी','Audio is saved safely on your phone')+'</p>')},
+function(){return '<h2 class="t">'+tx('क्या यह सही है?','Is this correct?')+'</h2>'+
+ '<div class="card"><div class="ic">💰</div><div><b>₹650</b><span>'+tx('हर दिन','per day')+'</span></div></div>'+
+ '<div class="card"><div class="ic">📅</div><div><b>6 '+tx('दिन','days')+'</b><span>'+tx('हफ़्ते में','a week')+'</span></div></div>'+
+ '<div class="card"><div class="ic">🗓️</div><div><b>'+tx('शनिवार','Saturday')+'</b><span>'+tx('पैसा मिलने का दिन','payday')+'</span></div></div>'+
+ listen(tx('रोज़ छह सौ पचास रुपये। हफ़्ते में छह दिन। हर शनिवार को पैसा।','650 rupees a day. Six days a week. Paid every Saturday.'))+
+ (sealed?'<div class="row ok"><span class="sh">🔒</span><div><b>'+tx('सुरक्षित हो गया','Sealed')+'</b><small>'+tx('कोई बदल नहीं सकता','Cannot be changed')+'</small></div></div><div class="hash">SHA-256 a41f…9c07<br>22 Nov 2026 · 8:05</div><button class="btn pri" onclick="go(3)">'+tx('आगे','Next')+' →</button>':
+ '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><button class="btn ok" onclick="sealed=true;go(2)">✔ '+tx('हाँ','Yes')+'</button><button class="btn bad" onclick="recd=false;go(1)">✖ '+tx('नहीं','No')+'</button></div>')},
+function(){var d=['M','T','W','T','F','S','S'],h='';for(var i=0;i<7;i++){var s=i<3?'✔':i==3?'○':'–';var c=i<3?'background:var(--okbg);border-color:var(--ok)':i==3?'border-color:var(--pri)':'';h+='<div style="'+c+'">'+d[i]+'<b>'+s+'</b></div>'}
+ return '<h2 class="t">'+tx('इस हफ़्ते की हाज़िरी','This week’s attendance')+'</h2><div class="days">'+h+'</div>'+
+ '<div class="row ok"><span class="sh">✔</span><div><b>3 '+tx('दिन आए','days present')+'</b><small>= ₹1,950</small></div></div>'+
+ '<p class="p">✔ '+tx('आए','present')+' &nbsp; ○ '+tx('आज','today')+' &nbsp; – '+tx('बाकी','upcoming')+'</p>'+
+ '<button class="btn pri" onclick="go(0)">📲 '+tx('आज की हाज़िरी लगाएँ','Check in today')+'</button><button class="btn" onclick="go(4)">'+tx('पैसे देखें','See wages')+' →</button>'},
+function(){return '<h2 class="t">'+tx('आपका पैसा','Your wages')+'</h2>'+
+ '<div class="row ok"><span class="sh">●</span><div><b>'+tx('हफ़्ता 1: मिल गया','Week 1: paid')+' ✔</b><small>₹3,900 · '+tx('शनिवार','Sat')+' 8 Nov</small></div></div>'+
+ '<div class="row warn"><span class="sh">▲</span><div><b>'+tx('हफ़्ता 2: देर','Week 2: late')+'</b><small>₹3,900 · '+tx('2 दिन देर','2 days late')+'</small></div></div>'+
+ '<div class="row bad"><span class="sh">■</span><div><b>'+tx('हफ़्ता 3: नहीं मिला','Week 3: unpaid')+'</b><small>₹3,900 · '+tx('7 दिन देर','7 days late')+'</small></div></div>'+
+ '<div class="card" style="justify-content:space-between"><b style="font-size:28px">₹7,800</b><span>'+tx('बाकी','owed')+'</span></div>'+
+ listen(tx('आपका सात हज़ार आठ सौ रुपये बाकी है।','You are owed 7,800 rupees.'))+
+ '<button class="btn bad" onclick="go(5)">🆘 '+tx('मदद माँगें','Ask for help')+'</button>'},
+function(){return '<h2 class="t">'+tx('कौन देखे सबूत?','Who should see your proof?')+'</h2><p class="p">'+tx('आप चुनिए। आपकी इजाज़त के बिना कोई नहीं देखेगा।','You choose. No one sees it without your permission.')+'</p>'+
+ '<button class="btn" onclick="share(this)">⚖️ '+tx('कानूनी सहायता संस्था','Legal Aid NGO')+'</button>'+
+ '<button class="btn" onclick="share(this)">🏛️ '+tx('श्रम आयुक्त','Labour Commissioner')+'</button>'+
+ '<div class="hash" id="aud">'+tx('सबूत में: 1 आवाज़, 3 हाज़िरी, 1 मुहर','Includes: 1 voice deal, 3 check-ins, 1 seal')+'</div>'+
+ '<div class="card"><div class="ic">📞</div><div><b style="font-size:16px">'+tx('फ़ीचर फ़ोन?','Feature phone?')+'</b><span>'+tx('मिस्ड कॉल दें: 1800‑XXX‑XXXX (डेमो)','Give a missed call: 1800‑XXX‑XXXX (demo)')+'</span></div></div>'}
+];
+function toggleRec(){rec=!rec;if(!rec)recd=true;go(1)}
+function share(b){b.className='btn ok';b.innerHTML='✔ '+tx('भेज दिया','Sent');var a=document.getElementById('aud');a.innerHTML+='<br>✔ '+tx('भेजा गया','Shared')+' · 22 Nov 2026 · 8:11'}
+var tabMap=[0,1,3,4],tabIc=['📲','🎙️','📅','💰'],tabK=['site','deal','days','wages'];
+function go(n){S=n;render()}
+function render(){
+ document.getElementById('main').innerHTML='<div style="display:flex;justify-content:flex-end"><button class="lang" onclick="L=L==\'hi\'?\'en\':\'hi\';render()">'+(L=='hi'?'English':'हिन्दी')+'</button></div>'+V[S]();
+ var tb='';for(var i=0;i<4;i++){var on=(S==tabMap[i])||(S==2&&i==1)||(S==5&&i==3);tb+='<button class="tab" '+(on?'aria-current="true"':'')+' onclick="go('+tabMap[i]+')"><i>'+tabIc[i]+'</i>'+t(tabK[i])+'</button>'}
+ document.getElementById('tabs').innerHTML=tb;
+ var sh='';steps.forEach(function(s,i){sh+='<button class="step" '+(i==S?'aria-current="true"':'')+' onclick="go('+i+')"><b>'+(i+1)+'. '+s[0]+'</b><span>'+s[1]+'</span></button>'});
+ document.getElementById('steps').innerHTML=sh;
+ document.getElementById('note').innerHTML='<b>Design note · '+steps[S][0]+'</b><br>'+steps[S][2];
+ document.getElementById('netb').innerHTML=slow?'<span class="chip warn-c">▲ 2G</span>':'<span class="chip ok-c">● 4G</span>';
+}
+document.getElementById('theme').onclick=function(){var r=document.documentElement,d=getComputedStyle(r).getPropertyValue('--bg').trim()=='#14161a';r.setAttribute('data-theme',d?'light':'dark')};
+document.getElementById('net').onclick=function(){slow=!slow;this.textContent=slow?'Back to 4G':'Simulate 2G';render()};
+render();
+</script></body></html>

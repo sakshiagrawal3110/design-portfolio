@@ -131,3 +131,40 @@ tkFilters.forEach((btn) => {
     });
   });
 });
+
+// Things I Built staggered reveal & subtle tilt micro-interaction
+const bentoCards = document.querySelectorAll("[data-bento-card]");
+if (bentoCards.length > 0) {
+  if ("IntersectionObserver" in window) {
+    const bentoObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const idx = Array.from(bentoCards).indexOf(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add("is-revealed");
+          }, Math.min(idx * 75, 300));
+          bentoObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12 }
+    );
+    bentoCards.forEach((card) => bentoObserver.observe(card));
+  } else {
+    bentoCards.forEach((card) => card.classList.add("is-revealed"));
+  }
+
+  bentoCards.forEach((card) => {
+    card.addEventListener("pointermove", (e) => {
+      if (!card.classList.contains("is-revealed")) return;
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `translateY(-5px) scale(1.01) rotateX(${(-py * 3).toFixed(2)}deg) rotateY(${(px * 3).toFixed(2)}deg)`;
+    });
+
+    card.addEventListener("pointerleave", () => {
+      card.style.transform = "";
+    });
+  });
+}

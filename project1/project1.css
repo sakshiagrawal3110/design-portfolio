@@ -1,4 +1,4 @@
-/* ===== Case Study Page Layout (Matching Main Theme) ===== */
+/* ===== Spendit Case Study Page (Matching Main Theme) ===== */
 .cs-nav-wrap {
   position: fixed;
   top: 16px;
@@ -123,7 +123,7 @@
 }
 
 .cs-hero-sub {
-  max-width: 60ch;
+  max-width: 62ch;
   font-size: 1.05rem;
   color: var(--ink-muted);
   margin-bottom: 24px;
@@ -321,21 +321,16 @@
 }
 
 .cs-sec-lead {
-  max-width: 48ch;
+  max-width: 50ch;
   font-size: 0.96rem;
 }
 
-.cs-sec-lead strong {
+.cs-sec-lead strong,
+.cs-panel strong,
+.cs-ordered-list strong,
+.cs-bullet-list strong {
   color: var(--ink);
   font-weight: 600;
-}
-
-.cs-sec-lead code {
-  font-family: var(--font-mono);
-  font-size: 0.84em;
-  background: var(--surface);
-  padding: 1px 5px;
-  border-radius: 4px;
 }
 
 .cs-split-diagram {
@@ -388,24 +383,22 @@
   line-height: 1.25;
 }
 
-.cs-four-cols {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.cs-three-cols,
 .cs-two-col {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 
-.cs-two-col {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.cs-three-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
 }
 
-.cs-three-cols {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.cs-five-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .cs-mini-card,
@@ -419,173 +412,179 @@
   gap: 8px;
 }
 
+.cs-mini-card.is-guardrail {
+  background: #fff8f5;
+  border-color: rgba(255, 90, 31, 0.35);
+}
+
 .cs-num {
-  font-size: 0.75rem;
-  color: var(--accent);
-  font-weight: 700;
-}
-
-.cs-big-num {
-  font-size: 1.4rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-}
-
-/* Swatches, Type & Button Previews */
-.swatch-strip {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 6px;
-}
-
-.swatch-chip {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 8px;
-  border-radius: 8px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  font-size: 0.68rem;
-}
-
-.swatch-chip i {
-  width: 12px;
-  height: 12px;
-  border-radius: 4px;
-  display: inline-block;
-  flex-shrink: 0;
-}
-
-.pair-mini-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 6px;
-  font-size: 0.64rem;
-}
-
-.pair-mini-grid > div {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  text-align: center;
-}
-
-.pair-mini-grid i {
-  height: 22px;
-  border-radius: 6px;
-  border: 1px solid var(--line);
-  display: block;
-}
-
-.type-scale-preview {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 6px;
-}
-
-.ts-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-}
-
-.ts-row > span:first-child {
   font-size: 0.72rem;
   color: var(--accent);
   font-weight: 700;
 }
 
-.ts-row strong {
-  font-size: 0.88rem;
+.cs-big-num {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
 }
 
-.btn-demo-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 6px;
-}
-
-.btn-demo-item {
+.persona-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 8px 10px;
-  border-radius: 8px;
+}
+
+.persona-badge {
+  font-size: 0.66rem;
+  padding: 3px 8px;
+  border-radius: 999px;
   background: var(--bg);
   border: 1px solid var(--line);
+  color: var(--ink-muted);
 }
 
-.demo-pill {
-  font-size: 0.78rem;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 999px;
-  white-space: nowrap;
-}
-
-.demo-pill.is-primary {
-  background: var(--ink);
-  color: #fff;
-}
-
-.demo-pill.is-secondary {
-  background: var(--surface);
-  color: var(--ink);
-  border: 1px solid var(--line-strong);
-}
-
-.demo-pill.is-tertiary {
-  background: #fff4ee;
-  color: var(--accent);
-}
-
-.mini-stat-cards {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
+.floor-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
   margin-top: 6px;
 }
 
-.mini-stat-box {
+.floor-chips span {
+  font-size: 0.68rem;
+  padding: 4px 8px;
+  border-radius: 999px;
   background: var(--bg);
   border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
 }
 
-.mini-stat-box.is-dark {
+/* Ideate Interactive-Style Pattern Previews */
+.rail-demo {
+  margin-top: 6px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rail-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.rail-tabs span {
+  font-size: 0.66rem;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink-muted);
+}
+
+.rail-tabs span.is-active {
   background: var(--ink);
   color: #fff;
   border-color: var(--ink);
 }
 
-.mini-stat-box.is-accent {
-  background: #fff4ee;
-  border-color: rgba(255, 90, 31, 0.35);
+.rail-preview-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
 }
 
-.mini-stat-box > span {
-  font-size: 0.62rem;
-  opacity: 0.75;
+/* Prototype Split Feature */
+.cs-split-feature {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 20px;
+  align-items: center;
 }
 
-.mini-stat-box strong {
-  font-size: 1.05rem;
-  font-weight: 800;
+.cs-three-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Lists */
+.cs-ordered-list,
+.cs-bullet-list {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Tier 1 Metrics Table */
+.cs-table-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.cs-table-head {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+  background: #fafafa;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.metrics-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+.metrics-table th,
+.metrics-table td {
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.metrics-table th {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  background: var(--bg);
+}
+
+.metrics-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.bench-pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(255, 224, 71, 0.72);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.block-label {
+  display: block;
+  margin-bottom: 12px;
 }
 
 /* Next Case Study Card */
@@ -618,17 +617,24 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .cs-five-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 960px) {
   .cs-meta-strip,
   .cs-banner-metrics,
   .tldr-kpi-grid,
-  .cs-four-cols,
   .cs-three-cols,
-  .cs-two-col {
+  .cs-two-col,
+  .cs-split-feature {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .cs-split-diagram {
+  .cs-split-diagram,
+  .cs-split-feature {
     grid-template-columns: 1fr;
   }
 }
@@ -642,9 +648,9 @@
   .cs-meta-strip,
   .cs-banner-metrics,
   .tldr-kpi-grid,
-  .cs-four-cols,
   .cs-three-cols,
   .cs-two-col,
+  .cs-five-grid,
   .cs-diag-row {
     grid-template-columns: 1fr;
   }

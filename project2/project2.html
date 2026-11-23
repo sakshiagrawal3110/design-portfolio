@@ -3,47 +3,460 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document &amp; Access Flow - Project 2</title>
+  <title>Design System — Global Financial Brand | Sakshi Agrawal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="project2.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="project1.css" />
 </head>
-<body>
-  <nav class="nav" aria-label="Project navigation">
-    <a href="../index.html" class="brand"><span>SA</span> Sakshi Agrawal</a>
-    <a href="../index.html#builds" class="back">Back to prototypes <b>→</b></a>
-  </nav>
+<body id="top">
+  <!-- Floating Translucent Nav with TL;DR Button -->
+  <header class="cs-nav-wrap">
+    <nav class="cs-nav" aria-label="Case study navigation">
+      <a href="../index.html" class="cs-back-link">← All work</a>
+
+      <div class="cs-jump-links">
+        <a href="#problem">Problem</a>
+        <a href="#foundation">Foundation</a>
+        <a href="#buttons">Buttons</a>
+        <a href="#governance">Governance</a>
+        <a href="#impact">Impact</a>
+      </div>
+
+      <div class="cs-nav-right">
+        <button
+          type="button"
+          id="tldr-btn"
+          class="tldr-nav-btn"
+          aria-pressed="false"
+        >
+          <span class="tldr-dot" aria-hidden="true"></span>
+          <span>TL;DR</span>
+        </button>
+
+        <span class="status-pill">
+          <span class="status-dot" aria-hidden="true"></span>
+          Open to work
+        </span>
+      </div>
+    </nav>
+  </header>
 
   <main>
-    <header class="hero">
-      <p class="eyebrow">PROJECT 02 / INFORMATION ARCHITECTURE</p>
-      <h1>Document<br /><em>&amp; Access</em> Flow</h1>
-      <p>Making a complex document library feel predictable, searchable, and safe to navigate.</p>
-    </header>
+    <!-- Hero + Metadata -->
+    <section class="cs-hero">
+      <div class="container">
+        <span class="mono small muted cs-eyebrow">CASE STUDY · GLOBAL DESIGN SYSTEM</span>
+        <h1 class="cs-title">DESIGN SYSTEM</h1>
+        <p class="cs-hero-sub">
+          <strong>50+ components</strong> across <strong>13–14 global markets</strong>—turning fragmented UI patterns into a governed, accessible design system from <em>research to handoff</em>.
+        </p>
 
-    <section class="workspace">
-      <aside class="sidebar">
-        <span class="wordmark">Library</span>
-        <button class="active">All documents <b>24</b></button>
-        <button>Shared with me <b>8</b></button>
-        <button>Archived <b>3</b></button>
-      </aside>
-      <div class="library">
-        <div class="toolbar"><label><span>Search</span><input type="text" placeholder="Search documents" /></label><button>+ Add document</button></div>
-        <div class="table-head"><span>Name</span><span>Owner</span><span>Status</span></div>
-        <div class="row"><span class="file-icon">PDF</span><strong>Investment guide</strong><span>A. Shah</span><em>Approved</em></div>
-        <div class="row"><span class="file-icon doc">DOC</span><strong>Client questionnaire</strong><span>M. Chen</span><em class="review">In review</em></div>
-        <div class="row"><span class="file-icon sheet">XLS</span><strong>Market comparison</strong><span>S. Patel</span><em>Approved</em></div>
-        <div class="row"><span class="file-icon doc">DOC</span><strong>Disclosure summary</strong><span>J. Wilson</span><em class="draft">Draft</em></div>
+        <dl class="cs-meta-strip">
+          <div>
+            <dt>Role</dt>
+            <dd>UX Designer &amp; Primary Researcher</dd>
+          </div>
+          <div>
+            <dt>Scope</dt>
+            <dd>Tokens, Accessibility &amp; Governance</dd>
+          </div>
+          <div>
+            <dt>Tools</dt>
+            <dd>Figma · Research &amp; Testing Tools</dd>
+          </div>
+          <div>
+            <dt>Timeline</dt>
+            <dd>12+ months</dd>
+          </div>
+        </dl>
+
+        <div class="cs-hero-banner">
+          <div class="cs-banner-top mono">
+            <span>SYSTEM ARCHITECTURE · TOKENS → COMPONENTS → GOVERNANCE</span>
+            <span class="cs-badge-accent">WCAG &amp; Accessibility 70 → 80</span>
+          </div>
+          <div class="cs-banner-metrics">
+            <div>
+              <strong>10–12 → 50+</strong>
+              <span>Governed components</span>
+            </div>
+            <div>
+              <strong>12 / 24 / 36 / 48</strong>
+              <span>Spacing scale</span>
+            </div>
+            <div>
+              <strong>13–14</strong>
+              <span>Global markets</span>
+            </div>
+            <div>
+              <strong>UX → Brand</strong>
+              <span>Cross-team alignment</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="details">
-      <article><span>01</span><h2>Find</h2><p>Clear categories and search make document discovery immediate.</p></article>
-      <article><span>02</span><h2>Review</h2><p>Status and ownership remove uncertainty before opening a file.</p></article>
-      <article><span>03</span><h2>Control</h2><p>Permission signals keep sensitive documents protected at a glance.</p></article>
+    <!-- Compact TL;DR Drawer / View (Toggled via Nav Button) -->
+    <section id="tldr-panel" class="tldr-panel" aria-label="TL;DR summary" hidden>
+      <div class="container">
+        <div class="tldr-box">
+          <div class="tldr-head">
+            <div>
+              <span class="mono small cs-accent-text">QUICK SUMMARY</span>
+              <h2>Design System — TL;DR</h2>
+            </div>
+            <button type="button" id="tldr-close-btn" class="tldr-close-link mono small">
+              Full case study ↓
+            </button>
+          </div>
+
+          <ul class="tldr-points">
+            <li><strong>The Problem:</strong> UI patterns evolved around one-off pages without shared rules, creating duplicate variants and inconsistent experiences across markets.</li>
+            <li><strong>The Shift:</strong> Rebuilt foundations first (activation blue <code>#165EDA</code>, modular type, <code>12/24/36/48</code> spacing) and framed buttons around <em>Intent, Variant, and State</em>.</li>
+            <li><strong>Governance:</strong> Embedded accessibility early and ran recurring <em>UX Open Houses</em> so the 51st screen is easier to build well.</li>
+          </ul>
+
+          <div class="tldr-kpi-grid">
+            <div class="tldr-kpi">
+              <strong>10–12 → 50+</strong>
+              <span class="small muted">Components in shared system</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>13–14</strong>
+              <span class="small muted">Global markets supported</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>70 → 80</strong>
+              <span class="small muted">Accessibility score lift</span>
+            </div>
+            <div class="tldr-kpi">
+              <strong>UX → Brand</strong>
+              <span class="small muted">Adopted across UX &amp; marketing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Case Study Sections -->
+    <div id="detailed-sections">
+      <!-- 1. The Problem -->
+      <section id="problem" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">THE PROBLEM</h2>
+            <p class="muted cs-sec-lead">
+              <strong>Components existed. The rules didn't.</strong> Patterns grew around individual pages rather than a shared system, slowing scale across global experiences.
+            </p>
+          </div>
+
+          <div class="cs-split-diagram">
+            <div class="cs-diag-col">
+              <span class="mono small muted">BEFORE · AD-HOC PAGE PATTERNS</span>
+              <div class="cs-diag-row">
+                <div class="cs-node">Page-specific UI</div>
+                <div class="cs-node">Duplicate CTAs</div>
+                <div class="cs-node">Repeated stats</div>
+              </div>
+              <p class="small muted">Similar flows required repeated decisions and inconsistent handoffs.</p>
+            </div>
+
+            <div class="cs-diag-center mono">SYSTEM<br />RULES</div>
+
+            <div class="cs-diag-col">
+              <span class="mono small muted">AFTER · SHARED SYSTEM LOGIC</span>
+              <div class="cs-diag-row">
+                <div class="cs-node is-lit">Core Tokens</div>
+                <div class="cs-node is-lit">Decision Rules</div>
+                <div class="cs-node is-lit">UX Open House</div>
+              </div>
+              <p class="small muted">One foundation supporting multi-market products and accessibility.</p>
+            </div>
+          </div>
+
+          <div class="cs-four-cols">
+            <article class="cs-mini-card">
+              <span class="mono cs-num">01</span>
+              <h3>Fragmented patterns</h3>
+              <p class="small muted">Components built for isolated requests drifted apart over time.</p>
+            </article>
+            <article class="cs-mini-card">
+              <span class="mono cs-num">02</span>
+              <h3>Unclear variants</h3>
+              <p class="small muted">No clear rule tying visual treatments to intent or state.</p>
+            </article>
+            <article class="cs-mini-card">
+              <span class="mono cs-num">03</span>
+              <h3>Global scale friction</h3>
+              <p class="small muted">Adapting across regions and screen sizes took extra effort.</p>
+            </article>
+            <article class="cs-mini-card">
+              <span class="mono cs-num">04</span>
+              <h3>Late accessibility</h3>
+              <p class="small muted">Checks happened too late instead of starting inside the base.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Foundation, Color & Typography Tokens -->
+      <section id="foundation" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">01 · FOUNDATION &amp; TOKENS</h2>
+            <p class="muted cs-sec-lead">
+              <strong>Rebuilt the foundation first.</strong> Reserved <code>#165EDA</code> as functional <em>activation blue</em> for interactive triggers and paired it with a <strong>12 / 24 / 36 / 48</strong> spacing scale.
+            </p>
+          </div>
+
+          <div class="cs-two-col">
+            <div class="cs-panel">
+              <span class="mono small muted">COLOR TOKENS &amp; PAIRINGS</span>
+              <h3>Functional color &amp; contrast</h3>
+              <p class="small muted">Brand blues, neutral greys, and accessible contrast pairs handed off as reusable tokens.</p>
+
+              <div class="swatch-strip">
+                <div class="swatch-chip"><i style="background: #165EDA;"></i><span class="mono">#165EDA · Action</span></div>
+                <div class="swatch-chip"><i style="background: #1B4B93;"></i><span class="mono">#1B4B93 · Primary</span></div>
+                <div class="swatch-chip"><i style="background: #0B1F44;"></i><span class="mono">#0B1F44 · Deep</span></div>
+                <div class="swatch-chip"><i style="background: #ff5a1f;"></i><span class="mono">#FF5A1F · Accent</span></div>
+              </div>
+
+              <div class="pair-mini-grid mono">
+                <div><span>A / B</span><i style="background: linear-gradient(90deg, #fff 50%, #eceef2 50%);"></i></div>
+                <div><span>C / D</span><i style="background: linear-gradient(90deg, #dceafb 50%, #e8eaee 50%);"></i></div>
+                <div><span>G / H</span><i style="background: linear-gradient(90deg, #0b1250 50%, #2e5fe0 50%);"></i></div>
+                <div><span>M / N</span><i style="background: linear-gradient(90deg, #7fa98b 50%, #1e7a3e 50%);"></i></div>
+              </div>
+            </div>
+
+            <div class="cs-panel">
+              <span class="mono small muted">TYPOGRAPHY &amp; SPACING</span>
+              <h3>Modular scale across viewports</h3>
+              <p class="small muted">Consistent headings, body sizes, and responsive mobile steps.</p>
+
+              <div class="type-scale-preview">
+                <div class="ts-row"><span class="mono">H1</span><strong>70px → 48px</strong><span class="muted small">Display</span></div>
+                <div class="ts-row"><span class="mono">H2</span><strong>56px → 40px</strong><span class="muted small">Section</span></div>
+                <div class="ts-row"><span class="mono">H3</span><strong>42px → 32px</strong><span class="muted small">Subhead</span></div>
+                <div class="ts-row"><span class="mono">SP</span><strong>12 · 24 · 36 · 48</strong><span class="muted small">Spacing</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Buttons & Component Refinement -->
+      <section id="buttons" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">02 · SYSTEM RULES &amp; COMPONENTS</h2>
+            <p class="muted cs-sec-lead">
+              Moved from <strong>visual variations</strong> to <strong>decision rules</strong>—framing buttons around <em>Intent, Variant, and State</em> and separating content from structure.
+            </p>
+          </div>
+
+          <div class="cs-two-col">
+            <div class="cs-panel">
+              <span class="mono small muted">BUTTONS · BEFORE → AFTER</span>
+              <h3>Clear hierarchy &amp; usage rules</h3>
+              <p class="small muted">Replaced duplicate v1/v2/v3 button states with defined tiers and guardrails.</p>
+
+              <div class="btn-demo-stack">
+                <div class="btn-demo-item">
+                  <span class="demo-pill is-primary">Primary action →</span>
+                  <span class="small muted">Main screen CTA (1 per view)</span>
+                </div>
+                <div class="btn-demo-item">
+                  <span class="demo-pill is-secondary">Secondary action →</span>
+                  <span class="small muted">Supporting path</span>
+                </div>
+                <div class="btn-demo-item">
+                  <span class="demo-pill is-tertiary">Tertiary link →</span>
+                  <span class="small muted">Low-friction inline step</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cs-panel">
+              <span class="mono small muted">DATA DISPLAY CARDS</span>
+              <h3>Distinct facts at a glance</h3>
+              <p class="small muted">Replaced repeated single-stat blocks with structured metrics and clear hierarchy.</p>
+
+              <div class="mini-stat-cards">
+                <div class="mini-stat-box is-dark">
+                  <span class="mono">ASSETS</span>
+                  <strong>$964B+</strong>
+                </div>
+                <div class="mini-stat-box is-accent">
+                  <span class="mono">A11Y SCORE</span>
+                  <strong>70 → 80</strong>
+                </div>
+                <div class="mini-stat-box">
+                  <span class="mono">COMPONENTS</span>
+                  <strong>50+</strong>
+                </div>
+                <div class="mini-stat-box">
+                  <span class="mono">MARKETS</span>
+                  <strong>13–14</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Accessibility & Governance -->
+      <section id="governance" class="cs-section">
+        <div class="container">
+          <div class="cs-sec-head">
+            <h2 class="cs-sec-title">03 · ACCESSIBILITY &amp; GOVERNANCE</h2>
+            <p class="muted cs-sec-lead">
+              <strong>A design system isn't finished when published.</strong> Recurring <em>UX Open Houses</em> aligned UX, brand, and engineering on what enters the system.
+            </p>
+          </div>
+
+          <div class="cs-three-cols">
+            <article class="cs-panel">
+              <span class="mono small muted">01 · EMBEDDED A11Y</span>
+              <h3>Built in from day one</h3>
+              <p class="small muted">Contrast and accessible component states became part of the baseline rather than a late patch.</p>
+            </article>
+            <article class="cs-panel">
+              <span class="mono small muted">02 · UX OPEN HOUSES</span>
+              <h3>Living governance</h3>
+              <p class="small muted">Regular reviews let designers bring edge cases, align on rules, and prevent drift.</p>
+            </article>
+            <article class="cs-panel">
+              <span class="mono small muted">03 · THE 51ST SCREEN</span>
+              <h3>Built to scale</h3>
+              <p class="small muted"><em>"The goal wasn't to build 50 components. It was to make the 51st easier to build well."</em></p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 5. Impact + Next Project + Dark CTA Block -->
+    <section id="impact" class="cs-section">
+      <div class="container">
+        <div class="cs-sec-head">
+          <h2 class="cs-sec-title">IMPACT</h2>
+          <p class="muted cs-sec-lead">
+            <strong>Scalable foundation across teams.</strong> Stronger accessibility, clearer decisions, and shared UI rules across global financial touchpoints.
+          </p>
+        </div>
+
+        <div class="cs-four-cols">
+          <div class="cs-mini-card">
+            <span class="mono small muted">SYSTEM SCALE</span>
+            <strong class="cs-big-num">10–12 → 50+</strong>
+            <p class="small muted">Components governed in one system.</p>
+          </div>
+          <div class="cs-mini-card">
+            <span class="mono small muted">REACH</span>
+            <strong class="cs-big-num">13–14</strong>
+            <p class="small muted">Global markets supported.</p>
+          </div>
+          <div class="cs-mini-card">
+            <span class="mono small muted">ACCESSIBILITY</span>
+            <strong class="cs-big-num">70 → 80</strong>
+            <p class="small muted">Score improvement via system rules.</p>
+          </div>
+          <div class="cs-mini-card">
+            <span class="mono small muted">ADOPTION</span>
+            <strong class="cs-big-num">UX → Brand</strong>
+            <p class="small muted">Shared across UX &amp; marketing.</p>
+          </div>
+        </div>
+
+        <!-- Next Case Study Card -->
+        <a href="../project4/project4.html" class="cs-next-card">
+          <div>
+            <span class="mono small muted">NEXT CASE STUDY</span>
+            <h3>Clinical AI Documentation</h3>
+            <p class="small muted">Trust-first clinical workflow separating AI note drafting from clinician authority.</p>
+          </div>
+          <span class="cs-next-arrow">→</span>
+        </a>
+
+        <!-- Dark Split CTA + Accent Stripes -->
+        <div class="cta-split mt-36">
+          <div class="cta-dark-box">
+            <span class="dark-pill">
+              <span class="status-dot" aria-hidden="true"></span>
+              Open to Senior UX &amp; Product roles
+            </span>
+            <h2>Let's make something<br />that actually matters.</h2>
+            <div class="cta-email-row">
+              <span class="cta-email-text">sakshiagrawal3110@gmail.com</span>
+              <button
+                type="button"
+                class="copy-pill-btn copy-email-btn"
+                data-email="sakshiagrawal3110@gmail.com"
+              >
+                Click to copy
+              </button>
+            </div>
+          </div>
+
+          <div class="cta-accent-block" aria-hidden="true">
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Sakshi Agrawal</strong>
+        <p class="small muted">Senior UX &amp; Product Designer · Mumbai</p>
+      </div>
+      <div class="mono small muted">
+        Mumbai, IN · <span id="local-time">--:-- --</span> · UTC+5:30
+      </div>
+      <div class="footer-right">
+        <a href="https://linkedin.com/in/sakshiagrawalll" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        <a href="#top" class="text-link">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Copied</div>
+
+  <script src="../script.js"></script>
+  <script>
+    const tldrBtn = document.getElementById("tldr-btn");
+    const tldrCloseBtn = document.getElementById("tldr-close-btn");
+    const tldrPanel = document.getElementById("tldr-panel");
+
+    function setTldrState(open) {
+      if (!tldrBtn || !tldrPanel) return;
+      tldrBtn.classList.toggle("is-active", open);
+      tldrBtn.setAttribute("aria-pressed", String(open));
+      tldrPanel.hidden = !open;
+      if (open) {
+        tldrPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+
+    if (tldrBtn) {
+      tldrBtn.addEventListener("click", () => {
+        const next = tldrBtn.getAttribute("aria-pressed") !== "true";
+        setTldrState(next);
+      });
+    }
+
+    if (tldrCloseBtn) {
+      tldrCloseBtn.addEventListener("click", () => setTldrState(false));
+    }
+  </script>
 </body>
 </html>

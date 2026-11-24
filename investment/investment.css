@@ -221,6 +221,13 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  transition: transform 0.22s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.cs-banner-metrics > div:hover {
+  transform: translateY(-3px);
+  background: #ffffff;
+  border-color: var(--ink);
 }
 
 .cs-banner-metrics strong {
@@ -376,6 +383,12 @@
   font-size: 0.72rem;
   font-weight: 600;
   text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.cs-node:hover {
+  transform: translateY(-2px);
+  border-color: var(--ink);
 }
 
 .cs-node.is-lit {
@@ -418,6 +431,16 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s ease,
+    box-shadow 0.24s ease;
+}
+
+.cs-panel:hover,
+.cs-mini-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--ink);
+  box-shadow: 0 12px 24px rgba(17, 18, 20, 0.06);
 }
 
 .cs-panel.is-selected,
@@ -460,6 +483,15 @@
   border-radius: 999px;
   background: var(--bg);
   border: 1px solid var(--line);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.loop-step:hover {
+  transform: translateY(-2px);
+  border-color: var(--ink);
 }
 
 .loop-step.is-lit {
@@ -468,9 +500,121 @@
   color: var(--ink);
 }
 
+.loop-step.is-active {
+  background: var(--ink);
+  color: #ffffff;
+  border-color: var(--ink);
+  transform: translateY(-2px) scale(1.03);
+}
+
 .loop-arrow {
   color: var(--ink-muted);
   font-weight: 600;
+}
+
+/* ===== Embedded Mini-Window Frames (inner-html/1.html – 4.html) ===== */
+.embed-window {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(17, 18, 20, 0.05);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.22s ease,
+    box-shadow 0.28s ease;
+}
+
+.embed-window:hover {
+  transform: translateY(-2px);
+  border-color: var(--ink);
+  box-shadow: 0 18px 36px rgba(17, 18, 20, 0.09);
+}
+
+.embed-window-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.embed-window-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.embed-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.embed-dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line-strong);
+  display: block;
+}
+
+.embed-dots i:first-child {
+  background: var(--accent);
+}
+
+.embed-window-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.embed-action-btn,
+.embed-action-link {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: #ffffff;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+}
+
+.embed-action-btn:hover,
+.embed-action-link:hover {
+  border-color: var(--ink);
+  background: #fff4ee;
+}
+
+.embed-action-btn.is-expanded {
+  background: var(--ink);
+  color: #ffffff;
+  border-color: var(--ink);
+}
+
+.embed-frame-wrap {
+  width: 100%;
+  height: 460px;
+  overflow: hidden;
+  background: var(--bg);
+  transition: height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.embed-window.is-expanded .embed-frame-wrap {
+  height: 780px;
+}
+
+.embed-frame-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
 }
 
 /* Closing Quote Box */
@@ -531,6 +675,14 @@
   .cs-split-diagram {
     grid-template-columns: 1fr;
   }
+
+  .embed-frame-wrap {
+    height: 390px;
+  }
+
+  .embed-window.is-expanded .embed-frame-wrap {
+    height: 650px;
+  }
 }
 
 @media (max-width: 760px) {
@@ -550,5 +702,15 @@
 
   .cs-quote-box {
     padding: 22px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .embed-window,
+  .embed-frame-wrap,
+  .cs-panel,
+  .cs-mini-card,
+  .loop-step {
+    transition: none;
   }
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Document Library — Screen Mockup</title>
+<title>Document Library - Screen Mockup</title>
 <style>
   :root{
     --ink:#0F1E3D;
@@ -150,7 +150,7 @@
           <div class="doc-left">
             <div class="doc-icon">PDF</div>
             <div>
-              <p class="doc-title">Global Equity — Q2 Investment Review</p>
+              <p class="doc-title">Global Equity - Q2 Investment Review</p>
               <p class="doc-meta">Northstar Asset Management<br>PDF · 24 pages</p>
             </div>
           </div>
@@ -190,7 +190,7 @@
           <div class="doc-left">
             <div class="doc-icon">PDF</div>
             <div>
-              <p class="doc-title">Manager Commentary — July</p>
+              <p class="doc-title">Manager Commentary - July</p>
               <p class="doc-meta">Northstar Asset Management<br>PDF · 12 pages</p>
             </div>
           </div>
@@ -208,7 +208,7 @@
       <p id="noResults" class="doc-meta" style="display:none;padding:18px 4px;">No documents match your search.</p>
 
       <div class="principle-note">
-        <b>Design decision:</b> Open is the primary action; Summarise is an assistance action. AI assists the investment professional — it doesn't replace their judgement.
+        <b>Design decision:</b> Open is the primary action; Summarise is an assistance action. AI assists the investment professional - it doesn't replace their judgement.
       </div>
     </div>
   </div>
@@ -230,12 +230,12 @@
     noResults.style.display = visible === 0 ? 'block' : 'none';
   });
 
-  // Filter chips — toggle active state
+  // Filter chips - toggle active state
   document.querySelectorAll('.filter-chip').forEach(chip => {
     chip.addEventListener('click', () => chip.classList.toggle('active'));
   });
 
-  // Summarise — expand/collapse the AI summary panel
+  // Summarise - expand/collapse the AI summary panel
   document.querySelectorAll('.btn-assist').forEach(btn => {
     btn.addEventListener('click', () => {
       const row = btn.closest('.doc-row');
@@ -248,7 +248,7 @@
     });
   });
 
-  // Open — brief loading state to reinforce it as the primary action
+  // Open - brief loading state to reinforce it as the primary action
   document.querySelectorAll('.btn-primary').forEach(btn => {
     btn.addEventListener('click', () => {
       const original = btn.textContent;

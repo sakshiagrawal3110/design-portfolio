@@ -297,8 +297,8 @@ function tiles(f){
   MET.forEach(function(m){
     var inner;
     if(S.sys==='load'){inner='<div class="sk"></div><div class="sk" style="height:12px;width:60%"></div>';}
-    else if(S.sys==='nodata'){inner='<div class="v">—</div><div class="d flat">No data</div>';}
-    else if(low&&m.rate){inner='<div class="v" style="color:var(--muted)">—</div><span class="low">Low sample: '+Math.round(cur.vol)+' tickets, '+S.minSample+' needed</span>';}
+    else if(S.sys==='nodata'){inner='<div class="v">-</div><div class="d flat">No data</div>';}
+    else if(low&&m.rate){inner='<div class="v" style="color:var(--muted)">-</div><span class="low">Low sample: '+Math.round(cur.vol)+' tickets, '+S.minSample+' needed</span>';}
     else{
       var v=mc[m.k],d='';
       if(mp){var diff,txt;if(m.unit==='%'||m.k==='cs'){diff=v-mp[m.k];txt=(diff>=0?'▲ +':'▼ ')+(m.k==='cs'?diff.toFixed(2):diff.toFixed(1))+(m.unit==='%'?' pt':'');}else{diff=(v-mp[m.k])/mp[m.k]*100;txt=(diff>=0?'▲ +':'▼ ')+diff.toFixed(0)+'%';}

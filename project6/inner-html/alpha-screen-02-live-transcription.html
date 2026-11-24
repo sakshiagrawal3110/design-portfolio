@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Live Transcription — Screen Mockup</title>
+<title>Live Transcription - Screen Mockup</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -139,7 +139,7 @@
 
       <div class="ai-panel">
         <h3>Information detected</h3>
-        <p class="sub">Review each item — nothing is saved until you confirm it.</p>
+        <p class="sub">Review each item - nothing is saved until you confirm it.</p>
 
         <div class="ex-card">
           <div class="ex-head">
@@ -173,7 +173,7 @@
 </div>
 
 <script>
-  // Timer — counts up from the displayed value, pausable
+  // Timer - counts up from the displayed value, pausable
   let [mm, ss] = document.getElementById('timerDisplay').textContent.split(':').map(Number);
   let totalSeconds = mm * 60 + ss;
   let running = true;
@@ -205,7 +205,7 @@
     document.getElementById('endBtn').style.opacity = '.5';
   });
 
-  // Review buttons — mark each extracted item as reviewed
+  // Review buttons - mark each extracted item as reviewed
   document.querySelectorAll('.btn-review').forEach(btn => {
     btn.addEventListener('click', () => {
       const reviewed = btn.classList.toggle('reviewed');

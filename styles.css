@@ -1054,17 +1054,57 @@ dl {
   box-shadow: 0 -6px 24px rgba(17, 17, 17, 0.04);
 }
 
-.tone-light {
-  background: var(--surface);
+/* Distinct Bright High-Contrast Editorial Tones for Stacked Work Cards */
+.case-stack-card {
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.32s ease,
+    border-color 0.25s ease;
 }
 
-.tone-warm {
-  background: var(--surface-warm);
+.case-stack-card:hover {
+  box-shadow: 0 20px 44px rgba(17, 18, 20, 0.1);
 }
 
-.tone-accent {
-  background: #fff4ee;
-  border-color: #ffd5c2;
+.tone-spendit {
+  background: #e8f7ef;
+  border-color: #9bd7b8;
+}
+
+.tone-ds {
+  background: #eaf2ff;
+  border-color: #a7c5ff;
+}
+
+.tone-opspilot {
+  background: #fff0e5;
+  border-color: #ffbe8c;
+}
+
+.tone-wayable {
+  background: #f1ecff;
+  border-color: #c5b4ff;
+}
+
+.tone-finbit {
+  background: #fff7db;
+  border-color: #edd06b;
+}
+
+.tone-clinical {
+  background: #ffeef3;
+  border-color: #f7b5c8;
+}
+
+/* High-contrast inner surfaces & dividers inside each colored card */
+.case-stack-card .case-meta {
+  border-top-color: rgba(17, 18, 20, 0.14);
+  border-bottom-color: rgba(17, 18, 20, 0.14);
+}
+
+.case-stack-card .case-media-frame,
+.case-stack-card .ds-preview-card {
+  background: #ffffff;
+  border-color: rgba(17, 18, 20, 0.14);
 }
 
 .case-stack-copy h3 {
@@ -1803,11 +1843,9 @@ dl {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    360px circle at var(--spot-x) var(--spot-y),
-    rgba(255, 90, 31, 0.09),
-    transparent 70%
-  );
+  background: radial-gradient(360px circle at var(--spot-x) var(--spot-y),
+      rgba(255, 90, 31, 0.09),
+      transparent 70%);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
@@ -1945,6 +1983,7 @@ dl {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .exp-row,
   .exp-row::before,
   .exp-period,
@@ -1955,6 +1994,7 @@ dl {
     transition: none;
   }
 }
+
 /* END: EXPERIENCE TIMELINE & ROLE STACK */
 
 /* ===== Outside Work & Sketchbook ===== */
@@ -2042,11 +2082,9 @@ dl {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    420px circle at var(--cta-x) var(--cta-y),
-    rgba(255, 90, 31, 0.08),
-    transparent 68%
-  );
+  background: radial-gradient(420px circle at var(--cta-x) var(--cta-y),
+      rgba(255, 90, 31, 0.08),
+      transparent 68%);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -2250,6 +2288,7 @@ dl {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .cta-split,
   .cta-editorial-box::before,
   .cta-italic-accent::after,

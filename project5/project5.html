@@ -378,13 +378,13 @@
         </div>
       </section>
 
-      <!-- 4. Prototype (12-Screen Dual-Surface Architecture) -->
+      <!-- 4. Prototype (12-Screen Dual-Surface Architecture + Screens & Figma Prototypes) -->
       <section id="prototype" class="cs-section">
         <div class="container">
           <div class="cs-sec-head">
             <h2 class="cs-sec-title">04 · DUAL-SURFACE PROTOTYPE</h2>
             <p class="muted cs-sec-lead">
-              <strong>12 focused screens</strong> spanning the <em>Consumer Listening App (10 screens)</em> and <em>B2B Partner Governance Console (2 screens)</em>.
+              <strong>12 focused screens</strong> spanning the <em>Consumer Listening App (10 screens)</em> and <em>B2B Partner Governance Console (2 screens)</em>, paired with interactive Figma prototypes[cite: 54].
             </p>
           </div>
 
@@ -422,6 +422,72 @@
                   Controls for content categories, regional markets, host voice/identity, brand colors, embedded player styling, API feeds, and push rules.
                 </p>
               </article>
+            </div>
+          </div>
+
+          <!-- Consumer Flow Screens Strip (assets/finbit/screens.png) -->
+          <div class="mt-24">
+            <div class="case-media-frame">
+              <img
+                src="../assets/finbit/screens.png"
+                alt="FINBIT consumer mobile flow screens covering onboarding, topic selection, listening preferences, daily briefing card, and dark audio player"
+              />
+            </div>
+          </div>
+
+          <!-- Interactive Figma Prototype 01: Consumer / Onboarding & Briefing Flow (node-id=10-383) -->
+          <div class="embed-window mt-24" data-embed-window>
+            <div class="embed-window-bar">
+              <div class="embed-window-meta">
+                <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="mono small">FIGMA PROTOTYPE · CONSUMER FLOW (NODE 10:383)</span>
+                <span class="mono small muted">Figma Embed</span>
+              </div>
+              <div class="embed-window-actions">
+                <button type="button" class="embed-action-btn" data-toggle-expand aria-pressed="false">Expand height</button>
+                <a
+                  href="https://www.figma.com/proto/eGVqHbBZMbJiKgqvmC183i/Untitled?node-id=10-383&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=10%3A383&show-proto-sidebar=1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="embed-action-link mono small"
+                >Figma ↗</a>
+              </div>
+            </div>
+            <div class="embed-frame-wrap">
+              <iframe
+                src="https://embed.figma.com/proto/eGVqHbBZMbJiKgqvmC183i/Untitled?node-id=10-383&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=10%3A383&show-proto-sidebar=1&embed-host=share"
+                title="FINBIT interactive Figma prototype — Consumer flow"
+                loading="lazy"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- Interactive Figma Prototype 02: Player & Partner Experience (node-id=8-48) -->
+          <div class="embed-window mt-24" data-embed-window>
+            <div class="embed-window-bar">
+              <div class="embed-window-meta">
+                <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="mono small">FIGMA PROTOTYPE · AUDIO PLAYER &amp; ECOSYSTEM (NODE 8:48)</span>
+                <span class="mono small muted">Figma Embed</span>
+              </div>
+              <div class="embed-window-actions">
+                <button type="button" class="embed-action-btn" data-toggle-expand aria-pressed="false">Expand height</button>
+                <a
+                  href="https://www.figma.com/proto/eGVqHbBZMbJiKgqvmC183i/Untitled?node-id=8-48&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=8%3A48&show-proto-sidebar=1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="embed-action-link mono small"
+                >Figma ↗</a>
+              </div>
+            </div>
+            <div class="embed-frame-wrap">
+              <iframe
+                src="https://embed.figma.com/proto/eGVqHbBZMbJiKgqvmC183i/Untitled?node-id=8-48&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=8%3A48&show-proto-sidebar=1&embed-host=share"
+                title="FINBIT interactive Figma prototype — Player and ecosystem flow"
+                loading="lazy"
+                allowfullscreen
+              ></iframe>
             </div>
           </div>
 
@@ -705,6 +771,18 @@
     if (tldrCloseBtn) {
       tldrCloseBtn.addEventListener("click", () => setTldrState(false));
     }
+
+    // Embedded Prototype Window Expand / Collapse Micro-Interaction
+    document.querySelectorAll("[data-toggle-expand]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const win = btn.closest("[data-embed-window]");
+        if (!win) return;
+        const expanded = win.classList.toggle("is-expanded");
+        btn.classList.toggle("is-expanded", expanded);
+        btn.setAttribute("aria-pressed", String(expanded));
+        btn.textContent = expanded ? "Compact height" : "Expand height";
+      });
+    });
   </script>
 </body>
 </html>

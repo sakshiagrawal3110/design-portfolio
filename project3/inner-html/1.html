@@ -1,0 +1,200 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>OpsPilot Design Blueprints</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky tab strip, one sheet per blueprint. Diagrams are drawn to the same tokens as the prototype so the two read as one system. */
+:root{
+  --bg:#F5F6F8;--surface:#FFFFFF;--surface-2:#ECEFF4;--line:#D8DEE8;--ink:#141A2A;--ink-2:#465067;--muted:#677289;
+  --accent:#2447C8;--accent-soft:#E3E9FB;--on-accent:#FFFFFF;
+  --good:#146C43;--good-bg:#E1F3E8;--warn:#8F5600;--warn-bg:#FFF0D2;--crit:#B3261E;--crit-bg:#FDE6E3;
+  --font:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1220;--surface:#161D2F;--surface-2:#1E273C;--line:#2A354E;--ink:#E9EDF6;--ink-2:#B0B9CC;--muted:#8E99B0;
+  --accent:#8AA6FF;--accent-soft:#1F2B53;--on-accent:#0E1220;--good:#63D493;--good-bg:#12301F;--warn:#F2BC55;--warn-bg:#3A2A0C;--crit:#FF8D80;--crit-bg:#451A1A;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1220;--surface:#161D2F;--surface-2:#1E273C;--line:#2A354E;--ink:#E9EDF6;--ink-2:#B0B9CC;--muted:#8E99B0;
+  --accent:#8AA6FF;--accent-soft:#1F2B53;--on-accent:#0E1220;--good:#63D493;--good-bg:#12301F;--warn:#F2BC55;--warn-bg:#3A2A0C;--crit:#FF8D80;--crit-bg:#451A1A;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.45;margin:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto}
+h1{font-size:23px;margin:20px 0 4px;font-weight:600;letter-spacing:-.01em}h2{font-size:16px;margin:0 0 8px;font-weight:600}h3{font-size:14px;margin:0 0 6px;font-weight:600}
+.sub{color:var(--ink-2);max-width:78ch;margin:0}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--line);margin:12px 0 18px}
+.tabs button{border:0;background:none;padding:9px 13px;color:var(--ink-2);white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--ink);font-weight:600;border-bottom-color:var(--accent)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:14px;min-width:0}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px;align-items:start}
+.tw{overflow-x:auto}
+svg{display:block}
+table{border-collapse:collapse;width:100%}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:left;font-weight:500;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:bottom}
+td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+.mono{font-family:var(--mono);font-size:12.5px}
+.tip{color:var(--muted);font-size:12.5px}
+.chip{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:1px 9px;font-size:12px;font-weight:500;background:var(--surface-2);color:var(--ink-2);white-space:nowrap}
+.chip.good{background:var(--good-bg);color:var(--good)}.chip.warn{background:var(--warn-bg);color:var(--warn)}.chip.crit{background:var(--crit-bg);color:var(--crit)}.chip.info{background:var(--accent-soft);color:var(--accent)}
+.note{background:var(--warn-bg);border-radius:8px;padding:9px 12px;margin-bottom:14px;font-size:13px}
+.leg{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin-top:10px;font-size:13px}
+.leg b{font-family:var(--mono);background:var(--accent);color:var(--on-accent);border-radius:50%;width:20px;height:20px;display:grid;place-items:center;font-size:11px}
+.sw{display:flex;align-items:center;gap:10px;padding:3px 0}.sw i{width:34px;height:24px;border-radius:6px;border:1px solid var(--line);flex:none}
+.state{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.state small{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 13px;font-weight:500}
+.btn.pri{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.btn.hov{background:var(--surface-2)}.btn.pri.hov{filter:brightness(1.1)}.btn.foc{outline:2px solid var(--accent);outline-offset:2px}.btn.dis{opacity:.5;cursor:not-allowed}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+.tile .k{font-size:12.5px;color:var(--ink-2)}.tile .v{font-family:var(--mono);font-size:22px;font-weight:500;margin:2px 0}.tile .d{font-size:12px;font-family:var(--mono)}
+.sk{background:linear-gradient(90deg,var(--surface-2),var(--line),var(--surface-2));background-size:200% 100%;animation:sk 1.2s linear infinite;border-radius:6px;height:20px;margin:6px 0}
+@keyframes sk{to{background-position:-200% 0}}@media (prefers-reduced-motion:reduce){.sk{animation:none}}
+.fld{width:100%}.fld label{font-size:12.5px;font-weight:500;color:var(--ink-2);display:block;margin-bottom:3px}
+.fld .in{border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:7px 9px;min-height:34px}
+.fld .in.err{border-color:var(--crit)}.fld .in.dis{opacity:.6}.fld .in.foc{outline:2px solid var(--accent)}
+.fld .m{font-size:12.5px;margin-top:3px}
+.banner{border-radius:10px;padding:9px 12px;font-size:13px;width:100%}.banner.crit{background:var(--crit-bg)}.banner.warn{background:var(--warn-bg)}.banner.info{background:var(--accent-soft)}
+.row{width:100%;display:grid;grid-template-columns:70px 1fr auto;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-size:13px;align-items:center}
+.row.hov{background:var(--surface-2)}
+.empty{width:100%;text-align:center;border:1px dashed var(--line);border-radius:8px;padding:16px 10px;color:var(--ink-2)}
+.toast{background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:13px}
+</style>
+<div class="wrap">
+<h1>OpsPilot Design Blueprints</h1>
+<p class="sub">Information architecture, user flows, low-fidelity wireframes, the design system with component states, and the written specs. These are design proposals to refine after interviews, not validated findings.</p>
+<nav class="tabs" id="tabs" role="tablist" aria-label="Blueprint sections"></nav>
+<div id="view"></div>
+</div>
+<script>
+(function(){
+'use strict';
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+var TAB='ia',TABS=[['ia','Information architecture'],['flows','User flows'],['wire','Wireframes'],['ds','Design system'],['spec','Specifications']];
+
+/* ----- IA tree ----- */
+var TREE={n:'OpsPilot',c:[
+ {n:'Overview',fr:'FR01-03, 12',c:[{n:'Time filter',fr:'FR02'},{n:'Metric tiles with definitions',fr:'FR01'},{n:'Trend chart',fr:'FR01'},{n:'Breakdown: team, channel, category',fr:'FR03'},{n:'Data freshness and sync status',fr:'FR12'}]},
+ {n:'Alerts',fr:'FR04',c:[{n:'Alert list and status',fr:'FR04'},{n:'Rule and evidence for each alert'}]},
+ {n:'Investigate',fr:'FR05',c:[{n:'Filtered metrics for the alert'},{n:'Supporting records',fr:'FR05'},{n:'Create issue from alert',fr:'FR06'}]},
+ {n:'Issues',fr:'FR06-10',c:[{n:'Issue list, search, status filter',fr:'FR06'},{n:'Issue detail',c:[{n:'Owner, priority, due date',fr:'FR07, 08'},{n:'Status and transitions',fr:'FR09'},{n:'Activity history',fr:'FR10'}]}]},
+ {n:'Settings (manager)',fr:'FR11',c:[{n:'Team settings'},{n:'Roles and permissions',fr:'FR11'},{n:'Metric definitions'},{n:'Data sources'}]}
+]};
+function layoutTree(){
+  var rows=[],NW=190,NH=30,GX=40,GY=8;
+  (function walk(n,d){n.d=d;if(!n.c||!n.c.length){n.y=rows.length;rows.push(n);}else{n.c.forEach(function(k){walk(k,d+1);});n.y=(n.c[0].y+n.c[n.c.length-1].y)/2;}})(TREE,0);
+  var maxd=0,all=[];(function col(n){all.push(n);if(n.d>maxd)maxd=n.d;(n.c||[]).forEach(col);})(TREE);
+  var W=(maxd+1)*(NW+GX)+10,H=rows.length*(NH+GY)+10,s='';
+  all.forEach(function(n){n.px=5+n.d*(NW+GX);n.py=5+n.y*(NH+GY);});
+  all.forEach(function(n){(n.c||[]).forEach(function(k){var x1=n.px+NW,y1=n.py+NH/2,x2=k.px,y2=k.py+NH/2,mx=x1+GX/2;s+='<path d="M'+x1+' '+y1+' H'+mx+' V'+y2+' H'+x2+'" fill="none" stroke="var(--line)" stroke-width="1.5"/>';});});
+  all.forEach(function(n){var root=n.d===0,top=n.d===1;s+='<rect x="'+n.px+'" y="'+n.py+'" width="'+NW+'" height="'+NH+'" rx="7" fill="'+(root?'var(--accent)':top?'var(--accent-soft)':'var(--surface)')+'" stroke="'+(root?'var(--accent)':'var(--line)')+'"/><text x="'+(n.px+10)+'" y="'+(n.py+19)+'" font-size="12.5" font-weight="'+(top||root?600:400)+'" fill="'+(root?'var(--on-accent)':'var(--ink)')+'">'+esc(n.n.length>25?n.n.slice(0,24)+'…':n.n)+'</text>'+(n.fr?'<text x="'+(n.px+NW-8)+'" y="'+(n.py+19)+'" text-anchor="end" font-size="10.5" font-family="var(--mono)" fill="var(--muted)">'+n.fr+'</text>':'');});
+  return '<div class="tw"><svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" role="img" aria-label="Information architecture tree">'+s+'</svg></div>';
+}
+function vIa(){
+  return '<div class="card"><h2>Information architecture</h2><p class="tip" style="margin-top:-4px">Structure follows the signal-to-resolution journey: monitor, identify, investigate, act, track. Labels on the right are the functional requirements each node serves.</p>'+layoutTree()+'</div><div class="cols"><div class="card"><h3>Navigation rules</h3><ul style="margin:0;padding-left:18px;color:var(--ink-2)"><li>Four primary destinations: Overview, Alerts, Issues, Settings. Investigate is a mode of Overview, entered from an alert, so filters and context carry over.</li><li>Settings appears only for managers. Other roles never see a disabled link they cannot use.</li><li>Agents land on My actions. Dashboards and alerts are not shown to them.</li><li>Every metric links to its definition. Every alert links to supporting records.</li></ul></div><div class="card"><h3>Why Investigate is not its own destination</h3><p class="tip" style="margin:0">Investigation is the step users are most likely to lose context in if it lives on another page. Keeping it inside Overview keeps the metric, the filter and the evidence together. Test this in discovery: if participants describe investigation as a separate activity done elsewhere, promote it to a destination.</p></div></div>';
+}
+
+/* ----- Flow renderer ----- */
+function anchor(n,s){return s==='r'?[n.x+n.w,n.y+n.h/2]:s==='l'?[n.x,n.y+n.h/2]:s==='t'?[n.x+n.w/2,n.y]:[n.x+n.w/2,n.y+n.h];}
+function flow(nodes,edges,W,H,label){
+  var N={};nodes.forEach(function(n){N[n.id]=n;});var s='<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>';
+  edges.forEach(function(e){
+    var a=N[e[0]],b=N[e[1]],sa=e[3]||'r',sb=e[4]||'l',p0=anchor(a,sa),p1=anchor(b,sb),pts;
+    if(sa==='r'&&sb==='l'){var mx=(p0[0]+p1[0])/2;pts=p0[1]===p1[1]?[p0,p1]:[p0,[mx,p0[1]],[mx,p1[1]],p1];}
+    else if(sa==='b'&&sb==='t'){var my=(p0[1]+p1[1])/2;pts=p0[0]===p1[0]?[p0,p1]:[p0,[p0[0],my],[p1[0],my],p1];}
+    else if(sa==='t'&&sb==='t'){var ty=Math.min(p0[1],p1[1])-26;pts=[p0,[p0[0],ty],[p1[0],ty],p1];}
+    else if(sa==='b'&&sb==='b'){var by=Math.max(p0[1],p1[1])+26;pts=[p0,[p0[0],by],[p1[0],by],p1];}
+    else if(sa==='l'&&sb==='b'){pts=[p0,[p1[0],p0[1]],p1];}
+    else if(sa==='b'&&sb==='r'){pts=[p0,[p0[0],p1[1]],p1];}
+    else if(sa==='r'&&sb==='t'){pts=[p0,[p1[0],p0[1]],p1];}
+    else pts=[p0,p1];
+    s+='<polyline points="'+pts.map(function(p){return p.join(',');}).join(' ')+'" fill="none" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah)"/>';
+    if(e[2]){var lp=pts[Math.floor((pts.length-1)/2)],lq=pts[Math.floor((pts.length-1)/2)+1],lx=(lp[0]+lq[0])/2,ly=(lp[1]+lq[1])/2;s+='<text x="'+lx+'" y="'+(ly-5)+'" text-anchor="middle" font-size="11" fill="var(--ink-2)" paint-order="stroke" stroke="var(--surface)" stroke-width="4">'+esc(e[2])+'</text>';}
+  });
+  nodes.forEach(function(n){
+    var fill=n.t==='start'||n.t==='end'?'var(--accent)':n.t==='dec'?'var(--warn-bg)':'var(--surface-2)',tc=n.t==='start'||n.t==='end'?'var(--on-accent)':'var(--ink)',stroke=n.t==='dec'?'var(--warn)':'var(--line)';
+    if(n.t==='dec'){var cx=n.x+n.w/2,cy=n.y+n.h/2;s+='<polygon points="'+cx+','+n.y+' '+(n.x+n.w)+','+cy+' '+cx+','+(n.y+n.h)+' '+n.x+','+cy+'" fill="'+fill+'" stroke="'+stroke+'"/>';}
+    else s+='<rect x="'+n.x+'" y="'+n.y+'" width="'+n.w+'" height="'+n.h+'" rx="'+(n.t==='start'||n.t==='end'?n.h/2:8)+'" fill="'+fill+'" stroke="'+stroke+'"/>';
+    var lines=n.l.split('\n'),y0=n.y+n.h/2-(lines.length-1)*7+4;
+    lines.forEach(function(L,i){s+='<text x="'+(n.x+n.w/2)+'" y="'+(y0+i*14)+'" text-anchor="middle" font-size="12" fill="'+tc+'">'+esc(L)+'</text>';});
+  });
+  return '<div class="tw"><svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" role="img" aria-label="'+esc(label)+'">'+s+'</svg></div>';
+}
+function vFlows(){
+  var n1=[
+   {id:'a',x:10,y:30,w:130,h:46,t:'start',l:'Open Overview'},{id:'b',x:180,y:30,w:130,h:46,l:'Scan metric tiles\nand trend'},{id:'c',x:350,y:20,w:130,h:66,t:'dec',l:'Deviation\nfrom target?'},{id:'d',x:530,y:30,w:130,h:46,l:'Open alert or\nbreakdown'},{id:'e',x:700,y:30,w:130,h:46,l:'Investigate:\nfilters + records'},{id:'f',x:880,y:20,w:130,h:66,t:'dec',l:'Enough\ncontext?'},
+   {id:'g',x:10,y:230,w:130,h:46,l:'Create issue\nfrom alert'},{id:'h',x:180,y:230,w:130,h:46,l:'Set owner, priority,\ndue date'},{id:'i',x:370,y:230,w:130,h:46,l:'Track status\nand history'},{id:'j',x:550,y:220,w:130,h:66,t:'dec',l:'Action\ncomplete?'},{id:'k',x:730,y:230,w:130,h:46,l:'Resolve with\nnote'},{id:'l',x:900,y:230,w:110,h:46,t:'end',l:'Close or reopen'}];
+  var e1=[['a','b'],['b','c'],['c','d','Yes'],['c','b','No: keep monitoring','t','t'],['d','e'],['e','f'],['f','e','No: refine','t','t'],['f','g','Yes','b','t'],['g','h'],['h','i'],['i','j'],['j','k','Yes'],['j','i','No','b','b'],['k','l']];
+  var n2=[{id:'o',x:20,y:70,w:130,h:50,l:'Open'},{id:'p',x:240,y:70,w:130,h:50,l:'In progress'},{id:'r',x:460,y:70,w:130,h:50,l:'Resolved'},{id:'c',x:680,y:70,w:130,h:50,l:'Closed'},{id:'q',x:460,y:210,w:130,h:50,l:'Reopened'}];
+  var e2=[['o','p','needs an owner'],['p','r','needs a note'],['r','c','manager, or lead if enabled'],['r','q','needs a note','b','t'],['q','p','','l','b'],['c','q','','b','r']];
+  var n3=[{id:'a',x:10,y:30,w:140,h:46,t:'start',l:'Receive assignment'},{id:'b',x:190,y:30,w:140,h:46,l:'Open My actions'},{id:'c',x:370,y:30,w:150,h:46,l:'Read context,\npriority, due date'},{id:'d',x:560,y:30,w:130,h:46,l:'Start work:\nIn progress'},{id:'e',x:730,y:30,w:130,h:46,l:'Resolve with note'},{id:'f',x:900,y:30,w:110,h:46,t:'end',l:'Lead reviews'}];
+  var e3=[['a','b'],['b','c'],['c','d'],['d','e'],['e','f']];
+  return '<div class="card"><h2>Signal to resolution</h2><p class="tip" style="margin-top:-4px">The core journey for operations managers and team leads. Loops show where people repeat a step before moving on.</p>'+flow(n1,e1,1030,320,'Signal to resolution flow')+'</div><div class="cols"><div class="card"><h2>Status transitions</h2><p class="tip" style="margin-top:-4px">Each arrow carries the rule that blocks an invalid move. The prototype enforces these and explains the block in words.</p>'+flow(n2,e2,830,290,'Issue status transitions')+'</div><div class="card"><h2>Agent: work an assigned action</h2><p class="tip" style="margin-top:-4px">Agents see only their own actions and can update status. They cannot assign, reprioritise or close.</p>'+flow(n3,e3,1020,110,'Agent flow')+'</div></div>';
+}
+
+/* ----- Wireframes ----- */
+function wf(W,H,shapes,pins){
+  var s='<rect x="0.5" y="0.5" width="'+(W-1)+'" height="'+(H-1)+'" rx="6" fill="var(--surface)" stroke="var(--line)"/>';
+  shapes.forEach(function(r){var x=r[0],y=r[1],w=r[2],h=r[3],l=r[4]||'',k=r[5]||'box';
+    if(k==='box')s+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="4" fill="var(--surface-2)" stroke="var(--line)"/>';
+    if(k==='line')s+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="2" fill="var(--line)"/>';
+    if(k==='chart')s+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="4" fill="var(--surface)" stroke="var(--line)"/><polyline points="'+[0,.2,.35,.3,.55,.5,.7,.62,.9].map(function(p,i){return(x+8+i*(w-16)/8)+','+(y+h-10-[.2,.3,.25,.4,.35,.5,.45,.7,.8][i]*(h-24));}).join(' ')+'" fill="none" stroke="var(--muted)" stroke-width="2"/>';
+    if(k==='bars')s+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="4" fill="var(--surface)" stroke="var(--line)"/>'+[.9,.6,.45,.3].map(function(p,i){return '<rect x="'+(x+8)+'" y="'+(y+10+i*((h-20)/4))+'" width="'+((w-16)*p)+'" height="'+((h-20)/4-6)+'" fill="var(--muted)" opacity=".5"/>';}).join('');
+    if(k==='nav')s+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="var(--surface-2)" stroke="var(--line)"/>';
+    if(k==='btn')s+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="5" fill="var(--ink-2)" opacity=".85"/>';
+    if(l)s+='<text x="'+(x+(k==='btn'?w/2:8)+0)+'" y="'+(y+(k==='line'?h+10:Math.min(h/2+4,16)))+'" '+(k==='btn'?'text-anchor="middle" fill="var(--bg)"':'fill="var(--ink-2)"')+' font-size="10.5" font-family="var(--font)">'+esc(l)+'</text>';
+  });
+  pins.forEach(function(p,i){s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="9" fill="var(--accent)"/><text x="'+p[0]+'" y="'+(p[1]+4)+'" text-anchor="middle" font-size="10.5" font-weight="600" fill="var(--on-accent)" font-family="var(--mono)">'+(i+1)+'</text>';});
+  return '<div class="tw"><svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" style="max-width:100%;height:auto" role="img" aria-label="Wireframe">'+s+'</svg></div>';
+}
+function legend(a){return '<div class="leg">'+a.map(function(x,i){return '<b>'+(i+1)+'</b><span>'+x+'</span>';}).join('')+'</div>';}
+function vWire(){
+  var nav=[0,0,110,330,'','nav'],navT=[12,14,60,6,'','line'];
+  var navItems=[[12,50,86,12,'Overview'],[12,74,86,12,'Alerts'],[12,98,86,12,'Issues'],[12,122,86,12,'Settings']].map(function(x){return [x[0],x[1],x[2],x[3],x[4],'line'];});
+  var A=wf(560,330,[nav,navT].concat(navItems,[[126,12,100,10,'Overview','line'],[126,34,300,24,'Last 7 / 30 / 90 days   Channel   Team   Category','box'],[440,38,110,14,'Updated 10:05 IST','line']],[0,1,2,3,4,5,6].map(function(i){return [126+i*62,70,56,44,['Volume','FRT','Resol.','SLA','Backlog','Reopen','CSAT'][i],'box'];}),[[126,124,270,130,'Trend by day','chart'],[406,124,144,130,'By team / channel','bars'],[126,266,424,50,'Supporting records (when investigating)','box']]),[[120,30],[116,92],[116,189],[420,189],[560-12,40]]);
+  var B=wf(560,330,[nav,navT].concat(navItems,[[126,12,100,10,'Alerts','line']],[0,1,2].map(function(i){return [126,36+i*92,424,80,'','box'];}),[0,1,2].map(function(i){return [138,48+i*92,130,12,'Critical · New','line'];}),[0,1,2].map(function(i){return [138,68+i*92,260,10,'','line'];}),[0,1,2].map(function(i){return [138,86+i*92,300,8,'','line'];}),[0,1,2].map(function(i){return [450,50+i*92,92,14,'Investigate','btn'];}),[0,1,2].map(function(i){return [450,70+i*92,92,14,'Create issue','box'];})),[[134,48],[444,57],[444,77]]);
+  var C=wf(560,330,[nav,navT].concat(navItems,[[126,12,100,10,'Issues','line'],[126,32,200,20,'Search   Status','box'],[470,32,80,20,'Create issue','btn'],[126,62,424,22,'ID   Issue   Priority   Owner   Team   Due   Status','box']],[0,1,2,3,4].map(function(i){return [126,90+i*30,424,26,'','box'];}),[[286,40,0,0,'','line']]),[[330,42],[516,42],[240,128],[420,128]]);
+  var D=wf(560,330,[[0,0,200,330,'List dims behind','nav'],[200,0,360,330,'','box'],[212,12,200,12,'I-195 · Bravo · Manual','line'],[212,32,300,16,'Chat greeting automation misroutes...','box'],[212,56,70,14,'Reopened','line'],[290,56,40,14,'P1','line'],[212,80,300,24,'Description','box'],[212,112,70,26,'Priority','box'],[290,112,90,26,'Owner','box'],[388,112,80,26,'Due date','box'],[212,148,324,24,'Open · In progress · Resolved · Closed · Reopened','box'],[212,178,324,30,'Note (required to resolve or reopen)','box'],[212,216,324,100,'Activity history, newest first','box']],[[220,26],[312,64],[250,125],[360,160],[360,266]]);
+  return '<div class="note">Low-fidelity layouts. Grey boxes stand for content, numbered pins match the notes below each frame. Annotate these with research findings before building them in high fidelity.</div><div class="cols"><div class="card"><h3>1. Overview and investigation</h3>'+A+legend(['Time and dimension filters (FR02, FR03)','Metric tiles with definitions and change against the last period (FR01)','Trend chart with hover values and a table view (FR01)','Breakdown bars that filter the whole page when selected (FR03)','Data freshness and last successful sync (FR12)'])+'</div><div class="card"><h3>2. Alerts</h3>'+B+legend(['Severity, status and the rule that fired (FR04)','Investigate: opens Overview filtered to the alert (FR05)','Create issue: prefilled from the alert (FR06)'])+'</div><div class="card"><h3>3. Issues list</h3>'+C+legend(['Search and status filter','Create issue, hidden for agents (FR06)','Unassigned and overdue shown as labelled chips, never colour alone','Row opens the issue detail panel'])+'</div><div class="card"><h3>4. Issue detail</h3>'+D+legend(['Source of the issue and its link back to the alert','Status and priority at the top, with text labels','Owner, priority and due date, editable by leads and managers (FR07, FR08)','Status steps enforce valid transitions (FR09)','Activity history, including who changed what (FR10)'])+'</div></div>';
+}
+
+/* ----- Design system ----- */
+var TOK=[['--bg','Page background'],['--surface','Cards and panels'],['--surface-2','Recessed areas, hover'],['--line','Borders and grid'],['--ink','Primary text'],['--ink-2','Secondary text'],['--muted','Captions, axes'],['--accent','Actions and selection'],['--accent-soft','Selected and info background'],['--good','Good, text'],['--warn','Warning, text'],['--crit','Critical, text']];
+function vDs(){
+  var cs=getComputedStyle(document.documentElement);
+  var h='<div class="cols"><div class="card"><h2>Colour tokens</h2><p class="tip" style="margin-top:-4px">Neutrals lean cool to sit with the cobalt accent. Status colours are separate from the accent and are always paired with an icon and a word.</p>'+TOK.map(function(t){return '<div class="sw"><i style="background:var('+t[0]+')"></i><span class="mono" style="min-width:120px">'+t[0]+'</span><span class="tip">'+t[1]+'</span></div>';}).join('')+'</div>'+
+  '<div class="card"><h2>Type</h2><p class="tip" style="margin-top:-4px">IBM Plex Sans for interface text. IBM Plex Mono for figures, IDs and times, so numbers align and read as data.</p>'+[['Page title','22px / 600',22,600],['Panel title','15px / 600',15,600],['Body','14px / 400',14,400],['Caption and label','12.5px / 400',12.5,400]].map(function(t){return '<div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding:6px 0"><span style="font-size:'+t[2]+'px;font-weight:'+t[3]+'">'+t[0]+'</span><span class="tip mono">'+t[1]+'</span></div>';}).join('')+'<div style="display:flex;justify-content:space-between;align-items:baseline;padding:6px 0"><span class="mono" style="font-size:25px">12,480<small style="font-size:13px;color:var(--muted)"> min</small></span><span class="tip mono">Mono 25px / 500, metric value</span></div></div></div>';
+  function g(title,items){return '<div class="card"><h3>'+title+'</h3><div class="cgrid">'+items.map(function(i){return '<div class="state">'+i[1]+'<small>'+i[0]+'</small></div>';}).join('')+'</div></div>';}
+  h+=g('Buttons',[['Default','<button class="btn pri">Create issue</button>'],['Hover','<button class="btn pri hov">Create issue</button>'],['Focus','<button class="btn pri foc">Create issue</button>'],['Disabled','<button class="btn pri dis" disabled>Create issue</button>'],['Secondary','<button class="btn">Dismiss</button>'],['Secondary hover','<button class="btn hov">Dismiss</button>']]);
+  h+=g('Status and priority',[['Open','<span class="chip">○ Open</span>'],['In progress','<span class="chip info">◐ In progress</span>'],['Resolved','<span class="chip good">✓ Resolved</span>'],['Closed','<span class="chip">● Closed</span>'],['Reopened','<span class="chip warn">↺ Reopened</span>'],['P1','<span class="chip crit">▲▲ P1</span>'],['P2','<span class="chip warn">▲ P2</span>'],['P3','<span class="chip">– P3</span>'],['Unassigned','<span class="chip crit">⚠ Unassigned</span>'],['Overdue','<span class="chip crit">Overdue · Sana</span>'],['Critical alert','<span class="chip crit">◆ Critical</span>'],['Warning alert','<span class="chip warn">▲ Warning</span>']]);
+  h+=g('Metric tile',[['Normal','<div class="tile"><div class="k">First response time</div><div class="v">27.4<small style="font-size:12px;color:var(--muted)"> min</small></div><div class="d" style="color:var(--crit)">▲ +18% vs prev 30d · worse</div></div>'],['Loading','<div class="tile"><div class="k">First response time</div><div class="sk"></div><div class="sk" style="height:10px;width:60%"></div></div>'],['Low sample','<div class="tile"><div class="k">First response time</div><div class="v" style="color:var(--muted)">—</div><div style="font-size:12px;color:var(--warn)">Low sample: 42 tickets, 100 needed</div></div>'],['No data','<div class="tile"><div class="k">First response time</div><div class="v">—</div><div class="d" style="color:var(--muted)">No data</div></div>'],['No earlier period','<div class="tile"><div class="k">Ticket volume</div><div class="v">6,742</div><div class="d" style="color:var(--muted)">No earlier period to compare</div></div>']]);
+  h+=g('Form field',[['Default','<div class="fld"><label>Title</label><div class="in">Delta callback backlog</div></div>'],['Focus','<div class="fld"><label>Title</label><div class="in foc">Delta callback backlog</div></div>'],['Error','<div class="fld"><label>Title</label><div class="in err">&nbsp;</div><div class="m" style="color:var(--crit)">Enter a title so others can find this issue.</div></div>'],['Disabled','<div class="fld"><label>Owner</label><div class="in dis">Managed by team lead</div></div>']]);
+  h+='<div class="card"><h3>Banners, rows and empty states</h3><div class="cgrid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr))">'+[['Sync failed','<div class="banner crit"><b>Data sync failed</b><br>Showing the last successful sync at 09:42 IST. Figures may be out of date.</div>'],['Small sample','<div class="banner warn"><b>Sample too small to draw conclusions</b><br>Fewer than 100 tickets. Widen the period or remove a filter.</div>'],['Investigation','<div class="banner info"><b>Investigating A-101</b><br>Filters are set to Bravo, Chat, last 7 days.</div>'],['Table row','<div class="row"><span class="mono">I-200</span><span>Delta phone callback backlog</span><span class="chip crit">⚠ Unassigned</span></div>'],['Table row, hover','<div class="row hov"><span class="mono">I-198</span><span>Charlie delivery reopen rate</span><span class="chip crit">Overdue · Sana</span></div>'],['Empty: filter','<div class="empty"><b>No issues match</b><br>Nothing matches the current search or status filter.<br><button class="btn" style="margin-top:8px">Reset filters</button></div>'],['Permission denied','<div class="empty"><b>You do not have access to team settings</b><br>Only operations managers can change them.</div>'],['Toast','<div class="toast">Issue I-201 created</div>']].map(function(i){return '<div class="state" style="align-items:stretch">'+i[1]+'<small>'+i[0]+'</small></div>';}).join('')+'</div></div>';
+  h+='<div class="card"><h3>Accessibility rules</h3><ul style="margin:0;padding-left:18px;color:var(--ink-2)"><li>State is never colour alone: every status, priority and severity carries an icon and a word.</li><li>Every chart has a table view, and bars and points carry text values.</li><li>All controls are keyboard reachable with a visible focus ring. Dialogs close on Escape.</li><li>Both light and dark themes are defined as tokens. Text on every surface keeps readable contrast.</li><li>Motion is limited to loading skeletons and respects reduced-motion settings.</li></ul></div>';
+  return h;
+}
+
+/* ----- Specs ----- */
+function vSpec(){
+  var RB=[['View overall dashboard','Yes','Team-level','Limited'],['View team metrics','Yes','Assigned team','Own metrics, if permitted'],['Investigate issues','Yes','Yes','Limited'],['Create issues','Yes','Yes','Optional, subject to research'],['Assign tasks','Yes','Yes','No'],['Update assigned tasks','Yes','Yes','Yes'],['Close issues','Yes','If authorised','No'],['Manage team settings','Yes','No','No']];
+  var MD=[['Ticket volume','Tickets created in the selected period','Ticket level, summed to team'],['First response time','Creation to first human response. Automated replies excluded. Not resolution time','Mean across tickets'],['Resolution time','Creation to resolution. Reopened tickets keep original creation time','Mean across resolved tickets'],['SLA attainment','Eligible tickets meeting the SLA for their channel, as a percentage','Weighted by ticket count'],['Backlog','Unresolved tickets at a point in time','Point-in-time, not summed over days'],['Reopen rate','Resolved tickets later reopened, as a percentage','Ratio of totals'],['CSAT','Mean survey score from collected feedback','Ratio of totals; depends on response rate']];
+  var EC=[['No data available','Explain why the dashboard has no results and offer a retry','Data state: No data'],['Data sync fails','Show the last successful sync and an error state','Data state: Sync failed'],['User lacks permission','Explain restricted access without exposing data','Viewing as: Support agent, then Overview or Settings'],['No owner assigned','Make unassigned status visible','Issues list: I-200'],['Task becomes overdue','Show the overdue state and responsible owner','Issues list: I-198'],['Two users edit the same issue','Prevent silent overwriting and communicate changes','Open an issue, simulate a colleague edit, then save'],['Issue is reopened','Retain history and show the new status','Issue I-195, or reopen I-197'],['Filter returns no records','Explain the empty result and allow filters to be reset','Issues: search for a word that does not exist'],['Metric below minimum sample size','Avoid presenting misleading conclusions','Filter to Delta and Phone over 7 days'],['Invalid status transition','Explain what must happen before the status can change','Open I-199 and choose Resolved']];
+  var NF=[['Performance','Core overview stays usable while data loads'],['Scalability','Tables support large datasets and pagination'],['Accessibility','Keyboard navigation, contrast and non-colour status indicators'],['Security','Role-based access to sensitive operational data'],['Reliability','Clear communication when integrations fail'],['Data integrity','Display the source and last successful sync time'],['Responsiveness','Desktop first, tablet layouts supported'],['Auditability','Track changes to issues, owners and statuses']];
+  function tb(head,rows){return '<div class="tw"><table><thead><tr>'+head.map(function(x){return '<th>'+x+'</th>';}).join('')+'</tr></thead><tbody>'+rows.map(function(r){return '<tr>'+r.map(function(c,i){return '<td'+(i===0?' style="font-weight:500"':'')+'>'+c+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div>';}
+  return '<div class="note">All rules below are proposals. The permission model and metric treatment must be revised to match the organisations you find in research.</div><div class="card"><h2>Role-based access</h2>'+tb(['Capability','Operations manager','Team lead','Support agent'],RB)+'</div>'+
+  '<div class="card"><h2>Metric definitions</h2>'+tb(['Metric','Proposed definition','Aggregation'],MD)+'<h3 style="margin-top:14px">Decisions still to make</h3>'+tb(['Topic','Proposal for the prototype','To confirm in research'],[['Reporting time zone','IST (UTC+05:30)','Do teams report in one zone across sites?'],['Business or calendar hours','Calendar hours','Whether SLAs run on business hours'],['Reopened tickets','Keep original creation time; count again when re-resolved','How teams treat reopens today'],['Missing or incomplete data','Exclude from means; show how many tickets were excluded','What data is usually missing'],['Refresh frequency','Show last successful sync; target near real time','How fresh the data must be to be trusted'],['Ticket vs team level','Team figures are ratios of totals, not averages of agent figures','How teams compare agents']])+'</div>'+
+  '<div class="card"><h2>Critical edge cases</h2>'+tb(['Scenario','Expected behaviour','See it in the prototype'],EC)+'</div>'+
+  '<div class="card"><h2>Non-functional requirements</h2>'+tb(['Area','Requirement'],NF)+'</div>';
+}
+var V={ia:vIa,flows:vFlows,wire:vWire,ds:vDs,spec:vSpec};
+function render(){document.getElementById('tabs').innerHTML=TABS.map(function(t){return '<button role="tab" data-t="'+t[0]+'" aria-selected="'+(TAB===t[0])+'">'+t[1]+'</button>';}).join('');document.getElementById('view').innerHTML=V[TAB]();}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-t]');if(b){TAB=b.dataset.t;render();window.scrollTo(0,0);}});
+render();
+})();
+</script>
+
+</body></html>

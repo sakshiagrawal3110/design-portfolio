@@ -19,7 +19,7 @@
       <div class="cs-jump-links">
         <a href="#empathy">Research</a>
         <a href="#define">Define</a>
-        <a href="#ideate">Ideate</a>
+        <a href="#ideate">Blueprints</a>
         <a href="#prototype">Prototype</a>
         <a href="#test-ship">Test &amp; Ship</a>
         <a href="#impact">KPIs</a>
@@ -152,7 +152,7 @@
 
     <!-- Detailed Case Study Sections -->
     <div id="detailed-sections">
-      <!-- 1. Empathy (Context & Research Framework) -->
+      <!-- 1. Empathy (Context & Research Framework + Research Workbook Window) -->
       <section id="empathy" class="cs-section">
         <div class="container">
           <div class="cs-sec-head">
@@ -220,6 +220,24 @@
               </table>
             </div>
           </div>
+
+          <!-- Embedded Window: inner-html/3.html (Research Workbook) -->
+          <div class="embed-window mt-24" data-embed-window>
+            <div class="embed-window-bar">
+              <div class="embed-window-meta">
+                <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="mono small">RESEARCH WORKBOOK · RECRUITMENT, AFFINITY, WORKFLOW &amp; USABILITY</span>
+                <span class="mono small muted">inner-html/3.html</span>
+              </div>
+              <div class="embed-window-actions">
+                <button type="button" class="embed-action-btn" data-toggle-expand aria-pressed="false">Expand height</button>
+                <a href="inner-html/3.html" target="_blank" rel="noopener noreferrer" class="embed-action-link mono small">Open ↗</a>
+              </div>
+            </div>
+            <div class="embed-frame-wrap">
+              <iframe src="inner-html/3.html" title="OpsPilot research workbook" loading="lazy"></iframe>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -275,13 +293,13 @@
         </div>
       </section>
 
-      <!-- 3. Ideate (Divergence & Workflow Exploration) -->
+      <!-- 3. Ideate (Divergence, Workflow Exploration & Design Blueprints Window) -->
       <section id="ideate" class="cs-section">
         <div class="container">
           <div class="cs-sec-head">
-            <h2 class="cs-sec-title">03 · IDEATE &amp; WORKFLOWS</h2>
+            <h2 class="cs-sec-title">03 · IDEATE &amp; BLUEPRINTS</h2>
             <p class="muted cs-sec-lead">
-              Auditing <strong>5 support and analytics platforms</strong> showed analytics tools are built for reading while trackers are built for doing—OpsPilot bridges both <em>without context switching</em>.
+              Auditing <strong>5 support and analytics platforms</strong> informed our IA, user flows, wireframes, design system states, and specs inside <code>1.html</code>[cite: 48].
             </p>
           </div>
 
@@ -314,16 +332,34 @@
               </div>
             </article>
           </div>
+
+          <!-- Embedded Window: inner-html/1.html (OpsPilot Design Blueprints) -->
+          <div class="embed-window mt-24" data-embed-window>
+            <div class="embed-window-bar">
+              <div class="embed-window-meta">
+                <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="mono small">DESIGN BLUEPRINTS · IA, USER FLOWS, WIREFRAMES, DESIGN SYSTEM &amp; SPECS</span>
+                <span class="mono small muted">inner-html/1.html</span>
+              </div>
+              <div class="embed-window-actions">
+                <button type="button" class="embed-action-btn" data-toggle-expand aria-pressed="false">Expand height</button>
+                <a href="inner-html/1.html" target="_blank" rel="noopener noreferrer" class="embed-action-link mono small">Open ↗</a>
+              </div>
+            </div>
+            <div class="embed-frame-wrap">
+              <iframe src="inner-html/1.html" title="OpsPilot design blueprints including IA, flows, wireframes, design system, and specs" loading="lazy"></iframe>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- 4. Prototype (Craft & Key Decisions) -->
+      <!-- 4. Prototype (Craft, Key Decisions & Interactive Mockup Window) -->
       <section id="prototype" class="cs-section">
         <div class="container">
           <div class="cs-sec-head">
             <h2 class="cs-sec-title">04 · PROTOTYPE &amp; CRAFT</h2>
             <p class="muted cs-sec-lead">
-              Designed for <strong>high-density desktop scanning</strong>, rapid incident triage, and <em>audit-ready operational history</em>.
+              Designed for <strong>high-density desktop scanning</strong>, rapid incident triage, and an interactive prototype in <code>2.html</code>[cite: 49].
             </p>
           </div>
 
@@ -392,6 +428,24 @@
                   <span>No Manual Deck Prep</span>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <!-- Embedded Window: inner-html/2.html (Interactive OpsPilot Prototype Mockup) -->
+          <div class="embed-window mt-24" data-embed-window>
+            <div class="embed-window-bar">
+              <div class="embed-window-meta">
+                <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="mono small">INTERACTIVE PROTOTYPE · OVERVIEW, ALERTS, ISSUES &amp; ROLE SWITCHER</span>
+                <span class="mono small muted">inner-html/2.html</span>
+              </div>
+              <div class="embed-window-actions">
+                <button type="button" class="embed-action-btn" data-toggle-expand aria-pressed="false">Expand height</button>
+                <a href="inner-html/2.html" target="_blank" rel="noopener noreferrer" class="embed-action-link mono small">Open ↗</a>
+              </div>
+            </div>
+            <div class="embed-frame-wrap">
+              <iframe src="inner-html/2.html" title="Interactive OpsPilot prototype mockup" loading="lazy"></iframe>
             </div>
           </div>
         </div>
@@ -556,6 +610,18 @@
     if (tldrCloseBtn) {
       tldrCloseBtn.addEventListener("click", () => setTldrState(false));
     }
+
+    // Embedded Window Expand / Collapse Micro-Interaction
+    document.querySelectorAll("[data-toggle-expand]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const win = btn.closest("[data-embed-window]");
+        if (!win) return;
+        const expanded = win.classList.toggle("is-expanded");
+        btn.classList.toggle("is-expanded", expanded);
+        btn.setAttribute("aria-pressed", String(expanded));
+        btn.textContent = expanded ? "Compact height" : "Expand height";
+      });
+    });
   </script>
 </body>
 </html>

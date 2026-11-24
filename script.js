@@ -156,6 +156,58 @@ if (bentoCards.length > 0) {
   });
 }
 
+// 9. Editorial Closing CTA Reveal & Micro-interactions
+const ctaCard = document.querySelector("[data-cta-card]");
+if (ctaCard) {
+  if ("IntersectionObserver" in window) {
+    const ctaObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          ctaCard.classList.add("is-revealed");
+          ctaObserver.unobserve(ctaCard);
+        });
+      },
+      { threshold: 0.18 }
+    );
+    ctaObserver.observe(ctaCard);
+  } else {
+    ctaCard.classList.add("is-revealed");
+  }
+
+  ctaCard.addEventListener("pointermove", (e) => {
+    const rect = ctaCard.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    ctaCard.style.setProperty("--cta-x", `${x.toFixed(1)}%`);
+    ctaCard.style.setProperty("--cta-y", `${y.toFixed(1)}%`);
+  });
+
+  ctaCard.addEventListener("pointerleave", () => {
+    ctaCard.style.setProperty("--cta-x", "50%");
+    ctaCard.style.setProperty("--cta-y", "50%");
+  });
+
+  const ctaCopyBtn = ctaCard.querySelector(".copy-pill-btn");
+  const ctaCopyLabel = ctaCard.querySelector(".copy-pill-label");
+  const ctaCopyIcon = ctaCard.querySelector(".copy-pill-icon");
+
+  if (ctaCopyBtn && ctaCopyLabel && ctaCopyIcon) {
+    ctaCopyBtn.addEventListener("click", () => {
+      ctaCopyBtn.classList.add("is-copied");
+      ctaCopyLabel.textContent = "Copied";
+      ctaCopyIcon.textContent = "✓";
+
+      setTimeout(() => {
+        ctaCopyBtn.classList.remove("is-copied");
+        ctaCopyLabel.textContent = "Click to copy";
+        ctaCopyIcon.textContent = "↗";
+      }, 2000);
+    });
+  }
+}
+
+
 // START: EXPERIENCE MICRO-INTERACTIONS
 const expCards = document.querySelectorAll("[data-exp-card]");
 const expSegs = document.querySelectorAll("[data-role-seg]");

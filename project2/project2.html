@@ -15,6 +15,11 @@
 </head>
 
 <body id="top">
+  <!-- Reading Progress Hairline -->
+  <div class="cs-progress" aria-hidden="true">
+    <span class="cs-progress-bar" id="cs-progress-bar"></span>
+  </div>
+
   <!-- Floating Translucent Nav with TL;DR Button -->
   <header class="cs-nav-wrap">
     <nav class="cs-nav" aria-label="Case study navigation">
@@ -43,11 +48,11 @@
   </header>
 
   <main>
-    <!-- Hero + Metadata -->
+    <!-- Hero + Editorial Metadata -->
     <section class="cs-hero">
       <div class="container">
         <span class="mono small muted cs-eyebrow">CASE STUDY · GLOBAL DESIGN SYSTEM</span>
-        <h1 class="cs-title">DESIGN SYSTEM</h1>
+        <h1 class="cs-title">DESIGN <span class="cs-title-serif">System</span></h1>
         <p class="cs-hero-sub">
           <strong>50+ components</strong> across <strong>13–14 global markets</strong>—turning fragmented UI patterns
           into a governed, accessible design system from <em>research to handoff</em>.
@@ -150,7 +155,7 @@
       <!-- 1. The Problem -->
       <section id="problem" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">THE PROBLEM</h2>
             <p class="muted cs-sec-lead">
               <strong>Components existed. The rules didn't.</strong> Patterns grew around individual pages rather than a
@@ -158,47 +163,39 @@
             </p>
           </div>
 
-          <div class="cs-split-diagram">
-            <div class="cs-diag-col">
+          <div class="cs-editorial-bridge" data-reveal>
+            <div class="cs-bridge-side">
               <span class="mono small muted">BEFORE · AD-HOC PAGE PATTERNS</span>
-              <div class="cs-diag-row">
-                <div class="cs-node">Page-specific UI</div>
-                <div class="cs-node">Duplicate CTAs</div>
-                <div class="cs-node">Repeated stats</div>
-              </div>
+              <p class="cs-bridge-list mono">Page-specific UI · Duplicate CTAs · Repeated stats</p>
               <p class="small muted">Similar flows required repeated decisions and inconsistent handoffs.</p>
             </div>
 
-            <div class="cs-diag-center mono">SYSTEM<br />RULES</div>
+            <div class="cs-bridge-pivot mono">SYSTEM<br />RULES</div>
 
-            <div class="cs-diag-col">
-              <span class="mono small muted">AFTER · SHARED SYSTEM LOGIC</span>
-              <div class="cs-diag-row">
-                <div class="cs-node is-lit">Core Tokens</div>
-                <div class="cs-node is-lit">Decision Rules</div>
-                <div class="cs-node is-lit">UX Open House</div>
-              </div>
+            <div class="cs-bridge-side">
+              <span class="mono small cs-accent-text">AFTER · SHARED SYSTEM LOGIC</span>
+              <p class="cs-bridge-list mono">Core Tokens · Decision Rules · UX Open House</p>
               <p class="small muted">One foundation supporting multi-market products and accessibility.</p>
             </div>
           </div>
 
-          <div class="cs-four-cols">
-            <article class="cs-mini-card">
+          <div class="cs-editorial-cols four mt-24" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono cs-num">01</span>
               <h3>Fragmented patterns</h3>
               <p class="small muted">Components built for isolated requests drifted apart over time.</p>
             </article>
-            <article class="cs-mini-card">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">02</span>
               <h3>Unclear variants</h3>
               <p class="small muted">No clear rule tying visual treatments to intent or state.</p>
             </article>
-            <article class="cs-mini-card">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">03</span>
               <h3>Global scale friction</h3>
               <p class="small muted">Adapting across regions and screen sizes took extra effort.</p>
             </article>
-            <article class="cs-mini-card">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">04</span>
               <h3>Late accessibility</h3>
               <p class="small muted">Checks happened too late instead of starting inside the base.</p>
@@ -210,7 +207,7 @@
       <!-- 2. Foundation, Color & Typography Tokens -->
       <section id="foundation" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">01 · FOUNDATION &amp; TOKENS</h2>
             <p class="muted cs-sec-lead">
               <strong>Rebuilt the foundation first.</strong> Reserved <code>#165EDA</code> as functional <em>activation
@@ -219,8 +216,8 @@
             </p>
           </div>
 
-          <div class="cs-two-col">
-            <div class="cs-panel">
+          <div class="cs-editorial-cols two" data-reveal>
+            <div class="cs-editorial-col">
               <span class="mono small muted">COLOR TOKENS &amp; PAIRINGS</span>
               <h3>Functional color &amp; contrast</h3>
               <p class="small muted">Brand blues, neutral greys, and accessible contrast pairs handed off as reusable
@@ -248,7 +245,7 @@
               </div>
             </div>
 
-            <div class="cs-panel">
+            <div class="cs-editorial-col">
               <span class="mono small muted">TYPOGRAPHY &amp; SPACING</span>
               <h3>Modular scale across viewports</h3>
               <p class="small muted">Consistent headings, body sizes, and responsive mobile steps.</p>
@@ -267,7 +264,7 @@
           </div>
 
           <!-- Visual Artefact: Color Tokens Breakdown -->
-          <div class="stage mt-24">
+          <div class="stage mt-24" data-reveal>
             <span class="stage-label after">Color Tokens</span>
             <p class="small muted mb-16">
               Full palette—main brand blues, a 12-step neutral grey ramp, and semantic contrast pairings—checked before token handoff.
@@ -322,7 +319,7 @@
           </div>
 
           <!-- Visual Artefact: Typography Tokens Breakdown -->
-          <div class="stage mt-24">
+          <div class="stage mt-24" data-reveal>
             <span class="stage-label after">Typography Tokens</span>
             <p class="small muted mb-16">
               Modular type scale for headings, body roles, and responsive title breakpoints reused across templates.
@@ -406,7 +403,7 @@
       <!-- 3. Buttons & Component Refinement -->
       <section id="buttons" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">02 · SYSTEM RULES &amp; COMPONENTS</h2>
             <p class="muted cs-sec-lead">
               Moved from <strong>visual variations</strong> to <strong>decision rules</strong>—framing buttons around
@@ -414,8 +411,8 @@
             </p>
           </div>
 
-          <div class="cs-two-col">
-            <div class="cs-panel">
+          <div class="cs-editorial-cols two" data-reveal>
+            <div class="cs-editorial-col">
               <span class="mono small muted">BUTTONS · BEFORE → AFTER</span>
               <h3>Clear hierarchy &amp; usage rules</h3>
               <p class="small muted">Replaced duplicate v1/v2/v3 button states with defined tiers and guardrails.</p>
@@ -436,7 +433,7 @@
               </div>
             </div>
 
-            <div class="cs-panel">
+            <div class="cs-editorial-col">
               <span class="mono small muted">DATA DISPLAY CARDS</span>
               <h3>Distinct facts at a glance</h3>
               <p class="small muted">Replaced repeated single-stat blocks with structured metrics and clear hierarchy.
@@ -464,7 +461,7 @@
           </div>
 
           <!-- Visual Artefact: Button Audit (Before) & Authoring Guidelines (After) -->
-          <div class="stage mt-24">
+          <div class="stage mt-24" data-reveal>
             <span class="stage-label before">Before</span>
             <p class="small muted mb-16">
               Audit of duplicated filled/outline pairs and unlabelled variants before standardizing button tiers.
@@ -517,7 +514,7 @@
             </div>
           </div>
 
-          <div class="stage mt-24">
+          <div class="stage mt-24" data-reveal>
             <span class="stage-label after">After</span>
             <p class="small muted mb-16">
               Consolidated into documented button variants with explicit purpose, use cases, and do-not-use rules.
@@ -584,7 +581,7 @@
           </div>
 
           <!-- Visual Artefact: Data Display Cards (Before vs. After) -->
-          <div class="stage mt-24">
+          <div class="stage mt-24" data-reveal>
             <span class="stage-label before">Data Cards · Before</span>
             <p class="small muted mb-16">
               Repeated placeholder metrics with a single orange accent bar and no visual differentiation.
@@ -603,7 +600,7 @@
             </div>
           </div>
 
-          <div class="stage mt-24">
+          <div class="stage mt-24" data-reveal>
             <span class="stage-label after">Data Cards · After</span>
             <p class="small muted mb-16">
               Structured metric cards pairing distinct figures, context copy, and mini data visualisations.
@@ -657,7 +654,7 @@
       <!-- 4. Accessibility & Governance -->
       <section id="governance" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">03 · ACCESSIBILITY &amp; GOVERNANCE</h2>
             <p class="muted cs-sec-lead">
               <strong>A design system isn't finished when published.</strong> Recurring <em>UX Open Houses</em> aligned
@@ -665,20 +662,20 @@
             </p>
           </div>
 
-          <div class="cs-three-cols">
-            <article class="cs-panel">
+          <div class="cs-editorial-cols three" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono small muted">01 · EMBEDDED A11Y</span>
               <h3>Built in from day one</h3>
               <p class="small muted">Contrast and accessible component states became part of the baseline rather than a
                 late patch.</p>
             </article>
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono small muted">02 · UX OPEN HOUSES</span>
               <h3>Living governance</h3>
               <p class="small muted">Regular reviews let designers bring edge cases, align on rules, and prevent drift.
               </p>
             </article>
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono small muted">03 · THE 51ST SCREEN</span>
               <h3>Built to scale</h3>
               <p class="small muted"><em>"The goal wasn't to build 50 components. It was to make the 51st easier to
@@ -689,10 +686,10 @@
       </section>
     </div>
 
-    <!-- 5. Impact + Next Project + Dark CTA Block -->
+    <!-- 5. Impact + Next Project + Editorial CTA -->
     <section id="impact" class="cs-section">
       <div class="container">
-        <div class="cs-sec-head">
+        <div class="cs-sec-head" data-reveal>
           <h2 class="cs-sec-title">IMPACT</h2>
           <p class="muted cs-sec-lead">
             <strong>Scalable foundation across teams.</strong> Stronger accessibility, clearer decisions, and shared UI
@@ -700,31 +697,31 @@
           </p>
         </div>
 
-        <div class="cs-four-cols">
-          <div class="cs-mini-card">
+        <div class="cs-kpi-ledger" data-reveal>
+          <div class="cs-kpi-metric is-northstar">
             <span class="mono small muted">SYSTEM SCALE</span>
             <strong class="cs-big-num">10–12 → 50+</strong>
             <p class="small muted">Components governed in one system.</p>
           </div>
-          <div class="cs-mini-card">
+          <div class="cs-kpi-metric">
             <span class="mono small muted">REACH</span>
             <strong class="cs-big-num">13–14</strong>
             <p class="small muted">Global markets supported.</p>
           </div>
-          <div class="cs-mini-card">
+          <div class="cs-kpi-metric is-guardrail">
             <span class="mono small muted">ACCESSIBILITY</span>
             <strong class="cs-big-num">70 → 80</strong>
             <p class="small muted">Score improvement via system rules.</p>
           </div>
-          <div class="cs-mini-card">
+          <div class="cs-kpi-metric">
             <span class="mono small muted">ADOPTION</span>
             <strong class="cs-big-num">UX → Brand</strong>
             <p class="small muted">Shared across UX &amp; marketing.</p>
           </div>
         </div>
 
-        <!-- Next Case Study Card -->
-        <a href="../project3/project3.html" class="cs-next-card">
+        <!-- Next Case Study Editorial Link -->
+        <a href="../project3/project3.html" class="cs-next-card" data-reveal>
           <div>
             <span class="mono small muted">NEXT CASE STUDY</span>
             <h3>OpsPilot</h3>
@@ -734,18 +731,27 @@
           <span class="cs-next-arrow">→</span>
         </a>
 
-        <!-- Dark Split CTA + Accent Stripes -->
-        <div class="cta-split mt-36">
-          <div class="cta-dark-box">
-            <span class="dark-pill">
-              <span class="status-dot" aria-hidden="true"></span>
-              Open to Senior UX &amp; Product roles
-            </span>
-            <h2>Let's make something<br />that actually matters.</h2>
+        <!-- Editorial White + Accent Closing CTA -->
+        <div class="cta-split mt-36" data-cta-card>
+          <div class="cta-editorial-box">
+            <div class="cta-top-bar">
+              <span class="editorial-pill">
+                <span class="status-dot" aria-hidden="true"></span>
+                Open to Senior UX &amp; Product roles
+              </span>
+              <span class="cta-issue mono" aria-hidden="true">PORTFOLIO // 2026</span>
+            </div>
+
+            <h2>
+              Let's make something<br />
+              that <span class="cta-italic-accent">actually matters.</span>
+            </h2>
+
             <div class="cta-email-row">
               <span class="cta-email-text">sakshiagrawal3110@gmail.com</span>
               <button type="button" class="copy-pill-btn copy-email-btn" data-email="sakshiagrawal3110@gmail.com">
-                Click to copy
+                <span class="copy-pill-label">Click to copy</span>
+                <span class="copy-pill-icon" aria-hidden="true">↗</span>
               </button>
             </div>
           </div>
@@ -830,6 +836,53 @@
       }
     }
     fillGrid("grid1", 27, 0.55);
+
+    // Reading progress bar & active section link highlight
+    const progressBar = document.getElementById("cs-progress-bar");
+    const navLinks = Array.from(document.querySelectorAll(".cs-jump-links a"));
+    const trackedSections = navLinks
+      .map((a) => document.querySelector(a.getAttribute("href")))
+      .filter(Boolean);
+
+    function updateScrollProgress() {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.min(100, Math.max(0, (window.scrollY / docHeight) * 100)) : 0;
+      if (progressBar) {
+        progressBar.style.width = `${pct}%`;
+      }
+
+      const marker = window.scrollY + 180;
+      let currentId = "";
+      for (const sec of trackedSections) {
+        if (sec.offsetTop <= marker) {
+          currentId = sec.id;
+        }
+      }
+      navLinks.forEach((link) => {
+        link.classList.toggle("is-current", link.getAttribute("href") === `#${currentId}`);
+      });
+    }
+
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+    // Editorial scroll reveal
+    const revealEls = document.querySelectorAll("[data-reveal]");
+    if (revealEls.length > 0 && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-in");
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.1 }
+      );
+      revealEls.forEach((el) => observer.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add("is-in"));
+    }
   </script>
 </body>
 

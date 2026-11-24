@@ -1,0 +1,2490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WayAble — Accessible Urban Mobility | Interactive UX Prototype & Case Study</title>
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            cream: {
+              50: '#FBFBF9',
+              100: '#F7F6F2',
+              200: '#EFECE4',
+              300: '#E2DDD0',
+            },
+            teal: {
+              brand: '#165B5E',
+              dark: '#11474A',
+              mint: '#E6F1F0',
+              border: '#B8D4D2',
+            },
+            ink: {
+              DEFAULT: '#111827',
+              muted: '#4B5563',
+              subtle: '#6B7280',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Custom subtle scrollbars for realistic mobile viewport */
+    .phone-scroll::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .phone-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .phone-scroll::-webkit-scrollbar-thumb {
+      background: rgba(17, 24, 39, 0.16);
+      border-radius: 9999px;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .screen-animate {
+      animation: fadeSlideUp 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes pulseRing {
+      0% { transform: scale(0.85); opacity: 0.7; }
+      70% { transform: scale(1.45); opacity: 0; }
+      100% { transform: scale(1.45); opacity: 0; }
+    }
+    .pulse-ring {
+      animation: pulseRing 2s infinite;
+    }
+  </style>
+</head>
+<body class="bg-[#F3F1EC] text-[#111827] antialiased selection:bg-[#165B5E] selection:text-white">
+
+  <!-- Embeddable Portfolio Container -->
+  <div id="app-root" class="min-h-screen w-full max-w-[1380px] mx-auto p-3 sm:p-5 lg:p-6 flex flex-col gap-4">
+
+    <!-- Top Portfolio Embed Header Bar -->
+    <header class="bg-[#FBFBF9] border border-[#E2DDD0] rounded-2xl px-4 py-3 sm:px-6 sm:py-3.5 shadow-sm flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <!-- Brand Mark matching Page 1 -->
+        <div class="w-10 h-10 rounded-xl bg-[#165B5E] flex items-center justify-center text-white shadow-xs shrink-0">
+          <svg class="w-6 h-6" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="21" r="2.5" fill="#111827" stroke="white" stroke-width="2"/>
+            <path d="M8.5 21H14V11H21.5"/>
+            <rect x="20" y="7" width="6" height="6" rx="1.5" fill="#111827" stroke="none"/>
+            <path d="M21.5 10L22.6 11.1L24.7 8.9" stroke="white" stroke-width="1.6"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-[11px] font-bold tracking-wider uppercase text-[#165B5E] bg-[#E6F1F0] px-2 py-0.5 rounded-md">Project 05</span>
+            <h1 class="font-display font-extrabold text-base sm:text-lg text-[#111827] leading-tight">WayAble — Accessible Urban Mobility</h1>
+          </div>
+          <p class="text-xs text-[#4B5563] hidden sm:block">Inclusive navigation prototype for Mumbai (Andheri Station → Andheri Community Hospital)</p>
+        </div>
+      </div>
+
+      <!-- Primary View Mode Switcher & Embed Snippet Copy -->
+      <div class="flex items-center gap-2 flex-wrap">
+        <div class="bg-[#EFECE4] p-1 rounded-xl flex items-center gap-1 border border-[#E2DDD0]" role="tablist">
+          <button id="mode-prototype-btn" onclick="setAppMode('prototype')" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-[#165B5E] text-white shadow-xs flex items-center gap-1.5 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <rect x="7" y="2" width="10" height="20" rx="2.5"/>
+              <line x1="11" y1="18" x2="13" y2="18"/>
+            </svg>
+            <span>Interactive Prototype</span>
+          </button>
+          <button id="mode-deck-btn" onclick="setAppMode('deck')" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all text-[#4B5563] hover:text-[#111827] flex items-center gap-1.5 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="14" rx="2"/>
+              <path d="M8 21h8M12 18v3"/>
+            </svg>
+            <span>11-Slide Case Study</span>
+          </button>
+        </div>
+
+        <button onclick="openEmbedModal()" title="Get iframe snippet for your portfolio" class="px-3 py-2 rounded-xl border border-[#D6D0C2] bg-white hover:bg-[#F7F6F2] text-[#111827] text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer">
+          <svg class="w-3.5 h-3.5 text-[#165B5E]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          <span class="hidden md:inline">Embed</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- =====================================================================
+         MODE 1: INTERACTIVE PROTOTYPE + LIVE UX RATIONALE SIDEBAR
+    ====================================================================== -->
+    <main id="prototype-workspace" class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+
+      <!-- Left / Top Guided Story Pills (Desktop Col 3) -->
+      <aside class="lg:col-span-3 bg-[#FBFBF9] border border-[#E2DDD0] rounded-2xl p-4 shadow-sm order-2 lg:order-1">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="font-display font-bold text-xs uppercase tracking-wider text-[#4B5563]">Guided UX Flows</h2>
+          <button onclick="resetPrototype()" class="text-xs font-semibold text-[#165B5E] hover:underline cursor-pointer">Reset App</button>
+        </div>
+        <div id="story-pills-list" class="flex lg:flex-col gap-1.5 overflow-x-auto no-scrollbar pb-1 lg:pb-0">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- Quick Scenario Triggers -->
+        <div class="mt-4 pt-3.5 border-t border-[#EFECE4] hidden lg:block">
+          <p class="text-[11px] font-bold uppercase tracking-wider text-[#6B7280] mb-2">Test Edge Cases</p>
+          <div class="space-y-2">
+            <button onclick="navigateTo('no-route')" class="w-full text-left px-3 py-2 rounded-xl bg-[#FDF6E7] hover:bg-[#FEF3C7] border border-[#F5D08A] text-[#92400E] text-xs font-semibold transition flex items-center justify-between cursor-pointer">
+              <span>Trigger "No Step-Free Route"</span>
+              <span>→</span>
+            </button>
+            <button onclick="navigateTo('lift-alert')" class="w-full text-left px-3 py-2 rounded-xl bg-[#E6F1F0] hover:bg-[#D5E8E6] border border-[#B8D4D2] text-[#165B5E] text-xs font-semibold transition flex items-center justify-between cursor-pointer">
+              <span>Simulate Mid-Trip Lift Outage</span>
+              <span>→</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Center: Realistic Interactive iPhone Frame (Desktop Col 5) -->
+      <section class="lg:col-span-5 flex flex-col items-center justify-center order-1 lg:order-2">
+        <!-- iPhone Device Chassis matching PDF's crisp dark 2.5px rounded bezel -->
+        <div class="relative w-full max-w-[392px] bg-[#F7F6F2] rounded-[46px] border-[3.5px] border-[#111827] shadow-[0_24px_60px_-15px_rgba(17,24,39,0.22)] overflow-hidden flex flex-col h-[760px] sm:h-[790px]">
+
+          <!-- iOS Status Bar + Dynamic Island -->
+          <div class="bg-[#F7F6F2] px-6 pt-3 pb-2 flex items-center justify-between text-[12px] font-bold text-[#111827] shrink-0 select-none z-20" id="phone-status-bar">
+            <span class="tabular-nums">9:41</span>
+            <div class="w-24 h-5 bg-[#111827] rounded-full flex items-center justify-end px-2">
+              <span class="w-2 h-2 rounded-full bg-[#165B5E]"></span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <!-- Signal -->
+              <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+                <rect x="1" y="10" width="2.5" height="5" rx="0.7"/>
+                <rect x="5" y="7.5" width="2.5" height="7.5" rx="0.7"/>
+                <rect x="9" y="4.5" width="2.5" height="10.5" rx="0.7"/>
+                <rect x="13" y="1.5" width="2.5" height="13.5" rx="0.7"/>
+              </svg>
+              <!-- Battery -->
+              <div class="w-5 h-2.5 border border-[#111827] rounded-[3px] p-[1px] flex items-center">
+                <div class="w-full h-full bg-[#111827] rounded-[1px]"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Screen Content Area -->
+          <div id="phone-screen-body" class="flex-1 overflow-y-auto phone-scroll flex flex-col relative bg-[#F7F6F2]">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Bottom Tab Bar (Shown on core app screens) -->
+          <nav id="phone-tab-bar" class="bg-[#FBFBF9] border-t border-[#E2DDD0] px-3 py-2 flex items-center justify-around shrink-0 select-none z-20">
+            <button onclick="navigateTo('home')" data-tab="plan" class="tab-btn flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl text-[#165B5E] cursor-pointer">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="5" cy="18" r="2.5"/>
+                <circle cx="19" cy="6" r="2.5"/>
+                <path d="M7.5 18H12V6H16.5"/>
+              </svg>
+              <span class="text-[11px] font-bold">Plan</span>
+            </button>
+            <button onclick="navigateTo('map')" data-tab="map" class="tab-btn flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl text-[#4B5563] hover:text-[#111827] cursor-pointer">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
+                <line x1="9" y1="3" x2="9" y2="18"/>
+                <line x1="15" y1="6" x2="15" y2="21"/>
+              </svg>
+              <span class="text-[11px] font-semibold">Map</span>
+            </button>
+            <button onclick="navigateTo('nearby-reports')" data-tab="reports" class="tab-btn flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl text-[#4B5563] hover:text-[#111827] cursor-pointer">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                <line x1="4" y1="22" x2="4" y2="15"/>
+              </svg>
+              <span class="text-[11px] font-semibold">Reports</span>
+            </button>
+            <button onclick="navigateTo('needs')" data-tab="profile" class="tab-btn flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl text-[#4B5563] hover:text-[#111827] cursor-pointer">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+              <span class="text-[11px] font-semibold">Profile</span>
+            </button>
+          </nav>
+
+          <!-- Home Indicator Bar -->
+          <div class="bg-[#FBFBF9] pb-2 pt-0.5 flex justify-center shrink-0" id="phone-home-indicator">
+            <div class="w-32 h-1 bg-[#111827]/80 rounded-full"></div>
+          </div>
+
+          <!-- In-Phone Toast Notification Banner -->
+          <div id="phone-toast" class="hidden absolute top-12 left-4 right-4 z-50 bg-[#111827] text-white px-4 py-3 rounded-2xl shadow-xl text-xs font-medium flex items-center justify-between gap-2 transition-all">
+            <span id="phone-toast-text">Report submitted</span>
+            <span class="text-[#6EE7B7] font-bold">✓</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Dynamic UX Design Rationale & Case Study Context Panel (Desktop Col 4) -->
+      <aside class="lg:col-span-4 bg-[#FBFBF9] border border-[#E2DDD0] rounded-2xl p-5 sm:p-6 shadow-sm order-3 flex flex-col justify-between gap-5">
+        <div id="annotation-panel-content" class="space-y-4">
+          <!-- Populated dynamically based on current screen -->
+        </div>
+
+        <!-- Bottom Story Navigation Controls -->
+        <div class="pt-4 border-t border-[#EFECE4] flex items-center justify-between gap-3">
+          <button id="prev-story-btn" onclick="stepStory(-1)" class="px-3.5 py-2.5 rounded-xl border border-[#D6D0C2] bg-white hover:bg-[#F7F6F2] text-xs font-bold text-[#111827] transition cursor-pointer disabled:opacity-40">
+            ← Previous
+          </button>
+          <span id="story-step-counter" class="text-xs font-bold tabular-nums text-[#6B7280]">Step 1 of 11</span>
+          <button id="next-story-btn" onclick="stepStory(1)" class="px-4 py-2.5 rounded-xl bg-[#165B5E] hover:bg-[#11474A] text-white text-xs font-bold transition shadow-xs cursor-pointer">
+            Next Story Step →
+          </button>
+        </div>
+      </aside>
+    </main>
+
+    <!-- =====================================================================
+         MODE 2: 11-SLIDE INTERACTIVE CASE STUDY STORYBOARD DECK
+    ====================================================================== -->
+    <section id="deck-workspace" class="hidden bg-[#FBFBF9] border border-[#E2DDD0] rounded-2xl p-5 sm:p-8 shadow-sm">
+      <!-- Slide Progress Header -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pb-5 mb-6 border-b border-[#EFECE4]">
+        <div class="flex items-center gap-2">
+          <span id="deck-slide-badge" class="px-2.5 py-1 rounded-lg bg-[#165B5E] text-white font-display font-bold text-xs tabular-nums">01 / 11</span>
+          <span id="deck-slide-kicker" class="text-xs font-bold uppercase tracking-wider text-[#165B5E]">Project 05 · Accessible Urban Mobility</span>
+        </div>
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar max-w-full" id="deck-dots">
+          <!-- 11 slide pill buttons -->
+        </div>
+      </div>
+
+      <!-- Active Slide Content -->
+      <div id="deck-slide-body" class="min-h-[430px] flex flex-col justify-between">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+      <!-- Slide Deck Footer Controls -->
+      <div class="mt-8 pt-5 border-t border-[#EFECE4] flex flex-wrap items-center justify-between gap-3">
+        <button onclick="changeDeckSlide(-1)" id="deck-prev-btn" class="px-4 py-2.5 rounded-xl border border-[#D6D0C2] bg-white hover:bg-[#F7F6F2] text-sm font-bold text-[#111827] transition cursor-pointer disabled:opacity-40">
+          ← Previous Slide
+        </button>
+
+        <button id="deck-jump-proto-btn" onclick="jumpFromDeckToPrototype()" class="px-5 py-2.5 rounded-xl bg-[#E6F1F0] hover:bg-[#D5E8E6] border border-[#B8D4D2] text-[#165B5E] text-sm font-bold transition flex items-center gap-2 cursor-pointer">
+          <span>Try this screen in Live Prototype</span>
+          <span>→</span>
+        </button>
+
+        <button onclick="changeDeckSlide(1)" id="deck-next-btn" class="px-5 py-2.5 rounded-xl bg-[#165B5E] hover:bg-[#11474A] text-white text-sm font-bold transition shadow-xs cursor-pointer">
+          Next Slide →
+        </button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Portfolio Embed Code Modal -->
+  <div id="embed-modal" class="hidden fixed inset-0 z-50 bg-[#111827]/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#FBFBF9] border border-[#E2DDD0] rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="font-display font-extrabold text-lg text-[#111827]">Embed WayAble in Your Portfolio</h3>
+        <button onclick="closeEmbedModal()" class="w-8 h-8 rounded-full bg-[#EFECE4] hover:bg-[#E2DDD0] flex items-center justify-center text-[#111827] font-bold cursor-pointer">✕</button>
+      </div>
+      <p class="text-sm text-[#4B5563]">Host this self-contained HTML file (e.g. on GitHub Pages, Vercel, Webflow, or Framer) and drop this responsive <code class="bg-[#EFECE4] px-1.5 py-0.5 rounded text-xs font-mono">&lt;iframe&gt;</code> into your UX case study page:</p>
+      <div class="relative">
+        <textarea id="embed-code-textarea" readonly rows="4" class="w-full bg-[#111827] text-[#E6F1F0] font-mono text-xs p-3.5 rounded-2xl border border-[#374151] focus:outline-none">&lt;iframe src="https://your-portfolio.com/wayable-prototype.html" title="WayAble Interactive UX Case Study" width="100%" height="880" style="border: 1px solid #E2DDD0; border-radius: 20px; overflow: hidden;" loading="lazy"&gt;&lt;/iframe&gt;</textarea>
+      </div>
+      <div class="flex items-center justify-end gap-2">
+        <button onclick="copyEmbedSnippet()" id="copy-embed-btn" class="px-4 py-2.5 rounded-xl bg-[#165B5E] hover:bg-[#11474A] text-white text-xs font-bold transition cursor-pointer">
+          Copy Embed Snippet
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       APPLICATION STATE & INTERACTIVE LOGIC
+  ========================================================================== -->
+  <script>
+    // -------------------------------------------------------------------------
+    // 1. STATE MANAGEMENT
+    // -------------------------------------------------------------------------
+    const state = {
+      mode: 'prototype', // 'prototype' | 'deck'
+      currentScreen: 'onboarding',
+      deckSlideIndex: 0,
+      selectedProfile: 'wheelchair', // 'wheelchair' | 'slow' | 'recovering' | 'caregiver'
+      destination: 'Andheri Community Hospital',
+      selectedRouteId: 'step-free',
+      rerouted: false,
+      needs: {
+        avoidStairs: true,
+        workingElevators: true,
+        preferRamps: false,
+        avoidSlopes: true,
+        limitWalking: true,
+        includeRest: true,
+        avoidUneven: false,
+        lessCrowded: false,
+      },
+      mapFilters: {
+        lifts: true,
+        ramps: true,
+        rest: true,
+        toilets: true,
+        crossings: true,
+        reports: true,
+      },
+      reportForm: {
+        issue: 'Lift out of service',
+        severity: 'Blocked',
+        duration: 'Today',
+        submitted: false,
+      },
+      arrivalFeedback: {
+        seg1: 'yes',
+        seg2: 'yes',
+        seg3: null,
+        overall: 'Yes',
+      },
+      nearbyFilter: 'All',
+      nearbyReports: [
+        { id: 1, type: 'Lifts', title: 'Lift out of service', loc: 'Link Road skywalk, 420 m from the station', time: '6 min ago', confidence: 'Medium confidence', count: 3, confirmed: false },
+        { id: 2, type: 'Paths', title: 'Footpath blocked by works', loc: 'Station Road, near the junction', time: '2 h ago', confidence: 'High confidence', count: 5, confirmed: false },
+        { id: 3, type: 'Ramps', title: 'Ramp available', loc: 'West entrance of the station', time: 'Today', confidence: 'High confidence', count: 2, confirmed: false },
+        { id: 4, type: 'Paths', title: 'Broken pavement', loc: 'Link Road, outside the market', time: 'Yesterday', confidence: 'Medium confidence', count: 1, confirmed: false },
+        { id: 5, type: 'Crossings', title: 'Signal crossing working', loc: 'Station Road junction', time: 'Today', confidence: 'High confidence', count: 4, confirmed: false },
+      ],
+      shareContacts: ['Mum'],
+      shareLiveLocation: true,
+      shareRouteChanges: true,
+      selectedEntrance: 'main',
+    };
+
+    // Guided Flow Steps (maps to the right-side annotation panel & left pills)
+    const STORY_FLOWS = [
+      {
+        id: 'onboarding',
+        pillLabel: '1. Onboarding & Profile',
+        slideNum: '03 / 11',
+        kicker: '01 · Start With You',
+        title: 'Routes that fit how you move',
+        summary: 'Instead of forcing users through complex settings on launch, WayAble begins with plain-language mobility identities. Selecting a profile automatically configures underlying routing rules.',
+        highlights: [
+          'Human-centered framing ("Who are you planning for?") supports both travelers and caregivers.',
+          'One-tap profile selection pre-configures stairs, elevators, and rest stop thresholds.',
+          'Includes a low-friction "Skip for now" escape hatch.'
+        ]
+      },
+      {
+        id: 'home',
+        pillLabel: '2. Destination & Profile Bar',
+        slideNum: '03 / 11',
+        kicker: '01 · Persistent Context',
+        title: 'Search with your needs in view',
+        summary: 'Set in Andheri, Mumbai, the home screen keeps active accessibility requirements visible right below the search bar so users never wonder whether filters are applied.',
+        highlights: [
+          'Persistent profile summary chips ("Step-free", "Short walks", "Rest stops") with instant Edit access.',
+          'Freshness tags ("Verified today", "3 days old") set expectations before route planning.',
+          'Try tapping "Link Road Market" to test how WayAble handles blocked routes.'
+        ]
+      },
+      {
+        id: 'needs',
+        pillLabel: '3. Accessibility Needs (8 Toggles)',
+        slideNum: '04 / 11',
+        kicker: '02 · Your Needs',
+        title: 'Eight granular needs, light setup',
+        summary: 'Users can start with a quick preset (Wheelchair, Older adult, Recovering) and fine-tune eight real-world urban mobility parameters specific to Mumbai streets.',
+        highlights: [
+          'Distinguishes between "Avoid stairs completely" and "Require working elevators".',
+          'Includes fatigue-aware controls: "Limit walking distance (1 km)" and "Include rest stops".',
+          'Live counter confirms exact active rules before calculating routes.'
+        ]
+      },
+      {
+        id: 'routes',
+        pillLabel: '4. Route Comparison & Trade-offs',
+        slideNum: '04 / 11',
+        kicker: '02 · Ranked by Needs',
+        title: 'Transparent trade-offs, not just speed',
+        summary: 'Standard map apps default to the 28-minute fastest route—which hides 3 stairs on a foot overbridge with no ramp. WayAble ranks by accessibility match first.',
+        highlights: [
+          'Step-free (36 min) is highlighted as "Best match" with working lift & bench counts.',
+          'Low-effort (42 min) minimizes crossing count and guarantees benches every 150 m.',
+          'Fastest (28 min) explicitly warns "✕ Not step-free: 3 stairs on the foot overbridge".'
+        ]
+      },
+      {
+        id: 'map',
+        pillLabel: '5. Accessibility Map & Layers',
+        slideNum: '05 / 11',
+        kicker: '03 · The Whole Journey',
+        title: 'Lifts, ramps, rest points & barriers on one map',
+        summary: 'The interactive vector map layers verified infrastructure pins (Lifts, Ramps, Rest benches, Accessible Toilets, Dropped-kerb Crossings) alongside live community barrier reports.',
+        highlights: [
+          'Interactive top filter pills let users isolate specific infrastructure like working lifts or toilets.',
+          'Spatial context shows the Andheri West exit lift and nearby footpath construction.',
+          'Clear "High confidence" badge reassures users before they begin walking.'
+        ]
+      },
+      {
+        id: 'segments',
+        pillLabel: '6. 5-Segment Breakdown',
+        slideNum: '05 / 11',
+        kicker: '03 · Segment-Level Trust',
+        title: 'Every segment shows what it is like & when checked',
+        summary: 'A route is only as accessible as its weakest link. WayAble breaks the 1.5 km journey into 5 micro-segments with surface details, slope grades, and verification timestamps.',
+        highlights: [
+          'Platform to West exit (60 m): Lift verified working 12 min ago.',
+          'Link Road stretch (840 m): Flags gentle 3% slope and two rest benches.',
+          'Tap "High confidence" to inspect the plain-language freshness explainer.'
+        ]
+      },
+      {
+        id: 'confidence',
+        pillLabel: '7. Journey Confidence Explainer',
+        slideNum: '06 / 11',
+        kicker: '04 · Journey Confidence',
+        title: 'Honest freshness timestamps in plain language',
+        summary: 'Accessibility data decays quickly in busy cities. WayAble exposes data recency transparently across High, Medium, and Low confidence levels.',
+        highlights: [
+          '4 of 5 segments verified within 24 hours; hospital entrance ramp flagged as 5 days old.',
+          'Plain-language definitions explain what High, Medium, and Low mean for trip risk.',
+          'Empowers users to decide with the full picture rather than false certainty.'
+        ]
+      },
+      {
+        id: 'navigation',
+        pillLabel: '8. Turn-by-Turn & Live Alert',
+        slideNum: '06 / 11',
+        kicker: '04 · Calm On-Route Guidance',
+        title: 'Large type, next step in view, early warnings',
+        summary: 'Designed for high outdoor legibility on the move: high-contrast dark header, upcoming bench distance (190 m), and non-intrusive live barrier alerts.',
+        highlights: [
+          'Shows upcoming rest stop distance right on the map canvas ("Bench, 190 m").',
+          'Inline amber alert warns of a lift issue 420 m ahead before the user gets stuck.',
+          'One-tap access to "Report a barrier" or "Alternatives".'
+        ]
+      },
+      {
+        id: 'lift-alert',
+        pillLabel: '9. Lift Outage & Smart Reroute',
+        slideNum: '07 / 11',
+        kicker: '05 · When Things Change',
+        title: 'Warned before the barrier, not at it',
+        summary: 'When 3 community reports flag the Link Road skywalk lift out of service 420 m ahead, WayAble proactively offers a step-free ground-level detour (+4 min).',
+        highlights: [
+          'Visual diagram compares the blocked skywalk lift against the step-free detour.',
+          'After accepting, the "Your route has changed" screen explains exactly why in plain English.',
+          'Before/After comparison shows the trade-off: +4 min and +100 m, still 100% step-free.'
+        ]
+      },
+      {
+        id: 'report',
+        pillLabel: '10. 10-Second Report & Arrival',
+        slideNum: '08 / 11',
+        kicker: '06 · A Community Layer',
+        title: 'Report barriers in 10 seconds; verify on arrival',
+        summary: 'Crowdsourced accessibility only works if reporting is effortless and temporary barriers expire automatically.',
+        highlights: [
+          'Structured chips ("Lift out of service", "Footpath blocked") + severity + auto-expiry ("2 hours", "Today").',
+          'Arrival screen ("You\'ve arrived") asks 3 lightweight Yes/Changed questions to keep data fresh.',
+          'Closes the feedback loop by showing "Your report is live".'
+        ]
+      },
+      {
+        id: 'no-route',
+        pillLabel: '11. Honest States & Entrances',
+        slideNum: '09 / 11',
+        kicker: '07 · Honest States',
+        title: 'Honest when there is no easy way',
+        summary: 'When construction blocks the only step-free path to Link Road Market, WayAble refuses to fake a route—offering 4 real alternatives instead, plus entrance-level comparisons.',
+        highlights: [
+          'Actionable fallback options: Wait for 6 pm reopening, 3-step route with handrails, alternate entrance, or caregiver help.',
+          'Entrance comparison lets users compare Main Gate (ramp + auto door) vs East Gate vs Drop-off before arriving.',
+          'Also check the Reports tab & Caregiver Share for community support.'
+        ]
+      }
+    ];
+
+    // All 11 Slides for the Storyboard Deck Mode
+    const DECK_SLIDES = [
+      {
+        num: '01 / 11',
+        kicker: 'PROJECT 05 · ACCESSIBLE URBAN MOBILITY',
+        title: 'WayAble: The journey matters, not just the destination.',
+        subtitle: 'An inclusive navigation app concept for Mumbai, guiding travelers from Andheri Station to their destination with confidence.',
+        tags: ['UX Research', 'Product Design', 'Inclusive Design', 'Mobile App'],
+        jumpScreen: 'onboarding',
+        visualType: 'hero'
+      },
+      {
+        num: '02 / 11',
+        kicker: 'THE PROBLEM',
+        title: "The fastest route isn't always an accessible one",
+        subtitle: 'Most navigation apps rank routes by speed. A route can be technically walkable and still be full of barriers. Finding a barrier halfway can mean abandoning the trip or relying on someone else.',
+        barriers: [
+          'Broken footpaths', 'Stairs with no ramp', 'Lifts out of service', 'Steep inclines',
+          'Uneven pavements', 'Crowded walkways', 'Long gaps between accessible entrances', 'Unreliable accessibility information'
+        ],
+        jumpScreen: 'routes',
+        visualType: 'problem'
+      },
+      {
+        num: '03 / 11',
+        kicker: '01 · START WITH YOU',
+        title: 'Who are you planning for?',
+        subtitle: 'Pick a mobility profile and your needs are automatically configured. Search a destination while keeping your active accessibility profile persistently in view.',
+        points: [
+          'Plain-language profiles: Wheelchair user, walk slowly / tire quickly, recovering from injury, or planning for someone else.',
+          'Persistent profile bar on the home search screen shows active constraints ("Step-free", "Short walks", "Rest stops").',
+          'Recent destinations display verification freshness ("Verified today" vs "3 days old").'
+        ],
+        jumpScreen: 'onboarding',
+        visualType: 'screens-pair'
+      },
+      {
+        num: '04 / 11',
+        kicker: '02 · YOUR NEEDS',
+        title: 'Routes ranked by your needs, not by speed',
+        subtitle: 'Eight fine-tunable accessibility toggles paired with quick presets keep setup light while surfacing honest trade-offs between Step-free, Low-effort, and Fastest routes.',
+        points: [
+          '8 granular switches: Avoid stairs, Require working elevators, Prefer ramps, Avoid steep slopes, Limit walking distance, Include rest stops, Avoid uneven surfaces, Prefer less crowded routes.',
+          'Side-by-side route trade-offs: 36 min Step-free (Best match) vs 42 min Low-effort (benches every 150 m) vs 28 min Fastest (✕ 3 stairs, not step-free).'
+        ],
+        jumpScreen: 'needs',
+        visualType: 'screens-pair'
+      },
+      {
+        num: '05 / 11',
+        kicker: '03 · THE WHOLE JOURNEY',
+        title: 'See every segment, not just the destination',
+        subtitle: 'Lifts, ramps, rest points, accessible toilets, crossings, and reported barriers on one map—backed by a 5-segment breakdown with verification timestamps.',
+        points: [
+          'Filterable infrastructure layers (L, R, B, WC, C, Reports) around Andheri Station (West).',
+          'Segment-by-segment breakdown reveals surface quality, slope percentages (3%), and exact verification recency.'
+        ],
+        jumpScreen: 'map',
+        visualType: 'screens-pair'
+      },
+      {
+        num: '06 / 11',
+        kicker: '04 · JOURNEY CONFIDENCE',
+        title: 'How sure are we that the journey works?',
+        subtitle: 'High, medium, or low confidence in plain language with timestamps—paired with large-type turn-by-turn navigation that keeps the next step and rest bench in view.',
+        points: [
+          'Transparent confidence scoring ("4 of 5 segments verified in the last 24 hours").',
+          'Calm navigation view highlights upcoming benches (190 m) and crossings (380 m) with early route update alerts.'
+        ],
+        jumpScreen: 'confidence',
+        visualType: 'screens-pair'
+      },
+      {
+        num: '07 / 11',
+        kicker: '05 · WHEN THINGS CHANGE',
+        title: 'Warned before the barrier, not at it',
+        subtitle: 'When the Link Road skywalk lift goes out of service 420 m ahead, WayAble alerts you early, offers a step-free detour (+4 min), and explains exactly why the route changed.',
+        points: [
+          'Early warning 420 m before the broken lift prevents dead-end backtracking.',
+          'Clear Before/After comparison: Skywalk lift (36 min, 1.5 km) → Street crossing with dropped kerbs (40 min, 1.6 km).'
+        ],
+        jumpScreen: 'lift-alert',
+        visualType: 'screens-pair'
+      },
+      {
+        num: '08 / 11',
+        kicker: '06 · A COMMUNITY LAYER',
+        title: 'A community that keeps the information fresh',
+        subtitle: 'Report a barrier in about ten seconds with automatic expiration—and verify segments with one tap upon arrival to help the next traveler.',
+        points: [
+          '10-second structured barrier reporting with severity ("Slows me down", "Hard to pass", "Blocked") and expiry ("2 hours", "Today", "Until fixed").',
+          'Post-trip arrival check-in verifies footpaths, crossings, and hospital ramps in seconds.'
+        ],
+        jumpScreen: 'report',
+        visualType: 'screens-pair'
+      },
+      {
+        num: '09 / 11',
+        kicker: '07 · HONEST STATES',
+        title: 'Honest when there is no easy way',
+        subtitle: 'When no step-free route exists, WayAble says so plainly and offers real options—while letting users compare building entrances before they set off.',
+        points: [
+          'Four honest fallback options when construction blocks Link Road Market: Wait & be reminded, Lowest-effort 3-step route, Try different entrance, or Ask caregiver.',
+          'Entrance comparison for Andheri Community Hospital compares Main Gate (ramp + auto door), East Gate, and Drop-off point.'
+        ],
+        jumpScreen: 'no-route',
+        visualType: 'screens-pair'
+      },
+      {
+        num: '10 / 11',
+        kicker: '08 · SUPPORT AROUND YOU',
+        title: 'Awareness around you, support beside you',
+        subtitle: 'Browse nearby community reports within 1 km of Andheri Station with one-tap confirmation, and share live journey updates with a trusted caregiver.',
+        points: [
+          'Filterable nearby feed (All, Lifts, Ramps, Paths, Crossings) with "Still there?" one-tap verification.',
+          'Caregiver sharing lets trusted contacts (Mum, Aarav) follow live progress and automatically notifies them if a lift outage triggers a reroute.'
+        ],
+        jumpScreen: 'share',
+        visualType: 'screens-pair'
+      },
+      {
+        num: '11 / 11',
+        kicker: 'WHAT IS NEXT',
+        title: 'A hypothesis to test with real people',
+        subtitle: 'The prototype is a starting point. These are the six core research questions for upcoming usability sessions with people who have lived experience of mobility limitations in Mumbai.',
+        hypotheses: [
+          'Can people pick a route that meets their needs?',
+          'How long does planning a journey take?',
+          'Is setting up preferences easy to finish?',
+          'Do the trade-offs between routes make sense?',
+          'How confident do people feel before starting?',
+          'Is reporting a barrier easy enough to do on the move?'
+        ],
+        jumpScreen: 'onboarding',
+        visualType: 'next'
+      }
+    ];
+
+    // -------------------------------------------------------------------------
+    // 2. CORE NAVIGATION & MODE SWITCHING
+    // -------------------------------------------------------------------------
+    function setAppMode(mode) {
+      state.mode = mode;
+      const protoWorkspace = document.getElementById('prototype-workspace');
+      const deckWorkspace = document.getElementById('deck-workspace');
+      const protoBtn = document.getElementById('mode-prototype-btn');
+      const deckBtn = document.getElementById('mode-deck-btn');
+
+      if (mode === 'prototype') {
+        protoWorkspace.classList.remove('hidden');
+        deckWorkspace.classList.add('hidden');
+        protoBtn.className = 'px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-[#165B5E] text-white shadow-xs flex items-center gap-1.5 cursor-pointer';
+        deckBtn.className = 'px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all text-[#4B5563] hover:text-[#111827] flex items-center gap-1.5 cursor-pointer';
+      } else {
+        protoWorkspace.classList.add('hidden');
+        deckWorkspace.classList.remove('hidden');
+        deckBtn.className = 'px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-[#165B5E] text-white shadow-xs flex items-center gap-1.5 cursor-pointer';
+        protoBtn.className = 'px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all text-[#4B5563] hover:text-[#111827] flex items-center gap-1.5 cursor-pointer';
+        renderDeckSlide();
+      }
+    }
+
+    function navigateTo(screenId) {
+      state.currentScreen = screenId;
+      renderPhoneScreen();
+      updateTabBar();
+      renderStoryPills();
+      renderAnnotationPanel();
+      const body = document.getElementById('phone-screen-body');
+      if (body) body.scrollTop = 0;
+    }
+
+    function resetPrototype() {
+      state.selectedProfile = 'wheelchair';
+      state.destination = 'Andheri Community Hospital';
+      state.rerouted = false;
+      state.selectedRouteId = 'step-free';
+      applyProfilePreset('wheelchair', false);
+      navigateTo('onboarding');
+      showToast('Prototype reset to start');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('phone-toast');
+      const text = document.getElementById('phone-toast-text');
+      text.textContent = msg;
+      toast.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 2400);
+    }
+
+    // -------------------------------------------------------------------------
+    // 3. PROFILE & TOGGLE LOGIC
+    // -------------------------------------------------------------------------
+    function applyProfilePreset(profileKey, notify = true) {
+      state.selectedProfile = profileKey;
+      if (profileKey === 'wheelchair') {
+        state.needs = {
+          avoidStairs: true,
+          workingElevators: true,
+          preferRamps: true,
+          avoidSlopes: true,
+          limitWalking: true,
+          includeRest: true,
+          avoidUneven: true,
+          lessCrowded: false,
+        };
+      } else if (profileKey === 'slow' || profileKey === 'older') {
+        state.needs = {
+          avoidStairs: true,
+          workingElevators: true,
+          preferRamps: true,
+          avoidSlopes: true,
+          limitWalking: true,
+          includeRest: true,
+          avoidUneven: false,
+          lessCrowded: true,
+        };
+      } else if (profileKey === 'recovering') {
+        state.needs = {
+          avoidStairs: true,
+          workingElevators: false,
+          preferRamps: true,
+          avoidSlopes: true,
+          limitWalking: true,
+          includeRest: true,
+          avoidUneven: false,
+          lessCrowded: false,
+        };
+      } else {
+        state.needs = {
+          avoidStairs: true,
+          workingElevators: true,
+          preferRamps: false,
+          avoidSlopes: true,
+          limitWalking: true,
+          includeRest: true,
+          avoidUneven: false,
+          lessCrowded: false,
+        };
+      }
+      if (notify) {
+        renderPhoneScreen();
+      }
+    }
+
+    function toggleNeed(key) {
+      state.needs[key] = !state.needs[key];
+      renderPhoneScreen();
+    }
+
+    function getActiveNeedsCount() {
+      return Object.values(state.needs).filter(Boolean).length;
+    }
+
+    function getProfileChips() {
+      const chips = [];
+      if (state.needs.avoidStairs) chips.push('Step-free');
+      if (state.needs.limitWalking) chips.push('Short walks');
+      if (state.needs.includeRest) chips.push('Rest stops');
+      if (state.needs.workingElevators && chips.length < 3) chips.push('Working lifts');
+      if (state.needs.preferRamps && chips.length < 3) chips.push('Ramps');
+      return chips.length ? chips.slice(0, 3) : ['Custom route'];
+    }
+
+    // -------------------------------------------------------------------------
+    // 4. PHONE SCREEN RENDERERS (Matching every PDF screen in detail)
+    // -------------------------------------------------------------------------
+    function updateTabBar() {
+      const tabBar = document.getElementById('phone-tab-bar');
+      const noTabScreens = ['onboarding', 'lift-alert', 'rerouted', 'report', 'arrival', 'share'];
+      if (noTabScreens.includes(state.currentScreen)) {
+        tabBar.classList.add('hidden');
+      } else {
+        tabBar.classList.remove('hidden');
+      }
+
+      // Highlight active tab
+      let activeTab = 'plan';
+      if (['map', 'segments', 'confidence', 'navigation'].includes(state.currentScreen)) activeTab = 'map';
+      if (['nearby-reports'].includes(state.currentScreen)) activeTab = 'reports';
+      if (['needs'].includes(state.currentScreen)) activeTab = 'profile';
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        if (btn.dataset.tab === activeTab) {
+          btn.className = 'tab-btn flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl text-[#165B5E] cursor-pointer';
+          btn.querySelector('span').classList.add('font-bold');
+        } else {
+          btn.className = 'tab-btn flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl text-[#4B5563] hover:text-[#111827] cursor-pointer';
+          btn.querySelector('span').classList.remove('font-bold');
+        }
+      });
+    }
+
+    function renderPhoneScreen() {
+      const container = document.getElementById('phone-screen-body');
+      const s = state.currentScreen;
+
+      // Adjust status bar theme for dark navigation header
+      const statusBar = document.getElementById('phone-status-bar');
+      if (s === 'navigation') {
+        statusBar.className = 'bg-[#111827] px-6 pt-3 pb-2 flex items-center justify-between text-[12px] font-bold text-white shrink-0 select-none z-20';
+      } else {
+        statusBar.className = 'bg-[#F7F6F2] px-6 pt-3 pb-2 flex items-center justify-between text-[12px] font-bold text-[#111827] shrink-0 select-none z-20';
+      }
+
+      let html = '';
+
+      // -----------------------------------------------------------------------
+      // SCREEN 1: ONBOARDING ("Routes that fit how you move") — Page 3 Left
+      // -----------------------------------------------------------------------
+      if (s === 'onboarding') {
+        const profiles = [
+          { id: 'wheelchair', label: 'I use a wheelchair' },
+          { id: 'slow', label: 'I walk slowly or tire quickly' },
+          { id: 'recovering', label: 'I am recovering from an injury' },
+          { id: 'caregiver', label: 'I am planning for someone else' },
+        ];
+        html = `
+          <div class="screen-animate p-5 flex-1 flex flex-col justify-between bg-[#F7F6F2]">
+            <div>
+              <!-- Brand Header -->
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-7 h-7 rounded-lg bg-[#165B5E] flex items-center justify-center text-white">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 18h6V8h8"/>
+                    <circle cx="5" cy="18" r="2" fill="white"/>
+                  </svg>
+                </div>
+                <span class="font-display font-extrabold text-base text-[#111827]">WayAble</span>
+              </div>
+
+              <h2 class="font-display font-extrabold text-[26px] leading-[1.15] text-[#111827] tracking-tight">Routes that fit how you move</h2>
+              <p class="text-xs text-[#4B5563] mt-1.5">The journey matters, not just the destination.</p>
+
+              <!-- Signature Route Illustration Card matching PDF -->
+              <div class="mt-4 bg-[#EFECE4] rounded-2xl p-4 border border-[#E2DDD0] relative overflow-hidden">
+                <svg class="w-full h-16" viewBox="0 0 280 64" fill="none">
+                  <!-- Subtle street grid -->
+                  <rect x="0" y="38" width="280" height="12" fill="#F7F6F2"/>
+                  <rect x="82" y="0" width="12" height="64" fill="#F7F6F2"/>
+                  <!-- Teal accessible path -->
+                  <path d="M24 44H88V18H236" stroke="#165B5E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <!-- Start Node -->
+                  <circle cx="24" cy="44" r="6" fill="#111827" stroke="white" stroke-width="2.5"/>
+                  <!-- Destination Check Badge -->
+                  <rect x="224" y="6" width="24" height="24" rx="6" fill="#111827"/>
+                  <path d="M231 18L234.5 21.5L241.5 14.5" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+
+              <p class="font-display font-bold text-sm text-[#111827] mt-4 mb-2.5">Who are you planning for?</p>
+
+              <div class="space-y-2">
+                ${profiles.map(p => {
+                  const selected = state.selectedProfile === p.id;
+                  return `
+                    <button onclick="applyProfilePreset('${p.id}')" class="w-full text-left px-4 py-3 rounded-2xl border-[1.5px] transition flex items-center gap-3 cursor-pointer ${
+                      selected
+                        ? 'bg-[#E6F1F0] border-[#165B5E] text-[#111827] font-bold shadow-2xs'
+                        : 'bg-white border-[#D6D0C2] hover:border-[#165B5E]/60 text-[#111827] font-semibold'
+                    }">
+                      <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
+                        selected ? 'text-[#165B5E]' : 'border border-[#9CA3AF]'
+                      }">
+                        ${selected ? '<svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6"><polyline points="4 10 8 14 16 6"/></svg>' : ''}
+                      </span>
+                      <span class="text-[13.5px]">${p.label}</span>
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <div class="pt-4 space-y-2.5 text-center">
+              <button onclick="navigateTo('home')" class="w-full py-3.5 rounded-2xl bg-[#165B5E] hover:bg-[#11474A] text-white font-display font-bold text-sm shadow-sm transition cursor-pointer">
+                Continue
+              </button>
+              <button onclick="navigateTo('home')" class="text-xs font-bold text-[#165B5E] underline underline-offset-2 cursor-pointer">
+                Skip for now, you can change this any time
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 2: HOME / PLAN ("Where are we heading today?") — Page 3 Right
+      // -----------------------------------------------------------------------
+      else if (s === 'home') {
+        const chips = getProfileChips();
+        html = `
+          <div class="screen-animate p-5 space-y-4 bg-[#F7F6F2]">
+            <div>
+              <p class="text-xs font-semibold text-[#4B5563]">Andheri, Mumbai</p>
+              <h2 class="font-display font-extrabold text-[26px] leading-[1.15] text-[#111827] mt-0.5">Where are we heading today?</h2>
+            </div>
+
+            <!-- Destination Search Input -->
+            <div class="relative">
+              <div class="flex items-center gap-2.5 bg-white border-[1.5px] border-[#111827] rounded-2xl px-3.5 py-3 shadow-2xs">
+                <svg class="w-4 h-4 text-[#111827] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
+                  <circle cx="11" cy="11" r="7"/>
+                  <line x1="20" y1="20" x2="16.2" y2="16.2"/>
+                </svg>
+                <input id="dest-input" type="text" value="${state.destination}" onchange="state.destination = this.value" class="w-full text-sm font-semibold text-[#111827] bg-transparent focus:outline-none" />
+              </div>
+            </div>
+
+            <!-- Primary CTA -->
+            <button onclick="handlePlanRoute()" class="w-full py-3.5 rounded-2xl bg-[#165B5E] hover:bg-[#11474A] text-white font-display font-bold text-sm shadow-sm transition cursor-pointer">
+              Plan an accessible route
+            </button>
+
+            <!-- Persistent Accessibility Profile Card -->
+            <div class="bg-[#FBFBF9] border border-[#E2DDD0] rounded-2xl p-3.5 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-[#111827]">Your accessibility profile</span>
+                <button onclick="navigateTo('needs')" class="text-xs font-bold text-[#165B5E] underline underline-offset-2 cursor-pointer">Edit</button>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                ${chips.map(c => `<span class="px-2.5 py-1 rounded-full bg-[#E6F1F0] text-[#165B5E] text-[11px] font-bold">${c}</span>`).join('')}
+              </div>
+            </div>
+
+            <!-- Saved Places -->
+            <div>
+              <p class="text-xs font-bold text-[#111827] mb-2">Saved</p>
+              <div class="grid grid-cols-2 gap-2.5">
+                <button onclick="state.destination='Home (Andheri West)'; navigateTo('routes')" class="bg-white border border-[#E2DDD0] hover:border-[#165B5E] rounded-2xl p-3 flex items-center gap-2.5 text-left transition cursor-pointer">
+                  <svg class="w-4 h-4 text-[#165B5E]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  </svg>
+                  <span class="text-xs font-bold text-[#111827]">Home</span>
+                </button>
+                <button onclick="state.destination='Work (MIDC Andheri)'; navigateTo('routes')" class="bg-white border border-[#E2DDD0] hover:border-[#165B5E] rounded-2xl p-3 flex items-center gap-2.5 text-left transition cursor-pointer">
+                  <svg class="w-4 h-4 text-[#165B5E]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="7" width="20" height="14" rx="2"/>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                  </svg>
+                  <span class="text-xs font-bold text-[#111827]">Work</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Recent Destinations -->
+            <div>
+              <p class="text-xs font-bold text-[#111827] mb-2">Recent</p>
+              <div class="space-y-2">
+                <button onclick="state.destination='Andheri Community Hospital'; navigateTo('routes')" class="w-full bg-white border border-[#E2DDD0] hover:border-[#165B5E] rounded-2xl p-3 flex items-center justify-between gap-2 text-left transition cursor-pointer">
+                  <div class="flex items-start gap-2.5">
+                    <svg class="w-4 h-4 text-[#4B5563] mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/>
+                    </svg>
+                    <div>
+                      <p class="text-xs font-bold text-[#111827]">Andheri Community Hospital</p>
+                      <p class="text-[11px] text-[#4B5563]">From Andheri Station (West)</p>
+                    </div>
+                  </div>
+                  <span class="px-2 py-0.5 rounded-full bg-[#DCFCE7] text-[#166534] text-[10px] font-bold shrink-0">Verified today</span>
+                </button>
+
+                <button onclick="state.destination='Link Road Market'; navigateTo('no-route')" class="w-full bg-white border border-[#E2DDD0] hover:border-[#92400E] rounded-2xl p-3 flex items-center justify-between gap-2 text-left transition cursor-pointer">
+                  <div class="flex items-start gap-2.5">
+                    <svg class="w-4 h-4 text-[#4B5563] mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/>
+                    </svg>
+                    <div>
+                      <p class="text-xs font-bold text-[#111827]">Link Road Market</p>
+                      <p class="text-[11px] text-[#4B5563]">From Andheri Station (East)</p>
+                    </div>
+                  </div>
+                  <span class="px-2 py-0.5 rounded-full bg-[#FEF3C7] text-[#92400E] text-[10px] font-bold shrink-0">3 days old</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 3: SET WHAT YOU NEED (8 Interactive Toggles) — Page 4 Left
+      // -----------------------------------------------------------------------
+      else if (s === 'needs') {
+        const toggles = [
+          { key: 'avoidStairs', title: 'Avoid stairs completely', desc: 'Only step-free options' },
+          { key: 'workingElevators', title: 'Require working elevators', desc: 'Skips lifts reported out of service' },
+          { key: 'preferRamps', title: 'Prefer ramps', desc: 'Over steps, where a ramp exists' },
+          { key: 'avoidSlopes', title: 'Avoid steep slopes', desc: 'Flags inclines above a gentle grade' },
+          { key: 'limitWalking', title: 'Limit walking distance', desc: 'Up to 1 km on foot per leg' },
+          { key: 'includeRest', title: 'Include rest stops', desc: 'Seating along the way' },
+          { key: 'avoidUneven', title: 'Avoid uneven surfaces', desc: 'Broken or rough pavement' },
+          { key: 'lessCrowded', title: 'Prefer less crowded routes', desc: 'Quieter footpaths and crossings' },
+        ];
+        const count = getActiveNeedsCount();
+
+        html = `
+          <div class="screen-animate p-5 space-y-3.5 bg-[#F7F6F2]">
+            <button onclick="navigateTo('home')" class="inline-flex items-center gap-1 text-xs font-bold text-[#165B5E] cursor-pointer">
+              <span>‹</span><span>Back</span>
+            </button>
+
+            <div>
+              <h2 class="font-display font-extrabold text-2xl text-[#111827]">Set what you need</h2>
+              <p class="text-xs text-[#4B5563] mt-1">Start with a quick profile, then fine-tune. You can change this any time.</p>
+            </div>
+
+            <!-- Quick Profile Pills -->
+            <div class="flex items-center gap-2">
+              ${[
+                { id: 'wheelchair', label: 'Wheelchair' },
+                { id: 'older', label: 'Older adult' },
+                { id: 'recovering', label: 'Recovering' },
+              ].map(p => `
+                <button onclick="applyProfilePreset('${p.id}')" class="px-3 py-1.5 rounded-full text-xs font-bold border transition cursor-pointer ${
+                  state.selectedProfile === p.id
+                    ? 'bg-[#165B5E] text-white border-[#165B5E]'
+                    : 'bg-white text-[#111827] border-[#111827]/70 hover:bg-[#E6F1F0]'
+                }">${p.label}</button>
+              `).join('')}
+            </div>
+
+            <!-- 8 Toggles List -->
+            <div class="divide-y divide-[#E2DDD0] border-t border-b border-[#E2DDD0]">
+              ${toggles.map(t => {
+                const on = state.needs[t.key];
+                return `
+                  <div onclick="toggleNeed('${t.key}')" class="py-2.5 flex items-center justify-between gap-3 cursor-pointer select-none">
+                    <div>
+                      <p class="text-[13px] font-bold text-[#111827]">${t.title}</p>
+                      <p class="text-[11px] text-[#4B5563]">${t.desc}</p>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                      <span class="text-[11px] font-bold ${on ? 'text-[#165B5E]' : 'text-[#6B7280]'}">${on ? 'On' : 'Off'}</span>
+                      <div class="w-11 h-6 rounded-full p-0.5 transition-colors ${on ? 'bg-[#165B5E]' : 'bg-[#6B7280]'}">
+                        <div class="w-5 h-5 rounded-full bg-white shadow-xs transition-transform ${on ? 'translate-x-5' : 'translate-x-0'}"></div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <div class="pt-1 space-y-2.5 text-center">
+              <p class="text-xs font-semibold text-[#4B5563] tabular-nums">${count} needs turned on</p>
+              <button onclick="navigateTo('routes')" class="w-full py-3.5 rounded-2xl bg-[#165B5E] hover:bg-[#11474A] text-white font-display font-bold text-sm shadow-sm transition cursor-pointer">
+                Save and see routes
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 4: ROUTE OPTIONS ("Andheri Station (West) to Hospital") — Page 4 Right
+      // -----------------------------------------------------------------------
+      else if (s === 'routes') {
+        const chipsText = getProfileChips().join(', ').toLowerCase();
+        html = `
+          <div class="screen-animate p-5 space-y-3.5 bg-[#F7F6F2]">
+            <button onclick="navigateTo('home')" class="inline-flex items-center gap-1 text-xs font-bold text-[#165B5E] cursor-pointer">
+              <span>‹</span><span>Back</span>
+            </button>
+
+            <div>
+              <h2 class="font-display font-extrabold text-xl leading-snug text-[#111827]">Andheri Station (West) to ${state.destination}</h2>
+              <p class="text-xs text-[#4B5563] mt-1">Sorted by your needs, not by speed. <span class="capitalize">${chipsText}</span>.</p>
+            </div>
+
+            <!-- Route 1: Step-free (Best Match) -->
+            <div onclick="state.selectedRouteId='step-free'; navigateTo('map')" class="bg-white border-2 border-[#165B5E] rounded-2xl p-4 shadow-xs space-y-2.5 cursor-pointer hover:bg-[#FBFBF9] transition">
+              <div class="flex items-center justify-between">
+                <span class="font-display font-extrabold text-base text-[#111827]">Step-free</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-[#165B5E] text-white text-[11px] font-bold">Best match</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2 pt-0.5">
+                <div>
+                  <p class="text-[10px] font-semibold text-[#6B7280]">Time</p>
+                  <p class="font-display font-extrabold text-base text-[#111827] tabular-nums">36 min</p>
+                </div>
+                <div>
+                  <p class="text-[10px] font-semibold text-[#6B7280]">Walking</p>
+                  <p class="font-display font-extrabold text-base text-[#111827] tabular-nums">1.5 km</p>
+                </div>
+                <div>
+                  <p class="text-[10px] font-semibold text-[#6B7280]">Accessibility</p>
+                  <p class="font-display font-extrabold text-sm text-[#111827]">No stairs</p>
+                </div>
+              </div>
+              <p class="text-xs text-[#4B5563]">2 lifts working, 2 accessible crossings, 3 benches</p>
+              <div class="flex items-center justify-between pt-1">
+                <span class="px-2.5 py-1 rounded-full bg-[#DCFCE7] text-[#166534] text-[11px] font-bold">✓ High confidence</span>
+                <span class="text-xs font-bold text-[#165B5E]">Choose route →</span>
+              </div>
+            </div>
+
+            <!-- Route 2: Low-effort -->
+            <div onclick="state.selectedRouteId='low-effort'; navigateTo('map')" class="bg-white border border-[#E2DDD0] hover:border-[#165B5E] rounded-2xl p-4 space-y-2.5 cursor-pointer transition">
+              <div class="flex items-center justify-between">
+                <span class="font-display font-extrabold text-base text-[#111827]">Low-effort</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <p class="text-[10px] font-semibold text-[#6B7280]">Time</p>
+                  <p class="font-display font-extrabold text-base text-[#111827] tabular-nums">42 min</p>
+                </div>
+                <div>
+                  <p class="text-[10px] font-semibold text-[#6B7280]">Walking</p>
+                  <p class="font-display font-extrabold text-base text-[#111827] tabular-nums">900 m</p>
+                </div>
+                <div>
+                  <p class="text-[10px] font-semibold text-[#6B7280]">Accessibility</p>
+                  <p class="font-display font-extrabold text-sm text-[#111827]">Seating, flat</p>
+                </div>
+              </div>
+              <p class="text-xs text-[#4B5563]">Fewest crossings, benches every 150 m</p>
+              <div class="flex items-center justify-between pt-1">
+                <span class="px-2.5 py-1 rounded-full bg-[#FEF3C7] text-[#92400E] text-[11px] font-bold">! Medium confidence</span>
+                <span class="text-xs font-bold text-[#165B5E]">Choose route →</span>
+              </div>
+            </div>
+
+            <!-- Route 3: Fastest (Not step-free) -->
+            <div class="bg-white/80 border border-[#E2DDD0] rounded-2xl p-4 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-display font-extrabold text-base text-[#111827]">Fastest</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-[#FEE2E2] text-[#991B1B] text-[11px] font-bold">✕ Not step-free</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <p class="text-[10px] font-semibold text-[#6B7280]">Time</p>
+                  <p class="font-display font-extrabold text-base text-[#111827] tabular-nums">28 min</p>
+                </div>
+                <div>
+                  <p class="text-[10px] font-semibold text-[#6B7280]">Walking</p>
+                  <p class="font-display font-extrabold text-base text-[#111827] tabular-nums">1.2 km</p>
+                </div>
+                <div>
+                  <p class="text-[10px] font-semibold text-[#6B7280]">Accessibility</p>
+                  <p class="font-display font-extrabold text-sm text-[#991B1B]">3 stairs</p>
+                </div>
+              </div>
+              <p class="text-xs text-[#4B5563]">Stairs on the foot overbridge, no ramp alternative</p>
+            </div>
+
+            <button onclick="navigateTo('map')" class="w-full py-3 rounded-2xl bg-white border-[1.5px] border-[#111827] hover:bg-[#EFECE4] text-[#111827] font-display font-bold text-xs flex items-center justify-center gap-2 transition cursor-pointer">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
+              </svg>
+              <span>See routes on the map</span>
+            </button>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 5: ACCESSIBILITY MAP ("Accessibility map") — Page 5 Left
+      // -----------------------------------------------------------------------
+      else if (s === 'map') {
+        const filters = [
+          { key: 'lifts', badge: 'L', label: 'Lifts' },
+          { key: 'ramps', badge: 'R', label: 'Ramps' },
+          { key: 'rest', badge: 'B', label: 'Rest' },
+          { key: 'toilets', badge: 'WC', label: 'Toilets' },
+          { key: 'crossings', badge: 'C', label: 'Crossings' },
+          { key: 'reports', badge: '!', label: 'Reports', warn: true },
+        ];
+
+        html = `
+          <div class="screen-animate flex-1 flex flex-col justify-between bg-[#F7F6F2]">
+            <!-- Top Map Header & Interactive Filter Pills -->
+            <div class="p-4 pb-3 bg-[#FBFBF9] border-b border-[#E2DDD0] space-y-2.5 z-10">
+              <div class="flex items-center justify-between">
+                <button onclick="navigateTo('routes')" class="inline-flex items-center gap-1.5 font-display font-extrabold text-base text-[#111827] cursor-pointer">
+                  <span class="text-[#165B5E]">‹</span>
+                  <span>Accessibility map</span>
+                </button>
+                <button onclick="navigateTo('entrances')" class="text-[11px] font-bold text-[#165B5E] bg-[#E6F1F0] px-2.5 py-1 rounded-full cursor-pointer">
+                  Compare gates
+                </button>
+              </div>
+
+              <div class="grid grid-cols-3 gap-1.5">
+                ${filters.map(f => {
+                  const active = state.mapFilters[f.key];
+                  const baseStyle = f.warn
+                    ? (active ? 'bg-[#FDF6E7] border-[#92400E] text-[#92400E]' : 'bg-white border-[#E2DDD0] text-[#6B7280] opacity-60')
+                    : (active ? 'bg-[#E6F1F0] border-[#165B5E] text-[#111827]' : 'bg-white border-[#E2DDD0] text-[#6B7280] opacity-60');
+                  return `
+                    <button onclick="state.mapFilters['${f.key}']=!state.mapFilters['${f.key}']; renderPhoneScreen()" class="px-2 py-1.5 rounded-full border text-[11px] font-bold flex items-center gap-1.5 transition cursor-pointer ${baseStyle}">
+                      <span class="w-4 h-4 rounded-full bg-white border border-current flex items-center justify-center text-[9px] font-extrabold shrink-0">${f.badge}</span>
+                      <span class="truncate">${f.label}</span>
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <!-- Custom Interactive SVG Mumbai Map (Andheri West to Hospital) -->
+            <div class="relative flex-1 bg-[#E5E1D6] overflow-hidden min-h-[290px]">
+              <svg class="w-full h-full" viewBox="0 0 360 320" preserveAspectRatio="xMidYMid slice">
+                <!-- City Blocks & Park -->
+                <rect width="360" height="320" fill="#E5E1D6"/>
+                <!-- Green Park Block -->
+                <rect x="165" y="138" width="82" height="88" rx="8" fill="#D5E3D2"/>
+                <rect x="88" y="34" width="26" height="62" rx="4" fill="#DCD7C9"/>
+                <rect x="278" y="138" width="56" height="88" rx="6" fill="#DCD7C9"/>
+
+                <!-- Roads -->
+                <!-- Horizontal Station Road -->
+                <rect x="0" y="232" width="360" height="16" fill="#FBFBF9"/>
+                <!-- Horizontal Link Cross -->
+                <rect x="85" y="116" width="275" height="16" fill="#FBFBF9"/>
+                <!-- Vertical Link Road -->
+                <rect x="132" y="16" width="16" height="304" fill="#FBFBF9"/>
+                <!-- Vertical Hospital Lane -->
+                <rect x="260" y="16" width="16" height="304" fill="#FBFBF9"/>
+
+                <!-- Railway Tracks (Western Line Andheri) -->
+                <rect x="34" y="0" width="14" height="320" fill="#9CA3AF"/>
+                <line x1="41" y1="0" x2="41" y2="320" stroke="#FBFBF9" stroke-width="2" stroke-dasharray="6 6"/>
+
+                <!-- Step-Free Teal Route Line -->
+                <path d="M76 240H140V124H268V74" fill="none" stroke="#165B5E" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+                <!-- Andheri Stn (W) Label -->
+                <g transform="translate(10, 185)">
+                  <rect width="62" height="34" rx="6" fill="#DDE2EB" stroke="#111827" stroke-width="1.5"/>
+                  <text x="31" y="15" text-anchor="middle" font-size="10" font-weight="800" fill="#111827">Andheri</text>
+                  <text x="31" y="27" text-anchor="middle" font-size="10" font-weight="800" fill="#111827">Stn (W)</text>
+                </g>
+
+                <!-- Origin Dot & West Exit -->
+                <circle cx="76" cy="240" r="6" fill="#111827" stroke="white" stroke-width="2"/>
+                <text x="76" y="262" text-anchor="middle" font-size="10" font-weight="700" fill="#111827">West exit</text>
+
+                <!-- Community Hospital [H] -->
+                <text x="242" y="64" text-anchor="end" font-size="10.5" font-weight="800" fill="#111827">Community Hospital</text>
+                <g transform="translate(252, 44)">
+                  <rect width="30" height="30" rx="7" fill="#111827"/>
+                  <text x="15" y="21" text-anchor="middle" font-size="15" font-weight="800" fill="white">H</text>
+                </g>
+
+                <!-- Dynamic Filter Pins -->
+                ${state.mapFilters.lifts ? `
+                  <g transform="translate(76, 216)">
+                    <circle r="12" fill="white" stroke="#111827" stroke-width="1.8"/>
+                    <text y="4" text-anchor="middle" font-size="11" font-weight="800" fill="#111827">L</text>
+                  </g>
+                ` : ''}
+
+                ${state.mapFilters.toilets ? `
+                  <g transform="translate(142, 260)">
+                    <circle r="12" fill="white" stroke="#111827" stroke-width="1.8"/>
+                    <text y="3.5" text-anchor="middle" font-size="9.5" font-weight="800" fill="#111827">WC</text>
+                  </g>
+                ` : ''}
+
+                ${state.mapFilters.ramps ? `
+                  <g transform="translate(164, 192)">
+                    <circle r="12" fill="white" stroke="#111827" stroke-width="1.8"/>
+                    <text y="4" text-anchor="middle" font-size="11" font-weight="800" fill="#111827">R</text>
+                  </g>
+                ` : ''}
+
+                ${state.mapFilters.rest ? `
+                  <g transform="translate(112, 162)">
+                    <circle r="12" fill="white" stroke="#111827" stroke-width="1.8"/>
+                    <text y="4" text-anchor="middle" font-size="11" font-weight="800" fill="#111827">B</text>
+                  </g>
+                  <g transform="translate(212, 102)">
+                    <circle r="12" fill="white" stroke="#111827" stroke-width="1.8"/>
+                    <text y="4" text-anchor="middle" font-size="11" font-weight="800" fill="#111827">B</text>
+                  </g>
+                ` : ''}
+
+                ${state.mapFilters.crossings ? `
+                  <g transform="translate(205, 148)">
+                    <circle r="12" fill="white" stroke="#111827" stroke-width="1.8"/>
+                    <text y="4" text-anchor="middle" font-size="11" font-weight="800" fill="#111827">C</text>
+                  </g>
+                ` : ''}
+
+                ${state.mapFilters.reports ? `
+                  <g transform="translate(268, 172)">
+                    <polygon points="0,-16 15,11 -15,11" fill="#FDF6E7" stroke="#92400E" stroke-width="2"/>
+                    <text y="6" text-anchor="middle" font-size="12" font-weight="800" fill="#92400E">!</text>
+                  </g>
+                  <g transform="translate(274, 188)">
+                    <rect width="78" height="32" rx="6" fill="#FDF6E7" stroke="#92400E" stroke-width="1.3"/>
+                    <text x="39" y="13" text-anchor="middle" font-size="9" font-weight="800" fill="#92400E">Footpath work</text>
+                    <text x="39" y="25" text-anchor="middle" font-size="8.5" font-weight="600" fill="#92400E">2 h ago</text>
+                  </g>
+                ` : ''}
+              </svg>
+            </div>
+
+            <!-- Bottom Route Summary Sheet -->
+            <div class="p-4 bg-[#FBFBF9] border-t border-[#E2DDD0] space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="font-display font-extrabold text-base text-[#111827]">Step-free route</span>
+                <button onclick="navigateTo('confidence')" class="px-2.5 py-1 rounded-full bg-[#DCFCE7] text-[#166534] text-[11px] font-bold cursor-pointer">
+                  ✓ High confidence
+                </button>
+              </div>
+              <p class="text-xs text-[#4B5563]">36 min, 1.5 km. West exit lift working 12 min ago.</p>
+              <button onclick="navigateTo('segments')" class="w-full py-3.5 rounded-2xl bg-[#165B5E] hover:bg-[#11474A] text-white font-display font-bold text-sm shadow-sm transition cursor-pointer">
+                View route details
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 6: 5-SEGMENT BREAKDOWN ("Step-free route 36 min") — Page 5 Right
+      // -----------------------------------------------------------------------
+      else if (s === 'segments') {
+        const segments = [
+          { num: 1, title: 'Platform to West exit', dist: '60 m', desc: 'Lift, no steps', status: '✓ Verified 12 min ago', warn: false },
+          { num: 2, title: 'Station Road footpath', dist: '380 m', desc: 'Flat, smooth surface, bench halfway', status: '✓ Confirmed today', warn: false },
+          { num: 3, title: 'Junction crossing', dist: '25 m', desc: 'Signal crossing, dropped kerbs both sides', status: '✓ Confirmed today', warn: false },
+          { num: 4, title: 'Link Road stretch', dist: '840 m', desc: 'Gentle 3% slope, two benches, one crossing', status: '✓ Checked yesterday', warn: false },
+          { num: 5, title: 'Hospital entrance', dist: '195 m', desc: 'Ramp at the main gate', status: '! Community report, 5 days ago', warn: true },
+        ];
+
+        html = `
+          <div class="screen-animate p-5 space-y-3.5 bg-[#F7F6F2]">
+            <button onclick="navigateTo('map')" class="inline-flex items-center gap-1 text-xs font-bold text-[#165B5E] cursor-pointer">
+              <span>‹</span><span>Back</span>
+            </button>
+
+            <div class="flex items-baseline justify-between">
+              <h2 class="font-display font-extrabold text-xl text-[#111827]">Step-free route</h2>
+              <span class="text-xs font-bold text-[#4B5563] tabular-nums">36 min, 1.5 km</span>
+            </div>
+
+            <!-- Confidence Banner Card (Clickable to open "How sure are we?") -->
+            <div onclick="navigateTo('confidence')" class="bg-[#E6F1F0] border border-[#B8D4D2] rounded-2xl p-3.5 space-y-2 cursor-pointer hover:bg-[#DCECEB] transition">
+              <div class="flex items-center justify-between">
+                <p class="font-display font-bold text-xs text-[#165B5E]">High accessibility confidence</p>
+                <span class="text-[11px] font-bold text-[#165B5E] underline">Why?</span>
+              </div>
+              <p class="text-[11px] text-[#111827]">4 of 5 segments verified in the last 24 hours</p>
+              <div class="flex flex-wrap gap-1.5 pt-0.5">
+                <span class="px-2 py-0.5 rounded-full bg-white text-[#111827] text-[10px] font-semibold">Step-free verified</span>
+                <span class="px-2 py-0.5 rounded-full bg-white text-[#111827] text-[10px] font-semibold">Pavement confirmed today</span>
+                <span class="px-2 py-0.5 rounded-full bg-white text-[#111827] text-[10px] font-semibold">Lift working 12 min ago</span>
+              </div>
+            </div>
+
+            <!-- 5 Segments List -->
+            <div class="divide-y divide-[#E2DDD0] bg-white border border-[#E2DDD0] rounded-2xl px-3.5">
+              ${segments.map(seg => `
+                <div class="py-3 flex items-start gap-3">
+                  <span class="w-6 h-6 rounded-full bg-[#165B5E] text-white text-xs font-extrabold flex items-center justify-center shrink-0 mt-0.5 tabular-nums">${seg.num}</span>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-2">
+                      <p class="text-xs font-bold text-[#111827]">${seg.title}</p>
+                      <span class="text-xs font-bold text-[#4B5563] tabular-nums shrink-0">${seg.dist}</span>
+                    </div>
+                    <p class="text-[11px] text-[#4B5563] mt-0.5">${seg.desc}</p>
+                    <p class="text-[11px] font-bold mt-1 ${seg.warn ? 'text-[#92400E]' : 'text-[#166534]'}">${seg.status}</p>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+
+            <button onclick="navigateTo('navigation')" class="w-full py-3.5 rounded-2xl bg-[#165B5E] hover:bg-[#11474A] text-white font-display font-bold text-sm shadow-sm transition cursor-pointer">
+              → Start navigation
+            </button>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 7: JOURNEY CONFIDENCE EXPLAINER ("How sure are we?") — Page 6 Left
+      // -----------------------------------------------------------------------
+      else if (s === 'confidence') {
+        const freshness = [
+          { seg: 'West exit lift', time: '12 min ago', warn: false },
+          { seg: 'Station Road footpath', time: 'Today', warn: false },
+          { seg: 'Junction crossing', time: 'Today', warn: false },
+          { seg: 'Link Road stretch', time: 'Yesterday', warn: false },
+          { seg: 'Hospital entrance ramp', time: '5 days ago', warn: true },
+        ];
+        html = `
+          <div class="screen-animate p-5 space-y-4 bg-[#F7F6F2]">
+            <button onclick="navigateTo('segments')" class="inline-flex items-center gap-1 text-xs font-bold text-[#165B5E] cursor-pointer">
+              <span>‹</span><span>Back</span>
+            </button>
+
+            <div>
+              <h2 class="font-display font-extrabold text-2xl text-[#111827]">How sure are we?</h2>
+              <p class="text-xs text-[#4B5563] mt-1 leading-relaxed">Every route shows how recently its accessibility has been checked, so you can decide with the full picture.</p>
+            </div>
+
+            <!-- High Confidence Callout -->
+            <div class="bg-[#DCFCE7]/80 border border-[#86EFAC] rounded-2xl p-3.5 flex items-center gap-3">
+              <div class="flex gap-1 shrink-0">
+                <span class="w-2 h-6 rounded-sm bg-[#166534]"></span>
+                <span class="w-2 h-6 rounded-sm bg-[#166534]"></span>
+                <span class="w-2 h-6 rounded-sm bg-[#166534]"></span>
+              </div>
+              <div>
+                <p class="font-display font-extrabold text-sm text-[#166534]">High confidence</p>
+                <p class="text-xs text-[#111827]">Step-free route: 4 of 5 segments verified in the last 24 hours</p>
+              </div>
+            </div>
+
+            <!-- Freshness by Segment -->
+            <div>
+              <p class="text-xs font-bold text-[#111827] mb-2">Freshness by segment</p>
+              <div class="divide-y divide-[#E2DDD0] bg-white border border-[#E2DDD0] rounded-2xl px-3.5">
+                ${freshness.map(f => `
+                  <div class="py-2.5 flex items-center justify-between text-xs">
+                    <span class="font-semibold text-[#111827]">${f.seg}</span>
+                    <span class="font-bold tabular-nums ${f.warn ? 'text-[#92400E]' : 'text-[#166534]'}">${f.time}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- What the levels mean -->
+            <div class="space-y-2.5">
+              <p class="text-xs font-bold text-[#111827]">What the levels mean</p>
+              <div class="flex items-start gap-2.5 text-xs">
+                <span class="w-2.5 h-4 rounded-xs bg-[#166534] shrink-0 mt-0.5"></span>
+                <p class="text-[#4B5563]"><strong class="text-[#111827]">High.</strong> Most segments verified in the last 24 hours.</p>
+              </div>
+              <div class="flex items-start gap-2.5 text-xs">
+                <span class="w-2.5 h-4 rounded-xs bg-[#D97706] shrink-0 mt-0.5"></span>
+                <p class="text-[#4B5563]"><strong class="text-[#111827]">Medium.</strong> Some details are over a day old, or rest on a single report.</p>
+              </div>
+              <div class="flex items-start gap-2.5 text-xs">
+                <span class="w-2.5 h-4 rounded-xs bg-[#DC2626] shrink-0 mt-0.5"></span>
+                <p class="text-[#4B5563]"><strong class="text-[#111827]">Low.</strong> Details are over a week old, or reports disagree. We show a backup route.</p>
+              </div>
+            </div>
+
+            <button onclick="navigateTo('segments')" class="w-full py-3.5 rounded-2xl bg-[#165B5E] hover:bg-[#11474A] text-white font-display font-bold text-sm transition cursor-pointer">
+              Got it
+            </button>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 8: TURN-BY-TURN NAVIGATION ("Follow Station Road footpath") — Page 6 Right
+      // -----------------------------------------------------------------------
+      else if (s === 'navigation') {
+        html = `
+          <div class="screen-animate flex-1 flex flex-col justify-between bg-[#E5E1D6]">
+            <!-- High-Contrast Dark Top Navigation Instruction Banner -->
+            <div class="bg-[#111827] text-white px-4 pt-2 pb-4 rounded-b-3xl shadow-md z-10">
+              <div class="flex items-center gap-3.5">
+                <div class="w-12 h-12 rounded-2xl bg-white text-[#111827] flex items-center justify-center shrink-0">
+                  <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="19" x2="12" y2="5"/>
+                    <polyline points="5 12 12 5 19 12"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-[11px] font-semibold text-[#9CA3AF] tabular-nums">Step 2 of 5, 380 m</p>
+                  <h2 class="font-display font-extrabold text-lg leading-tight">Follow Station Road footpath</h2>
+                  <p class="text-xs text-[#D1D5DB] mt-0.5">Flat and smooth. Bench halfway.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Live First-Person Vector Path Canvas -->
+            <div class="relative flex-1 min-h-[250px] overflow-hidden">
+              <svg class="w-full h-full" viewBox="0 0 360 280" preserveAspectRatio="xMidYMid slice">
+                <rect width="360" height="280" fill="#E5E1D6"/>
+                <!-- Parks -->
+                <rect x="28" y="135" width="76" height="84" rx="10" fill="#D5E3D2"/>
+                <rect x="235" y="128" width="90" height="90" rx="10" fill="#DDD8CA"/>
+
+                <!-- Cross Street & Main Footpath -->
+                <rect x="0" y="42" width="360" height="18" fill="#FBFBF9"/>
+                <rect x="148" y="0" width="20" height="280" fill="#FBFBF9"/>
+
+                <!-- Teal Active Route -->
+                <line x1="158" y1="280" x2="158" y2="20" stroke="#165B5E" stroke-width="8" stroke-linecap="round"/>
+
+                <!-- Crossing Marker (C) -->
+                <g transform="translate(158, 51)">
+                  <circle r="13" fill="white" stroke="#111827" stroke-width="2"/>
+                  <text y="4" text-anchor="middle" font-size="11" font-weight="800" fill="#111827">C</text>
+                </g>
+                <g transform="translate(182, 37)">
+                  <rect width="142" height="28" rx="14" fill="white" stroke="#111827" stroke-width="1.5"/>
+                  <text x="71" y="18" text-anchor="middle" font-size="11" font-weight="800" fill="#111827">Crossing, 380 m</text>
+                </g>
+
+                <!-- Bench Marker (B) -->
+                <g transform="translate(158, 142)">
+                  <circle r="13" fill="white" stroke="#111827" stroke-width="2"/>
+                  <text y="4" text-anchor="middle" font-size="11" font-weight="800" fill="#111827">B</text>
+                </g>
+                <g transform="translate(182, 128)">
+                  <rect width="124" height="28" rx="14" fill="white" stroke="#111827" stroke-width="1.5"/>
+                  <text x="62" y="18" text-anchor="middle" font-size="11" font-weight="800" fill="#111827">Bench, 190 m</text>
+                </g>
+
+                <!-- Live User Position Puck -->
+                <g transform="translate(158, 232)">
+                  <circle r="22" fill="#165B5E" opacity="0.22" class="pulse-ring"/>
+                  <circle r="11" fill="#111827" stroke="white" stroke-width="2.5"/>
+                  <polygon points="0,-16 -5,-8 5,-8" fill="#111827"/>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Bottom Navigation Cards & Live Lift Outage Alert -->
+            <div class="p-4 bg-[#FBFBF9] border-t border-[#E2DDD0] space-y-2.5">
+              <!-- Next Step Card -->
+              <div class="bg-white border border-[#E2DDD0] rounded-2xl p-3 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full border-[1.5px] border-[#111827] flex items-center justify-center font-display font-extrabold text-xs text-[#111827] shrink-0">C</span>
+                <div>
+                  <p class="text-xs font-bold text-[#111827]">Next: junction crossing</p>
+                  <p class="text-[11px] text-[#4B5563]">Signal crossing, dropped kerbs both sides</p>
+                </div>
+              </div>
+
+              <!-- Live Amber Update Banner -->
+              ${!state.rerouted ? `
+                <div onclick="navigateTo('lift-alert')" class="bg-[#FDF6E7] border-[1.5px] border-[#92400E] rounded-2xl p-3 flex items-center justify-between gap-2 cursor-pointer hover:bg-[#FEF3C7] transition">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-[#92400E] font-extrabold text-base">⚠</span>
+                    <div>
+                      <p class="text-xs font-bold text-[#111827]">1 update on your route</p>
+                      <p class="text-[11px] text-[#92400E]">Lift issue reported ahead, 6 min ago</p>
+                    </div>
+                  </div>
+                  <span class="text-xs font-extrabold text-[#92400E] underline shrink-0">View</span>
+                </div>
+              ` : `
+                <div onclick="navigateTo('arrival')" class="bg-[#DCFCE7] border border-[#166534] rounded-2xl p-3 flex items-center justify-between gap-2 cursor-pointer">
+                  <div>
+                    <p class="text-xs font-bold text-[#166534]">✓ Ground-level detour active</p>
+                    <p class="text-[11px] text-[#111827]">Tap here to simulate arriving at hospital</p>
+                  </div>
+                  <span class="text-xs font-extrabold text-[#166534] underline">Arrive →</span>
+                </div>
+              `}
+
+              <!-- Action Row -->
+              <div class="grid grid-cols-2 gap-2">
+                <button onclick="navigateTo('report')" class="py-2.5 px-3 rounded-xl bg-white border border-[#111827] text-xs font-bold text-[#111827] flex items-center justify-center gap-1.5 cursor-pointer hover:bg-[#EFECE4]">
+                  <span>⚑</span><span>Report a barrier</span>
+                </button>
+                <button onclick="navigateTo('share')" class="py-2.5 px-3 rounded-xl bg-[#165B5E] text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer hover:bg-[#11474A]">
+                  <span>Share trip</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 9A: LIFT OUT OF SERVICE ALERT — Page 7 Left
+      // -----------------------------------------------------------------------
+      else if (s === 'lift-alert') {
+        html = `
+          <div class="screen-animate flex-1 flex flex-col justify-between bg-[#F7F6F2]">
+            <div>
+              <!-- Warm Amber Top Alert Header -->
+              <div class="bg-[#FDF6E7] border-b border-[#92400E]/30 p-5 space-y-1.5">
+                <div class="flex items-center gap-1.5 text-[#92400E] text-xs font-bold">
+                  <span>⚠</span><span>Alert on your route</span>
+                </div>
+                <h2 class="font-display font-extrabold text-2xl text-[#451A03]">Lift out of service ahead</h2>
+                <p class="text-xs text-[#78350F] leading-relaxed">Link Road skywalk lift, 420 m ahead. Your step-free route needs it.</p>
+              </div>
+
+              <!-- Visual Detour Schematic Diagram -->
+              <div class="bg-[#E5E1D6] border-b border-[#D6D0C2] py-4 px-3">
+                <svg class="w-full h-32" viewBox="0 0 340 120" fill="none">
+                  <!-- Main Street Horizontal -->
+                  <rect x="0" y="34" width="340" height="12" fill="#FBFBF9"/>
+                  <!-- Detour Street Loop -->
+                  <rect x="108" y="34" width="12" height="58" fill="#FBFBF9"/>
+                  <rect x="258" y="34" width="12" height="58" fill="#FBFBF9"/>
+                  <rect x="108" y="80" width="162" height="12" fill="#FBFBF9"/>
+
+                  <!-- Active path up to detour -->
+                  <line x1="16" y1="40" x2="114" y2="40" stroke="#165B5E" stroke-width="5" stroke-linecap="round"/>
+                  <!-- Blocked dashed old path -->
+                  <line x1="114" y1="40" x2="324" y2="40" stroke="#9CA3AF" stroke-width="4" stroke-dasharray="6 6"/>
+                  <!-- Proposed dashed teal detour -->
+                  <path d="M114 40V86H264V40" stroke="#165B5E" stroke-width="4.5" stroke-dasharray="7 5" stroke-linecap="round" stroke-linejoin="round"/>
+
+                  <!-- You Marker -->
+                  <text x="48" y="22" text-anchor="middle" font-size="10" font-weight="800" fill="#111827">You</text>
+                  <circle cx="48" cy="40" r="7" fill="#111827" stroke="white" stroke-width="2"/>
+
+                  <!-- Lift Out Badge & Triangle -->
+                  <rect x="150" y="4" width="64" height="20" rx="10" fill="#FDF6E7" stroke="#92400E" stroke-width="1.3"/>
+                  <text x="182" y="17" text-anchor="middle" font-size="9.5" font-weight="800" fill="#92400E">Lift out</text>
+                  <polygon points="182,27 195,49 169,49" fill="#FDF6E7" stroke="#92400E" stroke-width="2"/>
+                  <text x="182" y="45" text-anchor="middle" font-size="11" font-weight="800" fill="#92400E">!</text>
+
+                  <!-- Detour +4 min Pill -->
+                  <rect x="142" y="96" width="94" height="20" rx="10" fill="white" stroke="#165B5E" stroke-width="1.4"/>
+                  <text x="189" y="109" text-anchor="middle" font-size="10" font-weight="800" fill="#165B5E">Detour +4 min</text>
+                </svg>
+              </div>
+
+              <!-- Confidence & Community Verification Card -->
+              <div class="p-5">
+                <div class="bg-white border border-[#E2DDD0] rounded-2xl p-4 space-y-2">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <span class="flex gap-0.5">
+                        <span class="w-1.5 h-3.5 rounded-xs bg-[#92400E]"></span>
+                        <span class="w-1.5 h-3.5 rounded-xs bg-[#92400E]"></span>
+                        <span class="w-1.5 h-3.5 rounded-xs border border-[#92400E]"></span>
+                      </span>
+                      <span class="text-xs font-extrabold text-[#111827]">Medium confidence</span>
+                    </div>
+                    <span class="text-[11px] text-[#6B7280]">Reported 6 min ago</span>
+                  </div>
+                  <p class="text-xs text-[#4B5563]">3 community reports. Last seen working 2 h ago.</p>
+                  <button onclick="showToast('Confirmed: Lift outage verified')" class="text-xs font-bold text-[#165B5E] underline underline-offset-2 cursor-pointer">
+                    Is this still true? Confirm or dispute
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action CTAs -->
+            <div class="p-5 pt-0 space-y-2.5">
+              <button onclick="state.rerouted=true; navigateTo('rerouted')" class="w-full py-3.5 px-4 rounded-2xl bg-[#165B5E] hover:bg-[#11474A] text-white transition shadow-sm cursor-pointer text-center">
+                <p class="font-display font-bold text-sm">Take the step-free detour</p>
+                <p class="text-[11px] text-[#D5E8E6]">Adds 4 min, no stairs, working lifts only</p>
+              </button>
+              <button onclick="navigateTo('navigation')" class="w-full py-3 rounded-2xl bg-white border border-[#111827] text-xs font-bold text-[#111827] hover:bg-[#EFECE4] transition cursor-pointer">
+                Keep my current route
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 9B: YOUR ROUTE HAS CHANGED (Rerouted) — Page 7 Right
+      // -----------------------------------------------------------------------
+      else if (s === 'rerouted') {
+        html = `
+          <div class="screen-animate flex-1 flex flex-col justify-between bg-[#F7F6F2]">
+            <div>
+              <!-- Emerald Green Rerouted Header -->
+              <div class="bg-[#DCFCE7] border-b border-[#166534]/25 p-5 space-y-1">
+                <div class="flex items-center gap-1.5 text-[#166534] text-xs font-bold">
+                  <span>✓</span><span>Rerouted</span>
+                </div>
+                <h2 class="font-display font-extrabold text-2xl text-[#14532D]">Your route has changed</h2>
+                <p class="text-xs text-[#166534] font-semibold">Still step-free. 4 minutes longer.</p>
+              </div>
+
+              <!-- Updated Solid Route Diagram -->
+              <div class="bg-[#E5E1D6] border-b border-[#D6D0C2] py-4 px-3">
+                <svg class="w-full h-32" viewBox="0 0 340 120" fill="none">
+                  <rect x="0" y="34" width="340" height="12" fill="#FBFBF9"/>
+                  <rect x="108" y="34" width="12" height="58" fill="#FBFBF9"/>
+                  <rect x="258" y="34" width="12" height="58" fill="#FBFBF9"/>
+                  <rect x="108" y="80" width="162" height="12" fill="#FBFBF9"/>
+
+                  <!-- Old disabled segment -->
+                  <line x1="114" y1="40" x2="264" y2="40" stroke="#9CA3AF" stroke-width="4" stroke-dasharray="5 5"/>
+                  <!-- Solid new step-free route -->
+                  <path d="M16 40H114V86H264V40H324" stroke="#165B5E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+                  <circle cx="48" cy="40" r="7" fill="#111827" stroke="white" stroke-width="2"/>
+
+                  <rect x="136" y="4" width="96" height="20" rx="10" fill="white" stroke="#6B7280" stroke-width="1"/>
+                  <text x="184" y="17" text-anchor="middle" font-size="9" font-weight="700" fill="#4B5563">Old route, lift out</text>
+                  <polygon points="184,27 197,49 171,49" fill="#FDF6E7" stroke="#92400E" stroke-width="2"/>
+                  <text x="184" y="45" text-anchor="middle" font-size="11" font-weight="800" fill="#92400E">!</text>
+
+                  <rect x="150" y="96" width="76" height="20" rx="10" fill="white" stroke="#165B5E" stroke-width="1.4"/>
+                  <text x="188" y="109" text-anchor="middle" font-size="9.5" font-weight="800" fill="#165B5E">New route</text>
+                </svg>
+              </div>
+
+              <!-- Plain-English Explanation & Before/After -->
+              <div class="p-4 space-y-3">
+                <div class="bg-white border border-[#E2DDD0] rounded-2xl p-3.5 space-y-1.5">
+                  <p class="text-xs font-extrabold text-[#111827]">Why we changed it</p>
+                  <p class="text-xs text-[#4B5563] leading-relaxed">The Link Road skywalk lift was reported out of service 6 minutes ago. You asked for working lifts only, so we moved you to the ground-level signal crossing with dropped kerbs.</p>
+                </div>
+
+                <div class="bg-white border border-[#E2DDD0] rounded-2xl divide-y divide-[#EFECE4] px-3.5">
+                  <div class="py-2.5 flex items-center gap-2.5 text-xs">
+                    <span class="px-2 py-0.5 rounded-full bg-[#EFECE4] text-[#4B5563] font-bold text-[10px]">Before</span>
+                    <span class="line-through text-[#6B7280] tabular-nums">Skywalk lift, 36 min, 1.5 km</span>
+                  </div>
+                  <div class="py-2.5 flex items-center gap-2.5 text-xs">
+                    <span class="px-2 py-0.5 rounded-full bg-[#165B5E] text-white font-bold text-[10px]">Now</span>
+                    <span class="font-bold text-[#111827] tabular-nums">Street crossing, 40 min, 1.6 km</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-1 rounded-full bg-[#DCFCE7] text-[#166534] text-[11px] font-bold">✓ High confidence</span>
+                  <span class="text-xs text-[#4B5563]">Crossing confirmed today</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 pt-0 space-y-2">
+              <button onclick="navigateTo('arrival')" class="w-full py-3.5 rounded-2xl bg-[#165B5E] hover:bg-[#11474A] text-white font-display font-bold text-sm transition cursor-pointer">
+                Continue & complete trip →
+              </button>
+              <button onclick="navigateTo('report')" class="w-full py-2.5 rounded-2xl bg-white border border-[#111827] text-xs font-bold text-[#111827] cursor-pointer">
+                ⚑ Report a barrier
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 10A: 10-SECOND BARRIER REPORT — Page 8 Left
+      // -----------------------------------------------------------------------
+      else if (s === 'report') {
+        const issues = [
+          'Lift out of service', 'Broken ramp',
+          'Footpath blocked', 'Construction',
+          'Flooding', 'Unsafe crossing',
+          'Broken pavement', 'Access restricted'
+        ];
+        const severities = ['Slows me down', 'Hard to pass', 'Blocked'];
+        const durations = ['2 hours', 'Today', 'Until fixed'];
+
+        html = `
+          <div class="screen-animate p-5 space-y-4 bg-[#F7F6F2]">
+            <button onclick="navigateTo('navigation')" class="inline-flex items-center gap-1 text-xs font-bold text-[#165B5E] cursor-pointer">
+              <span>‹</span><span>Back</span>
+            </button>
+
+            <div>
+              <h2 class="font-display font-extrabold text-2xl text-[#111827]">Report a barrier</h2>
+              <p class="text-xs text-[#4B5563] mt-0.5">Takes about 10 seconds. Reports are timestamped and expire.</p>
+            </div>
+
+            <!-- What is the issue? -->
+            <div>
+              <p class="text-xs font-bold text-[#111827] mb-2">What is the issue?</p>
+              <div class="grid grid-cols-2 gap-2">
+                ${issues.map(iss => {
+                  const active = state.reportForm.issue === iss;
+                  return `
+                    <button onclick="state.reportForm.issue='${iss}'; renderPhoneScreen()" class="px-3 py-2.5 rounded-xl border text-xs font-bold text-left transition cursor-pointer flex items-center gap-1.5 ${
+                      active ? 'bg-[#111827] text-white border-[#111827]' : 'bg-white text-[#111827] border-[#D6D0C2] hover:border-[#111827]'
+                    }">
+                      ${active ? '<span>✓</span>' : ''}
+                      <span class="truncate">${iss}</span>
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <!-- How bad is it? -->
+            <div>
+              <p class="text-xs font-bold text-[#111827] mb-2">How bad is it?</p>
+              <div class="grid grid-cols-3 gap-2">
+                ${severities.map(sev => {
+                  const active = state.reportForm.severity === sev;
+                  return `
+                    <button onclick="state.reportForm.severity='${sev}'; renderPhoneScreen()" class="px-2 py-2.5 rounded-xl border text-[11px] font-bold text-center transition cursor-pointer ${
+                      active ? 'bg-[#111827] text-white border-[#111827]' : 'bg-white text-[#111827] border-[#D6D0C2]'
+                    }">${sev}</button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <!-- Show this report for -->
+            <div>
+              <p class="text-xs font-bold text-[#111827] mb-2">Show this report for</p>
+              <div class="grid grid-cols-3 gap-2">
+                ${durations.map(dur => {
+                  const active = state.reportForm.duration === dur;
+                  return `
+                    <button onclick="state.reportForm.duration='${dur}'; renderPhoneScreen()" class="px-2 py-2.5 rounded-xl border text-xs font-bold text-center transition cursor-pointer ${
+                      active ? 'bg-[#111827] text-white border-[#111827]' : 'bg-white text-[#111827] border-[#D6D0C2]'
+                    }">${dur}</button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <!-- Auto Location Pill -->
+            <div class="bg-white border border-[#E2DDD0] rounded-2xl p-3 flex items-center gap-2.5">
+              <span class="text-[#165B5E] font-bold">📍</span>
+              <div>
+                <p class="text-xs font-bold text-[#111827]">Near the junction on Station Road</p>
+                <p class="text-[11px] text-[#4B5563]">Using your current location</p>
+              </div>
+            </div>
+
+            <button onclick="state.reportForm.submitted=true; showToast('Report live for ${state.reportForm.duration}'); navigateTo('arrival')" class="w-full py-3.5 rounded-2xl bg-[#165B5E] hover:bg-[#11474A] text-white font-display font-bold text-sm shadow-sm transition cursor-pointer">
+              Send report
+            </button>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 10B: YOU'VE ARRIVED (Community Verification) — Page 8 Right
+      // -----------------------------------------------------------------------
+      else if (s === 'arrival') {
+        const checks = [
+          { key: 'seg1', label: 'Station Road footpath' },
+          { key: 'seg2', label: 'Junction crossing' },
+          { key: 'seg3', label: 'Hospital entrance ramp' },
+        ];
+        const answeredCount = Object.values(checks).filter(c => state.arrivalFeedback[c.key] !== null).length;
+
+        html = `
+          <div class="screen-animate flex-1 flex flex-col justify-between bg-[#F7F6F2]">
+            <div>
+              <!-- Emerald Arrival Header -->
+              <div class="bg-[#DCFCE7] border-b border-[#166534]/25 p-5 space-y-2">
+                <div class="w-8 h-8 rounded-full bg-[#166534] text-white flex items-center justify-center font-bold text-sm">✓</div>
+                <h2 class="font-display font-extrabold text-2xl text-[#14532D]">You've arrived</h2>
+                <p class="text-xs text-[#166534] font-medium">Andheri Community Hospital. 40 min, 1.6 km, 1 reroute.</p>
+              </div>
+
+              <div class="p-5 space-y-4">
+                <!-- Live Report Confirmation Card -->
+                <div class="bg-white border border-[#E2DDD0] rounded-2xl p-3 flex items-center gap-3">
+                  <span class="text-[#165B5E] font-bold text-base">⚑</span>
+                  <div>
+                    <p class="text-xs font-bold text-[#111827]">Your report is live</p>
+                    <p class="text-[11px] text-[#4B5563]">${state.reportForm.issue}, shown until end of ${state.reportForm.duration.toLowerCase()}</p>
+                  </div>
+                </div>
+
+                <!-- 1-Tap Accuracy Verification -->
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <p class="text-xs font-extrabold text-[#111827]">Was the route accurate?</p>
+                    <span class="text-[11px] font-bold text-[#6B7280] tabular-nums">${answeredCount} of 3 answered</span>
+                  </div>
+                  <p class="text-[11px] text-[#4B5563] mb-2.5">Your answers keep other people's information fresh.</p>
+
+                  <div class="divide-y divide-[#E2DDD0] bg-white border border-[#E2DDD0] rounded-2xl px-3.5">
+                    ${checks.map(c => {
+                      const val = state.arrivalFeedback[c.key];
+                      return `
+                        <div class="py-2.5 flex items-center justify-between gap-2">
+                          <span class="text-xs font-bold text-[#111827]">${c.label}</span>
+                          <div class="flex items-center gap-1.5">
+                            <button onclick="state.arrivalFeedback['${c.key}']='yes'; renderPhoneScreen()" class="px-2.5 py-1 rounded-xl text-[11px] font-bold border transition cursor-pointer ${
+                              val === 'yes' ? 'bg-[#166534] text-white border-[#166534]' : 'bg-white text-[#111827] border-[#D6D0C2]'
+                            }">${val === 'yes' ? '✓ Yes' : 'Yes'}</button>
+                            <button onclick="state.arrivalFeedback['${c.key}']='changed'; renderPhoneScreen()" class="px-2.5 py-1 rounded-xl text-[11px] font-bold border transition cursor-pointer ${
+                              val === 'changed' ? 'bg-[#92400E] text-white border-[#92400E]' : 'bg-white text-[#111827] border-[#D6D0C2]'
+                            }">Changed</button>
+                          </div>
+                        </div>
+                      `;
+                    }).join('')}
+                  </div>
+                </div>
+
+                <!-- Overall Needs Rating -->
+                <div>
+                  <p class="text-xs font-extrabold text-[#111827] mb-2">Did it work for your needs?</p>
+                  <div class="grid grid-cols-3 gap-2">
+                    ${['Yes', 'Mostly', 'No'].map(opt => {
+                      const active = state.arrivalFeedback.overall === opt;
+                      return `
+                        <button onclick="state.arrivalFeedback.overall='${opt}'; renderPhoneScreen()" class="py-2.5 rounded-xl border text-xs font-bold transition cursor-pointer ${
+                          active ? 'bg-[#111827] text-white border-[#111827]' : 'bg-white text-[#111827] border-[#D6D0C2]'
+                        }">${opt}</button>
+                      `;
+                    }).join('')}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 pt-0">
+              <button onclick="showToast('Thank you! Community data updated.'); navigateTo('home')" class="w-full py-3.5 rounded-2xl bg-[#165B5E] hover:bg-[#11474A] text-white font-display font-bold text-sm transition cursor-pointer">
+                Done
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 11A: HONEST STATE ("No step-free route right now") — Page 9 Left
+      // -----------------------------------------------------------------------
+      else if (s === 'no-route') {
+        const options = [
+          { icon: '🕒', title: 'Wait and be reminded', desc: 'Works are expected to end around 6 pm. Low confidence.', action: "showToast('Reminder set for 6:00 PM')" },
+          { icon: '🪜', title: 'Lowest-effort route, 3 steps', desc: 'Handrails on both sides and one rest stop. Medium confidence.', action: "navigateTo('routes')" },
+          { icon: '🏛️', title: 'Try a different entrance', desc: 'The east gate has a ramp, per a community report 5 days ago.', action: "navigateTo('entrances')" },
+          { icon: '👥', title: 'Ask someone to help', desc: 'Share your journey so a caregiver can meet you at the steps.', action: "navigateTo('share')" },
+        ];
+
+        html = `
+          <div class="screen-animate flex-1 flex flex-col justify-between bg-[#F7F6F2]">
+            <div>
+              <!-- Honest Amber Header -->
+              <div class="bg-[#FDF6E7] border-b border-[#92400E]/30 p-5 space-y-2">
+                <button onclick="navigateTo('home')" class="inline-flex items-center gap-1 text-xs font-bold text-[#92400E] cursor-pointer">
+                  <span>‹</span><span>Back</span>
+                </button>
+                <h2 class="font-display font-extrabold text-2xl leading-tight text-[#451A03]">No step-free route right now</h2>
+                <p class="text-xs text-[#78350F] leading-relaxed">To Link Road Market. The only step-free path is blocked by construction, reported 2 hours ago.</p>
+              </div>
+
+              <div class="p-5 space-y-3">
+                <p class="text-xs text-[#4B5563] leading-relaxed">We would rather tell you plainly than send you a route you can't use. Here is what you can do.</p>
+
+                <div class="space-y-2.5">
+                  ${options.map(o => `
+                    <button onclick="${o.action}" class="w-full bg-white border border-[#E2DDD0] hover:border-[#165B5E] rounded-2xl p-3.5 flex items-center justify-between gap-3 text-left transition cursor-pointer">
+                      <div class="flex items-start gap-3">
+                        <span class="w-8 h-8 rounded-full bg-[#E6F1F0] flex items-center justify-center text-sm shrink-0">${o.icon}</span>
+                        <div>
+                          <p class="text-xs font-extrabold text-[#111827]">${o.title}</p>
+                          <p class="text-[11px] text-[#4B5563] mt-0.5 leading-snug">${o.desc}</p>
+                        </div>
+                      </div>
+                      <span class="text-[#4B5563] font-bold">›</span>
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 pt-0 text-center">
+              <button onclick="navigateTo('report')" class="text-xs font-bold text-[#165B5E] underline underline-offset-2 cursor-pointer">
+                Something changed? Update this report
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 11B: ENTRANCE COMPARISON ("Andheri Community Hospital") — Page 9 Right
+      // -----------------------------------------------------------------------
+      else if (s === 'entrances') {
+        html = `
+          <div class="screen-animate p-5 space-y-3.5 bg-[#F7F6F2]">
+            <button onclick="navigateTo('map')" class="inline-flex items-center gap-1 text-xs font-bold text-[#165B5E] cursor-pointer">
+              <span>‹</span><span>Back</span>
+            </button>
+
+            <div>
+              <h2 class="font-display font-extrabold text-2xl leading-tight text-[#111827]">Andheri Community Hospital</h2>
+              <p class="text-xs text-[#4B5563] mt-0.5">Getting in. Compare entrances before you set off.</p>
+            </div>
+
+            <!-- Building Entrance Schematic -->
+            <div class="bg-[#EFECE4] border border-[#E2DDD0] rounded-2xl p-3">
+              <svg class="w-full h-24" viewBox="0 0 300 90" fill="none">
+                <rect x="65" y="10" width="170" height="58" rx="10" fill="#DDE2EB" stroke="#111827" stroke-width="1.8"/>
+                <text x="150" y="42" text-anchor="middle" font-size="12" font-weight="800" fill="#111827">Hospital</text>
+                <!-- Gate 1 (West) -->
+                <circle cx="65" cy="48" r="12" fill="white" stroke="#165B5E" stroke-width="2.2"/>
+                <text x="65" y="52" text-anchor="middle" font-size="11" font-weight="800" fill="#111827">1</text>
+                <!-- Gate 2 (East) -->
+                <circle cx="235" cy="48" r="12" fill="white" stroke="#111827" stroke-width="1.8"/>
+                <text x="235" y="52" text-anchor="middle" font-size="11" font-weight="800" fill="#111827">2</text>
+                <!-- Drop-off D -->
+                <circle cx="150" cy="68" r="12" fill="white" stroke="#111827" stroke-width="1.8"/>
+                <text x="150" y="72" text-anchor="middle" font-size="11" font-weight="800" fill="#111827">D</text>
+              </svg>
+            </div>
+
+            <!-- Entrance Cards -->
+            <div class="space-y-2.5">
+              <div onclick="state.selectedEntrance='main'; renderPhoneScreen()" class="bg-white rounded-2xl p-3.5 cursor-pointer transition ${state.selectedEntrance==='main' ? 'border-2 border-[#165B5E]' : 'border border-[#E2DDD0]'}">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-extrabold text-[#111827]">1 Main gate, west side</span>
+                  <span class="px-2 py-0.5 rounded-full bg-[#165B5E] text-white text-[10px] font-bold">Best match</span>
+                </div>
+                <p class="text-[11px] text-[#4B5563] mt-1">Ramp, automatic door, no steps. Reception is 20 m inside.</p>
+                <span class="inline-block mt-2 px-2.5 py-0.5 rounded-full bg-[#FEF3C7] text-[#92400E] text-[10px] font-bold">Community report, 5 days ago</span>
+              </div>
+
+              <div onclick="state.selectedEntrance='east'; renderPhoneScreen()" class="bg-white rounded-2xl p-3.5 cursor-pointer transition ${state.selectedEntrance==='east' ? 'border-2 border-[#165B5E]' : 'border border-[#E2DDD0]'}">
+                <span class="text-xs font-extrabold text-[#111827]">2 East gate</span>
+                <p class="text-[11px] text-[#4B5563] mt-1">Ramp with handrail, manual door. Quieter, 90 m more walking.</p>
+                <span class="inline-block mt-2 px-2.5 py-0.5 rounded-full bg-[#FEF3C7] text-[#92400E] text-[10px] font-bold">Community report, 5 days ago</span>
+              </div>
+
+              <div onclick="state.selectedEntrance='dropoff'; renderPhoneScreen()" class="bg-white rounded-2xl p-3.5 cursor-pointer transition ${state.selectedEntrance==='dropoff' ? 'border-2 border-[#165B5E]' : 'border border-[#E2DDD0]'}">
+                <span class="text-xs font-extrabold text-[#111827]">D Drop-off point</span>
+                <p class="text-[11px] text-[#4B5563] mt-1">Level kerb for cars and autos, 40 m from the main gate.</p>
+                <span class="inline-block mt-2 px-2.5 py-0.5 rounded-full bg-[#DCFCE7] text-[#166534] text-[10px] font-bold">Confirmed yesterday</span>
+              </div>
+            </div>
+
+            <!-- Indoor Facility Chips -->
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2.5 py-1 rounded-full bg-[#E6F1F0] text-[#165B5E] text-[11px] font-bold">Lifts inside</span>
+              <span class="px-2.5 py-1 rounded-full bg-[#E6F1F0] text-[#165B5E] text-[11px] font-bold">Accessible toilet</span>
+              <span class="px-2.5 py-1 rounded-full bg-[#E6F1F0] text-[#165B5E] text-[11px] font-bold">Seating in waiting area</span>
+            </div>
+
+            <button onclick="navigateTo('navigation')" class="w-full py-3.5 rounded-2xl bg-[#165B5E] hover:bg-[#11474A] text-white font-display font-bold text-sm transition cursor-pointer">
+              Route to the ${state.selectedEntrance === 'east' ? 'east gate' : state.selectedEntrance === 'dropoff' ? 'drop-off point' : 'main gate'}
+            </button>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 12A: NEARBY REPORTS TAB — Page 10 Left
+      // -----------------------------------------------------------------------
+      else if (s === 'nearby-reports') {
+        const categories = ['All', 'Lifts', 'Ramps', 'Paths', 'Crossings'];
+        const filtered = state.nearbyFilter === 'All'
+          ? state.nearbyReports
+          : state.nearbyReports.filter(r => r.type === state.nearbyFilter);
+
+        html = `
+          <div class="screen-animate p-5 space-y-3.5 bg-[#F7F6F2]">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="font-display font-extrabold text-2xl text-[#111827]">Nearby reports</h2>
+                <p class="text-xs text-[#4B5563]">Within 1 km of Andheri Station. Newest first.</p>
+              </div>
+              <button onclick="navigateTo('report')" class="px-3 py-1.5 rounded-xl bg-[#165B5E] text-white text-xs font-bold cursor-pointer">+ Report</button>
+            </div>
+
+            <!-- Filter Pills -->
+            <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5">
+              ${categories.map(cat => `
+                <button onclick="state.nearbyFilter='${cat}'; renderPhoneScreen()" class="px-3 py-1.5 rounded-full text-xs font-bold border transition shrink-0 cursor-pointer ${
+                  state.nearbyFilter === cat
+                    ? 'bg-[#111827] text-white border-[#111827]'
+                    : 'bg-white text-[#111827] border-[#111827]/70'
+                }">${cat}</button>
+              `).join('')}
+            </div>
+
+            <!-- Feed Cards -->
+            <div class="space-y-2.5">
+              ${filtered.map(rep => {
+                const isHigh = rep.confidence.includes('High');
+                return `
+                  <div class="bg-white border border-[#E2DDD0] rounded-2xl p-3.5 space-y-2">
+                    <div class="flex items-start justify-between gap-2">
+                      <p class="text-xs font-extrabold text-[#111827]">${rep.title}</p>
+                      <span class="text-[11px] text-[#6B7280] shrink-0">${rep.time}</span>
+                    </div>
+                    <p class="text-[11px] text-[#4B5563]">${rep.loc}</p>
+                    <div class="flex items-center justify-between pt-1">
+                      <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                        isHigh ? 'bg-[#DCFCE7] text-[#166534]' : 'bg-[#FEF3C7] text-[#92400E]'
+                      }">${rep.confidence}, ${rep.count} reports</span>
+                      <button onclick="confirmNearbyReport(${rep.id})" class="text-xs font-bold text-[#165B5E] underline underline-offset-2 cursor-pointer">
+                        ${rep.confirmed ? '✓ Confirmed' : 'Still there?'}
+                      </button>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // SCREEN 12B: SHARE YOUR JOURNEY (Caregiver Support) — Page 10 Right
+      // -----------------------------------------------------------------------
+      else if (s === 'share') {
+        const contacts = [
+          { name: 'Mum', initial: 'M', role: 'Can follow and call you' },
+          { name: 'Aarav', initial: 'A', role: 'Caregiver, can reroute for you' },
+          { name: 'Neha', initial: 'N', role: 'Friend' },
+        ];
+
+        html = `
+          <div class="screen-animate p-5 flex-1 flex flex-col justify-between bg-[#F7F6F2]">
+            <div class="space-y-4">
+              <button onclick="navigateTo('navigation')" class="inline-flex items-center gap-1 text-xs font-bold text-[#165B5E] cursor-pointer">
+                <span>‹</span><span>Back</span>
+              </button>
+
+              <div>
+                <h2 class="font-display font-extrabold text-2xl text-[#111827]">Share your journey</h2>
+                <p class="text-xs text-[#4B5563] mt-1">Let someone you trust follow along and meet you if the route changes.</p>
+              </div>
+
+              <!-- Who can follow? -->
+              <div class="space-y-2">
+                <p class="text-xs font-bold text-[#111827]">Who can follow?</p>
+                ${contacts.map(c => {
+                  const selected = state.shareContacts.includes(c.name);
+                  return `
+                    <button onclick="toggleShareContact('${c.name}')" class="w-full text-left p-3 rounded-2xl border-[1.5px] transition flex items-center justify-between cursor-pointer ${
+                      selected ? 'bg-[#E6F1F0] border-[#165B5E]' : 'bg-white border-[#D6D0C2]'
+                    }">
+                      <div class="flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-full font-display font-extrabold text-xs flex items-center justify-center ${
+                          selected ? 'bg-[#165B5E] text-white' : 'bg-[#EFECE4] text-[#111827]'
+                        }">${c.initial}</span>
+                        <div>
+                          <p class="text-xs font-extrabold text-[#111827]">${c.name}</p>
+                          <p class="text-[11px] text-[#4B5563]">${c.role}</p>
+                        </div>
+                      </div>
+                      ${selected ? '<span class="text-[#165B5E] font-extrabold">✓</span>' : ''}
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+
+              <!-- Privacy & Reroute Toggles -->
+              <div class="space-y-2.5 pt-1">
+                <div onclick="state.shareLiveLocation=!state.shareLiveLocation; renderPhoneScreen()" class="flex items-center justify-between gap-3 cursor-pointer">
+                  <div>
+                    <p class="text-xs font-bold text-[#111827]">Share live location until I arrive</p>
+                    <p class="text-[11px] text-[#4B5563]">Stops automatically at the destination</p>
+                  </div>
+                  <div class="w-11 h-6 rounded-full p-0.5 transition-colors shrink-0 ${state.shareLiveLocation ? 'bg-[#165B5E]' : 'bg-[#6B7280]'}">
+                    <div class="w-5 h-5 rounded-full bg-white transition-transform ${state.shareLiveLocation ? 'translate-x-5' : 'translate-x-0'}"></div>
+                  </div>
+                </div>
+
+                <div onclick="state.shareRouteChanges=!state.shareRouteChanges; renderPhoneScreen()" class="flex items-center justify-between gap-3 cursor-pointer">
+                  <div>
+                    <p class="text-xs font-bold text-[#111827]">Tell them if my route changes</p>
+                    <p class="text-[11px] text-[#4B5563]">For example a lift out of service</p>
+                  </div>
+                  <div class="w-11 h-6 rounded-full p-0.5 transition-colors shrink-0 ${state.shareRouteChanges ? 'bg-[#165B5E]' : 'bg-[#6B7280]'}">
+                    <div class="w-5 h-5 rounded-full bg-white transition-transform ${state.shareRouteChanges ? 'translate-x-5' : 'translate-x-0'}"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Live Preview Card -->
+              <div class="bg-[#EFECE4] border border-[#E2DDD0] rounded-2xl p-3.5 space-y-1">
+                <p class="text-[10px] font-extrabold uppercase tracking-wider text-[#6B7280]">What they will see</p>
+                <p class="text-xs font-extrabold text-[#111827]">Heading to ${state.destination}</p>
+                <p class="text-[11px] text-[#4B5563]">Step 2 of 5, step-free route. Updates if you reroute. Your saved needs stay private.</p>
+              </div>
+            </div>
+
+            <div class="pt-4">
+              <button onclick="showToast('Live trip shared with ${state.shareContacts.join(', ') || 'caregiver'}'); navigateTo('navigation')" class="w-full py-3.5 rounded-2xl bg-[#165B5E] hover:bg-[#11474A] text-white font-display font-bold text-sm transition cursor-pointer">
+                Share with ${Math.max(1, state.shareContacts.length)} ${state.shareContacts.length === 1 ? 'person' : 'people'}
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+    }
+
+    // Helper interactions inside screens
+    function handlePlanRoute() {
+      const dest = (state.destination || '').toLowerCase();
+      if (dest.includes('market') || dest.includes('link road')) {
+        navigateTo('no-route');
+      } else {
+        navigateTo('routes');
+      }
+    }
+
+    function confirmNearbyReport(id) {
+      const item = state.nearbyReports.find(r => r.id === id);
+      if (item && !item.confirmed) {
+        item.count += 1;
+        item.confirmed = true;
+        item.time = 'Just now';
+        renderPhoneScreen();
+        showToast('Confirmed! Report count updated.');
+      }
+    }
+
+    function toggleShareContact(name) {
+      const idx = state.shareContacts.indexOf(name);
+      if (idx > -1) {
+        if (state.shareContacts.length > 1) state.shareContacts.splice(idx, 1);
+      } else {
+        state.shareContacts.push(name);
+      }
+      renderPhoneScreen();
+    }
+
+    // -------------------------------------------------------------------------
+    // 5. GUIDED PILLS & CONTEXTUAL UX ANNOTATION PANEL
+    // -------------------------------------------------------------------------
+    function renderStoryPills() {
+      const list = document.getElementById('story-pills-list');
+      list.innerHTML = STORY_FLOWS.map(flow => {
+        const active = flow.id === state.currentScreen ||
+          (flow.id === 'nearby-reports' && ['nearby-reports', 'share'].includes(state.currentScreen)) ||
+          (flow.id === 'no-route' && ['no-route', 'entrances'].includes(state.currentScreen));
+        return `
+          <button onclick="navigateTo('${flow.id}')" class="px-3 py-2 rounded-xl text-xs font-bold text-left transition whitespace-nowrap lg:whitespace-normal flex items-center justify-between gap-2 cursor-pointer ${
+            active
+              ? 'bg-[#165B5E] text-white shadow-2xs'
+              : 'bg-white lg:bg-transparent hover:bg-[#EFECE4] text-[#4B5563] hover:text-[#111827] border border-[#E2DDD0] lg:border-transparent'
+          }">
+            <span>${flow.pillLabel}</span>
+            <span class="text-[10px] opacity-75 hidden lg:inline">${flow.slideNum.split('/')[0]}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function getCurrentFlowIndex() {
+      let idx = STORY_FLOWS.findIndex(f => f.id === state.currentScreen);
+      if (idx === -1) {
+        if (state.currentScreen === 'rerouted') idx = STORY_FLOWS.findIndex(f => f.id === 'lift-alert');
+        else if (state.currentScreen === 'arrival') idx = STORY_FLOWS.findIndex(f => f.id === 'report');
+        else if (state.currentScreen === 'entrances') idx = STORY_FLOWS.findIndex(f => f.id === 'no-route');
+        else if (['nearby-reports', 'share'].includes(state.currentScreen)) idx = STORY_FLOWS.length - 1;
+        else idx = 0;
+      }
+      return idx;
+    }
+
+    function renderAnnotationPanel() {
+      const idx = getCurrentFlowIndex();
+      const flow = STORY_FLOWS[idx];
+      const panel = document.getElementById('annotation-panel-content');
+
+      panel.innerHTML = `
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-extrabold uppercase tracking-wider text-[#165B5E]">${flow.kicker}</span>
+          <span class="px-2 py-0.5 rounded-md bg-[#EFECE4] text-[#4B5563] text-[11px] font-bold tabular-nums">Slide ${flow.slideNum}</span>
+        </div>
+
+        <h3 class="font-display font-extrabold text-xl text-[#111827] leading-snug">${flow.title}</h3>
+        <p class="text-xs sm:text-[13px] text-[#4B5563] leading-relaxed">${flow.summary}</p>
+
+        <div class="bg-[#F7F6F2] border border-[#E2DDD0] rounded-2xl p-4 space-y-2.5">
+          <p class="text-[11px] font-extrabold uppercase tracking-wider text-[#111827]">Key UX Decisions</p>
+          <ul class="space-y-2">
+            ${flow.highlights.map(h => `
+              <li class="flex items-start gap-2 text-xs text-[#374151] leading-relaxed">
+                <span class="w-4 h-4 rounded-full bg-[#E6F1F0] text-[#165B5E] font-extrabold text-[10px] flex items-center justify-center shrink-0 mt-0.5">✓</span>
+                <span>${h}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+
+        <!-- Quick Extra Screens Switcher -->
+        <div class="pt-1">
+          <p class="text-[11px] font-bold text-[#6B7280] mb-2">Jump to related screens:</p>
+          <div class="flex flex-wrap gap-1.5">
+            <button onclick="navigateTo('entrances')" class="px-2.5 py-1 rounded-lg bg-white border border-[#D6D0C2] hover:border-[#165B5E] text-[11px] font-bold text-[#111827] cursor-pointer">Hospital Entrances</button>
+            <button onclick="navigateTo('nearby-reports')" class="px-2.5 py-1 rounded-lg bg-white border border-[#D6D0C2] hover:border-[#165B5E] text-[11px] font-bold text-[#111827] cursor-pointer">Nearby Reports</button>
+            <button onclick="navigateTo('share')" class="px-2.5 py-1 rounded-lg bg-white border border-[#D6D0C2] hover:border-[#165B5E] text-[11px] font-bold text-[#111827] cursor-pointer">Caregiver Share</button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('story-step-counter').textContent = `Step ${idx + 1} of ${STORY_FLOWS.length}`;
+      document.getElementById('prev-story-btn').disabled = idx === 0;
+      document.getElementById('next-story-btn').textContent = idx === STORY_FLOWS.length - 1 ? 'Restart Tour ↺' : 'Next Story Step →';
+    }
+
+    function stepStory(delta) {
+      const idx = getCurrentFlowIndex();
+      let nextIdx = idx + delta;
+      if (nextIdx >= STORY_FLOWS.length) nextIdx = 0;
+      if (nextIdx < 0) nextIdx = 0;
+      navigateTo(STORY_FLOWS[nextIdx].id);
+    }
+
+    // -------------------------------------------------------------------------
+    // 6. 11-SLIDE CASE STUDY DECK RENDERER
+    // -------------------------------------------------------------------------
+    function renderDeckSlide() {
+      const slide = DECK_SLIDES[state.deckSlideIndex];
+      document.getElementById('deck-slide-badge').textContent = slide.num;
+      document.getElementById('deck-slide-kicker').textContent = slide.kicker;
+
+      // Render top 11 pills
+      const dots = document.getElementById('deck-dots');
+      dots.innerHTML = DECK_SLIDES.map((s, i) => `
+        <button onclick="state.deckSlideIndex=${i}; renderDeckSlide()" class="w-7 h-7 rounded-lg text-xs font-bold tabular-nums transition cursor-pointer ${
+          i === state.deckSlideIndex ? 'bg-[#165B5E] text-white' : 'bg-[#EFECE4] text-[#4B5563] hover:text-[#111827]'
+        }">${String(i + 1).padStart(2, '0')}</button>
+      `).join('');
+
+      const body = document.getElementById('deck-slide-body');
+
+      if (slide.visualType === 'hero') {
+        body.innerHTML = `
+          <div class="screen-animate space-y-6">
+            <!-- Signature Teal Banner from Page 1 -->
+            <div class="bg-[#1C6366] rounded-3xl p-6 sm:p-10 relative overflow-hidden">
+              <svg class="w-full h-36 sm:h-44" viewBox="0 0 640 160" fill="none">
+                <rect x="0" y="106" width="640" height="22" fill="white" fill-opacity="0.16"/>
+                <rect x="190" y="0" width="22" height="160" fill="white" fill-opacity="0.16"/>
+                <rect x="410" y="0" width="22" height="160" fill="white" fill-opacity="0.16"/>
+                <path d="M56 117H201V42H525" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Start -->
+                <circle cx="56" cy="117" r="16" fill="#111827" stroke="white" stroke-width="5"/>
+                <!-- L -->
+                <circle cx="132" cy="117" r="18" fill="white"/>
+                <text x="132" y="123" text-anchor="middle" font-size="16" font-weight="800" fill="#165B5E">L</text>
+                <!-- R -->
+                <circle cx="201" cy="78" r="18" fill="white"/>
+                <text x="201" y="84" text-anchor="middle" font-size="16" font-weight="800" fill="#165B5E">R</text>
+                <!-- B -->
+                <circle cx="356" cy="42" r="18" fill="white"/>
+                <text x="356" y="48" text-anchor="middle" font-size="16" font-weight="800" fill="#165B5E">B</text>
+                <!-- Check -->
+                <rect x="515" y="18" width="48" height="48" rx="12" fill="#111827"/>
+                <path d="M528 42L535.5 49.5L550 35" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
+              <div class="md:col-span-8 space-y-2">
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#111827] tracking-tight">${slide.title}</h2>
+                <p class="text-sm sm:text-base text-[#4B5563] max-w-2xl">${slide.subtitle}</p>
+              </div>
+              <div class="md:col-span-4 flex flex-wrap gap-2 md:justify-end">
+                ${slide.tags.map(t => `<span class="px-3 py-1 rounded-full bg-[#EFECE4] text-[#111827] text-xs font-bold">${t}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (slide.visualType === 'problem') {
+        body.innerHTML = `
+          <div class="screen-animate grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-5 space-y-4">
+              <h2 class="font-display font-extrabold text-3xl text-[#111827] leading-tight">${slide.title}</h2>
+              <p class="text-sm text-[#4B5563] leading-relaxed">${slide.subtitle}</p>
+            </div>
+            <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              ${slide.barriers.map(b => `
+                <div class="bg-white border border-[#E2DDD0] rounded-2xl p-4 flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-xl bg-[#FDF6E7] text-[#92400E] font-extrabold text-sm flex items-center justify-center shrink-0">!</span>
+                  <span class="text-sm font-bold text-[#111827]">${b}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else if (slide.visualType === 'next') {
+        body.innerHTML = `
+          <div class="screen-animate space-y-6">
+            <div class="max-w-2xl space-y-2">
+              <h2 class="font-display font-extrabold text-3xl text-[#111827]">${slide.title}</h2>
+              <p class="text-sm text-[#4B5563]">${slide.subtitle}</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              ${slide.hypotheses.map((q, i) => `
+                <div class="bg-white border border-[#E2DDD0] rounded-2xl p-5 space-y-2">
+                  <span class="text-xs font-extrabold text-[#165B5E] tabular-nums">0${i + 1}</span>
+                  <p class="font-display font-bold text-base text-[#111827] leading-snug">${q}</p>
+                </div>
+              `).join('')}
+            </div>
+            <p class="text-xs text-[#6B7280] bg-[#EFECE4] px-4 py-3 rounded-xl">A concept set in Mumbai. The screens use illustrative data and have not yet been validated with people who have lived experience of mobility limitations.</p>
+          </div>
+        `;
+      } else {
+        body.innerHTML = `
+          <div class="screen-animate grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-6 space-y-4">
+              <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-[#111827] leading-tight">${slide.title}</h2>
+              <p class="text-sm text-[#4B5563] leading-relaxed">${slide.subtitle}</p>
+              <ul class="space-y-2.5 pt-2">
+                ${slide.points.map(pt => `
+                  <li class="flex items-start gap-2.5 text-xs sm:text-sm text-[#374151]">
+                    <span class="w-5 h-5 rounded-full bg-[#E6F1F0] text-[#165B5E] font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">✓</span>
+                    <span>${pt}</span>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+            <div class="lg:col-span-6 bg-[#F7F6F2] border border-[#E2DDD0] rounded-3xl p-6 flex flex-col items-center justify-center text-center space-y-4">
+              <div class="w-14 h-14 rounded-2xl bg-[#165B5E] text-white flex items-center justify-center shadow-sm">
+                <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                  <rect x="6" y="2" width="12" height="20" rx="2.5"/>
+                  <line x1="11" y1="18" x2="13" y2="18"/>
+                </svg>
+              </div>
+              <div class="space-y-1">
+                <p class="font-display font-extrabold text-base text-[#111827]">Interactive Prototype Ready</p>
+                <p class="text-xs text-[#4B5563] max-w-xs">Click below to jump directly into this exact screen inside the clickable WayAble mobile prototype.</p>
+              </div>
+              <button onclick="jumpFromDeckToPrototype()" class="px-5 py-2.5 rounded-xl bg-[#165B5E] hover:bg-[#11474A] text-white text-xs font-bold shadow-xs transition cursor-pointer">
+                Open "${slide.kicker}" in Phone →
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      document.getElementById('deck-prev-btn').disabled = state.deckSlideIndex === 0;
+      document.getElementById('deck-next-btn').disabled = state.deckSlideIndex === DECK_SLIDES.length - 1;
+    }
+
+    function changeDeckSlide(delta) {
+      const next = state.deckSlideIndex + delta;
+      if (next >= 0 && next < DECK_SLIDES.length) {
+        state.deckSlideIndex = next;
+        renderDeckSlide();
+      }
+    }
+
+    function jumpFromDeckToPrototype() {
+      const targetScreen = DECK_SLIDES[state.deckSlideIndex].jumpScreen || 'onboarding';
+      setAppMode('prototype');
+      navigateTo(targetScreen);
+    }
+
+    // -------------------------------------------------------------------------
+    // 7. EMBED MODAL HELPERS
+    // -------------------------------------------------------------------------
+    function openEmbedModal() {
+      document.getElementById('embed-modal').classList.remove('hidden');
+    }
+
+    function closeEmbedModal() {
+      document.getElementById('embed-modal').classList.add('hidden');
+    }
+
+    function copyEmbedSnippet() {
+      const textarea = document.getElementById('embed-code-textarea');
+      textarea.select();
+      document.execCommand('copy');
+      const btn = document.getElementById('copy-embed-btn');
+      btn.textContent = 'Copied! ✓';
+      setTimeout(() => {
+        btn.textContent = 'Copy Embed Snippet';
+      }, 2000);
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', () => {
+      navigateTo('onboarding');
+    });
+  </script>
+</body>
+</html>

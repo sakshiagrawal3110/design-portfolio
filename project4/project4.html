@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WayAble — Inclusive Urban Mobility in Mumbai | Sakshi Agrawal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css" />
   <link rel="stylesheet" href="project4.css" />
 </head>
+
 <body id="top">
+  <!-- Reading Progress Hairline -->
+  <div class="cs-progress" aria-hidden="true">
+    <span class="cs-progress-bar" id="cs-progress-bar"></span>
+  </div>
+
   <!-- Floating Translucent Nav with TL;DR Button -->
   <header class="cs-nav-wrap">
     <nav class="cs-nav" aria-label="Case study navigation">
@@ -20,18 +29,13 @@
         <a href="#empathy">Empathy</a>
         <a href="#define">Define</a>
         <a href="#ideate">Trust Engine</a>
-        <a href="#prototype">10 Screens</a>
+        <a href="#prototype">Prototype</a>
         <a href="#test-ship">Validation</a>
         <a href="#impact">Metrics</a>
       </div>
 
       <div class="cs-nav-right">
-        <button
-          type="button"
-          id="tldr-btn"
-          class="tldr-nav-btn"
-          aria-pressed="false"
-        >
+        <button type="button" id="tldr-btn" class="tldr-nav-btn" aria-pressed="false">
           <span class="tldr-dot" aria-hidden="true"></span>
           <span>TL;DR</span>
         </button>
@@ -45,13 +49,15 @@
   </header>
 
   <main>
-    <!-- Hero + Metadata -->
+    <!-- Hero + Editorial Metadata -->
     <section class="cs-hero">
       <div class="container">
         <span class="mono small muted cs-eyebrow">CASE STUDY · URBAN MOBILITY · ACCESSIBILITY · MUMBAI</span>
-        <h1 class="cs-title">WAYABLE</h1>
+        <h1 class="cs-title">WAY<span class="cs-title-serif">Able</span></h1>
         <p class="cs-hero-sub">
-          <strong>Designing for journey confidence, not just the fastest route</strong>—an inclusive urban navigation concept for <em>Mumbai</em> that helps people with mobility limitations plan, verify, and complete journeys independently.
+          <strong>Designing for journey confidence, not just the fastest route</strong>—an inclusive urban navigation
+          concept for <em>Mumbai</em> that helps people with mobility limitations plan, verify, and complete journeys
+          independently.
         </p>
 
         <dl class="cs-meta-strip">
@@ -65,7 +71,7 @@
           </div>
           <div>
             <dt>Scope</dt>
-            <dd>Research, Trust Engine &amp; 10-Screen Prototype</dd>
+            <dd>Research, Trust Engine &amp; Interactive Prototype</dd>
           </div>
           <div>
             <dt>Status</dt>
@@ -115,9 +121,15 @@
           </div>
 
           <ul class="tldr-points">
-            <li><strong>The Problem:</strong> Mainstream maps optimize for minimum time, hiding stair-only foot-over-bridges, broken lifts, and steep footpaths across Mumbai's four fragmented infrastructure owners.</li>
-            <li><strong>The Core Model:</strong> Replaced stigmatizing disability labels with modular effort toggles, explicit route trade-offs (<em>Fastest</em> vs. <em>Step-free</em> vs. <em>Low-effort</em>), and a <strong>Time-Decayed Journey Confidence</strong> engine backed by recency timestamps.</li>
-            <li><strong>Prototype &amp; Validation:</strong> 10 WCAG 2.2 AA screens scoped to Andheri Station last-mile trips, paired with a 5-participant comparative usability test targeting <strong>+40% pre-trip confidence</strong> and <strong>&lt; 90s</strong> planning.</li>
+            <li><strong>The Problem:</strong> Mainstream maps optimize for minimum time, hiding stair-only
+              foot-over-bridges, broken lifts, and steep footpaths across Mumbai's four fragmented infrastructure
+              owners.</li>
+            <li><strong>The Core Model:</strong> Replaced stigmatizing disability labels with modular effort toggles,
+              explicit route trade-offs (<em>Fastest</em> vs. <em>Step-free</em> vs. <em>Low-effort</em>), and a
+              <strong>Time-Decayed Journey Confidence</strong> engine backed by recency timestamps.</li>
+            <li><strong>Prototype &amp; Validation:</strong> 10 WCAG 2.2 AA screens scoped to Andheri Station last-mile
+              trips, paired with a 5-participant comparative usability test targeting <strong>+40% pre-trip
+                confidence</strong> and <strong>&lt; 90s</strong> planning.</li>
           </ul>
 
           <div class="tldr-kpi-grid">
@@ -147,96 +159,104 @@
       <!-- 1. Empathy (Context & Discovery) -->
       <section id="empathy" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">01 · EMPATHY &amp; DISCOVERY</h2>
             <p class="muted cs-sec-lead">
-              <strong>The fastest route is often a trap—and uncertainty is the real barrier.</strong> Scoped to last-mile journeys from <em>Andheri Station</em>, where accessibility data fractures across four disconnected owners.
+              <strong>The fastest route is often a trap—and uncertainty is the real barrier.</strong> Scoped to
+              last-mile journeys from <em>Andheri Station</em>, where accessibility data fractures across four
+              disconnected owners.
             </p>
           </div>
 
-          <div class="cs-split-diagram">
-            <div class="cs-diag-col">
+          <div class="cs-editorial-bridge" data-reveal>
+            <div class="cs-bridge-side">
               <span class="mono small muted">MUMBAI INFRASTRUCTURE · 4 DISCONNECTED OWNERS</span>
-              <div class="cs-diag-row four-mini">
-                <div class="cs-node">Railways</div>
-                <div class="cs-node">Municipal Paths</div>
-                <div class="cs-node">Crossings</div>
-                <div class="cs-node">Entrances</div>
-              </div>
+              <p class="cs-bridge-list mono">Railways · Municipal Paths · Crossings · Entrances</p>
               <p class="small muted">One unverified staircase or broken lift triggers an abandonment loop mid-trip.</p>
             </div>
 
-            <div class="cs-diag-center mono">JOURNEY<br />CERTAINTY</div>
+            <div class="cs-bridge-pivot mono">JOURNEY<br />CERTAINTY</div>
 
-            <div class="cs-diag-col">
-              <span class="mono small muted">WAYABLE · UNIFIED END-TO-END LAYER</span>
-              <div class="cs-diag-row">
-                <div class="cs-node is-lit">Modular Needs</div>
-                <div class="cs-node is-lit">Route Trade-Offs</div>
-                <div class="cs-node is-lit">Live Freshness</div>
-              </div>
-              <p class="small muted">Bridges accessible destinations with verified, navigable segments along the way.</p>
+            <div class="cs-bridge-side">
+              <span class="mono small cs-accent-text">WAYABLE · UNIFIED END-TO-END LAYER</span>
+              <p class="cs-bridge-list mono">Modular Needs · Route Trade-Offs · Live Freshness</p>
+              <p class="small muted">Bridges accessible destinations with verified, navigable segments along the way.
+              </p>
             </div>
           </div>
 
-          <!-- 4 Distinct Behavioral Profiles -->
-          <div class="cs-four-cols">
-            <article class="cs-mini-card">
-              <span class="mono cs-num">PROFILE 01 · HARD CONSTRAINTS</span>
-              <h3>Wheelchair User</h3>
+          <!-- 4 Behavioral Profiles as Editorial Ledger Rows -->
+          <div class="cs-ledger" data-reveal>
+            <article class="cs-ledger-row">
+              <div class="cs-ledger-meta">
+                <span class="mono cs-num">01 · HARD CONSTRAINTS</span>
+                <h3>Wheelchair User</h3>
+              </div>
               <p class="small muted">
-                Requires <strong>step-free access</strong>, verified ramps, working elevators, pavement surface data, and accessible washrooms. One unverified staircase invalidates the entire route.
+                Requires <strong>step-free access</strong>, verified ramps, working elevators, pavement surface data,
+                and accessible washrooms. One unverified staircase invalidates the entire route.
               </p>
             </article>
 
-            <article class="cs-mini-card">
-              <span class="mono cs-num">PROFILE 02 · EFFORT CONSTRAINTS</span>
-              <h3>Older Adult</h3>
+            <article class="cs-ledger-row">
+              <div class="cs-ledger-meta">
+                <span class="mono cs-num">02 · EFFORT CONSTRAINTS</span>
+                <h3>Older Adult</h3>
+              </div>
               <p class="small muted">
-                Can manage a few steps if needed, but prioritizes <strong>shorter walking distances</strong>, shaded seating/rest stops, fewer multi-lane crossings, and gentle inclines.
+                Can manage a few steps if needed, but prioritizes <strong>shorter walking distances</strong>, shaded
+                seating/rest stops, fewer multi-lane crossings, and gentle inclines.
               </p>
             </article>
 
-            <article class="cs-mini-card">
-              <span class="mono cs-num">PROFILE 03 · SITUATIONAL</span>
-              <h3>Temporary Mobility Limit</h3>
+            <article class="cs-ledger-row">
+              <div class="cs-ledger-meta">
+                <span class="mono cs-num">03 · SITUATIONAL</span>
+                <h3>Temporary Mobility Limit</h3>
+              </div>
               <p class="small muted">
-                Recovering from surgery or injury; needs <strong>flexible, low-effort routes</strong> with minimal walking without permanently identifying as disabled.
+                Recovering from surgery or injury; needs <strong>flexible, low-effort routes</strong> with minimal
+                walking without permanently identifying as disabled.
               </p>
             </article>
 
-            <article class="cs-mini-card">
-              <span class="mono cs-num">PROFILE 04 · SECONDARY</span>
-              <h3>Caregiver</h3>
+            <article class="cs-ledger-row">
+              <div class="cs-ledger-meta">
+                <span class="mono cs-num">04 · SECONDARY</span>
+                <h3>Caregiver</h3>
+              </div>
               <p class="small muted">
-                Pre-verifies routes <strong>remotely on behalf of someone else</strong>; prioritizes high data certainty before committing to leaving home.
+                Pre-verifies routes <strong>remotely on behalf of someone else</strong>; prioritizes high data certainty
+                before committing to leaving home.
               </p>
             </article>
           </div>
 
           <!-- Research Plan & Honest Disclosure -->
-          <div class="cs-panel mt-20">
+          <div class="cs-editorial-note mt-24" data-reveal>
             <div class="disclosure-head">
               <span class="mono small cs-accent-text">RESEARCH PLAN &amp; HONEST DISCLOSURE</span>
               <span class="persona-badge mono">Ethical Outreach · No Fabricated Quotes</span>
             </div>
             <p class="small muted">
-              Recruiting participants with lived mobility limitations requires dedicated ethical outreach. Rather than inventing interview quotes, this concept is grounded in secondary research and competitive analysis, paired with a structured validation plan:
+              Recruiting participants with lived mobility limitations requires dedicated ethical outreach. Rather than
+              inventing interview quotes, this concept is grounded in secondary research and competitive analysis,
+              paired with a structured validation plan:
             </p>
             <div class="cs-four-cols mt-8">
-              <div class="sub-box">
+              <div class="cs-inline-item">
                 <strong class="small">User Interviews (5–7)</strong>
                 <p class="small muted">Trip planning habits, abandonment triggers, and trust signals.</p>
               </div>
-              <div class="sub-box">
+              <div class="cs-inline-item">
                 <strong class="small">Contextual Inquiry (2–3)</strong>
                 <p class="small muted">Observing physical friction and cognitive load on real Mumbai trips.</p>
               </div>
-              <div class="sub-box">
+              <div class="cs-inline-item">
                 <strong class="small">Competitive Audit</strong>
                 <p class="small muted">Google Maps, Wheelmap, and AccessNow pattern &amp; gap mapping.</p>
               </div>
-              <div class="sub-box">
+              <div class="cs-inline-item">
                 <strong class="small">Accessibility Audit</strong>
                 <p class="small muted">Full WCAG 2.2 AA contrast, focus, and motor target pass.</p>
               </div>
@@ -248,61 +268,68 @@
       <!-- 2. Define (The Anchor Section) -->
       <section id="define" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">02 · DEFINE</h2>
             <p class="muted cs-sec-lead">
-              <em>"How might we give people with mobility limitations the confidence to plan and complete an entire urban journey independently?"</em>
+              <em>"How might we give people with mobility limitations the confidence to plan and complete an entire
+                urban journey independently?"</em>
             </p>
           </div>
 
           <!-- Two Core Insights -->
-          <div class="cs-two-col">
-            <article class="cs-panel">
+          <div class="cs-editorial-cols two" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono cs-num">INSIGHT 01 · SPECTRUM</span>
               <h3>Accessibility is a spectrum of effort, not a binary filter</h3>
               <p class="small muted">
-                Wheelmap and AccessNow tell you if a destination is accessible; Google Maps tells you how to get there fast. A single <em>"Wheelchair Accessible"</em> toggle fails older adults, people on crutches, and caregivers.
+                Wheelmap and AccessNow tell you if a destination is accessible; Google Maps tells you how to get there
+                fast. A single <em>"Wheelchair Accessible"</em> toggle fails older adults, people on crutches, and
+                caregivers.
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">INSIGHT 02 · FRESHNESS</span>
               <h3>Stale data is worse than no data</h3>
               <p class="small muted">
-                In a city with frequent construction and elevator outages, an unverified <em>"Step-Free"</em> label destroys user trust the very first time it fails mid-journey.
+                In a city with frequent construction and elevator outages, an unverified <em>"Step-Free"</em> label
+                destroys user trust the very first time it fails mid-journey.
               </p>
             </article>
           </div>
 
           <!-- Strategic Trade-offs -->
-          <div class="cs-three-cols mt-20">
-            <article class="cs-panel">
+          <div class="cs-editorial-cols three mt-24" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono cs-num">TRADE-OFF 01 · NO LABELS</span>
               <h3>No disability-label onboarding</h3>
               <p class="small muted">
-                Replaced stigmatizing identity presets (<em>"I am elderly"</em>) with <strong>modular, behavior-based preferences</strong> that adapt daily to fatigue, weather, or companions.
+                Replaced stigmatizing identity presets (<em>"I am elderly"</em>) with <strong>modular, behavior-based
+                  preferences</strong> that adapt daily to fatigue, weather, or companions.
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">TRADE-OFF 02 · SAFETY</span>
               <h3>No AR street-view navigation</h3>
               <p class="small muted">
-                Holding a phone up in crowded Mumbai streets is unsafe with crutches, a cane, or a wheelchair. Prioritized <strong>high-contrast, glanceable 2D maps</strong> and audio cues.
+                Holding a phone up in crowded Mumbai streets is unsafe with crutches, a cane, or a wheelchair.
+                Prioritized <strong>high-contrast, glanceable 2D maps</strong> and audio cues.
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">TRADE-OFF 03 · AGENCY</span>
               <h3>No hidden "best route" algorithm</h3>
               <p class="small muted">
-                Exposes explicit time, walking distance, and barrier trade-offs side by side so the traveler retains full agency over their energy and schedule.
+                Exposes explicit time, walking distance, and barrier trade-offs side by side so the traveler retains
+                full agency over their energy and schedule.
               </p>
             </article>
           </div>
 
           <!-- Route Trade-Off Comparison Table -->
-          <div class="cs-table-card mt-20">
+          <div class="cs-table-card mt-24" data-reveal>
             <div class="cs-table-head">
               <span class="mono small cs-accent-text">EXPLICIT ROUTE TRADE-OFF MODEL · ANDHERI CORRIDOR EXAMPLE</span>
             </div>
@@ -339,30 +366,44 @@
               </table>
             </div>
           </div>
+
+          <!-- Intended Impact Visual (impact_2.jpg) -->
+          <figure class="cs-figure mt-24" data-reveal>
+            <div class="cs-figure-caption-top">
+              <span class="mono small cs-accent-text">THE INTENDED IMPACT · BEFORE VS. NOW &amp; DESIGN SCOPE</span>
+              <span class="persona-badge mono">Andheri Station · Illustrative Concept</span>
+            </div>
+            <div class="case-media-frame">
+              <img src="../assets/wayable/impact.png"
+                alt="WayAble intended impact overview comparing before and now across routes, confidence, barrier alerts, and freshness alongside design scope" />
+            </div>
+          </figure>
         </div>
       </section>
 
       <!-- 3. Ideate (Divergence & Trust Architecture) -->
       <section id="ideate" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">03 · TRUST ARCHITECTURE</h2>
             <p class="muted cs-sec-lead">
-              Solving the hardest crowdsourced UX challenge: <strong>preventing outdated or inaccurate reports from stranding a traveler</strong>.
+              Solving the hardest crowdsourced UX challenge: <strong>preventing outdated or inaccurate reports from
+                stranding a traveler</strong>.
             </p>
           </div>
 
           <!-- 3 Explorations -->
-          <div class="cs-three-cols">
-            <article class="cs-panel is-rejected">
+          <div class="cs-editorial-cols three" data-reveal>
+            <article class="cs-editorial-col is-rejected">
               <span class="mono small muted">REJECTED · OPTION A</span>
               <h3>Raw community feed</h3>
               <p class="small muted">
-                Showing every user comment chronologically creates cognitive overload and forces travelers to do mental math while commuting.
+                Showing every user comment chronologically creates cognitive overload and forces travelers to do mental
+                math while commuting.
               </p>
             </article>
 
-            <article class="cs-panel is-rejected">
+            <article class="cs-editorial-col is-rejected">
               <span class="mono small muted">REJECTED · OPTION B</span>
               <h3>Static "Verified" badge</h3>
               <p class="small muted">
@@ -370,17 +411,18 @@
               </p>
             </article>
 
-            <article class="cs-panel is-selected">
+            <article class="cs-editorial-col is-selected">
               <span class="mono cs-num">SELECTED · TRUST ENGINE</span>
               <h3>Time-Decayed Journey Confidence</h3>
               <p class="small muted">
-                Transparent confidence tiers (<strong>High, Moderate, Low</strong>) backed by recency timestamps. Weight decays by barrier type—flooding expires in hours; permanent ramps decay over months.
+                Transparent confidence tiers (<strong>High, Moderate, Low</strong>) backed by recency timestamps. Weight
+                decays by barrier type—flooding expires in hours; permanent ramps decay over months.
               </p>
             </article>
           </div>
 
           <!-- Core Closed-Loop Flow -->
-          <div class="loop-banner mt-20">
+          <div class="loop-stream mt-24" data-reveal>
             <span class="loop-step is-lit mono">1. Plan</span>
             <span class="loop-arrow" aria-hidden="true">→</span>
             <span class="loop-step is-lit mono">2. Set Needs</span>
@@ -394,180 +436,227 @@
             <span class="loop-step is-lit mono">6. Report</span>
           </div>
 
-          <div class="cs-two-col mt-20">
-            <article class="cs-panel">
+          <div class="cs-editorial-cols two mt-24" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono small muted">DISRUPTION HANDLING</span>
               <h3>Proactive pre-emptive alerts</h3>
               <p class="small muted">
-                When an outage is reported ahead (e.g., Andheri Station Platform 2 elevator), WayAble pushes a pre-emptive alert before commitment—paired with a dynamic reroute explaining <strong>why</strong> the path changed.
+                When an outage is reported ahead (e.g., Andheri Station Platform 2 elevator), WayAble pushes a
+                pre-emptive alert before commitment—paired with a dynamic reroute explaining <strong>why</strong> the
+                path changed.
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono small muted">3-TAP CONTRIBUTION</span>
               <h3>Frictionless mid-journey reporting</h3>
               <p class="small muted">
-                Reduced reporting to three taps with auto-captured GPS: <strong>Issue Type → Severity / Expiry → Optional Photo</strong>—so reporting never feels like a municipal complaint form.
+                Reduced reporting to three taps with auto-captured GPS: <strong>Issue Type → Severity / Expiry →
+                  Optional Photo</strong>—so reporting never feels like a municipal complaint form.
               </p>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- 4. Prototype (10 Focused Screens & Craft Decisions) -->
+      <!-- 4. Prototype (10 Focused Screens, Craft Decisions & Scroll-Free Mobile Stage) -->
       <section id="prototype" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">04 · 10-SCREEN PROTOTYPE</h2>
             <p class="muted cs-sec-lead">
-              Concentrated craft on the <strong>10 highest-signal moments</strong> along the Andheri Station-to-destination journey, built for outdoor legibility.
+              Concentrated craft on the <strong>10 highest-signal moments</strong> along the Andheri
+              Station-to-destination journey, built for outdoor legibility.
             </p>
           </div>
 
-          <div class="cs-split-feature">
+          <div class="cs-split-feature" data-reveal>
             <div class="cs-mockup-showcase">
               <div class="case-media-frame">
-                <img
-                  src="../assets/wayable/wayable-mockup.png"
-                  alt="WayAble route comparison and live accessibility alerts mobile screens"
-                />
+                <img src="../assets/wayable/wayable-mockup.png"
+                  alt="WayAble route comparison and live accessibility alerts mobile screens" />
               </div>
             </div>
 
-            <div class="cs-three-stack">
-              <article class="cs-panel">
+            <div class="cs-craft-list">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">CRAFT 01 · WCAG 2.2 AA</span>
                 <h3>Outdoor glare legibility</h3>
                 <p class="small muted">
-                  Minimum <strong>4.5:1 text contrast</strong> and <strong>3:1 UI component contrast</strong> so maps and alerts stay clear in harsh Mumbai sunlight.
+                  Minimum <strong>4.5:1 text contrast</strong> and <strong>3:1 UI component contrast</strong> so maps
+                  and alerts stay clear in harsh Mumbai sunlight.
                 </p>
               </article>
 
-              <article class="cs-panel">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">CRAFT 02 · REDUNDANT CUES</span>
                 <h3>Color never works alone</h3>
                 <p class="small muted">
-                  Every barrier, confidence tier, and route tag pairs color with distinct iconography and plain-language labels.
+                  Every barrier, confidence tier, and route tag pairs color with distinct iconography and plain-language
+                  labels.
                 </p>
               </article>
 
-              <article class="cs-panel">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">CRAFT 03 · ERGONOMICS</span>
                 <h3>One-handed thumb-zone reach</h3>
                 <p class="small muted">
-                  Primary actions (confirm route, accept reroute, report barrier) sit in the lower thumb zone with minimum <strong>48×48dp</strong> touch targets.
+                  Primary actions (confirm route, accept reroute, report barrier) sit in the lower thumb zone with
+                  minimum <strong>48×48dp</strong> touch targets.
                 </p>
               </article>
             </div>
           </div>
 
-          <!-- 10-Screen Flow Grid -->
-          <div class="screens-grid mt-24">
-            <div class="screen-step-card">
+          <!-- 10-Screen Editorial Index -->
+          <div class="screens-index mt-24" data-reveal>
+            <div class="screen-index-item">
               <span class="mono cs-num">01</span>
               <strong>Home &amp; Search</strong>
               <p class="small muted">Recent places, saved stops, and one-tap mobility preferences.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">02</span>
               <strong>Mobility Preferences</strong>
-              <p class="small muted">6 modular per-trip toggles (stairs, slopes, distance, lifts, rest stops, surfaces).</p>
+              <p class="small muted">6 modular per-trip toggles (stairs, slopes, distance, lifts, rest stops, surfaces).
+              </p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">03</span>
               <strong>Route Comparison</strong>
               <p class="small muted">Side-by-side Fastest, Step-free, and Low-effort trade-off cards.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">04</span>
               <strong>Accessibility Map</strong>
               <p class="small muted">Spatial layer for ramps, lifts, rest points, toilets, and live barriers.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">05</span>
               <strong>Route Details</strong>
               <p class="small muted">Segment-by-segment surface quality, slope, crossings, and entrances.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">06</span>
               <strong>Live Navigation</strong>
               <p class="small muted">Glanceable turn-by-turn cues anchored to accessible landmarks.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">07</span>
               <strong>Disruption Alert</strong>
               <p class="small muted">Timestamped outage warning with one-tap alternate route.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">08</span>
               <strong>Report Barrier</strong>
               <p class="small muted">One-handed 3-tap flow with auto-GPS, severity, expiry, and photo.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">09</span>
               <strong>Dynamic Rerouting</strong>
               <p class="small muted">Transparent recalculation banner explaining what changed and why.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">10</span>
               <strong>Journey Completion</strong>
               <p class="small muted">1-tap post-trip check ("Was this route accurate?") to refresh trust.</p>
             </div>
           </div>
+
+          <!-- Scroll-Free 390x844 Mobile Prototype Stage (inner-html/design.html) -->
+          <div class="cs-prototype-embed-card mt-24" data-reveal>
+            <div class="cs-embed-head">
+              <div>
+                <span class="mono small cs-accent-text">WORKING MOBILE PROTOTYPE · 390 × 844</span>
+                <h3>Interactive Andheri navigation prototype</h3>
+              </div>
+              <span class="persona-badge mono">Scroll-Free Frame</span>
+            </div>
+
+            <div class="cs-proto-stage">
+              <iframe src="inner-html/design.html" title="WayAble Working Mobile Prototype" class="cs-proto-iframe"
+                scrolling="no" loading="lazy"></iframe>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- 5. Test & Iterate (Validation Plan) -->
+      <!-- 5. Test & Iterate (Validation Plan & Interactive Case Study Walkthrough) -->
       <section id="test-ship" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">05 · TEST &amp; ITERATE</h2>
             <p class="muted cs-sec-lead">
-              Designed a <strong>5-participant comparative usability study</strong> pitting WayAble against a conventional navigation app on the exact same Mumbai journey.
+              Designed a <strong>5-participant comparative usability study</strong> pitting WayAble against a
+              conventional navigation app on the exact same Mumbai journey.
             </p>
           </div>
 
-          <div class="cs-three-cols">
-            <article class="cs-panel">
+          <div class="cs-editorial-cols three" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono cs-num">TEST 01 · CONFIDENCE</span>
               <h3>Comparative pre-trip test</h3>
               <p class="small muted">
-                Participants plan the Andheri Station-to-destination route in both apps to measure trade-off comprehension and self-reported confidence before starting.
+                Participants plan the Andheri Station-to-destination route in both apps to measure trade-off
+                comprehension and self-reported confidence before starting.
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">TEST 02 · DECAY MODEL</span>
               <h3>Trust &amp; timestamp stress test</h3>
               <p class="small muted">
-                Compare routes verified <em>12 mins ago</em> vs. <em>3 weeks ago</em> to test whether the confidence model calibrates trust without causing anxiety.
+                Compare routes verified <em>12 mins ago</em> vs. <em>3 weeks ago</em> to test whether the confidence
+                model calibrates trust without causing anxiety.
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">TEST 03 · LIVE PIVOT</span>
               <h3>Disruption &amp; reporting simulation</h3>
               <p class="small muted">
-                Trigger an unexpected elevator outage mid-trip to validate reroute clarity and one-handed barrier reporting under time pressure.
+                Trigger an unexpected elevator outage mid-trip to validate reroute clarity and one-handed barrier
+                reporting under time pressure.
               </p>
             </article>
           </div>
 
           <!-- Planned Iteration Triggers -->
-          <div class="cs-two-col mt-20">
-            <div class="cs-panel">
+          <div class="cs-editorial-cols two mt-24" data-reveal>
+            <div class="cs-editorial-col">
               <span class="mono small cs-accent-text">ITERATION TRIGGER A</span>
               <h3>Preference setup hesitation</h3>
               <p class="small muted">
-                If users hesitate on individual toggles, group them into quick-start templates (<strong>"Step-Free"</strong>, <strong>"Low Effort"</strong>) while keeping granular overrides one tap away.
+                If users hesitate on individual toggles, group them into quick-start templates
+                (<strong>"Step-Free"</strong>, <strong>"Low Effort"</strong>) while keeping granular overrides one tap
+                away.
               </p>
             </div>
-            <div class="cs-panel">
+            <div class="cs-editorial-col">
               <span class="mono small cs-accent-text">ITERATION TRIGGER B</span>
               <h3>Alert fatigue or anxiety</h3>
               <p class="small muted">
-                If disruption alerts feel overwhelming, introduce a calmer two-tier hierarchy separating <strong>hard blockers</strong> (elevator out) from <strong>soft warnings</strong> (crowded footpath).
+                If disruption alerts feel overwhelming, introduce a calmer two-tier hierarchy separating <strong>hard
+                  blockers</strong> (elevator out) from <strong>soft warnings</strong> (crowded footpath).
               </p>
+            </div>
+          </div>
+
+          <!-- Guided Interactive Case Study & 11-Slide Deck (inner-html/study.html) -->
+          <div class="cs-study-embed-card mt-24" data-reveal>
+            <div class="cs-embed-head">
+              <div>
+                <span class="mono small cs-accent-text">GUIDED FLOWS &amp; 11-SLIDE DECK · STUDY.HTML</span>
+                <h3>Explore UX annotations &amp; storyboard slides</h3>
+              </div>
+              <a href="inner-html/study.html" target="_blank" rel="noopener noreferrer" class="text-link">
+                Open full view ↗
+              </a>
+            </div>
+
+            <div class="cs-study-frame-wrap">
+              <iframe src="inner-html/study.html" title="WayAble Interactive UX Case Study and 11-Slide Deck"
+                class="cs-study-iframe" loading="lazy"></iframe>
             </div>
           </div>
         </div>
@@ -577,15 +666,16 @@
     <!-- 6. Ship & Impact (Metrics & Target Benchmarks) -->
     <section id="impact" class="cs-section">
       <div class="container">
-        <div class="cs-sec-head">
+        <div class="cs-sec-head" data-reveal>
           <h2 class="cs-sec-title">SUCCESS METRICS &amp; BENCHMARKS</h2>
           <p class="muted cs-sec-lead">
-            Two-tier evaluation framework covering <strong>immediate prototype usability targets</strong> and <strong>post-launch product health metrics</strong>.
+            Two-tier evaluation framework covering <strong>immediate prototype usability targets</strong> and
+            <strong>post-launch product health metrics</strong>.
           </p>
         </div>
 
         <!-- Tier 1 Table -->
-        <div class="cs-table-card">
+        <div class="cs-table-card" data-reveal>
           <div class="cs-table-head">
             <span class="mono small cs-accent-text">TIER 1 · PROTOTYPE USABILITY &amp; VALIDATION TARGETS</span>
           </div>
@@ -634,62 +724,72 @@
           </div>
         </div>
 
-        <!-- Tier 2 Cards -->
-        <div class="mt-24">
+        <!-- Tier 2 Editorial Metrics Strip -->
+        <div class="mt-24" data-reveal>
           <span class="mono small muted block-label">TIER 2 · PROPOSED POST-LAUNCH PRODUCT METRICS (IF SHIPPED)</span>
-          <div class="cs-four-cols">
-            <article class="cs-mini-card is-northstar">
+          <div class="cs-kpi-ledger">
+            <article class="cs-kpi-metric is-northstar">
               <span class="mono cs-num">NORTH STAR METRIC</span>
               <strong class="cs-big-num">Independent Trips</strong>
-              <p class="small muted">% of planned accessible journeys completed without mid-trip abandonment or unscheduled rerouting.</p>
+              <p class="small muted">% of planned accessible journeys completed without mid-trip abandonment or
+                unscheduled rerouting.</p>
             </article>
 
-            <article class="cs-mini-card">
+            <article class="cs-kpi-metric">
               <span class="mono cs-num">CORRIDOR COVERAGE</span>
               <strong class="cs-big-num">&lt; 24h Freshness</strong>
-              <p class="small muted">% of major Mumbai transit corridors with accessibility status verified within 24 hours.</p>
+              <p class="small muted">% of major Mumbai transit corridors with accessibility status verified within 24
+                hours.</p>
             </article>
 
-            <article class="cs-mini-card">
+            <article class="cs-kpi-metric">
               <span class="mono cs-num">TRUST LOOP</span>
               <strong class="cs-big-num">≥ 25% Verified</strong>
-              <p class="small muted">% of completed trips where travelers tap the 1-step post-journey accuracy prompt.</p>
+              <p class="small muted">% of completed trips where travelers tap the 1-step post-journey accuracy prompt.
+              </p>
             </article>
 
-            <article class="cs-mini-card is-guardrail">
+            <article class="cs-kpi-metric is-guardrail">
               <span class="mono cs-num">GUARDRAIL METRIC</span>
               <strong class="cs-big-num">&lt; 2% False Positives</strong>
-              <p class="small muted">% of "High Confidence" routes where travelers still hit an unreported impassable barrier.</p>
+              <p class="small muted">% of "High Confidence" routes where travelers still hit an unreported impassable
+                barrier.</p>
             </article>
           </div>
         </div>
 
-        <!-- Next Case Study Card -->
-        <a href="../project5/project5.html" class="cs-next-card">
+        <!-- Next Case Study Editorial Link -->
+        <a href="../project5/project5.html" class="cs-next-card" data-reveal>
           <div>
             <span class="mono small muted">NEXT CASE STUDY</span>
             <h3>FINBIT</h3>
-            <p class="small muted">White-label, audio-first financial intelligence across consumer listening and B2B partner consoles.</p>
+            <p class="small muted">White-label, audio-first financial intelligence across consumer listening and B2B
+              partner consoles.</p>
           </div>
           <span class="cs-next-arrow">→</span>
         </a>
 
-        <!-- Dark Split CTA + Accent Stripes -->
-        <div class="cta-split mt-36">
-          <div class="cta-dark-box">
-            <span class="dark-pill">
-              <span class="status-dot" aria-hidden="true"></span>
-              Open to Senior UX &amp; Product roles
-            </span>
-            <h2>Let's make something<br />that actually matters.</h2>
+        <!-- Editorial White + Accent Closing CTA -->
+        <div class="cta-split mt-36" data-cta-card>
+          <div class="cta-editorial-box">
+            <div class="cta-top-bar">
+              <span class="editorial-pill">
+                <span class="status-dot" aria-hidden="true"></span>
+                Open to Senior UX &amp; Product roles
+              </span>
+              <span class="cta-issue mono" aria-hidden="true">PORTFOLIO // 2026</span>
+            </div>
+
+            <h2>
+              Let's make something<br />
+              that <span class="cta-italic-accent">actually matters.</span>
+            </h2>
+
             <div class="cta-email-row">
               <span class="cta-email-text">sakshiagrawal3110@gmail.com</span>
-              <button
-                type="button"
-                class="copy-pill-btn copy-email-btn"
-                data-email="sakshiagrawal3110@gmail.com"
-              >
-                Click to copy
+              <button type="button" class="copy-pill-btn copy-email-btn" data-email="sakshiagrawal3110@gmail.com">
+                <span class="copy-pill-label">Click to copy</span>
+                <span class="copy-pill-icon" aria-hidden="true">↗</span>
               </button>
             </div>
           </div>
@@ -748,6 +848,54 @@
     if (tldrCloseBtn) {
       tldrCloseBtn.addEventListener("click", () => setTldrState(false));
     }
+
+    // Reading progress bar & active section link highlight
+    const progressBar = document.getElementById("cs-progress-bar");
+    const navLinks = Array.from(document.querySelectorAll(".cs-jump-links a"));
+    const trackedSections = navLinks
+      .map((a) => document.querySelector(a.getAttribute("href")))
+      .filter(Boolean);
+
+    function updateScrollProgress() {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.min(100, Math.max(0, (window.scrollY / docHeight) * 100)) : 0;
+      if (progressBar) {
+        progressBar.style.width = `${pct}%`;
+      }
+
+      const marker = window.scrollY + 180;
+      let currentId = "";
+      for (const sec of trackedSections) {
+        if (sec.offsetTop <= marker) {
+          currentId = sec.id;
+        }
+      }
+      navLinks.forEach((link) => {
+        link.classList.toggle("is-current", link.getAttribute("href") === `#${currentId}`);
+      });
+    }
+
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+    // Editorial scroll reveal
+    const revealEls = document.querySelectorAll("[data-reveal]");
+    if (revealEls.length > 0 && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-in");
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.1 }
+      );
+      revealEls.forEach((el) => observer.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add("is-in"));
+    }
   </script>
 </body>
+
 </html>

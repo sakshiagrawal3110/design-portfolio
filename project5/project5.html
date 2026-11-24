@@ -11,6 +11,11 @@
   <link rel="stylesheet" href="project5.css" />
 </head>
 <body id="top">
+  <!-- Reading Progress Hairline -->
+  <div class="cs-progress" aria-hidden="true">
+    <span class="cs-progress-bar" id="cs-progress-bar"></span>
+  </div>
+
   <!-- Floating Translucent Nav with TL;DR Button -->
   <header class="cs-nav-wrap">
     <nav class="cs-nav" aria-label="Case study navigation">
@@ -45,11 +50,11 @@
   </header>
 
   <main>
-    <!-- Hero + Metadata -->
+    <!-- Hero + Editorial Metadata -->
     <section class="cs-hero">
       <div class="container">
         <span class="mono small muted cs-eyebrow">CASE STUDY · B2B2C FINTECH · AUDIO AI</span>
-        <h1 class="cs-title">FINBIT</h1>
+        <h1 class="cs-title">FIN<span class="cs-title-serif">bit</span></h1>
         <p class="cs-hero-sub">
           <strong>Financial intelligence, in the moments you have</strong>—a B2B2C <em>audio-first platform</em> that transforms fragmented market updates into personalized, source-backed briefings inside existing brokerage, banking, and wealth apps.
         </p>
@@ -147,16 +152,16 @@
       <!-- 1. Empathy (Context & Discovery) -->
       <section id="empathy" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">01 · EMPATHY &amp; DISCOVERY</h2>
             <p class="muted cs-sec-lead">
               <strong>People want to stay financially informed—they just don't have time to read.</strong> Market updates demand active screen attention, while real life happens in small hands-free windows.
             </p>
           </div>
 
-          <!-- Three Core Friction Points -->
-          <div class="cs-three-cols">
-            <article class="cs-panel">
+          <!-- Three Core Friction Points (Editorial Columns) -->
+          <div class="cs-editorial-cols three" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono cs-num">FRICTION 01 · FRAGMENTATION</span>
               <h3>Information takes too much time</h3>
               <p class="small muted">
@@ -164,7 +169,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">FRICTION 02 · NOISE</span>
               <h3>Too much data, too little context</h3>
               <p class="small muted">
@@ -172,7 +177,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">FRICTION 03 · SCREEN LOCK</span>
               <h3>Built for screens, not real life</h3>
               <p class="small muted">
@@ -182,7 +187,7 @@
           </div>
 
           <!-- Primary Persona + Daily Routine Mapping -->
-          <div class="cs-panel mt-20">
+          <div class="cs-editorial-note mt-24" data-reveal>
             <div class="disclosure-head">
               <div>
                 <span class="mono small cs-accent-text">PRIMARY PERSONA · ROUTINE MAPPING</span>
@@ -194,23 +199,23 @@
               Works full-time, actively uses an investment or banking app, and wants clear market understanding without spending 30 minutes reading every morning:
             </p>
 
-            <div class="cs-four-cols mt-8">
-              <div class="routine-card">
+            <div class="cs-four-cols mt-20">
+              <div class="routine-item">
                 <span class="mono cs-num">8:30 AM · GETTING READY</span>
                 <strong>5-min Morning Briefing</strong>
                 <p class="small muted">Personalized overview of overnight cues and watchlist highlights.</p>
               </div>
-              <div class="routine-card">
+              <div class="routine-item">
                 <span class="mono cs-num">9:15 AM · COMMUTE</span>
                 <strong>Sector &amp; Concept Deep-Dive</strong>
                 <p class="small muted">Listens to a tailored explanation of a followed industry or policy.</p>
               </div>
-              <div class="routine-card">
+              <div class="routine-item">
                 <span class="mono cs-num">12:45 PM · MIDDAY BREAK</span>
                 <strong>90-sec Contextual Pulse</strong>
                 <p class="small muted">Triggered update explaining a major intraday market move.</p>
               </div>
-              <div class="routine-card">
+              <div class="routine-item">
                 <span class="mono cs-num">7:00 PM · EVENING UNWIND</span>
                 <strong>Quick Daily Wrap-Up</strong>
                 <p class="small muted">Concise summary of the day's key takeaways and what to watch next.</p>
@@ -223,7 +228,7 @@
       <!-- 2. Define (The Anchor Section) -->
       <section id="define" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">02 · DEFINE</h2>
             <p class="muted cs-sec-lead">
               <em>"How might we deliver personalized, trustworthy financial context through short-form audio that fits naturally into everyday routines?"</em>
@@ -231,7 +236,7 @@
           </div>
 
           <!-- Comparison Table: Traditional Podcasts vs FINBIT -->
-          <div class="cs-table-card">
+          <div class="cs-table-card" data-reveal>
             <div class="cs-table-head">
               <span class="mono small cs-accent-text">STRATEGIC POSITIONING · NOT ANOTHER FINANCE PODCAST APP</span>
             </div>
@@ -269,9 +274,9 @@
             </div>
           </div>
 
-          <!-- Strategic Trade-offs -->
-          <div class="cs-three-cols mt-20">
-            <article class="cs-panel">
+          <!-- Strategic Trade-offs (Editorial Columns) -->
+          <div class="cs-editorial-cols three mt-24" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono cs-num">TRADE-OFF 01 · DISTRIBUTION</span>
               <h3>B2B2C white-label over standalone</h3>
               <p class="small muted">
@@ -279,7 +284,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">TRADE-OFF 02 · COMPLIANCE</span>
               <h3>No trading or stock tips</h3>
               <p class="small muted">
@@ -287,7 +292,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">TRADE-OFF 03 · AI GUARDRAILS</span>
               <h3>No unverified AI summaries</h3>
               <p class="small muted">
@@ -301,7 +306,7 @@
       <!-- 3. Ideate (Divergence & Core Innovations) -->
       <section id="ideate" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">03 · IDEATE &amp; AUDIO MECHANICS</h2>
             <p class="muted cs-sec-lead">
               Structured around <strong>three listening modes</strong>, <strong>six content formats</strong>, and personalization that adapts to time, knowledge level, and attention.
@@ -309,8 +314,8 @@
           </div>
 
           <!-- 3 Listening Modes + Personalization Controls -->
-          <div class="cs-two-col">
-            <article class="cs-panel">
+          <div class="cs-editorial-cols two" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono small muted">ARCHITECTURE · 3 MODES &amp; 6 FORMATS</span>
               <h3>Structured for moments, not feeds</h3>
               <p class="small muted">
@@ -326,7 +331,7 @@
               </div>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono small muted">PERSONALIZATION · BEYOND TOPICS</span>
               <h3>Control how intelligence is delivered</h3>
               <p class="small muted">
@@ -342,8 +347,8 @@
           </div>
 
           <!-- Four Innovative UX Mechanics -->
-          <div class="cs-four-cols mt-20">
-            <article class="cs-mini-card">
+          <div class="cs-editorial-cols four mt-24" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono cs-num">MECHANIC 01</span>
               <h3>Adaptive Audio</h3>
               <p class="small muted">
@@ -351,7 +356,7 @@
               </p>
             </article>
 
-            <article class="cs-mini-card">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">MECHANIC 02</span>
               <h3>Audio Chapters</h3>
               <p class="small muted">
@@ -359,7 +364,7 @@
               </p>
             </article>
 
-            <article class="cs-mini-card">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">MECHANIC 03</span>
               <h3>"Explain This Further"</h3>
               <p class="small muted">
@@ -367,7 +372,7 @@
               </p>
             </article>
 
-            <article class="cs-mini-card">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">MECHANIC 04</span>
               <h3>Smart Thresholds</h3>
               <p class="small muted">
@@ -381,14 +386,14 @@
       <!-- 4. Prototype (12-Screen Dual-Surface Architecture + Screens & Figma Prototypes) -->
       <section id="prototype" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">04 · DUAL-SURFACE PROTOTYPE</h2>
             <p class="muted cs-sec-lead">
-              <strong>12 focused screens</strong> spanning the <em>Consumer Listening App (10 screens)</em> and <em>B2B Partner Governance Console (2 screens)</em>, paired with interactive Figma prototypes[cite: 54].
+              <strong>12 focused screens</strong> spanning the <em>Consumer Listening App (10 screens)</em> and <em>B2B Partner Governance Console (2 screens)</em>, paired with interactive Figma prototypes.
             </p>
           </div>
 
-          <div class="cs-split-feature">
+          <div class="cs-split-feature" data-reveal>
             <div class="cs-mockup-showcase">
               <div class="case-media-frame">
                 <img
@@ -398,8 +403,8 @@
               </div>
             </div>
 
-            <div class="cs-three-stack">
-              <article class="cs-panel">
+            <div class="cs-craft-list">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">SURFACE A · CONSUMER CORE</span>
                 <h3>Source-backed interactive player</h3>
                 <p class="small muted">
@@ -407,7 +412,7 @@
                 </p>
               </article>
 
-              <article class="cs-panel">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">SURFACE B · B2B ANALYTICS (SCREEN 11)</span>
                 <h3>Partner ROI &amp; retention telemetry</h3>
                 <p class="small muted">
@@ -415,7 +420,7 @@
                 </p>
               </article>
 
-              <article class="cs-panel">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">SURFACE B · PARTNER CONFIG (SCREEN 12)</span>
                 <h3>Self-serve brand &amp; content governance</h3>
                 <p class="small muted">
@@ -426,7 +431,7 @@
           </div>
 
           <!-- Consumer Flow Screens Strip (assets/finbit/screens.png) -->
-          <div class="mt-24">
+          <div class="mt-24" data-reveal>
             <div class="case-media-frame">
               <img
                 src="../assets/finbit/screens.png"
@@ -436,7 +441,7 @@
           </div>
 
           <!-- Interactive Figma Prototype 01: Consumer / Onboarding & Briefing Flow (node-id=10-383) -->
-          <div class="embed-window mt-24" data-embed-window>
+          <div class="embed-window mt-24" data-embed-window data-reveal>
             <div class="embed-window-bar">
               <div class="embed-window-meta">
                 <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -464,7 +469,7 @@
           </div>
 
           <!-- Interactive Figma Prototype 02: Player & Partner Experience (node-id=8-48) -->
-          <div class="embed-window mt-24" data-embed-window>
+          <div class="embed-window mt-24" data-embed-window data-reveal>
             <div class="embed-window-bar">
               <div class="embed-window-meta">
                 <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -491,64 +496,64 @@
             </div>
           </div>
 
-          <!-- All 12 Screens Grid -->
-          <div class="screens-grid mt-24">
-            <div class="screen-step-card">
+          <!-- All 12 Screens Editorial Index -->
+          <div class="screens-index mt-24" data-reveal>
+            <div class="screen-index-item">
               <span class="mono cs-num">01 · CONSUMER</span>
               <strong>Onboarding</strong>
               <p class="small muted">Select financial interests, markets, and followed companies.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">02 · CONSUMER</span>
               <strong>Listening Preferences</strong>
               <p class="small muted">Set duration, knowledge level, language, and audio style.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">03 · CONSUMER</span>
               <strong>Home Feed</strong>
               <p class="small muted">Personalized daily briefing card + live market pulse strip.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">04 · CONSUMER</span>
               <strong>Briefing Details</strong>
               <p class="small muted">Chapter breakdown, duration, and Quick / Daily / Deep depth selector.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">05 · CONSUMER</span>
               <strong>Core Audio Player</strong>
               <p class="small muted">Chapters, synced transcript, Explain Further, AI badge &amp; sources.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">06 · CONSUMER</span>
               <strong>Live Market Update</strong>
               <p class="small muted">Event-triggered 2-minute breakdown (Sensex move or RBI policy).</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">07 · CONSUMER</span>
               <strong>Topic / Company Feed</strong>
               <p class="small muted">Curated audio stream for specific stocks or sectors.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">08 · CONSUMER</span>
               <strong>Search &amp; Discover</strong>
               <p class="small muted">Browse formats like Explain It and Finance Fundamentals.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">09 · CONSUMER</span>
               <strong>Saved Audio / Queue</strong>
               <p class="small muted">Lightweight playlist for commutes and offline listening.</p>
             </div>
-            <div class="screen-step-card">
+            <div class="screen-index-item">
               <span class="mono cs-num">10 · CONSUMER</span>
               <strong>Notification Rules</strong>
               <p class="small muted">Granular control over interruption thresholds.</p>
             </div>
-            <div class="screen-step-card is-b2b">
+            <div class="screen-index-item is-b2b">
               <span class="mono cs-num">11 · B2B PARTNER</span>
               <strong>Partner Analytics</strong>
               <p class="small muted">Plays, completion rate, listening time, topics &amp; returning users.</p>
             </div>
-            <div class="screen-step-card is-b2b">
+            <div class="screen-index-item is-b2b">
               <span class="mono cs-num">12 · B2B PARTNER</span>
               <strong>Brand &amp; API Config</strong>
               <p class="small muted">Voice identity, brand theme, player embed, API feeds &amp; push rules.</p>
@@ -560,15 +565,15 @@
       <!-- 5. Test & Iterate (Validation Plan) -->
       <section id="test-ship" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">05 · TEST &amp; VALIDATE</h2>
             <p class="muted cs-sec-lead">
               Testing the core hypothesis: <em>Can personalized financial audio help users stay informed more consistently and with less effort than traditional news?</em>
             </p>
           </div>
 
-          <div class="cs-three-cols">
-            <article class="cs-panel">
+          <div class="cs-editorial-cols three" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono cs-num">TEST 01 · CONSUMER (6–8)</span>
               <h3>Simulated commute &amp; trust test</h3>
               <p class="small muted">
@@ -576,7 +581,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">TEST 02 · INTERRUPTIONS</span>
               <h3>Notification fatigue check</h3>
               <p class="small muted">
@@ -584,7 +589,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">TEST 03 · B2B (3–4 PMs)</span>
               <h3>Partner concept review</h3>
               <p class="small muted">
@@ -599,7 +604,7 @@
     <!-- 6. Ship & Impact (Metrics & Target Benchmarks) -->
     <section id="impact" class="cs-section">
       <div class="container">
-        <div class="cs-sec-head">
+        <div class="cs-sec-head" data-reveal>
           <h2 class="cs-sec-title">SUCCESS METRICS &amp; BENCHMARKS</h2>
           <p class="muted cs-sec-lead">
             Two-tier framework measuring <strong>consumer habit formation</strong> and <strong>B2B partner ROI</strong>.
@@ -607,7 +612,7 @@
         </div>
 
         <!-- Tier 1 Table -->
-        <div class="cs-table-card">
+        <div class="cs-table-card" data-reveal>
           <div class="cs-table-head">
             <span class="mono small cs-accent-text">TIER 1 · PROTOTYPE USABILITY &amp; VALIDATION TARGETS</span>
           </div>
@@ -646,39 +651,39 @@
           </div>
         </div>
 
-        <!-- Tier 2 Cards -->
-        <div class="mt-24">
+        <!-- Tier 2 Editorial Metrics Strip -->
+        <div class="mt-24" data-reveal>
           <span class="mono small muted block-label">TIER 2 · PROPOSED POST-LAUNCH B2B2C METRICS (PARTNER DASHBOARD KPIs)</span>
-          <div class="cs-five-grid">
-            <article class="cs-mini-card is-northstar">
+          <div class="cs-kpi-ledger">
+            <article class="cs-kpi-metric is-northstar">
               <span class="mono cs-num">NORTH STAR</span>
               <strong class="cs-big-num">WAL / Return</strong>
               <h3>Weekly Active Listeners</h3>
               <p class="small muted">Proves audio becomes a genuine daily routine inside the partner app.</p>
             </article>
 
-            <article class="cs-mini-card">
+            <article class="cs-kpi-metric">
               <span class="mono cs-num">COMPLETION</span>
               <strong class="cs-big-num">≥ 80%</strong>
               <h3>Audio Completion</h3>
               <p class="small muted">Started briefings listened to ≥ 80%, validating duration &amp; depth fit.</p>
             </article>
 
-            <article class="cs-mini-card">
+            <article class="cs-kpi-metric">
               <span class="mono cs-num">DEPTH</span>
               <strong class="cs-big-num">Session Time</strong>
               <h3>Avg Listening Time</h3>
               <p class="small muted">Engagement depth across Daily Briefings vs. Market Pulses.</p>
             </article>
 
-            <article class="cs-mini-card">
+            <article class="cs-kpi-metric">
               <span class="mono cs-num">PARTNER ROI</span>
               <strong class="cs-big-num">30-Day Lift</strong>
               <h3>Partner App Retention</h3>
               <p class="small muted">Retention &amp; session frequency lift for FINBIT listeners vs. non-listeners.</p>
             </article>
 
-            <article class="cs-mini-card is-guardrail">
+            <article class="cs-kpi-metric is-guardrail">
               <span class="mono cs-num">GUARDRAIL</span>
               <strong class="cs-big-num">&lt; 10% Mute</strong>
               <h3>Notification Opt-Out</h3>
@@ -687,8 +692,8 @@
           </div>
         </div>
 
-        <!-- Next Case Study Card -->
-        <a href="../project6/project6.html" class="cs-next-card">
+        <!-- Next Case Study Editorial Link -->
+        <a href="../project6/project6.html" class="cs-next-card" data-reveal>
           <div>
             <span class="mono small muted">NEXT CASE STUDY</span>
             <h3>Clinical AI Documentation</h3>
@@ -697,14 +702,22 @@
           <span class="cs-next-arrow">→</span>
         </a>
 
-        <!-- Dark Split CTA + Accent Stripes -->
-        <div class="cta-split mt-36">
-          <div class="cta-dark-box">
-            <span class="dark-pill">
-              <span class="status-dot" aria-hidden="true"></span>
-              Open to Senior UX &amp; Product roles
-            </span>
-            <h2>Let's make something<br />that actually matters.</h2>
+        <!-- Editorial White + Accent Closing CTA -->
+        <div class="cta-split mt-36" data-cta-card>
+          <div class="cta-editorial-box">
+            <div class="cta-top-bar">
+              <span class="editorial-pill">
+                <span class="status-dot" aria-hidden="true"></span>
+                Open to Senior UX &amp; Product roles
+              </span>
+              <span class="cta-issue mono" aria-hidden="true">PORTFOLIO // 2026</span>
+            </div>
+
+            <h2>
+              Let's make something<br />
+              that <span class="cta-italic-accent">actually matters.</span>
+            </h2>
+
             <div class="cta-email-row">
               <span class="cta-email-text">sakshiagrawal3110@gmail.com</span>
               <button
@@ -712,7 +725,8 @@
                 class="copy-pill-btn copy-email-btn"
                 data-email="sakshiagrawal3110@gmail.com"
               >
-                Click to copy
+                <span class="copy-pill-label">Click to copy</span>
+                <span class="copy-pill-icon" aria-hidden="true">↗</span>
               </button>
             </div>
           </div>
@@ -783,6 +797,53 @@
         btn.textContent = expanded ? "Compact height" : "Expand height";
       });
     });
+
+    // Reading progress bar & active section link highlight
+    const progressBar = document.getElementById("cs-progress-bar");
+    const navLinks = Array.from(document.querySelectorAll(".cs-jump-links a"));
+    const trackedSections = navLinks
+      .map((a) => document.querySelector(a.getAttribute("href")))
+      .filter(Boolean);
+
+    function updateScrollProgress() {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.min(100, Math.max(0, (window.scrollY / docHeight) * 100)) : 0;
+      if (progressBar) {
+        progressBar.style.width = `${pct}%`;
+      }
+
+      const marker = window.scrollY + 180;
+      let currentId = "";
+      for (const sec of trackedSections) {
+        if (sec.offsetTop <= marker) {
+          currentId = sec.id;
+        }
+      }
+      navLinks.forEach((link) => {
+        link.classList.toggle("is-current", link.getAttribute("href") === `#${currentId}`);
+      });
+    }
+
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+    // Editorial scroll reveal
+    const revealEls = document.querySelectorAll("[data-reveal]");
+    if (revealEls.length > 0 && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-in");
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.1 }
+      );
+      revealEls.forEach((el) => observer.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add("is-in"));
+    }
   </script>
 </body>
 </html>

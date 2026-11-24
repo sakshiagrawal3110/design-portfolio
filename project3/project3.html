@@ -11,6 +11,11 @@
   <link rel="stylesheet" href="project3.css" />
 </head>
 <body id="top">
+  <!-- Reading Progress Hairline -->
+  <div class="cs-progress" aria-hidden="true">
+    <span class="cs-progress-bar" id="cs-progress-bar"></span>
+  </div>
+
   <!-- Floating Translucent Nav with TL;DR Button -->
   <header class="cs-nav-wrap">
     <nav class="cs-nav" aria-label="Case study navigation">
@@ -49,7 +54,7 @@
     <section class="cs-hero">
       <div class="container">
         <span class="mono small muted cs-eyebrow">CASE STUDY · B2B SAAS · SUPPORT OPERATIONS</span>
-        <h1 class="cs-title">OPSPILOT</h1>
+        <h1 class="cs-title">OPS<span class="cs-title-serif">Pilot</span></h1>
         <p class="cs-hero-sub">
           <strong>Closing the gap between spotting a support issue and fixing it</strong>—a research-led <em>desktop-first workspace</em> unifying operational monitoring, root-cause investigation, corrective action assignment, and resolution tracking.
         </p>
@@ -155,39 +160,31 @@
       <!-- 1. Empathy (Context & Research Framework + Research Workbook Window) -->
       <section id="empathy" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">01 · EMPATHY &amp; RESEARCH</h2>
             <p class="muted cs-sec-lead">
               <strong>Support teams don't lack data—they lack a bridge from data to action.</strong> Alerts fire in BI tools, digging happens in tickets, and action items scatter across spreadsheets and chat.
             </p>
           </div>
 
-          <div class="cs-split-diagram">
-            <div class="cs-diag-col">
+          <div class="cs-editorial-bridge" data-reveal>
+            <div class="cs-bridge-side">
               <span class="mono small muted">FRACTURED · CURRENT INCIDENT HANDOFF</span>
-              <div class="cs-diag-row">
-                <div class="cs-node">BI Alerts</div>
-                <div class="cs-node">Spreadsheets</div>
-                <div class="cs-node">Slack Threads</div>
-              </div>
+              <p class="cs-bridge-list mono">BI Alerts · Spreadsheets · Slack Threads</p>
               <p class="small muted">Context drops between spotting a metric slip and following through on fixes.</p>
             </div>
 
-            <div class="cs-diag-center mono">BRIDGE<br />TO ACTION</div>
+            <div class="cs-bridge-pivot mono">BRIDGE<br />TO ACTION</div>
 
-            <div class="cs-diag-col">
-              <span class="mono small muted">UNIFIED · OPSPILOT WORKSPACE</span>
-              <div class="cs-diag-row">
-                <div class="cs-node is-lit">Anomaly Queue</div>
-                <div class="cs-node is-lit">Root Cause</div>
-                <div class="cs-node is-lit">Tracked Owner</div>
-              </div>
+            <div class="cs-bridge-side">
+              <span class="mono small cs-accent-text">UNIFIED · OPSPILOT WORKSPACE</span>
+              <p class="cs-bridge-list mono">Anomaly Queue · Root Cause · Tracked Owner</p>
               <p class="small muted">Investigation findings carry straight into assigned corrective actions.</p>
             </div>
           </div>
 
           <!-- Research Framework Table -->
-          <div class="cs-table-card">
+          <div class="cs-table-card mt-24" data-reveal>
             <div class="cs-table-head">
               <span class="mono small cs-accent-text">GENERATIVE QUALITATIVE RESEARCH FRAMEWORK</span>
             </div>
@@ -222,7 +219,7 @@
           </div>
 
           <!-- Embedded Window: inner-html/3.html (Research Workbook) -->
-          <div class="embed-window mt-24" data-embed-window>
+          <div class="embed-window mt-24" data-embed-window data-reveal>
             <div class="embed-window-bar">
               <div class="embed-window-meta">
                 <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -244,15 +241,15 @@
       <!-- 2. Define (The Anchor Section) -->
       <section id="define" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">02 · DEFINE</h2>
             <p class="muted cs-sec-lead">
               <em>"How might we connect performance monitoring directly to root-cause investigation and tracked ownership?"</em> Anchored around <strong>Monitor → Investigate → Assign → Track → Resolve</strong>.
             </p>
           </div>
 
-          <!-- 5-Stage Loop Strip -->
-          <div class="loop-banner">
+          <!-- 5-Stage Loop Stream -->
+          <div class="loop-stream" data-reveal>
             <span class="loop-step is-lit mono">1. Monitor</span>
             <span class="loop-arrow" aria-hidden="true">→</span>
             <span class="loop-step is-lit mono">2. Investigate</span>
@@ -264,9 +261,9 @@
             <span class="loop-step is-lit mono">5. Resolve</span>
           </div>
 
-          <!-- Strategic Trade-offs -->
-          <div class="cs-three-cols mt-20">
-            <article class="cs-panel">
+          <!-- Strategic Trade-offs (Editorial Columns) -->
+          <div class="cs-editorial-cols three mt-24" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono cs-num">BOUNDARY 01 · INTEGRATION</span>
               <h3>Not another ticketing system</h3>
               <p class="small muted">
@@ -274,7 +271,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">BOUNDARY 02 · FOCUS</span>
               <h3>Not a generic BI builder</h3>
               <p class="small muted">
@@ -282,7 +279,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">BOUNDARY 03 · ACCOUNTABILITY</span>
               <h3>Ownership is mandatory</h3>
               <p class="small muted">
@@ -296,15 +293,15 @@
       <!-- 3. Ideate (Divergence, Workflow Exploration & Design Blueprints Window) -->
       <section id="ideate" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">03 · IDEATE &amp; BLUEPRINTS</h2>
             <p class="muted cs-sec-lead">
-              Auditing <strong>5 support and analytics platforms</strong> informed our IA, user flows, wireframes, design system states, and specs inside <code>1.html</code>[cite: 48].
+              Auditing <strong>5 support and analytics platforms</strong> informed our IA, user flows, wireframes, design system states, and specs inside <code>1.html</code>.
             </p>
           </div>
 
-          <div class="cs-two-col">
-            <article class="cs-panel">
+          <div class="cs-editorial-cols two" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono small muted">EXPLORATION 01 · INVESTIGATION</span>
               <h3>Inline root-cause drilldown</h3>
               <p class="small muted">
@@ -318,7 +315,7 @@
               </div>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono small muted">EXPLORATION 02 · HANDOFF</span>
               <h3>One-click escalation to Action Item</h3>
               <p class="small muted">
@@ -334,7 +331,7 @@
           </div>
 
           <!-- Embedded Window: inner-html/1.html (OpsPilot Design Blueprints) -->
-          <div class="embed-window mt-24" data-embed-window>
+          <div class="embed-window mt-24" data-embed-window data-reveal>
             <div class="embed-window-bar">
               <div class="embed-window-meta">
                 <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -356,16 +353,16 @@
       <!-- 4. Prototype (Craft, Key Decisions & Interactive Mockup Window) -->
       <section id="prototype" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">04 · PROTOTYPE &amp; CRAFT</h2>
             <p class="muted cs-sec-lead">
-              Designed for <strong>high-density desktop scanning</strong>, rapid incident triage, and an interactive prototype in <code>2.html</code>[cite: 49].
+              Designed for <strong>high-density desktop scanning</strong>, rapid incident triage, and an interactive prototype in <code>2.html</code>.
             </p>
           </div>
 
-          <div class="cs-split-feature">
-            <div class="cs-three-stack">
-              <article class="cs-panel">
+          <div class="cs-split-feature" data-reveal>
+            <div class="cs-craft-list">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">01 · TRIAGE VIEW</span>
                 <h3>Exception-first dashboard</h3>
                 <p class="small muted">
@@ -373,7 +370,7 @@
                 </p>
               </article>
 
-              <article class="cs-panel">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">02 · STATE VISIBILITY</span>
                 <h3>Persistent resolution timeline</h3>
                 <p class="small muted">
@@ -381,7 +378,7 @@
                 </p>
               </article>
 
-              <article class="cs-panel">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">03 · SINGLE RECORD</span>
                 <h3>Audit-ready context</h3>
                 <p class="small muted">
@@ -432,7 +429,7 @@
           </div>
 
           <!-- Embedded Window: inner-html/2.html (Interactive OpsPilot Prototype Mockup) -->
-          <div class="embed-window mt-24" data-embed-window>
+          <div class="embed-window mt-24" data-embed-window data-reveal>
             <div class="embed-window-bar">
               <div class="embed-window-meta">
                 <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -454,15 +451,15 @@
       <!-- 5. Test & Iterate (Validation Process) -->
       <section id="test-ship" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">05 · TEST &amp; VALIDATION</h2>
             <p class="muted cs-sec-lead">
               Structured a focused usability validation plan with <strong>5–6 support ops participants</strong> to stress-test the end-to-end workflow.
             </p>
           </div>
 
-          <div class="cs-three-cols">
-            <article class="cs-panel">
+          <div class="cs-editorial-cols three" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono cs-num">STEP 01 · SIMULATION</span>
               <h3>Task-based incident simulation</h3>
               <p class="small muted">
@@ -470,7 +467,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">STEP 02 · SIGNAL CHECK</span>
               <h3>Signal-to-noise check</h3>
               <p class="small muted">
@@ -478,7 +475,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">STEP 03 · STACK FIT</span>
               <h3>Integration &amp; permissions pass</h3>
               <p class="small muted">
@@ -493,41 +490,41 @@
     <!-- 6. Ship & Impact (Success Framework) -->
     <section id="impact" class="cs-section">
       <div class="container">
-        <div class="cs-sec-head">
+        <div class="cs-sec-head" data-reveal>
           <h2 class="cs-sec-title">SUCCESS FRAMEWORK (NDA)</h2>
           <p class="muted cs-sec-lead">
             <strong>Actual performance figures are redacted under NDA.</strong> Success is defined around four operational KPIs designed to close the loop from detection to resolution.
           </p>
         </div>
 
-        <div class="cs-four-cols">
-          <article class="cs-mini-card is-northstar">
+        <div class="cs-kpi-ledger" data-reveal>
+          <article class="cs-kpi-metric is-northstar">
             <span class="mono cs-num">NORTH STAR METRIC</span>
             <strong class="cs-big-num">Resolution in Target</strong>
             <p class="small muted">% of actionable operational issues resolved within target time—proving the loop closes.</p>
           </article>
 
-          <article class="cs-mini-card">
+          <article class="cs-kpi-metric">
             <span class="mono cs-num">DIAGNOSIS SPEED</span>
             <strong class="cs-big-num">Time to Root Cause</strong>
             <p class="small muted">Reduction in median time from anomaly detection to identified root cause.</p>
           </article>
 
-          <article class="cs-mini-card">
+          <article class="cs-kpi-metric">
             <span class="mono cs-num">ACCOUNTABILITY</span>
             <strong class="cs-big-num">Ownership Coverage</strong>
             <p class="small muted">% of flagged operational issues assigned to a named owner within 24 hours.</p>
           </article>
 
-          <article class="cs-mini-card">
+          <article class="cs-kpi-metric is-guardrail">
             <span class="mono cs-num">WORKFLOW CLARITY</span>
             <strong class="cs-big-num">Tool Switching</strong>
             <p class="small muted">Drop in manual spreadsheet and chat tracking during incident reviews.</p>
           </article>
         </div>
 
-        <!-- Next Case Study Card -->
-        <a href="../project4/project4.html" class="cs-next-card">
+        <!-- Next Case Study Editorial Link -->
+        <a href="../project4/project4.html" class="cs-next-card" data-reveal>
           <div>
             <span class="mono small muted">NEXT CASE STUDY</span>
             <h3>WayAble</h3>
@@ -536,14 +533,22 @@
           <span class="cs-next-arrow">→</span>
         </a>
 
-        <!-- Dark Split CTA + Accent Stripes -->
-        <div class="cta-split mt-36">
-          <div class="cta-dark-box">
-            <span class="dark-pill">
-              <span class="status-dot" aria-hidden="true"></span>
-              Open to Senior UX &amp; Product roles
-            </span>
-            <h2>Let's make something<br />that actually matters.</h2>
+        <!-- Editorial White + Accent Closing CTA -->
+        <div class="cta-split mt-36" data-cta-card>
+          <div class="cta-editorial-box">
+            <div class="cta-top-bar">
+              <span class="editorial-pill">
+                <span class="status-dot" aria-hidden="true"></span>
+                Open to Senior UX &amp; Product roles
+              </span>
+              <span class="cta-issue mono" aria-hidden="true">PORTFOLIO // 2026</span>
+            </div>
+
+            <h2>
+              Let's make something<br />
+              that <span class="cta-italic-accent">actually matters.</span>
+            </h2>
+
             <div class="cta-email-row">
               <span class="cta-email-text">sakshiagrawal3110@gmail.com</span>
               <button
@@ -551,7 +556,8 @@
                 class="copy-pill-btn copy-email-btn"
                 data-email="sakshiagrawal3110@gmail.com"
               >
-                Click to copy
+                <span class="copy-pill-label">Click to copy</span>
+                <span class="copy-pill-icon" aria-hidden="true">↗</span>
               </button>
             </div>
           </div>
@@ -622,6 +628,53 @@
         btn.textContent = expanded ? "Compact height" : "Expand height";
       });
     });
+
+    // Reading progress bar & active section link highlight
+    const progressBar = document.getElementById("cs-progress-bar");
+    const navLinks = Array.from(document.querySelectorAll(".cs-jump-links a"));
+    const trackedSections = navLinks
+      .map((a) => document.querySelector(a.getAttribute("href")))
+      .filter(Boolean);
+
+    function updateScrollProgress() {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.min(100, Math.max(0, (window.scrollY / docHeight) * 100)) : 0;
+      if (progressBar) {
+        progressBar.style.width = `${pct}%`;
+      }
+
+      const marker = window.scrollY + 180;
+      let currentId = "";
+      for (const sec of trackedSections) {
+        if (sec.offsetTop <= marker) {
+          currentId = sec.id;
+        }
+      }
+      navLinks.forEach((link) => {
+        link.classList.toggle("is-current", link.getAttribute("href") === `#${currentId}`);
+      });
+    }
+
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+    // Editorial scroll reveal
+    const revealEls = document.querySelectorAll("[data-reveal]");
+    if (revealEls.length > 0 && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-in");
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.1 }
+      );
+      revealEls.forEach((el) => observer.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add("is-in"));
+    }
   </script>
 </body>
 </html>

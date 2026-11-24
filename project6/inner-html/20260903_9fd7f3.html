@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alpha — Clinical Documentation · Full Flow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0eeea;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.5rem;
+            gap: 2.5rem;
+        }
+
+        .screen-wrapper {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Screen Card */
+        .screen {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid #e3e1db;
+            padding: 2rem 2.25rem 1.75rem 2.25rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            transition: all 0.15s ease;
+            position: relative;
+        }
+
+        .screen:hover {
+            border-color: #ceccc4;
+            box-shadow: 0 8px 32px -12px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Screen label (top left corner) */
+        .screen-label {
+            position: absolute;
+            top: -0.6rem;
+            left: 1.5rem;
+            background: #faf9f6;
+            padding: 0.1rem 0.8rem;
+            border-radius: 100px;
+            border: 1px solid #e3e1db;
+            font-size: 0.5rem;
+            font-weight: 500;
+            color: #8f8e89;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        /* Screen Header */
+        .screen-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #f0efec;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .screen-header .screen-title {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #2a2926;
+            letter-spacing: -0.01em;
+        }
+
+        .screen-header .screen-badge {
+            font-size: 0.5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #8f8e89;
+            background: #f5f4f0;
+            padding: 0.15rem 0.7rem;
+            border-radius: 100px;
+            border: 1px solid #e8e6e0;
+        }
+
+        .screen-header .screen-badge.active {
+            background: #e6f0ea;
+            border-color: #c8d8d0;
+            color: #2d4a3d;
+        }
+
+        .screen-header .screen-badge.draft {
+            background: #faf0d7;
+            border-color: #e0d4be;
+            color: #4a3d2a;
+        }
+
+        .screen-header .screen-badge.alert {
+            background: #f5ecec;
+            border-color: #e0d0d0;
+            color: #4a2d2d;
+        }
+
+        .screen-header .screen-badge.complete {
+            background: #e6f0ea;
+            border-color: #c8d8d0;
+            color: #2d4a3d;
+        }
+
+        .screen-header .screen-badge.review {
+            background: #e6edf5;
+            border-color: #c8d0d8;
+            color: #2d3d4a;
+        }
+
+        /* Patient Header */
+        .patient-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .patient-header .patient-name {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1f1e1b;
+        }
+
+        .patient-header .patient-meta {
+            font-size: 0.6rem;
+            font-weight: 400;
+            color: #8f8e89;
+        }
+
+        .patient-header .patient-id {
+            font-size: 0.55rem;
+            color: #b3b1ab;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Table styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.6rem;
+            margin: 0.5rem 0 0.75rem 0;
+        }
+
+        .data-table th {
+            text-align: left;
+            font-weight: 500;
+            color: #8f8e89;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 0.4rem 0.6rem 0.4rem 0;
+            border-bottom: 1px solid #f0efec;
+        }
+
+        .data-table td {
+            padding: 0.4rem 0.6rem 0.4rem 0;
+            color: #2d2c29;
+            border-bottom: 1px solid #f5f4f0;
+        }
+
+        .data-table .alert-badge {
+            font-size: 0.5rem;
+            font-weight: 400;
+            color: #4a2d2d;
+            background: #f5ecec;
+            padding: 0.1rem 0.5rem;
+            border-radius: 100px;
+            border: 1px solid #e0d0d0;
+        }
+
+        .data-table .status-badge {
+            font-size: 0.45rem;
+            font-weight: 400;
+            padding: 0.1rem 0.5rem;
+            border-radius: 100px;
+            display: inline-block;
+        }
+
+        .data-table .status-badge.resolved {
+            background: #e6f0ea;
+            color: #2d4a3d;
+        }
+
+        .data-table .status-badge.pending {
+            background: #faf0d7;
+            color: #4a3d2a;
+        }
+
+        /* Status indicators */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.55rem;
+            font-weight: 400;
+            color: #8f8e89;
+            padding: 0.2rem 0.7rem;
+            border-radius: 100px;
+            background: #f5f4f0;
+            border: 1px solid #e8e6e0;
+        }
+
+        .status-pill .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .status-pill .dot.green {
+            background: #5a7a6b;
+        }
+        .status-pill .dot.amber {
+            background: #d4b88a;
+        }
+        .status-pill .dot.grey {
+            background: #c4c2bc;
+        }
+        .status-pill .dot.blue {
+            background: #8a9ab0;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.65rem;
+            font-weight: 500;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #e3e1db;
+            background: #ffffff;
+            color: #2a2926;
+            cursor: default;
+            transition: all 0.1s ease;
+        }
+
+        .btn-primary {
+            background: #2a2926;
+            border-color: #2a2926;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #1f1e1b;
+        }
+
+        .btn-secondary {
+            background: #f5f4f0;
+            border-color: #e3e1db;
+            color: #4a4945;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border-color: transparent;
+            color: #8f8e89;
+        }
+
+        .btn-ghost:hover {
+            background: #f5f4f0;
+        }
+
+        .btn-sm {
+            font-size: 0.55rem;
+            padding: 0.3rem 0.9rem;
+            border-radius: 6px;
+        }
+
+        .btn-danger {
+            background: #f5ecec;
+            border-color: #e0d0d0;
+            color: #4a2d2d;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        /* Menu */
+        .menu-section {
+            margin-top: 1.25rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #f0efec;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .menu-section .menu-label {
+            font-size: 0.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #b3b1ab;
+        }
+
+        .menu-section .menu-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.2rem 1rem;
+        }
+
+        .menu-section .menu-items .item {
+            font-size: 0.6rem;
+            font-weight: 400;
+            color: #5a5954;
+            cursor: default;
+        }
+
+        .menu-section .menu-items .item.active {
+            font-weight: 500;
+            color: #2a2926;
+        }
+
+        .menu-section .menu-items .item:hover {
+            color: #2a2926;
+        }
+
+        /* Conversation */
+        .conversation {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin: 0.5rem 0 0.75rem 0;
+            max-height: 240px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .conversation::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .conversation::-webkit-scrollbar-track {
+            background: #f0efec;
+            border-radius: 10px;
+        }
+
+        .conversation::-webkit-scrollbar-thumb {
+            background: #d6d4ce;
+            border-radius: 10px;
+        }
+
+        .conversation .message {
+            padding: 0.6rem 0.9rem;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            line-height: 1.6;
+            max-width: 85%;
+        }
+
+        .conversation .message.clinician {
+            background: #f5f4f0;
+            color: #2a2926;
+            align-self: flex-start;
+            border: 1px solid #e8e6e0;
+        }
+
+        .conversation .message.patient {
+            background: #f0ede6;
+            color: #2d2c29;
+            align-self: flex-end;
+            border: 1px solid #e3dfd8;
+        }
+
+        .conversation .message .speaker {
+            font-size: 0.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #8f8e89;
+            display: block;
+            margin-bottom: 0.1rem;
+        }
+
+        .conversation .message .highlight {
+            background: #faf0d7;
+            padding: 0.05rem 0.2rem;
+            border-radius: 2px;
+        }
+
+        .conversation .message .highlight-blue {
+            background: #e6edf5;
+            padding: 0.05rem 0.2rem;
+            border-radius: 2px;
+            color: #2d3d4a;
+        }
+
+        /* Recording indicator */
+        .recording-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.5rem 0.8rem;
+            background: #f8f7f4;
+            border-radius: 10px;
+            border: 1px solid #e8e6e0;
+            margin: 0.5rem 0;
+        }
+
+        .recording-indicator .pulse {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #d44a4a;
+            animation: pulse 1.5s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.4;
+                transform: scale(0.7);
+            }
+        }
+
+        .recording-indicator .time {
+            font-size: 0.65rem;
+            font-weight: 400;
+            color: #5a5954;
+            font-family: 'JetBrains Mono', monospace;
+            flex: 1;
+        }
+
+        .recording-indicator .action {
+            font-size: 0.55rem;
+            font-weight: 400;
+            color: #8f8e89;
+            background: #ffffff;
+            padding: 0.2rem 0.7rem;
+            border-radius: 6px;
+            border: 1px solid #e3e1db;
+            cursor: default;
+            transition: all 0.1s ease;
+        }
+
+        .recording-indicator .action:hover {
+            background: #f5f4f0;
+        }
+
+        .recording-indicator .action.end {
+            background: #f5ecec;
+            border-color: #e0d0d0;
+            color: #4a2d2d;
+        }
+
+        /* Info cards */
+        .info-card {
+            background: #f8f7f4;
+            border: 1px solid #e8e6e0;
+            border-radius: 10px;
+            padding: 0.7rem 1rem;
+            margin: 0.4rem 0;
+            transition: all 0.1s ease;
+        }
+
+        .info-card:hover {
+            border-color: #d6d4ce;
+        }
+
+        .info-card .info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.55rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #8f8e89;
+        }
+
+        .info-card .info-header .tag {
+            font-weight: 400;
+            font-size: 0.45rem;
+            padding: 0.05rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .info-card .info-header .tag.ai {
+            background: #e6edf5;
+            color: #2d3d4a;
+        }
+
+        .info-card .info-header .tag.verified {
+            background: #e6f0ea;
+            color: #2d4a3d;
+        }
+
+        .info-card .info-header .tag.pending {
+            background: #faf0d7;
+            color: #4a3d2a;
+        }
+
+        .info-card .info-content {
+            font-size: 0.65rem;
+            color: #2d2c29;
+            margin-top: 0.2rem;
+            line-height: 1.5;
+        }
+
+        .info-card .info-content .em {
+            background: #faf0d7;
+            padding: 0.05rem 0.2rem;
+            border-radius: 2px;
+        }
+
+        .info-card .info-action {
+            font-size: 0.5rem;
+            font-weight: 400;
+            color: #8f8e89;
+            margin-top: 0.3rem;
+            display: inline-block;
+            background: #ffffff;
+            padding: 0.15rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid #e3e1db;
+            cursor: default;
+            transition: all 0.1s ease;
+        }
+
+        .info-card .info-action:hover {
+            background: #f5f4f0;
+        }
+
+        .info-card .info-action.approved {
+            background: #e6f0ea;
+            border-color: #c8d8d0;
+            color: #2d4a3d;
+        }
+
+        /* Draft note */
+        .draft-note {
+            background: #f8f7f4;
+            border: 1px solid #e8e6e0;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin: 0.5rem 0;
+        }
+
+        .draft-note .draft-label {
+            font-size: 0.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #8f8e89;
+            margin-bottom: 0.4rem;
+        }
+
+        .draft-note .draft-section {
+            margin: 0.4rem 0;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid #eeede8;
+        }
+
+        .draft-note .draft-section:last-child {
+            border-bottom: none;
+        }
+
+        .draft-note .draft-section .section-label {
+            font-size: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #5a5954;
+        }
+
+        .draft-note .draft-section .section-content {
+            font-size: 0.6rem;
+            color: #2d2c29;
+            line-height: 1.6;
+            margin-top: 0.1rem;
+        }
+
+        .draft-note .draft-section .section-content .highlight {
+            background: #faf0d7;
+            padding: 0.05rem 0.2rem;
+            border-radius: 2px;
+        }
+
+        /* Source links */
+        .source-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 0.5rem 0;
+        }
+
+        .source-links .source {
+            font-size: 0.5rem;
+            font-weight: 400;
+            color: #5a5954;
+            background: #f5f4f0;
+            padding: 0.2rem 0.7rem;
+            border-radius: 6px;
+            border: 1px solid #e8e6e0;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .source-links .source .check {
+            color: #5a7a6b;
+        }
+
+        .source-links .source .pending {
+            color: #d4b88a;
+        }
+
+        /* Alert box */
+        .alert-box {
+            background: #f8f7f4;
+            border-left: 3px solid #d4b88a;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            font-size: 0.6rem;
+            line-height: 1.6;
+            color: #4a4945;
+        }
+
+        .alert-box .alert-title {
+            font-weight: 500;
+            color: #2a2926;
+            font-size: 0.65rem;
+        }
+
+        .alert-box .alert-title .icon {
+            margin-right: 0.3rem;
+        }
+
+        .alert-box ul {
+            margin: 0.2rem 0 0 1rem;
+            padding-left: 0.5rem;
+        }
+
+        .alert-box ul li {
+            font-size: 0.55rem;
+            color: #6f6e69;
+            line-height: 1.6;
+        }
+
+        .alert-box.warning {
+            border-left-color: #d4b88a;
+            background: #faf7f0;
+        }
+
+        .alert-box.info {
+            border-left-color: #8a9ab0;
+            background: #f5f7f8;
+        }
+
+        .alert-box.success {
+            border-left-color: #5a7a6b;
+            background: #f0f7f4;
+        }
+
+        /* Grid layouts */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .three-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Control indicators */
+        .control-indicators {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.3rem;
+        }
+
+        .control-indicators .ctrl {
+            font-size: 0.5rem;
+            font-weight: 400;
+            color: #6f6e69;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .control-indicators .ctrl .check {
+            color: #5a7a6b;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #f0efec;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar .fill {
+            height: 100%;
+            border-radius: 4px;
+            background: #5a7a6b;
+            transition: width 0.3s ease;
+        }
+
+        /* Timeline */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .timeline .event {
+            display: flex;
+            gap: 0.75rem;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid #f5f4f0;
+        }
+
+        .timeline .event:last-child {
+            border-bottom: none;
+        }
+
+        .timeline .event .time {
+            font-size: 0.5rem;
+            font-weight: 400;
+            color: #b3b1ab;
+            font-family: 'JetBrains Mono', monospace;
+            min-width: 60px;
+        }
+
+        .timeline .event .description {
+            font-size: 0.6rem;
+            color: #2d2c29;
+            line-height: 1.4;
+        }
+
+        .timeline .event .description .em {
+            background: #faf0d7;
+            padding: 0.05rem 0.2rem;
+            border-radius: 2px;
+        }
+
+        .timeline .event .status {
+            margin-left: auto;
+            font-size: 0.45rem;
+            font-weight: 400;
+            padding: 0.1rem 0.5rem;
+            border-radius: 100px;
+            background: #f5f4f0;
+            color: #8f8e89;
+        }
+
+        .timeline .event .status.done {
+            background: #e6f0ea;
+            color: #2d4a3d;
+        }
+
+        .timeline .event .status.pending {
+            background: #faf0d7;
+            color: #4a3d2a;
+        }
+
+        /* Flex utilities */
+        .flex-1 {
+            flex: 1;
+        }
+
+        .mt-1 {
+            margin-top: 0.5rem;
+        }
+        .mt-2 {
+            margin-top: 1rem;
+        }
+        .mb-1 {
+            margin-bottom: 0.5rem;
+        }
+        .mb-2 {
+            margin-bottom: 1rem;
+        }
+
+        .text-muted {
+            color: #8f8e89;
+        }
+        .text-small {
+            font-size: 0.55rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+            .three-col {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.75rem;
+                gap: 1.5rem;
+            }
+            .screen {
+                padding: 1.5rem 1.25rem;
+                border-radius: 18px;
+            }
+            .three-col {
+                grid-template-columns: 1fr;
+            }
+            .screen-header .screen-title {
+                font-size: 0.75rem;
+            }
+            .patient-header .patient-name {
+                font-size: 0.9rem;
+            }
+            .data-table {
+                font-size: 0.55rem;
+            }
+            .data-table th,
+            .data-table td {
+                padding: 0.3rem 0.4rem 0.3rem 0;
+            }
+            .btn {
+                font-size: 0.55rem;
+                padding: 0.4rem 1rem;
+            }
+            .conversation .message {
+                max-width: 95%;
+                font-size: 0.6rem;
+            }
+            .menu-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .screen-label {
+                left: 1rem;
+                font-size: 0.45rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .screen {
+                padding: 1.25rem 1rem;
+                border-radius: 14px;
+            }
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+            .recording-indicator {
+                flex-wrap: wrap;
+            }
+            .source-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 1: Patient List / Dashboard -->
+    <!-- ============================================================ -->
+    <div class="screen-wrapper">
+        <div class="screen">
+            <span class="screen-label">Dashboard</span>
+
+            <div class="screen-header">
+                <span class="screen-title">Patients · today's consultations</span>
+                <span class="screen-badge active">8 patients</span>
+            </div>
+
+            <div style="display:flex; gap:1.5rem; flex-wrap:wrap; margin-bottom:1.25rem;">
+                <div>
+                    <div style="font-size:0.5rem; text-transform:uppercase; letter-spacing:0.04em; color:#8f8e89;">Scheduled</div>
+                    <div style="font-size:1.25rem; font-weight:500; color:#1f1e1b;">6</div>
+                </div>
+                <div>
+                    <div style="font-size:0.5rem; text-transform:uppercase; letter-spacing:0.04em; color:#8f8e89;">In progress</div>
+                    <div style="font-size:1.25rem; font-weight:500; color:#d4b88a;">2</div>
+                </div>
+                <div>
+                    <div style="font-size:0.5rem; text-transform:uppercase; letter-spacing:0.04em; color:#8f8e89;">Completed</div>
+                    <div style="font-size:1.25rem; font-weight:500; color:#5a7a6b;">3</div>
+                </div>
+                <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center;">
+                    <span class="btn btn-secondary btn-sm">Today</span>
+                    <span class="btn btn-secondary btn-sm">This week</span>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <tr>
+                    <th>Patient</th>
+                    <th>Time</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>AI draft</th>
+                </tr>
+                <tr>
+                    <td><strong>Sarah Mitchell</strong><br /><span style="font-size:0.5rem; color:#8f8e89;">34 · F · NHS: 123 456 7890</span></td>
+                    <td>09:00</td>
+                    <td>Recurring headaches</td>
+                    <td><span class="status-badge pending">In progress</span></td>
+                    <td><span style="color:#5a7a6b;">●</span> Drafting</td>
+                </tr>
+                <tr>
+                    <td><strong>James Cooper</strong><br /><span style="font-size:0.5rem; color:#8f8e89;">62 · M · NHS: 234 567 8901</span></td>
+                    <td>09:30</td>
+                    <td>Hypertension review</td>
+                    <td><span class="status-badge resolved">Completed</span></td>
+                    <td><span style="color:#5a7a6b;">✓</span> Signed</td>
+                </tr>
+                <tr>
+                    <td><strong>Emma Watson</strong><br /><span style="font-size:0.5rem; color:#8f8e89;">28 · F · NHS: 345 678 9012</span></td>
+                    <td>10:15</td>
+                    <td>Annual check-up</td>
+                    <td><span class="status-badge pending">Waiting</span></td>
+                    <td><span style="color:#b3b1ab;">—</span> Not started</td>
+                </tr>
+                <tr>
+                    <td><strong>Robert Chen</strong><br /><span style="font-size:0.5rem; color:#8f8e89;">45 · M · NHS: 456 789 0123</span></td>
+                    <td>11:00</td>
+                    <td>Follow-up · lab results</td>
+                    <td><span class="status-badge resolved">Completed</span></td>
+                    <td><span style="color:#5a7a6b;">✓</span> Signed</td>
+                </tr>
+            </table>
+
+            <div class="menu-section">
+                <div>
+                    <span class="menu-label">Alpha</span>
+                    <span style="margin-left:1.5rem; font-size:0.55rem; color:#8f8e89;">v2.4 · 8 patients today</span>
+                </div>
+                <div class="menu-items">
+                    <span class="item active">Dashboard</span>
+                    <span class="item">Patients</span>
+                    <span class="item">Appointments</span>
+                    <span class="item">Notes</span>
+                    <span class="item">Documents</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 2: Patient Summary with AI Assistant Intro -->
+    <!-- ============================================================ -->
+    <div class="screen-wrapper">
+        <div class="screen">
+            <span class="screen-label">Patient view</span>
+
+            <div class="screen-header">
+                <span class="screen-title">Sarah Mitchell</span>
+                <span class="screen-badge active">ready for consultation</span>
+            </div>
+
+            <div class="patient-header">
+                <div>
+                    <div class="patient-name">Sarah Mitchell</div>
+                    <div style="font-size:0.6rem; color:#8f8e89;">34 years · Female · DOB 12/03/1992</div>
+                </div>
+                <div style="text-align:right;">
+                    <div class="patient-id">NHS: 123 456 7890</div>
+                    <div style="font-size:0.5rem; color:#5a7a6b; margin-top:0.1rem;">⬤ Active patient</div>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <tr>
+                    <th>Reason for visit</th>
+                    <th>Last consultation</th>
+                    <th>Current medications</th>
+                    <th>Alerts</th>
+                </tr>
+                <tr>
+                    <td>Recurring headaches</td>
+                    <td>18 Aug 2026</td>
+                    <td>2 active</td>
+                    <td><span class="alert-badge">1</span></td>
+                </tr>
+            </table>
+
+            <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin:0.75rem 0;">
+                <span class="status-pill"><span class="dot green"></span> Consultation ready</span>
+                <span class="status-pill"><span class="dot amber"></span> 12:45 scheduled</span>
+                <span class="status-pill"><span class="dot grey"></span> No outstanding tasks</span>
+            </div>
+
+            <div class="alert-box info">
+                <div class="alert-title"><span class="icon">🤖</span> AI documentation assistant</div>
+                <div style="font-size:0.55rem; color:#6f6e69; margin-top:0.15rem;">
+                    During your consultation, I'll help organise relevant information into a draft note for your review.
+                </div>
+                <ul>
+                    <li>You review every AI-generated section before it's added</li>
+                    <li>You can edit or remove any content</li>
+                    <li>Nothing is added to the clinical record automatically</li>
+                </ul>
+            </div>
+
+            <div class="btn-group">
+                <span class="btn btn-primary">Start consultation</span>
+                <span class="btn btn-secondary">Enter notes manually</span>
+                <span class="btn btn-ghost" style="margin-left:auto;">View history →</span>
+            </div>
+
+            <div class="menu-section">
+                <span class="menu-label">Menu</span>
+                <div class="menu-items">
+                    <span class="item">Dashboard</span>
+                    <span class="item active">Patients</span>
+                    <span class="item">Appointments</span>
+                    <span class="item">Notes</span>
+                    <span class="item">Documents</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 3: Active Consultation with AI Detection -->
+    <!-- ============================================================ -->
+    <div class="screen-wrapper">
+        <div class="screen">
+            <span class="screen-label">Consultation</span>
+
+            <div class="screen-header">
+                <span class="screen-title">Sarah Mitchell · in progress</span>
+                <span class="screen-badge active">recording</span>
+            </div>
+
+            <div class="two-col">
+                <!-- Left: Conversation -->
+                <div>
+                    <div style="font-size:0.55rem; color:#8f8e89; margin-bottom:0.5rem; display:flex; justify-content:space-between;">
+                        <span>Conversation · live</span>
+                        <span style="font-family:'JetBrains Mono',monospace;">08:55</span>
+                    </div>
+
+                    <div class="conversation" style="max-height:280px;">
+                        <div class="message clinician">
+                            <span class="speaker">Clinician</span>
+                            How have the headaches been since we last spoke?
+                        </div>
+                        <div class="message patient">
+                            <span class="speaker">Patient</span>
+                            They've been happening <span class="highlight">less often</span>. 
+                            Maybe once or twice a week now, but I've still been feeling <span class="highlight">quite tired</span>.
+                        </div>
+                        <div class="message clinician">
+                            <span class="speaker">Clinician</span>
+                            And the fatigue — has that been affecting your daily activities?
+                        </div>
+                        <div class="message patient">
+                            <span class="speaker">Patient</span>
+                            Yes, especially in the afternoons. I've been <span class="highlight">struggling to concentrate</span> 
+                            and sometimes need to <span class="highlight-blue">rest during the day</span>.
+                        </div>
+                        <div class="message clinician">
+                            <span class="speaker">Clinician</span>
+                            Any other symptoms you've noticed?
+                        </div>
+                        <div class="message patient">
+                            <span class="speaker">Patient</span>
+                            <span class="highlight">Occasional dizziness</span> when I stand up too quickly. 
+                            Not as frequent as before though.
+                        </div>
+                    </div>
+
+                    <div class="recording-indicator">
+                        <span class="pulse"></span>
+                        <span class="time">08:55</span>
+                        <span class="action">Pause</span>
+                        <span class="action end">End consultation</span>
+                    </div>
+                </div>
+
+                <!-- Right: AI Detection -->
+                <div>
+                    <div style="font-size:0.55rem; font-weight:500; color:#8f8e89; margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.04em;">
+                        Information detected
+                    </div>
+                    <div style="font-size:0.5rem; color:#9a9892; margin-bottom:0.5rem;">
+                        Review each item — nothing is saved until you confirm it.
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-header">
+                            <span>🫀 Symptoms</span>
+                            <span class="tag ai">AI detected</span>
+                        </div>
+                        <div class="info-content">
+                            Headaches occurring approximately <span class="em">1–2 times per week</span>.
+                            <span style="display:block; font-size:0.55rem; color:#6f6e69; margin-top:0.1rem;">
+                                Occasional dizziness when standing.
+                            </span>
+                        </div>
+                        <span class="info-action">Review</span>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-header">
+                            <span>🗣 Patient reported</span>
+                            <span class="tag verified">verified</span>
+                        </div>
+                        <div class="info-content">
+                            Persistent <span class="em">fatigue</span> affecting afternoon concentration.
+                            <span style="display:block; font-size:0.55rem; color:#6f6e69; margin-top:0.1rem;">
+                                Requires rest during the day.
+                            </span>
+                        </div>
+                        <span class="info-action approved">✓ Reviewed</span>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-header">
+                            <span>📊 Change since previous</span>
+                            <span class="tag ai">AI detected</span>
+                        </div>
+                        <div class="info-content">
+                            <span class="em">Reduced headache frequency</span> from daily to 1–2 weekly.
+                            <span style="display:block; font-size:0.55rem; color:#6f6e69; margin-top:0.1rem;">
+                                Dizziness less frequent.
+                            </span>
+                        </div>
+                        <span class="info-action">Review</span>
+                    </div>
+
+                    <div style="margin-top:0.5rem; padding-top:0.5rem; border-top:1px solid #f0efec; display:flex; gap:0.75rem; flex-wrap:wrap; font-size:0.5rem; color:#8f8e89;">
+                        <span>🔄 Real-time transcription</span>
+                        <span>•</span>
+                        <span>🎯 4 items detected</span>
+                        <span>•</span>
+                        <span>⏳ 1 reviewed</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <span class="menu-label">Alpha</span>
+                <div class="menu-items">
+                    <span class="item">Dashboard</span>
+                    <span class="item active">Patients</span>
+                    <span class="item">Appointments</span>
+                    <span class="item">Notes</span>
+                    <span class="item">Documents</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 4: Review All Detections -->
+    <!-- ============================================================ -->
+    <div class="screen-wrapper">
+        <div class="screen">
+            <span class="screen-label">Review</span>
+
+            <div class="screen-header">
+                <span class="screen-title">Sarah Mitchell · review detected information</span>
+                <span class="screen-badge review">4 items to review</span>
+            </div>
+
+            <div style="font-size:0.6rem; color:#8f8e89; margin-bottom:1rem;">
+                Review each detected item. You can <strong>approve</strong>, <strong>edit</strong>, or <strong>dismiss</strong> 
+                before the draft is generated.
+            </div>
+
+            <div class="progress-bar" style="margin-bottom:1rem;">
+                <div class="fill" style="width:25%;"></div>
+            </div>
+            <div style="font-size:0.5rem; color:#8f8e89; text-align:right; margin-top:-0.5rem; margin-bottom:0.75rem;">
+                1 of 4 reviewed
+            </div>
+
+            <!-- Item 1: Approved -->
+            <div class="info-card" style="border-left:3px solid #5a7a6b;">
+                <div class="info-header">
+                    <span>🫀 Symptoms</span>
+                    <span class="tag verified">approved</span>
+                </div>
+                <div class="info-content">
+                    <span class="em">Headaches</span> occurring approximately 1–2 times per week. 
+                    <span class="em">Dizziness</span> occasionally when standing.
+                </div>
+                <div style="display:flex; gap:0.5rem; margin-top:0.3rem;">
+                    <span class="info-action approved">✓ Approved</span>
+                    <span class="info-action">Edit</span>
+                    <span class="info-action" style="color:#c4b8b8;">Dismiss</span>
+                </div>
+                <div style="font-size:0.45rem; color:#b3b1ab; margin-top:0.2rem;">
+                    Source: Patient statements at 03:12, 04:18, 07:05
+                </div>
+            </div>
+
+            <!-- Item 2: Approved -->
+            <div class="info-card" style="border-left:3px solid #5a7a6b;">
+                <div class="info-header">
+                    <span>🗣 Patient reported</span>
+                    <span class="tag verified">approved</span>
+                </div>
+                <div class="info-content">
+                    Persistent <span class="em">fatigue</span> affecting afternoon concentration. 
+                    Requires rest during the day.
+                </div>
+                <div style="display:flex; gap:0.5rem; margin-top:0.3rem;">
+                    <span class="info-action approved">✓ Approved</span>
+                    <span class="info-action">Edit</span>
+                    <span class="info-action" style="color:#c4b8b8;">Dismiss</span>
+                </div>
+                <div style="font-size:0.45rem; color:#b3b1ab; margin-top:0.2rem;">
+                    Source: Patient statements at 04:42, 05:15
+                </div>
+            </div>
+
+            <!-- Item 3: Pending review -->
+            <div class="info-card" style="border-left:3px solid #d4b88a;">
+                <div class="info-header">
+                    <span>📊 Change since previous</span>
+                    <span class="tag pending">pending review</span>
+                </div>
+                <div class="info-content">
+                    <span class="em">Reduced headache frequency</span> from daily to 1–2 per week.
+                </div>
+                <div style="display:flex; gap:0.5rem; margin-top:0.3rem;">
+                    <span class="info-action">✓ Approve</span>
+                    <span class="info-action">Edit</span>
+                    <span class="info-action" style="color:#c4b8b8;">Dismiss</span>
+                </div>
+                <div style="font-size:0.45rem; color:#b3b1ab; margin-top:0.2rem;">
+                    Source: Patient statement at 03:12
+                </div>
+            </div>
+
+            <!-- Item 4: Pending review -->
+            <div class="info-card" style="border-left:3px solid #d4b88a;">
+                <div class="info-header">
+                    <span>💊 Current medication</span>
+                    <span class="tag pending">pending review</span>
+                </div>
+                <div class="info-content">
+                    <span class="em">Medication A</span> — continue current dosage as prescribed.
+                </div>
+                <div style="display:flex; gap:0.5rem; margin-top:0.3rem;">
+                    <span class="info-action">✓ Approve</span>
+                    <span class="info-action">Edit</span>
+                    <span class="info-action" style="color:#c4b8b8;">Dismiss</span>
+                </div>
+                <div style="font-size:0.45rem; color:#b3b1ab; margin-top:0.2rem;">
+                    Source: EHR record · confirmed by clinician at 06:30
+                </div>
+            </div>
+
+            <div class="btn-group" style="margin-top:1rem; border-top:1px solid #f0efec; padding-top:1rem;">
+                <span class="btn btn-secondary">← Back to consultation</span>
+                <span class="btn btn-primary" style="margin-left:auto;">Generate draft →</span>
+            </div>
+
+            <div class="menu-section">
+                <span class="menu-label">Alpha</span>
+                <div class="menu-items">
+                    <span class="item">Dashboard</span>
+                    <span class="item active">Patients</span>
+                    <span class="item">Appointments</span>
+                    <span class="item">Notes</span>
+                    <span class="item">Documents</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 5: Draft Ready for Review with Sources -->
+    <!-- ============================================================ -->
+    <div class="screen-wrapper">
+        <div class="screen">
+            <span class="screen-label">Draft</span>
+
+            <div class="screen-header">
+                <span class="screen-title">Sarah Mitchell · draft ready for review</span>
+                <span class="screen-badge draft">draft ready</span>
+            </div>
+
+            <div style="font-size:0.55rem; color:#8f8e89; margin-bottom:0.75rem;">
+                08 Sep 2026 · 10:02 AM · AI-generated draft. Review before adding to the patient record.
+            </div>
+
+            <div class="two-col">
+                <!-- Left: Draft note -->
+                <div>
+                    <div class="draft-note">
+                        <div class="draft-label">📄 Draft clinical note</div>
+
+                        <div class="draft-section">
+                            <div class="section-label">Subjective</div>
+                            <div class="section-content">
+                                <span style="font-weight:500;">PATIENT-REPORTED SYMPTOMS</span><br />
+                                <span class="highlight">Headaches</span><br />
+                                Frequency has reduced to approximately 1–2 episodes per week.<br />
+                                <span style="font-size:0.55rem; color:#6f6e69;">Occasional dizziness when standing.</span><br /><br />
+                                <span class="highlight">Fatigue</span><br />
+                                Patient continues to report persistent fatigue affecting afternoon concentration.<br />
+                                <span style="font-size:0.55rem; color:#6f6e69;">Requires rest during the day.</span>
+                            </div>
+                        </div>
+
+                        <div class="draft-section">
+                            <div class="section-label">History</div>
+                            <div class="section-content">
+                                Since previous consultation (18 Aug 2026)<br />
+                                Patient reports a <span class="highlight">reduction in headache frequency</span> 
+                                from daily to 1–2 per week.
+                            </div>
+                        </div>
+
+                        <div class="draft-section">
+                            <div class="section-label">Current medication</div>
+                            <div class="section-content">
+                                <span style="font-weight:500;">Medication A</span><br />
+                                Continue current dosage. No changes recommended.
+                            </div>
+                        </div>
+
+                        <div class="draft-section" style="border-bottom:none;">
+                            <div class="section-label">Assessment</div>
+                            <div class="section-content">
+                                <span style="background:#e6edf5; padding:0.05rem 0.3rem; border-radius:2px; font-size:0.55rem; color:#2d3d4a;">
+                                    Improving headache frequency, persistent fatigue requiring monitoring.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Sources & confidence -->
+                <div>
+                    <div style="font-size:0.55rem; font-weight:500; color:#8f8e89; margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.04em;">
+                        AI confidence & sources
+                    </div>
+                    <div style="font-size:0.5rem; color:#9a9892; margin-bottom:0.75rem;">
+                        Every item links back to where it came from in the conversation.
+                    </div>
+
+                    <div class="source-links" style="flex-direction:column;">
+                        <div class="source" style="justify-content:space-between;">
+                            <span><span class="check">✓</span> <strong>Headaches</strong> — 1–2 episodes/week</span>
+                            <span style="font-size:0.45rem; color:#b3b1ab;">patient · 03:12</span>
+                        </div>
+                        <div class="source" style="justify-content:space-between;">
+                            <span><span class="check">✓</span> <strong>Dizziness</strong> — occasional</span>
+                            <span style="font-size:0.45rem; color:#b3b1ab;">patient · 04:18</span>
+                        </div>
+                        <div class="source" style="justify-content:space-between;">
+                            <span><span class="check">✓</span> <strong>Fatigue</strong> — persistent, affects concentration</span>
+                            <span style="font-size:0.45rem; color:#b3b1ab;">patient · 04:42, 05:15</span>
+                        </div>
+                        <div class="source" style="justify-content:space-between;">
+                            <span><span class="check">✓</span> <strong>Medication</strong> — continue current dosage</span>
+                            <span style="font-size:0.45rem; color:#b3b1ab;">EHR · confirmed 06:30</span>
+                        </div>
+                        <div class="source" style="justify-content:space-between; background:#e6f0ea; border-color:#c8d8d0;">
+                            <span><span class="check">✓</span> <strong>Assessment</strong> — improving, monitor fatigue</span>
+                            <span style="font-size:0.45rem; color:#b3b1ab;">clinician synthesis</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:0.75rem; padding:0.5rem 0.75rem; background:#f5f7f5; border-radius:8px; border:1px solid #e8e8e4;">
+                        <div style="font-size:0.5rem; font-weight:500; color:#5a7a6b; display:flex; justify-content:space-between;">
+                            <span>✅ All sections verified</span>
+                            <span>5 sources · 100% supported</span>
+                        </div>
+                        <div style="font-size:0.45rem; color:#8f8e89; margin-top:0.1rem;">
+                            Every claim in this draft is linked to a conversation source or EHR record.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group" style="margin-top:1rem; border-top:1px solid #f0efec; padding-top:1rem;">
+                <span class="btn btn-danger btn-sm">Discard draft</span>
+                <span class="btn btn-secondary">Edit draft</span>
+                <span class="btn btn-primary" style="margin-left:auto;">Add to patient record →</span>
+            </div>
+
+            <div class="menu-section">
+                <span class="menu-label">Alpha</span>
+                <div class="menu-items">
+                    <span class="item">Dashboard</span>
+                    <span class="item active">Patients</span>
+                    <span class="item">Appointments</span>
+                    <span class="item">Notes</span>
+                    <span class="item">Documents</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SCREEN 6: Draft Signed & Patient Record Updated -->
+    <!-- ============================================================ -->
+    <div class="screen-wrapper">
+        <div class="screen">
+            <span class="screen-label">Complete</span>
+
+            <div class="screen-header">
+                <span class="screen-title">Sarah Mitchell · consultation complete</span>
+                <span class="screen-badge complete">signed</span>
+            </div>
+
+            <div style="display:flex; gap:1.5rem; flex-wrap:wrap; margin-bottom:1.25rem; padding:1rem 1.25rem; background:#f0f7f4; border-radius:12px; border:1px solid #c8d8d0;">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <span style="font-size:1.5rem;">✓</span>
+                    <div>
+                        <div style="font-size:0.6rem; font-weight:500; color:#2d4a3d;">Consultation signed</div>
+                        <div style="font-size:0.5rem; color:#6f8f7a;">08 Sep 2026 · 10:28 AM</div>
+                    </div>
+                </div>
+                <div style="border-left:1px solid #c8d8d0; padding-left:1.5rem;">
+                    <div style="font-size:0.5rem; color:#6f8f7a;">Record updated</div>
+                    <div style="font-size:0.55rem; font-weight:500; color:#2d4a3d;">Patient record v4.2</div>
+                </div>
+                <div style="border-left:1px solid #c8d8d0; padding-left:1.5rem;">
+                    <div style="font-size:0.5rem; color:#6f8f7a;">Next consultation</div>
+                    <div style="font-size:0.55rem; font-weight:500; color:#2d4a3d;">22 Sep 2026 · 09:00</div>
+                </div>
+                <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center;">
+                    <span class="btn btn-secondary btn-sm">View record</span>
+                    <span class="btn btn-secondary btn-sm">Print</span>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <!-- Left: Timeline -->
+                <div>
+                    <div style="font-size:0.55rem; font-weight:500; color:#8f8e89; margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.04em;">
+                        Consultation timeline
+                    </div>
+                    <div class="timeline">
+                        <div class="event">
+                            <span class="time">09:00</span>
+                            <span class="description">Consultation started</span>
+                            <span class="status done">✓</span>
+                        </div>
+                        <div class="event">
+                            <span class="time">09:45</span>
+                            <span class="description"><span class="em">4 items</span> detected by AI assistant</span>
+                            <span class="status done">✓</span>
+                        </div>
+                        <div class="event">
+                            <span class="time">10:02</span>
+                            <span class="description">Draft generated · <span class="em">5 sources</span> identified</span>
+                            <span class="status done">✓</span>
+                        </div>
+                        <div class="event">
+                            <span class="time">10:15</span>
+                            <span class="description">Clinician review · <span class="em">1 edit</span> made</span>
+                            <span class="status done">✓</span>
+                        </div>
+                        <div class="event">
+                            <span class="time">10:28</span>
+                            <span class="description"><strong>Draft signed</strong> · added to patient record</span>
+                            <span class="status done">✓</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Summary -->
+                <div>
+                    <div style="font-size:0.55rem; font-weight:500; color:#8f8e89; margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.04em;">
+                        Consultation summary
+                    </div>
+
+                    <div style="background:#f8f7f4; border-radius:10px; border:1px solid #e8e6e0; padding:0.75rem 1rem;">
+                        <div style="display:flex; justify-content:space-between; padding:0.3rem 0; border-bottom:1px solid #eeede8;">
+                            <span style="font-size:0.55rem; color:#6f6e69;">Duration</span>
+                            <span style="font-size:0.6rem; font-weight:500; color:#2d2c29;">28 minutes</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; padding:0.3rem 0; border-bottom:1px solid #eeede8;">
+                            <span style="font-size:0.55rem; color:#6f6e69;">AI items detected</span>
+                            <span style="font-size:0.6rem; font-weight:500; color:#2d2c29;">4</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; padding:0.3rem 0; border-bottom:1px solid #eeede8;">
+                            <span style="font-size:0.55rem; color:#6f6e69;">Sources referenced</span>
+                            <span style="font-size:0.6rem; font-weight:500; color:#2d2c29;">5</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; padding:0.3rem 0; border-bottom:1px solid #eeede8;">
+                            <span style="font-size:0.55rem; color:#6f6e69;">Clinician edits</span>
+                            <span style="font-size:0.6rem; font-weight:500; color:#d4b88a;">1</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; padding:0.3rem 0;">
+                            <span style="font-size:0.55rem; color:#6f6e69;">AI confidence</span>
+                            <span style="font-size:0.6rem; font-weight:500; color:#5a7a6b;">100% verified</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:0.75rem; padding:0.5rem 0.75rem; background:#f5f7f8; border-radius:8px; border:1px solid #e8ecee;">
+                        <div style="font-size:0.5rem; color:#5a7a6b; display:flex; align-items:center; gap:0.5rem;">
+                            <span>🔒</span>
+                            <span>All AI-generated content was reviewed and approved by the clinician</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group" style="margin-top:1rem; border-top:1px solid #f0efec; padding-top:1rem;">
+                <span class="btn btn-primary">Next patient →</span>
+                <span class="btn btn-secondary">View all notes</span>
+                <span class="btn btn-ghost" style="margin-left:auto;">Export record</span>
+            </div>
+
+            <div class="menu-section">
+                <span class="menu-label">Alpha</span>
+                <div class="menu-items">
+                    <span class="item">Dashboard</span>
+                    <span class="item active">Patients</span>
+                    <span class="item">Appointments</span>
+                    <span class="item">Notes</span>
+                    <span class="item">Documents</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

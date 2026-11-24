@@ -11,6 +11,11 @@
   <link rel="stylesheet" href="project6.css" />
 </head>
 <body id="top">
+  <!-- Reading Progress Hairline -->
+  <div class="cs-progress" aria-hidden="true">
+    <span class="cs-progress-bar" id="cs-progress-bar"></span>
+  </div>
+
   <!-- Floating Translucent Nav with TL;DR Button -->
   <header class="cs-nav-wrap">
     <nav class="cs-nav" aria-label="Case study navigation">
@@ -45,11 +50,11 @@
   </header>
 
   <main>
-    <!-- Hero + Metadata -->
+    <!-- Hero + Editorial Metadata -->
     <section class="cs-hero">
       <div class="container">
         <span class="mono small muted cs-eyebrow">CASE STUDY · HEALTHCARE · AI COPILOT</span>
-        <h1 class="cs-title">CLINICAL AI DOCUMENTATION</h1>
+        <h1 class="cs-title">CLINICAL <span class="cs-title-serif">AI Documentation</span></h1>
         <p class="cs-hero-sub">
           A conceptual exploration of how AI could help clinicians turn patient consultations into <strong>structured clinical notes</strong> while maintaining <em>transparency, human oversight, accessibility, and trust</em>.
         </p>
@@ -147,15 +152,15 @@
       <!-- 1. The Challenges -->
       <section id="challenges" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">01 · THE CHALLENGES</h2>
             <p class="muted cs-sec-lead">
               <strong>Balancing attention and trust.</strong> The opportunity wasn't to automate clinical judgement—it was to remove repetitive documentation while keeping interpretation and approval with the clinician.
             </p>
           </div>
 
-          <div class="cs-three-cols">
-            <article class="cs-panel">
+          <div class="cs-editorial-cols three" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono cs-num">CHALLENGE 01 · ATTENTION</span>
               <h3>Documentation competes with patient care</h3>
               <p class="small muted">
@@ -163,7 +168,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">CHALLENGE 02 · TRUST</span>
               <h3>AI introduces a verification problem</h3>
               <p class="small muted">
@@ -171,7 +176,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">CHALLENGE 03 · BOUNDARIES</span>
               <h3>Automation has a clear boundary</h3>
               <p class="small muted">
@@ -185,59 +190,68 @@
       <!-- 2. The Audit & Role -->
       <section id="audit" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">02 · WORKFLOW AUDIT &amp; SCOPE</h2>
             <p class="muted cs-sec-lead">
               Started with the clinical workflow rather than <em>"What can AI do?"</em>—mapping where effort goes during a consultation to separate charting from decision-making.
             </p>
           </div>
 
-          <div class="cs-split-diagram">
-            <div class="cs-diag-col">
-              <span class="mono small muted">AI ASSISTANT · 4 BOUNDED CAPABILITIES</span>
-              <div class="cs-diag-row four-mini">
-                <div class="cs-node is-lit">Capture</div>
-                <div class="cs-node is-lit">Organise</div>
-                <div class="cs-node is-lit">Summarise</div>
-                <div class="cs-node is-lit">Retrieve</div>
-              </div>
+          <div class="cs-editorial-bridge" data-reveal>
+            <div class="cs-bridge-side">
+              <span class="mono small cs-accent-text">AI ASSISTANT · 4 BOUNDED CAPABILITIES</span>
+              <p class="cs-bridge-list mono">Capture · Organise · Summarise · Retrieve</p>
               <p class="small muted">Converts speech to transcript, identifies relevant clinical info, drafts notes, and surfaces context.</p>
             </div>
 
-            <div class="cs-diag-center mono">STRICT<br />BOUNDARY</div>
+            <div class="cs-bridge-pivot mono">STRICT<br />BOUNDARY</div>
 
-            <div class="cs-diag-col">
+            <div class="cs-bridge-side">
               <span class="mono small muted">CLINICIAN AUTHORITY · NEVER AUTOMATED</span>
-              <div class="cs-diag-row">
-                <div class="cs-node">Diagnosis</div>
-                <div class="cs-node">Prescriptions</div>
-                <div class="cs-node">Treatment</div>
-              </div>
+              <p class="cs-bridge-list mono">Diagnosis · Prescriptions · Treatment</p>
               <p class="small muted">The AI never independently diagnoses, prescribes, or makes treatment decisions.</p>
             </div>
           </div>
 
-          <div class="cs-four-cols">
-            <article class="cs-mini-card">
+          <div class="cs-editorial-cols four mt-24" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono cs-num">01 · CAPTURE</span>
               <h3>Convert to transcript</h3>
               <p class="small muted">Transcribes the consultation in the background without pulling focus from the patient.</p>
             </article>
-            <article class="cs-mini-card">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">02 · ORGANISE</span>
               <h3>Identify relevant info</h3>
               <p class="small muted">Structures key clinical details out of conversational dialogue.</p>
             </article>
-            <article class="cs-mini-card">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">03 · SUMMARISE</span>
               <h3>Draft a structured note</h3>
               <p class="small muted">Prepares a clear clinical draft for review rather than saving automatically.</p>
             </article>
-            <article class="cs-mini-card">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">04 · RETRIEVE</span>
               <h3>Surface source context</h3>
               <p class="small muted">Lets clinicians inspect supporting consultation moments on demand.</p>
             </article>
+          </div>
+
+          <!-- Embedded Window: Clinical Workspace Mockup -->
+          <div class="embed-window mt-24" data-embed-window data-reveal>
+            <div class="embed-window-bar">
+              <div class="embed-window-meta">
+                <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="mono small">01 · CLINICAL WORKSPACE &amp; CONSULTATION CONTROLS</span>
+                <span class="mono small muted">inner-html/alpha-screen-01-clinical-workspace.html</span>
+              </div>
+              <div class="embed-window-actions">
+                <button type="button" class="embed-action-btn" data-toggle-expand aria-pressed="false">Expand height</button>
+                <a href="inner-html/alpha-screen-01-clinical-workspace.html" target="_blank" rel="noopener noreferrer" class="embed-action-link mono small">Open ↗</a>
+              </div>
+            </div>
+            <div class="embed-frame-wrap">
+              <iframe src="inner-html/alpha-screen-01-clinical-workspace.html" title="Clinical workspace mockup" loading="lazy"></iframe>
+            </div>
           </div>
         </div>
       </section>
@@ -245,15 +259,15 @@
       <!-- 3. Interaction (Distinguishing Information States) -->
       <section id="interaction" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">03 · INTERACTION DESIGN</h2>
             <p class="muted cs-sec-lead">
               <strong>Making AI-generated information distinguishable.</strong> Visually separating three distinct types of information prevents generated drafts from being mistaken for verified clinical facts.
             </p>
           </div>
 
-          <div class="cs-three-cols">
-            <article class="cs-panel state-card state-patient">
+          <div class="cs-editorial-cols three" data-reveal>
+            <article class="cs-editorial-col state-patient">
               <span class="state-pill mono">STATE 01 · SOURCE</span>
               <h3>What the patient actually said</h3>
               <p class="small muted">
@@ -261,7 +275,7 @@
               </p>
             </article>
 
-            <article class="cs-panel state-card state-ai">
+            <article class="cs-editorial-col state-ai">
               <span class="state-pill mono">STATE 02 · DRAFT</span>
               <h3>What the system generated or inferred</h3>
               <p class="small muted">
@@ -269,7 +283,7 @@
               </p>
             </article>
 
-            <article class="cs-panel state-card state-approved">
+            <article class="cs-editorial-col state-approved">
               <span class="state-pill mono">STATE 03 · VERIFIED</span>
               <h3>Reviewed and accepted by clinician</h3>
               <p class="small muted">
@@ -277,13 +291,31 @@
               </p>
             </article>
           </div>
+
+          <!-- Embedded Window: Live Transcription & Detection Mockup -->
+          <div class="embed-window mt-24" data-embed-window data-reveal>
+            <div class="embed-window-bar">
+              <div class="embed-window-meta">
+                <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="mono small">02 · LIVE TRANSCRIPTION &amp; DETECTED ITEMS</span>
+                <span class="mono small muted">inner-html/alpha-screen-02-live-transcription.html</span>
+              </div>
+              <div class="embed-window-actions">
+                <button type="button" class="embed-action-btn" data-toggle-expand aria-pressed="false">Expand height</button>
+                <a href="inner-html/alpha-screen-02-live-transcription.html" target="_blank" rel="noopener noreferrer" class="embed-action-link mono small">Open ↗</a>
+              </div>
+            </div>
+            <div class="embed-frame-wrap">
+              <iframe src="inner-html/alpha-screen-02-live-transcription.html" title="Live transcription mockup" loading="lazy"></iframe>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- 4. Verification (Human-in-the-Loop) -->
       <section id="verification" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">04 · VERIFICATION &amp; CONTROL</h2>
             <p class="muted cs-sec-lead">
               <strong>AI proposes. The clinician decides.</strong> Every important piece of information traces back to the consultation inside an explicit human-in-the-loop workflow.
@@ -291,7 +323,7 @@
           </div>
 
           <!-- Human-in-the-loop Strip -->
-          <div class="loop-banner">
+          <div class="loop-stream" data-reveal>
             <span class="loop-step is-lit mono">1. Generate</span>
             <span class="loop-arrow" aria-hidden="true">→</span>
             <span class="loop-step is-lit mono">2. Review</span>
@@ -301,7 +333,7 @@
             <span class="loop-step is-lit mono">4. Approve</span>
           </div>
 
-          <div class="cs-split-feature mt-20">
+          <div class="cs-split-feature mt-24" data-reveal>
             <div class="cs-mockup-showcase">
               <div class="case-media-frame">
                 <img
@@ -311,8 +343,8 @@
               </div>
             </div>
 
-            <div class="cs-three-stack">
-              <article class="cs-panel">
+            <div class="cs-craft-list">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">CONTROL 01 · TRACEABILITY</span>
                 <h3>Source-linked verification</h3>
                 <p class="small muted">
@@ -320,7 +352,7 @@
                 </p>
               </article>
 
-              <article class="cs-panel">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">CONTROL 02 · ITEM-LEVEL AGENCY</span>
                 <h3>Accept, edit, or remove</h3>
                 <p class="small muted">
@@ -328,7 +360,7 @@
                 </p>
               </article>
 
-              <article class="cs-panel">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">CONTROL 03 · NO AUTO-SAVE</span>
                 <h3>Deliberate sign-off</h3>
                 <p class="small muted">
@@ -337,21 +369,39 @@
               </article>
             </div>
           </div>
+
+          <!-- Embedded Window: AI-Generated Note & Source Citations Mockup -->
+          <div class="embed-window mt-24" data-embed-window data-reveal>
+            <div class="embed-window-bar">
+              <div class="embed-window-meta">
+                <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="mono small">03 · DRAFT NOTE, INLINE EDIT &amp; SOURCE QUOTES</span>
+                <span class="mono small muted">inner-html/alpha-screen-03-ai-note.html</span>
+              </div>
+              <div class="embed-window-actions">
+                <button type="button" class="embed-action-btn" data-toggle-expand aria-pressed="false">Expand height</button>
+                <a href="inner-html/alpha-screen-03-ai-note.html" target="_blank" rel="noopener noreferrer" class="embed-action-link mono small">Open ↗</a>
+              </div>
+            </div>
+            <div class="embed-frame-wrap">
+              <iframe src="inner-html/alpha-screen-03-ai-note.html" title="AI-generated clinical note mockup" loading="lazy"></iframe>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- 5. Handling Constraints & Accessibility -->
       <section id="constraints" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">05 · UNCERTAINTY &amp; ACCESSIBILITY</h2>
             <p class="muted cs-sec-lead">
               <strong>Don't hide uncertainty behind a polished answer.</strong> Making gaps actionable and building accessibility into every state keeps high-stakes workflows safe.
             </p>
           </div>
 
-          <div class="cs-two-col">
-            <article class="cs-panel">
+          <div class="cs-editorial-cols two" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono cs-num">CONSTRAINT 01 · TRANSPARENCY</span>
               <h3>Actionable uncertainty pathways</h3>
               <p class="small muted">
@@ -359,7 +409,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">CONSTRAINT 02 · INCLUSIVE DESIGN</span>
               <h3>Accessibility at every step</h3>
               <p class="small muted">
@@ -374,47 +424,65 @@
     <!-- 6. Outcome & Closing Quote -->
     <section id="outcome" class="cs-section">
       <div class="container">
-        <div class="cs-sec-head">
+        <div class="cs-sec-head" data-reveal>
           <h2 class="cs-sec-title">OUTCOME</h2>
           <p class="muted cs-sec-lead">
             <strong>A model for responsible AI in clinical workflows</strong>—helping clinicians spend less time documenting and more time reviewing, reasoning, and caring for the patient.
           </p>
         </div>
 
-        <blockquote class="cs-quote-box">
+        <blockquote class="cs-quote-box" data-reveal>
           <p>
             "AI doesn't need to replace the clinician to be useful. It just needs to make the clinician's work easier — without taking away their control."
           </p>
         </blockquote>
 
-        <div class="cs-four-cols mt-20">
-          <article class="cs-mini-card is-northstar">
+        <div class="cs-kpi-ledger mt-24" data-reveal>
+          <article class="cs-kpi-metric is-northstar">
             <span class="mono cs-num">EFFICIENCY</span>
             <strong class="cs-big-num">Less Admin Effort</strong>
             <p class="small muted">Automates repetitive charting so clinicians stay present with patients.</p>
           </article>
 
-          <article class="cs-mini-card">
+          <article class="cs-kpi-metric">
             <span class="mono cs-num">OVERSIGHT</span>
             <strong class="cs-big-num">Human-in-the-Loop</strong>
             <p class="small muted">Clinicians review, verify, and approve—never passive bystanders.</p>
           </article>
 
-          <article class="cs-mini-card">
+          <article class="cs-kpi-metric">
             <span class="mono cs-num">TRACEABILITY</span>
             <strong class="cs-big-num">Source-Verified</strong>
             <p class="small muted">Every key claim traces back to the consultation transcript.</p>
           </article>
 
-          <article class="cs-mini-card">
+          <article class="cs-kpi-metric is-guardrail">
             <span class="mono cs-num">TRUST &amp; A11Y</span>
             <strong class="cs-big-num">Visible Uncertainty</strong>
             <p class="small muted">Clear states, keyboard navigation, and non-color-only cues.</p>
           </article>
         </div>
 
-        <!-- Next Case Study Card -->
-        <a href="../project1/project1.html" class="cs-next-card">
+        <!-- Embedded Window: Full 6-Screen Consultation Flow -->
+        <div class="embed-window mt-24" data-embed-window data-reveal>
+          <div class="embed-window-bar">
+            <div class="embed-window-meta">
+              <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="mono small">FULL FLOW · DASHBOARD TO SIGNED RECORD (6 SCREENS)</span>
+              <span class="mono small muted">20260903_9fd7f3.html</span>
+            </div>
+            <div class="embed-window-actions">
+              <button type="button" class="embed-action-btn" data-toggle-expand aria-pressed="false">Expand height</button>
+              <a href="inner-html/20260903_9fd7f3.html" target="_blank" rel="noopener noreferrer" class="embed-action-link mono small">Open ↗</a>
+            </div>
+          </div>
+          <div class="embed-frame-wrap">
+            <iframe src="inner-html/20260903_9fd7f3.html" title="Full 6-screen clinical documentation flow" loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <!-- Next Case Study Editorial Link -->
+        <a href="../project1/project1.html" class="cs-next-card" data-reveal>
           <div>
             <span class="mono small muted">NEXT CASE STUDY</span>
             <h3>Spendit</h3>
@@ -423,14 +491,22 @@
           <span class="cs-next-arrow">→</span>
         </a>
 
-        <!-- Dark Split CTA + Accent Stripes -->
-        <div class="cta-split mt-36">
-          <div class="cta-dark-box">
-            <span class="dark-pill">
-              <span class="status-dot" aria-hidden="true"></span>
-              Open to Senior UX &amp; Product roles
-            </span>
-            <h2>Let's make something<br />that actually matters.</h2>
+        <!-- Editorial White + Accent Closing CTA -->
+        <div class="cta-split mt-36" data-cta-card>
+          <div class="cta-editorial-box">
+            <div class="cta-top-bar">
+              <span class="editorial-pill">
+                <span class="status-dot" aria-hidden="true"></span>
+                Open to Senior UX &amp; Product roles
+              </span>
+              <span class="cta-issue mono" aria-hidden="true">PORTFOLIO // 2026</span>
+            </div>
+
+            <h2>
+              Let's make something<br />
+              that <span class="cta-italic-accent">actually matters.</span>
+            </h2>
+
             <div class="cta-email-row">
               <span class="cta-email-text">sakshiagrawal3110@gmail.com</span>
               <button
@@ -438,7 +514,8 @@
                 class="copy-pill-btn copy-email-btn"
                 data-email="sakshiagrawal3110@gmail.com"
               >
-                Click to copy
+                <span class="copy-pill-label">Click to copy</span>
+                <span class="copy-pill-icon" aria-hidden="true">↗</span>
               </button>
             </div>
           </div>
@@ -496,6 +573,65 @@
 
     if (tldrCloseBtn) {
       tldrCloseBtn.addEventListener("click", () => setTldrState(false));
+    }
+
+    // Embedded Window Expand / Collapse Micro-Interaction
+    document.querySelectorAll("[data-toggle-expand]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const win = btn.closest("[data-embed-window]");
+        if (!win) return;
+        const expanded = win.classList.toggle("is-expanded");
+        btn.classList.toggle("is-expanded", expanded);
+        btn.setAttribute("aria-pressed", String(expanded));
+        btn.textContent = expanded ? "Compact height" : "Expand height";
+      });
+    });
+
+    // Reading progress bar & active section link highlight
+    const progressBar = document.getElementById("cs-progress-bar");
+    const navLinks = Array.from(document.querySelectorAll(".cs-jump-links a"));
+    const trackedSections = navLinks
+      .map((a) => document.querySelector(a.getAttribute("href")))
+      .filter(Boolean);
+
+    function updateScrollProgress() {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.min(100, Math.max(0, (window.scrollY / docHeight) * 100)) : 0;
+      if (progressBar) {
+        progressBar.style.width = `${pct}%`;
+      }
+
+      const marker = window.scrollY + 180;
+      let currentId = "";
+      for (const sec of trackedSections) {
+        if (sec.offsetTop <= marker) {
+          currentId = sec.id;
+        }
+      }
+      navLinks.forEach((link) => {
+        link.classList.toggle("is-current", link.getAttribute("href") === `#${currentId}`);
+      });
+    }
+
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+    // Editorial scroll reveal
+    const revealEls = document.querySelectorAll("[data-reveal]");
+    if (revealEls.length > 0 && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-in");
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.1 }
+      );
+      revealEls.forEach((el) => observer.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add("is-in"));
     }
   </script>
 </body>

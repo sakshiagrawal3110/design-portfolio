@@ -15,6 +15,11 @@
 </head>
 
 <body id="top">
+  <!-- Reading Progress Hairline -->
+  <div class="cs-progress" aria-hidden="true">
+    <span class="cs-progress-bar" id="cs-progress-bar"></span>
+  </div>
+
   <!-- Floating Translucent Nav with TL;DR Button -->
   <header class="cs-nav-wrap">
     <nav class="cs-nav" aria-label="Case study navigation">
@@ -44,11 +49,11 @@
   </header>
 
   <main>
-    <!-- Hero + Metadata -->
+    <!-- Hero + Editorial Metadata -->
     <section class="cs-hero">
       <div class="container">
         <span class="mono small muted cs-eyebrow">CASE STUDY · FINTECH PAYMENTS &amp; REWARDS</span>
-        <h1 class="cs-title">SPENDIT</h1>
+        <h1 class="cs-title">SPEN<span class="cs-title-serif">dit</span></h1>
         <p class="cs-hero-sub">
           <strong>Turning everyday Indian payment rails into goal-driven rewards</strong>—unifying <em>UPI, IMPS, and
             NEFT</em> transfers with an instant, user-directed points economy across shopping, hotels, flights, and
@@ -153,7 +158,7 @@
       <!-- 1. Empathy (Context & Discovery) -->
       <section id="empathy" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">01 · EMPATHY &amp; DISCOVERY</h2>
             <p class="muted cs-sec-lead">
               <strong>Rewards are scattered, so they get forgotten.</strong> Existing payment apps rely on generic
@@ -161,33 +166,25 @@
             </p>
           </div>
 
-          <div class="cs-split-diagram">
-            <div class="cs-diag-col">
+          <div class="cs-editorial-bridge" data-reveal>
+            <div class="cs-bridge-side">
               <span class="mono small muted">CURRENT · FRAGMENTED ECOSYSTEMS</span>
-              <div class="cs-diag-row">
-                <div class="cs-node">Separate Apps</div>
-                <div class="cs-node">Random Cashback</div>
-                <div class="cs-node">Expired Points</div>
-              </div>
+              <p class="cs-bridge-list mono">Separate Apps · Random Cashback · Expired Points</p>
               <p class="small muted">Loyalty points stay trapped across disconnected travel, movie, and retail apps.</p>
             </div>
 
-            <div class="cs-diag-center mono">USER<br />INTENT</div>
+            <div class="cs-bridge-pivot mono">USER<br />INTENT</div>
 
-            <div class="cs-diag-col">
-              <span class="mono small muted">SPENDIT · GOAL-DIRECTED ECONOMY</span>
-              <div class="cs-diag-row">
-                <div class="cs-node is-lit">Unified Rails</div>
-                <div class="cs-node is-lit">Instant Split</div>
-                <div class="cs-node is-lit">4 Goal Wallets</div>
-              </div>
+            <div class="cs-bridge-side">
+              <span class="mono small cs-accent-text">SPENDIT · GOAL-DIRECTED ECONOMY</span>
+              <p class="cs-bridge-list mono">Unified Rails · Instant Split · 4 Goal Wallets</p>
               <p class="small muted">Everyday transfers directly fund personal goals at the moment of payment.</p>
             </div>
           </div>
 
-          <!-- Proto-Personas -->
-          <div class="cs-two-col">
-            <article class="cs-panel">
+          <!-- Proto-Personas (Editorial Columns) -->
+          <div class="cs-editorial-cols two mt-24" data-reveal>
+            <article class="cs-editorial-col">
               <div class="persona-top">
                 <span class="mono cs-num">PROTO-PERSONA 01</span>
                 <span class="persona-badge mono">UPI + NEFT · Travel Goal</span>
@@ -200,7 +197,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <div class="persona-top">
                 <span class="mono cs-num">PROTO-PERSONA 02</span>
                 <span class="persona-badge mono">IMPS + UPI · Household Bill</span>
@@ -218,16 +215,16 @@
       <!-- 2. Define & Brand System (The Anchor Section) -->
       <section id="define" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">02 · DEFINE &amp; BRAND</h2>
             <p class="muted cs-sec-lead">
               <em>"How might we let people decide, at the moment they pay, what their spending is working towards?"</em>
-              Anchored around <strong>Pay → Earn → Split → Redeem</strong> and a cohesive brand system[cite: 35].
+              Anchored around <strong>Pay → Earn → Split → Redeem</strong> and a cohesive brand system.
             </p>
           </div>
 
-          <div class="cs-three-cols">
-            <article class="cs-panel">
+          <div class="cs-editorial-cols three" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono cs-num">RULE 01 · MENTAL MATH</span>
               <h3>Simple math over tiers</h3>
               <p class="small muted">
@@ -243,7 +240,7 @@
               </div>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">RULE 02 · TRUST FIRST</span>
               <h3>Money stays the hero</h3>
               <p class="small muted">
@@ -252,7 +249,7 @@
               </p>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono cs-num">RULE 03 · CALM UX</span>
               <h3>Deferral over dark patterns</h3>
               <p class="small muted">
@@ -263,7 +260,7 @@
           </div>
 
           <!-- Brand System Visual (assets/spendit/brand.png) -->
-          <div class="mt-24">
+          <div class="mt-24" data-reveal>
             <div class="case-media-frame">
               <img src="../assets/spendit/brand.png"
                 alt="Spendit brand mark, Trust Indigo and Saffron color tokens, Plus Jakarta Sans tabular typography, and UI components" />
@@ -275,16 +272,16 @@
       <!-- 3. Ideate (Divergence & Key Patterns + Key Screens) -->
       <section id="ideate" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">03 · IDEATE &amp; KEY SCREENS</h2>
             <p class="muted cs-sec-lead">
               Replaced separate transfer tabs and manual point-entry forms with <strong>two repeatable, low-friction
-                interaction patterns</strong> across the core screens[cite: 34].
+                interaction patterns</strong> across the core screens.
             </p>
           </div>
 
-          <div class="cs-two-col">
-            <article class="cs-panel">
+          <div class="cs-editorial-cols two" data-reveal>
+            <article class="cs-editorial-col">
               <span class="mono small muted">PATTERN A · PAYMENT RAILS</span>
               <h3>Three rails, one pattern</h3>
               <p class="small muted">
@@ -304,7 +301,7 @@
               </div>
             </article>
 
-            <article class="cs-panel">
+            <article class="cs-editorial-col">
               <span class="mono small muted">PATTERN B · FOUR-WAY ALLOCATION</span>
               <h3>A counter, not a form</h3>
               <p class="small muted">
@@ -327,7 +324,7 @@
           </div>
 
           <!-- Key Screens Strip (assets/spendit/key-screens.png) -->
-          <div class="mt-24">
+          <div class="mt-24" data-reveal>
             <div class="case-media-frame">
               <img src="../assets/spendit/key-screens.png"
                 alt="Six Spendit mobile key screens covering Home, Pay, PIN authorisation, payment success, point splitting, and Rewards wallets" />
@@ -339,31 +336,31 @@
       <!-- 4. Prototype (Craft, Decisions & Interactive Mockup Window) -->
       <section id="prototype" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">04 · PROTOTYPE &amp; CRAFT</h2>
             <p class="muted cs-sec-lead">
               Designed at a <strong>390×844</strong> mobile base around payment trust, <em>goal-gradient momentum</em>,
-              and an interactive prototype window[cite: 36].
+              and an interactive prototype window.
             </p>
           </div>
 
-          <div class="cs-split-feature">
-            <div class="cs-three-stack">
-              <article class="cs-panel">
+          <div class="cs-split-feature" data-reveal>
+            <div class="cs-craft-list">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">01 · HIERARCHY</span>
                 <h3>Confirm money before rewards</h3>
                 <p class="small muted">The success screen leads with the green checkmark and transfer amount; only then
                   does the <em>"You earned X points"</em> reward appear.</p>
               </article>
 
-              <article class="cs-panel">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">02 · GOAL-GRADIENT</span>
                 <h3>Always-visible progress to unlock</h3>
                 <p class="small muted">Each wallet pairs a progress bar with plain-language copy (<strong>"150 to
                     unlock"</strong>) to pull users toward completing a goal.</p>
               </article>
 
-              <article class="cs-panel">
+              <article class="cs-craft-item">
                 <span class="mono cs-num">03 · ACCESSIBILITY</span>
                 <h3>Color never works alone</h3>
                 <p class="small muted">Every wallet pairs color with a distinct icon and label. Body text meets
@@ -381,25 +378,8 @@
             </div>
           </div>
 
-          <!-- Embedded Interactive Prototype Window (inner-html/mockup.html) -->
-          <!-- <div class="embed-window mt-24" data-embed-window>
-            <div class="embed-window-bar">
-              <div class="embed-window-meta">
-                <span class="embed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                <span class="mono small">INTERACTIVE PROTOTYPE · PAY, SPLIT, REWARDS, CIRCLE &amp; VAULT</span>
-                <span class="mono small muted">inner-html/mockup.html</span>
-              </div>
-              <div class="embed-window-actions">
-                <button type="button" class="embed-action-btn" data-toggle-expand aria-pressed="false">Expand height</button>
-                <a href="inner-html/mockup.html" target="_blank" rel="noopener noreferrer" class="embed-action-link mono small">Open ↗</a>
-              </div>
-            </div>
-            <div class="embed-frame-wrap">
-              <iframe src="inner-html/mockup.html" title="Interactive Spendit prototype" loading="lazy"></iframe>
-            </div>
-          </div> -->
           <!-- Interactive Phone Stage + Walkthrough Guide (Full 390x844 Visible Without Scrolling) -->
-          <div class="proto-lab-layout mt-24" data-embed-window>
+          <div class="proto-lab-layout mt-24" data-embed-window data-reveal>
             <aside class="proto-guide-panel">
               <div class="proto-guide-badge mono">
                 <span class="status-dot" aria-hidden="true"></span>
@@ -416,25 +396,25 @@
                 <div class="proto-step-item">
                   <span class="mono cs-num">01 · SPLASH &amp; HOME</span>
                   <p class="small muted">Tap <strong>Get started</strong> right at the bottom of the screen to enter
-                    Aarav's home screen, toggle balance privacy, or activate the 2× weekend boost[cite: 36].</p>
+                    Aarav's home screen, toggle balance privacy, or activate the 2× weekend boost.</p>
                 </div>
                 <div class="proto-step-item">
                   <span class="mono cs-num">02 · PAY &amp; EARN</span>
                   <p class="small muted">Switch between <strong>UPI</strong>, <strong>IMPS</strong>, and
                     <strong>NEFT</strong>, punch in an amount on the keypad, enter any 4-digit PIN, and watch points
-                    calculate live[cite: 36].
+                    calculate live.
                   </p>
                 </div>
                 <div class="proto-step-item">
                   <span class="mono cs-num">03 · SPLIT, CIRCLE &amp; VAULT</span>
                   <p class="small muted">Use <strong>Closest to unlock</strong>, <strong>Even split</strong>, or
-                    <code>±</code> steppers to assign points across Shopping, Hotels, Flights, and Movies[cite: 36].
+                    <code>±</code> steppers to assign points across Shopping, Hotels, Flights, and Movies.
                   </p>
                 </div>
               </div>
 
               <div class="proto-guide-footer">
-                <span class="mono small muted">390×844 fitted view · Demo data[cite: 36]</span>
+                <span class="mono small muted">390×844 fitted view · Demo data</span>
                 <div class="proto-guide-actions">
                   <button type="button" class="embed-action-btn" id="reset-prototype-btn">Reset screen</button>
                   <a href="inner-html/mockup.html" target="_blank" rel="noopener noreferrer"
@@ -446,7 +426,7 @@
             <div class="proto-phone-column">
               <div class="proto-phone-caption mono small muted">
                 <span>INTERACTABLE DEVICE VIEW</span>
-                <span>Full 390×844 screen fitted[cite: 36]</span>
+                <span>Full 390×844 screen fitted</span>
               </div>
 
               <div class="proto-phone-bezel">
@@ -463,24 +443,24 @@
       <!-- 5. Test & Iterate + Architecture -->
       <section id="test-ship" class="cs-section">
         <div class="container">
-          <div class="cs-sec-head">
+          <div class="cs-sec-head" data-reveal>
             <h2 class="cs-sec-title">05 · ITERATIONS &amp; ARCHITECTURE</h2>
             <p class="muted cs-sec-lead">
-              Paired post-test iteration findings (<code>iterations.png</code>)[cite: 33] with <strong>production-grade
+              Paired post-test iteration findings (<code>iterations.png</code>) with <strong>production-grade
                 fintech architecture</strong> built to scale for millions of users.
             </p>
           </div>
 
           <!-- Iterations Matrix Visual (assets/spendit/iterations.png) -->
-          <div class="mb-24">
+          <div class="mb-24" data-reveal>
             <div class="case-media-frame">
               <img src="../assets/spendit/iterations.png"
                 alt="Spendit iteration notes showing findings to change, design calls worth defending, and test tasks across rewards, splitting, gifting, circle, and vaults" />
             </div>
           </div>
 
-          <div class="cs-two-col">
-            <div class="cs-panel">
+          <div class="cs-editorial-cols two" data-reveal>
+            <div class="cs-editorial-col">
               <span class="mono small muted">TEST &amp; ITERATE · VALIDATION PLAN</span>
               <h3>Stress-testing pre-launch hypotheses</h3>
               <ol class="cs-ordered-list small muted">
@@ -494,7 +474,7 @@
               </ol>
             </div>
 
-            <div class="cs-panel">
+            <div class="cs-editorial-col">
               <span class="mono small muted">SHIP &amp; SCALE · SYSTEMS THINKING</span>
               <h3>Architected for real Indian payment rails</h3>
               <ul class="cs-bullet-list small muted">
@@ -516,7 +496,7 @@
     <!-- 6. Success Metrics & Target Benchmarks -->
     <section id="impact" class="cs-section">
       <div class="container">
-        <div class="cs-sec-head">
+        <div class="cs-sec-head" data-reveal>
           <h2 class="cs-sec-title">SUCCESS METRICS &amp; BENCHMARKS</h2>
           <p class="muted cs-sec-lead">
             Two-tier measurement framework covering <strong>prototype usability targets</strong> and <strong>post-launch
@@ -525,7 +505,7 @@
         </div>
 
         <!-- Tier 1 Table -->
-        <div class="cs-table-card">
+        <div class="cs-table-card" data-reveal>
           <div class="cs-table-head">
             <span class="mono small cs-accent-text">TIER 1 · PROTOTYPE USABILITY &amp; VALIDATION TARGETS</span>
           </div>
@@ -569,39 +549,39 @@
           </div>
         </div>
 
-        <!-- Tier 2 Cards -->
-        <div class="mt-24">
+        <!-- Tier 2 Editorial Metrics Strip -->
+        <div class="mt-24" data-reveal>
           <span class="mono small muted block-label">TIER 2 · PROPOSED POST-LAUNCH PRODUCT &amp; BUSINESS METRICS</span>
-          <div class="cs-five-grid">
-            <article class="cs-mini-card">
+          <div class="cs-kpi-ledger">
+            <article class="cs-kpi-metric is-northstar">
               <span class="mono cs-num">NORTH STAR</span>
               <strong class="cs-big-num">≥ 65%</strong>
               <h3>Split Completion</h3>
               <p class="small muted">Settled payments with points assigned within 24 hours.</p>
             </article>
 
-            <article class="cs-mini-card">
+            <article class="cs-kpi-metric">
               <span class="mono cs-num">ACTIVATION</span>
               <strong class="cs-big-num">≥ 30%</strong>
               <h3>First Redeem Rate</h3>
               <p class="small muted">New users completing first redemption within 60 days.</p>
             </article>
 
-            <article class="cs-mini-card">
+            <article class="cs-kpi-metric">
               <span class="mono cs-num">RETENTION</span>
               <strong class="cs-big-num">+15–20%</strong>
               <h3>30-Day Lift</h3>
               <p class="small muted">Cohort lift for active splitters vs. non-splitters.</p>
             </article>
 
-            <article class="cs-mini-card">
+            <article class="cs-kpi-metric">
               <span class="mono cs-num">FOCUS</span>
               <strong class="cs-big-num">1–2 Wallets</strong>
               <h3>Balance Spread</h3>
               <p class="small muted">Concentration ratio validating unlock progress bars.</p>
             </article>
 
-            <article class="cs-mini-card is-guardrail">
+            <article class="cs-kpi-metric is-guardrail">
               <span class="mono cs-num">GUARDRAIL</span>
               <strong class="cs-big-num">0% Lift</strong>
               <h3>Payment Drop-off</h3>
@@ -610,8 +590,8 @@
           </div>
         </div>
 
-        <!-- Next Case Study Card -->
-        <a href="../project2/project2.html" class="cs-next-card">
+        <!-- Next Case Study Editorial Link -->
+        <a href="../project2/project2.html" class="cs-next-card" data-reveal>
           <div>
             <span class="mono small muted">NEXT CASE STUDY</span>
             <h3>Agentic Design System</h3>
@@ -620,18 +600,27 @@
           <span class="cs-next-arrow">→</span>
         </a>
 
-        <!-- Dark Split CTA + Accent Stripes -->
-        <div class="cta-split mt-36">
-          <div class="cta-dark-box">
-            <span class="dark-pill">
-              <span class="status-dot" aria-hidden="true"></span>
-              Open to Senior UX &amp; Product roles
-            </span>
-            <h2>Let's make something<br />that actually matters.</h2>
+        <!-- Editorial White + Accent Closing CTA -->
+        <div class="cta-split mt-36" data-cta-card>
+          <div class="cta-editorial-box">
+            <div class="cta-top-bar">
+              <span class="editorial-pill">
+                <span class="status-dot" aria-hidden="true"></span>
+                Open to Senior UX &amp; Product roles
+              </span>
+              <span class="cta-issue mono" aria-hidden="true">PORTFOLIO // 2026</span>
+            </div>
+
+            <h2>
+              Let's make something<br />
+              that <span class="cta-italic-accent">actually matters.</span>
+            </h2>
+
             <div class="cta-email-row">
               <span class="cta-email-text">sakshiagrawal3110@gmail.com</span>
               <button type="button" class="copy-pill-btn copy-email-btn" data-email="sakshiagrawal3110@gmail.com">
-                Click to copy
+                <span class="copy-pill-label">Click to copy</span>
+                <span class="copy-pill-icon" aria-hidden="true">↗</span>
               </button>
             </div>
           </div>
@@ -691,17 +680,63 @@
       tldrCloseBtn.addEventListener("click", () => setTldrState(false));
     }
 
-    // Embedded Prototype Window Expand / Collapse
-    document.querySelectorAll("[data-toggle-expand]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const win = btn.closest("[data-embed-window]");
-        if (!win) return;
-        const expanded = win.classList.toggle("is-expanded");
-        btn.classList.toggle("is-expanded", expanded);
-        btn.setAttribute("aria-pressed", String(expanded));
-        btn.textContent = expanded ? "Compact height" : "Expand height";
+    // Reset embedded mobile prototype iframe
+    const resetProtoBtn = document.getElementById("reset-prototype-btn");
+    const protoFrame = document.getElementById("spendit-proto-frame");
+    if (resetProtoBtn && protoFrame) {
+      resetProtoBtn.addEventListener("click", () => {
+        const baseSrc = protoFrame.getAttribute("src");
+        protoFrame.setAttribute("src", "");
+        requestAnimationFrame(() => protoFrame.setAttribute("src", baseSrc));
       });
-    });
+    }
+
+    // Reading progress bar & active section link highlight
+    const progressBar = document.getElementById("cs-progress-bar");
+    const navLinks = Array.from(document.querySelectorAll(".cs-jump-links a"));
+    const trackedSections = navLinks
+      .map((a) => document.querySelector(a.getAttribute("href")))
+      .filter(Boolean);
+
+    function updateScrollProgress() {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.min(100, Math.max(0, (window.scrollY / docHeight) * 100)) : 0;
+      if (progressBar) {
+        progressBar.style.width = `${pct}%`;
+      }
+
+      const marker = window.scrollY + 180;
+      let currentId = "";
+      for (const sec of trackedSections) {
+        if (sec.offsetTop <= marker) {
+          currentId = sec.id;
+        }
+      }
+      navLinks.forEach((link) => {
+        link.classList.toggle("is-current", link.getAttribute("href") === `#${currentId}`);
+      });
+    }
+
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+    // Editorial scroll reveal
+    const revealEls = document.querySelectorAll("[data-reveal]");
+    if (revealEls.length > 0 && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-in");
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.1 }
+      );
+      revealEls.forEach((el) => observer.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add("is-in"));
+    }
   </script>
 </body>
 
